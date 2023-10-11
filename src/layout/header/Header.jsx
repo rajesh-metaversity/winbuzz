@@ -1,9 +1,11 @@
 import logo from "../../assets/img/logo.png";
 import ButtonComponent from "../../component/button/Button";
+import SubHeader from "./SubHeader";
 ///styles
 import "./styles.scss";
 const HeaderComponent = () => {
   return (
+    <>
     <div className="header-container">
       <div className="header-left-col">
         <img src={logo} alt="" />
@@ -21,7 +23,9 @@ const HeaderComponent = () => {
           <li></li>
         </ul>
       </div>
-    </div>
+      </div>
+      <SubHeader />
+      </>
   );
 };
 
