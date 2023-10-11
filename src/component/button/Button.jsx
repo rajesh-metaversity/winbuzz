@@ -8,7 +8,8 @@ const ButtonComponent = ({ name, icon }) => {
       variant="contained"
       //   sx={{ background: "green", "&:hover": { background: "black" } }}
     >
-      {icon},{name}
+      {icon}
+      {name}
     </MyButton>
   );
 };
