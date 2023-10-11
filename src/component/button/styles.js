@@ -9,10 +9,11 @@ export const MyButton = sytled(Button)(
     border: "none",
     background: "green",
     color: "#fff",
-    textTransform: "uppercase",
     display: "flex",
+    gap: "5px",
+    textTransform: "uppercase",
     alignItems: "center",
-    padding: "10px 8px",
+    padding: "5px 6px",
     borderRadius: "3px",
     transition: "0.9s",
   }
