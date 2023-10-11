@@ -13,6 +13,7 @@ import ModalComponent from "../../component/modal/Modal";
 import "./styles.scss";
 import { MyTextField } from "./styled";
 import React, { useState } from "react";
+import SubHeader from "./SubHeader";
 const HeaderComponent = () => {
   const [age, setAge] = React.useState("");
   const [open, setOpen] = useState(false);
@@ -78,6 +79,7 @@ const HeaderComponent = () => {
           </ul>
         </div>
       </div>
+      <SubHeader />
     </>
   );
 };

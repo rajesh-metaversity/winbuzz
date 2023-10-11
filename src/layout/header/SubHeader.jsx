@@ -1,20 +1,15 @@
 import './SubHeader.scss'
 
 const SubHeader = () => {
+    const listArray = ["Cricket", "Football", "Tennis", "Horse Racing", "GreyHound Racing", "Kabaddi", "Politics", "Casino", "Sports Book",  "Int Casino", "Binary" ]
   return (
       <div className="sub_header_cont">
           <ul className='sub_header_ul'>
-              <li>Cricket</li>
-              <li>Football</li>
-              <li>Tennis</li>
-              <li>Horse Racing</li>
-              <li>GreyHound Racing</li>
-              <li>Kabaddi</li>
-              <li>Politics</li>
-              <li>Casino</li>
-              <li>Sports Book</li>
-              <li>Int Casino</li>
-              <li>Binary</li>
+              {listArray.map(items => {
+                  return (
+                      <><li>{items }</li></>
+                  )
+              })}
           </ul>
          
     </div>
