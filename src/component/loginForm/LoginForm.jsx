@@ -2,7 +2,6 @@ import logo from '../../assets/img/logo.png'
 import CloseIcon from '@mui/icons-material/Close';
 ///styles
 import "./styles.scss"
-
 const LoginForm = () => {
     return (
         <div className="login_modal">
@@ -11,7 +10,7 @@ const LoginForm = () => {
                 <div className="winbuaa_logo">
                     <img src={logo} alt="" />
                 </div>
-                <form>
+                <form className='login-form'>
                     <input type="text" placeholder="Username" />
                     <input type="text" placeholder="Password" />
                 </form>
@@ -24,5 +23,4 @@ const LoginForm = () => {
         </div>
     )
 }
-
 export default LoginForm
