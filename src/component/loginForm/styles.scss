@@ -1,97 +1,96 @@
 .login_modal {
-   width: 100%;
-   height: 100vh;
-   background-image: url(../../assets/img/loginbanner.jpeg);
-   background-size: cover;
-   background-repeat: no-repeat;
-   position: relative;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-image: url(../../assets/img/loginbanner.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-   .login_section {
-      margin: auto;
-      width: 90%;
-      display: block;
-    }
+.login_section {
+  margin: auto;
+  width: 90%;
+  display: block;
+}
 
-    .winbuaa_logo {
-      width: 100%;
-      text-align: center;
-    }
+.winbuaa_logo {
+  width: 100%;
+  text-align: center;
+}
 
-    .winbuaa_logo img {
-      width: 80%;
-    }
+.winbuaa_logo img {
+  width: 80%;
+}
 
-    .login-form {
-      width: 100%;
-      margin-top: 20px;
-      input {
-        width: calc(100% - 20px);
-        background-color: #fff;
-        color: grey;
-        padding: 11px 10px;
-        margin-top: 8px;
-        border: unset;
-        outline: none;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: 400;
-        letter-spacing: 0.5px;
-      }
-    }
+.login-form {
+  width: 100%;
+  margin-top: 20px;
+  input {
+    width: calc(100% - 20px);
+    background-color: #fff;
+    color: grey;
+    padding: 11px 10px;
+    margin-top: 8px;
+    border: unset;
+    outline: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+}
 
-    .login_buttons {
-      width: 100%;
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-    }
+.login_buttons {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
 
-    .login {
-      background: #B88831;
-      padding: 12px 10px;
-      text-align: center;
-      color: #fff;
-      border: unset;
-      outline: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 400;
-    }
+.login {
+  background: #b88831;
+  padding: 12px 10px;
+  text-align: center;
+  color: #fff;
+  border: unset;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
 
-    .login_with_demo {
-      background: #B88831;
-      padding: 12px 10px;
-      text-align: center;
-      color: #fff;
-      margin-top: 10px;
-      border: unset;
-      outline: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 400;
-    }
+.login_with_demo {
+  background: #b88831;
+  padding: 12px 10px;
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
+  border: unset;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
 
-    .login_buttons a {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 500;
-      padding: 7px 0;
-    }
+.login_buttons a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 7px 0;
+}
 
-    .cross_icon {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: 10px;
-    }
+.cross_icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
 
-    .cross_icon svg {
-      font-weight: 800;
-      color: #000;
-      cursor: pointer;
-    }
- }
- 
+.cross_icon svg {
+  font-weight: 800;
+  color: #000;
+  cursor: pointer;
+}

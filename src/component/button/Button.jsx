@@ -1,12 +1,12 @@
 ///styles
 import "./styles.js";
 import { MyButton } from "./styles.js";
-const ButtonComponent = ({ name, icon }) => {
+const ButtonComponent = ({ name, icon,bg }) => {
   return (
     <MyButton
       className="btn"
       variant="contained"
-      //   sx={{ background: "green", "&:hover": { background: "black" } }}
+        sx={{ background: bg }}
     >
       {icon}
       {name}
