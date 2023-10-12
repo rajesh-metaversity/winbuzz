@@ -6,6 +6,8 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import List from "./list";
 import ModalComponent from "../modal/Modal";
 import BonusRules from "../bonusRule/BonusRules";
+import { bets_profit_loss, mybets, passwordChange } from "../../routes/PagesUrl";
+import { Link, NavLink } from "react-router-dom";
 const UserDetailDropDown = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -52,7 +54,7 @@ const UserDetailDropDown = () => {
           <li>
             <List name="Bonus" bot="" value="0.10" />
           </li>
-          <li>
+          <li style={{borderBottom: "1px solid #b88831", marginBottom: "5px"}}>
             <List name="Available Withdrawal" bot="" value="0.29" />
           </li>
           <li> </li>
@@ -63,6 +65,15 @@ const UserDetailDropDown = () => {
           <li className="list-bottom-border">Market Analysis</li>
           <li className="list-bottom-border">Change Password</li>
           <li className="list-bottom-border" onClick={()=>handleOpen()}>Bonus Rules</li>
+          <li className="refer_earn">Refer and Earn </li>
+          <li className="bonus">Awaiting Bonus 1290</li>
+          <Link to={mybets} className="link">
+          <li className="list-bottom-border" style={{borderTop: "1px solid #b88831", textDecoration: "none"}}>My Bets</li></Link>
+          <Link to={bets_profit_loss} className="link"><li className="list-bottom-border"> Betting Profit and Loss</li></Link>
+          <Link className="link"><li className="list-bottom-border">Account Statement</li></Link>
+          <Link className="link"><li className="list-bottom-border">Market Analysis</li></Link>
+          <Link to={passwordChange} className="link"><li className="list-bottom-border">Change Password</li></Link>
+          <li className="list-bottom-border">Bonus Rules</li>
           <li className="logout-li">
             Logout
             <ExitToAppIcon />
