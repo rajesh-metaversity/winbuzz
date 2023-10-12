@@ -1,9 +1,11 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-import React from "react";
+import React, { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import List from "./list";
+import ModalComponent from "../modal/Modal";
+import BonusRules from "../bonusRule/BonusRules";
 const UserDetailDropDown = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -14,8 +16,15 @@ const UserDetailDropDown = () => {
     setAnchorEl(null);
   };
 
+  const [openModal, setOpen] = useState(false);
+  const handleOpen = () => {
+
+    setOpen(true);
+    setAnchorEl(false)
+  }
   return (
     <>
+     <ModalComponent Elememt={<BonusRules />} open={openModal} setOpen={setOpen} />
       <Button
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
@@ -53,7 +62,7 @@ const UserDetailDropDown = () => {
           <li className="list-bottom-border">Account Statement</li>
           <li className="list-bottom-border">Market Analysis</li>
           <li className="list-bottom-border">Change Password</li>
-          <li className="list-bottom-border">Bonus Rules</li>
+          <li className="list-bottom-border" onClick={()=>handleOpen()}>Bonus Rules</li>
           <li className="logout-li">
             Logout
             <ExitToAppIcon />
