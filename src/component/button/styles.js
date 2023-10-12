@@ -7,7 +7,6 @@ export const MyButton = sytled(Button)(
       }`,
   {
     border: "none",
-    background: "green",
     color: "#fff",
     display: "flex",
     gap: "5px",
