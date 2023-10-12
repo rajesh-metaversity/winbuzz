@@ -29,6 +29,7 @@
   .list-bottom-border {
     padding-left: 10px;
     border-bottom: 1px solid #dddddd;
+    text-decoration: none !important;
   }
   .logout-li {
     padding-inline: 10px;
@@ -39,5 +40,26 @@
     svg {
       font-size: 18px;
     }
+  }
+
+  .refer_earn {
+    background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    border-radius: 100px;
+    text-align: center;
+    color: white;
+    // margin-bottom: 5px;
+    margin: 5px;
+  }
+  .bonus {
+    border: 1px solid #b88831;
+    color: #b88831;
+    border-radius: 100px;
+    text-align: center;
+    margin: 5px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: black;
   }
 }
