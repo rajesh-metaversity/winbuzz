@@ -1,0 +1,73 @@
+.account_statement_section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+ 
+
+    .account_st_top {
+        width: calc(100% - 40px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .accnt_text_left {
+        width: 50%;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .from_date_right {
+        width: 50%;
+        display: flex;
+        align-items: end;
+        gap: 10px;
+    }
+
+    .from_date {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: right;
+      
+    }
+
+    .input_field {
+        display: block;
+        input{
+            padding: 6px;
+            margin-top: 3px;
+            border-radius: 8px;
+            font-size: 16px;
+            border: 1px solid #d1d1d1 !important;
+            background: #f3f3f3 !important;
+            color: #666;
+        }
+    }
+    .search_btn{
+        width: auto;
+        padding: 9px 13px;
+        background-color: #198754;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+}
+
+.account_st_table_data{
+    width: 100%;
+    .table_row{
+        width: 100%;
+        background-color: #000;
+        color: #fff;
+        padding: 4px;
+        text-align: left;
+    }
+    
+}
+
+.css-1pclhgl-MuiTable-root {
+    margin-top: 10px!important;
+}

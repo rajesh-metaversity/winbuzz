@@ -7,6 +7,7 @@ const ModalComponent = ({ Elememt, open, setOpen }) => {
     <>
       <Dialog
         open={open}
+        maxWidth="xl"
         onClose={() => handleClose()}
         // aria-labelledby="modal-modal-title"
         // aria-describedby="modal-modal-description"
