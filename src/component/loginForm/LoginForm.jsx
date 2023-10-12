@@ -11,7 +11,7 @@ const LoginForm = () => {
                 <div className="winbuaa_logo">
                     <img src={logo} alt="" />
                 </div>
-                <form>
+                <form className='login-form'>
                     <input type="text" placeholder="Username" />
                     <input type="text" placeholder="Password" />
                 </form>
