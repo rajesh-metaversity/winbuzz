@@ -10,11 +10,11 @@ const ChangePassword = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    currentPassword: Yup.string().required('Current Password is required'),
-    newPassword: Yup.string().required('New Password is required'),
+    currentPassword: Yup.string().required('The Old Password Field is required'),
+    newPassword: Yup.string().required('The New Password Field is required'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
+      .required('The Confirm Password Field is required'),
   });
 
   const handleSubmit = (values, actions) => {
@@ -24,40 +24,30 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className='change_password_cont'>
-      <p>Change Password</p>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {() => (
-          <Form>
-            <div>
+		<div className="change_password_cont">
+			<p>Change Password</p>
+			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+				{() => (
+					<Form>
+						<div className="change-password-div">
 
-              <Field type="password" name="currentPassword" placeholder="Old Password" />
-              <ErrorMessage name="currentPassword" component="div" />
-            </div>
+							<Field type="password" name="currentPassword" placeholder="Old Password" />
+							<ErrorMessage name="currentPassword" component="div" className="error_message" />
 
-            <div>
+							<Field type="password" name="newPassword" placeholder="New Password" />
+							<ErrorMessage name="newPassword" component="div" className="error_message" />
 
-              <Field type="password" name="newPassword" placeholder="New Password"/>
-              <ErrorMessage name="newPassword" component="div" />
-            </div>
+							<Field type="password" name="confirmPassword" placeholder="Repeat Password" />
+							<ErrorMessage name="confirmPassword" component="div" className="error_message" />
 
-            <div>
-
-              <Field type="password" name="confirmPassword" placeholder="Confirm Password" />
-              <ErrorMessage name="confirmPassword" component="div" />
-            </div>
-
-            <div>
-              <button type="submit">Save</button>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
+							<div className="save_button">
+								<button type="submit">Save</button>
+							</div>
+						</div>
+					</Form>
+				)}
+			</Formik>
+		</div>
   );
 };
 
