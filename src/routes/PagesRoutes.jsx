@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../common/MainLayout";
 import DashBoard from "../pages/dashBoard/DashBoard";
+import MyBets from "../component/MyBets/MyBets";
+import ChangePassword from "../component/ChangePassword/ChangePassword";
 
 export const router = createBrowserRouter([
   {
@@ -11,6 +13,19 @@ export const router = createBrowserRouter([
         path: "/",
         element: <DashBoard />,
       },
+
+     
+
     ],
+    
   },
+  {
+    path: "/banner",
+    element: <MyBets />
+  },
+  
+  {
+    path: "/password_change",
+    element: <ChangePassword />
+  }
 ]);
