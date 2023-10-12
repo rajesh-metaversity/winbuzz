@@ -14,6 +14,7 @@ import { useState } from "react";
 import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDropDown";
 
 import SubHeader from "./SubHeader";
+import { Link } from "react-router-dom";
 const HeaderComponent = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [open, setOpen] = useState(false);
@@ -48,7 +49,10 @@ const HeaderComponent = () => {
                 <li onClick={() => handleOpen()} className="header-login">
                   login
                 </li>
+                <Link to="/sign-up">
+
                 <li className="header-register">Register</li>
+                </Link>
               </>
             ) : (
               <>

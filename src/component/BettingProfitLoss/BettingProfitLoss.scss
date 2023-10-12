@@ -1,0 +1,75 @@
+.betting_profit-loss_cont {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 20px;
+
+    .right {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        p {
+            width: 40%;
+            font-size: 20px;
+            margin: 0;
+            font-weight: 600;
+            text-transform: capitalize;
+            color: #333 !important;
+        }
+
+        .right_date {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 60%;
+            gap: 10px;
+
+            span {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    margin-bottom: 5px;
+                    font-size: 12px;
+    text-transform: capitalize;
+                }
+
+
+                input {
+                    padding: 10px 20px;
+                    background: #f3f3f3 !important;
+                    border: none;
+                    border: 1px solid #d1d1d1 !important;
+                    border-radius: 5px;
+
+                }
+            }
+
+            button {
+                background: #198754;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                color: white;
+                margin-top: 20px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #157347;
+                }
+
+
+            }
+        }
+    }
+    table {
+        th {
+            color: #fff;
+    font-weight: 700;
+    background-color: #333;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+            padding: 5px;
+        }
+    }
+}

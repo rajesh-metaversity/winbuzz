@@ -2,7 +2,6 @@ import logo from '../../assets/img/logo.png'
 import CloseIcon from '@mui/icons-material/Close';
 ///styles
 import "./styles.scss"
-
 const LoginForm = () => {
     return (
         <div className="login_modal">
@@ -24,5 +23,4 @@ const LoginForm = () => {
         </div>
     )
 }
-
 export default LoginForm

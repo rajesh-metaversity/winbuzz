@@ -1,0 +1,98 @@
+.bets_cont {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 50px;
+
+    .combo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .left {
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            text-align: end;
+            margin-right: 50px;
+
+            p {
+                padding-top: 30px;
+                font-size: 20px;
+                margin: 0;
+                font-weight: 600;
+                text-transform: capitalize;
+                color: #333 !important;
+            }
+
+            .matched {
+                display: flex;
+                align-items: flex-start;
+                gap: 50px;
+            }
+
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            span {
+                display: flex;
+                flex-direction: column;
+                margin-right: 10px;
+
+                label {
+                    margin-bottom: 5px;
+                }
+
+                select {
+                    padding: 10px 30px;
+                    padding-left: 0px;
+                    background: #f3f3f3 !important;
+                    border: none;
+                    border: 1px solid #d1d1d1 !important;
+                    border-radius: 5px;
+
+                }
+
+                input {
+                    padding: 10px;
+                    background: #f3f3f3 !important;
+                    border: none;
+                    border: 1px solid #d1d1d1 !important;
+                    border-radius: 5px;
+
+                }
+            }
+
+            button {
+                background: #198754;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                color: white;
+                margin-top: 20px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #157347;
+                }
+
+            }
+
+        }
+    }
+
+    table {
+        th {
+            color: #fff;
+    font-weight: 700;
+    background-color: #333;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+        }
+    }
+}

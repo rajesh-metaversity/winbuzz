@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import banner1 from '../../assets/banner-2.jpg';
 import Slider from 'react-slick';
 import { Grid } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 var settings = {
 	dots: false,
@@ -20,6 +21,8 @@ var settings = {
 };
 
 const SiderBanner = () => {
+    const location = useLocation
+    console.log("loaction,", location)
 	const arr = [1, 2, 3, 4,5,6];
 	return (
 		<div>
