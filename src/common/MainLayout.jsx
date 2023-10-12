@@ -18,7 +18,6 @@ const MainLayout = () => {
           </div>
           <div className="banner-sider">
             <SiderBanner />
-
           </div>
         </div>
         
