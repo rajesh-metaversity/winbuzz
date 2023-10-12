@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import "./styles.scss";
 import HeaderComponent from "../layout/header/Header";
+import SiderBanner from "../component/SiderBanner/SiderBanner";
+
 const MainLayout = () => {
   return (
     <div>
@@ -12,6 +14,10 @@ const MainLayout = () => {
           <div className="sider-container"></div>
           <div className="content">
             <Outlet />
+          </div>
+          <div className="banner-sider">
+            <SiderBanner />
+
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ import { MyTextField } from "./styled";
 import { useState } from "react";
 import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDropDown";
 
+import SubHeader from "./SubHeader";
 const HeaderComponent = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [open, setOpen] = useState(false);
@@ -84,16 +85,14 @@ const HeaderComponent = () => {
                 </li>
                 <li className="header-user-name" id="basic-menu">
                   <UserDetailDropDown />
-
-               
                 </li>
               </>
             )}
           </ul>
         </div>
       </div>
+      <SubHeader />
     </>
   );
 };
-
 export default HeaderComponent;

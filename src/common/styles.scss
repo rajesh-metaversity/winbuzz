@@ -3,7 +3,7 @@
   height: 100vh;
   background-color: aqua;
   .header-layout {
-    height: 94px;
+    height: auto;
   }
   .content-container {
     width: 100%;
@@ -15,9 +15,12 @@
       height: 100%;
     }
     .content {
-      width: 85%;
+      width: 65%;
       height: 100%;
       background-color: darkcyan;
+    }
+    .banner-sider {
+      width: 20%;
     }
   }
 }
