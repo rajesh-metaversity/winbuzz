@@ -1,0 +1,229 @@
+@keyframes blink2 {
+  0% {
+    background-color: #28a745;
+  }
+
+  50% {
+    background-color: #202020;
+  }
+
+  100% {
+    background-color: #28a745;
+  }
+}
+@keyframes bottom {
+  0% {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+  }
+}
+.inplay-container {
+  width: 100%;
+  height: auto;
+  .inplay-heading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    gap: 5px;
+    padding-block: 10px;
+    img {
+      width: 1.9rem;
+    }
+  }
+}
+
+.in-play-collapse-container {
+  width: 100%;
+  //   height: 400px;
+  margin-top: 10px;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 5px 0 #989898;
+  .inplay-titile-box {
+    width: 100%;
+    background-image: linear-gradient(90deg, #686666 50%, #707070);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .inplay-title-left-col {
+      padding: 0.4rem 0.5rem;
+      border-top-left-radius: 1rem;
+      font-family: "Lato", sans-serif;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 400;
+      background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+      display: inline-flex;
+      clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+      width: 30%;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .inplay-title-right-col {
+      width: 53%;
+      height: 100%;
+      ul {
+        margin: 0%;
+        display: flex;
+        li {
+          list-style: none;
+          text-align: center;
+          width: 33%;
+          color: white;
+        }
+      }
+    }
+  }
+  .odd-container {
+    // padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #28a745;
+  }
+}
+.live {
+  position: relative;
+  &::after {
+    content: "";
+    animation: bottom 5s linear infinite;
+    background: #0a0;
+    height: 3px;
+    display: inherit;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+.odds-row-container {
+  width: 100%;
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: rgba(248, 249, 250, 1);
+  padding-block: 5px;
+  border-left: 4px solid white;
+  cursor: pointer;
+
+  &:hover {
+    border-left: 4px solid #b88831;
+  }
+
+  .odds-row-left-col {
+    width: 30%;
+    padding-block: 5px;
+    height: 100%;
+    padding-left: 10px;
+    span {
+      color: #a1a1a1;
+      width: 100%;
+      display: block;
+      text-align: left;
+      white-space: normal;
+      font-size: 0.8rem;
+      font-weight: 400;
+      padding-left: 0 !important;
+    }
+    p {
+      font-size: 0.8rem;
+      line-height: 1.1;
+      color: #333;
+      margin: 0%;
+    }
+  }
+  .odds-row-middle-col {
+    width: 13%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 4px;
+    height: 100%;
+    .live-inplay {
+      font-weight: 500;
+      font-style: normal;
+      font-size: 10px;
+      height: 10px;
+      width: 10px;
+      line-height: 20px;
+      display: inline-block;
+      margin-left: 5px;
+      margin-right: 0;
+      color: #fff;
+      background: #3c1404;
+      border-radius: 50px;
+      -webkit-transition: all 1.5s ease-in-out;
+      -moz-transition: all 1.5s ease-in-out;
+      -o-transition: all 1.5s ease-in-out;
+      -ms-transition: all 1.5s ease-in-out;
+      transition: all 1.5s ease-in-out;
+      -webkit-animation-direction: normal;
+      -webkit-animation-duration: 2s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-name: blink2;
+      -webkit-animation-timing-function: ease-in-out;
+    }
+    img {
+      width: 1.2rem;
+    }
+    svg {
+      font-size: 1.3rem;
+    }
+    span {
+      font-weight: 500;
+      font-style: normal;
+      font-size: 10px;
+      height: 20px;
+      width: 30px;
+      line-height: 20px;
+      display: inline-block;
+      margin-left: 4px;
+      margin-right: 0;
+      color: #fff;
+      text-align: center;
+      background: #8b8b8b;
+      border-radius: 50px;
+    }
+  }
+  .odds-row-right-col {
+    width: 42%;
+    height: 100%;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    ul {
+      margin: 0%;
+      display: flex;
+      gap: 5px;
+      justify-content: end;
+      padding: 0%;
+      height: 100%;
+      li {
+        list-style: none;
+        width: 30%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: white;
+        gap: 5px;
+      }
+    }
+  }
+}
