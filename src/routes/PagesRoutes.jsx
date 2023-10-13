@@ -6,8 +6,10 @@ import AccountStatement from "../pages/AccountStatement/AccountStatement";
 import MyBets from "../component/MyBets/MyBets";
 import ChangePassword from "../component/ChangePassword/ChangePassword";
 import BettingProfitLoss from "../component/BettingProfitLoss/BettingProfitLoss";
-import { account_statement, mybets } from "./PagesUrl";
+import { account_statement, mybets ,casino} from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
+import Casino from "../pages/casino/Casino";
+
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <DashBoard />,
+      },
+      {
+        path: casino,
+        element: <Casino />,
       },
     ],
   },

@@ -1,19 +1,71 @@
+import { Link } from 'react-router-dom'
 import './SubHeader.scss'
+import { casino } from '../../routes/PagesUrl'
 
 const SubHeader = () => {
-    const listArray = ["Cricket", "Football", "Tennis", "Horse Racing", "GreyHound Racing", "Kabaddi", "Politics", "Casino", "Sports Book",  "Int Casino", "Binary" ]
-  return (
-      <div className="sub_header_cont">
-          <ul className='sub_header_ul'>
-              {listArray.map(items => {
-                  return (
-                      <><li>{items }</li></>
-                  )
-              })}
-          </ul>
-         
-    </div>
-  )
+    const listArray = [
+        {
+            name: "Cricket",
+            url: ""
+        },
+        {
+            name: "Football",
+            url: ""
+        },
+        {
+            name: "Tennis",
+            url: ""
+        }
+        ,
+        {
+            name: "Horse Racing",
+            url: ""
+        },
+        {
+            name: "GreyHound Racing",
+            url: ""
+        },
+        {
+            name: "Kabaddi",
+            url: ""
+        },
+        {
+            name: "Politics",
+            url: ""
+        },
+        {
+            name: "Casino",
+            url: ""
+        },
+      
+        {
+            name: "Sports Book",
+            url: ""
+        },
+        {
+            name: "Int Casino",
+            url: casino
+        },
+        {
+            name: "Binary",
+            url: ""
+        },
+        
+    ]
+      
+    return (
+        <div className="sub_header_cont">
+            <ul className='sub_header_ul'>
+                {listArray.map(items => {
+                    return (
+                        <>
+                            <Link to={items.url}>{items.name}</Link><li></li></>
+                    )
+                })}
+            </ul>
+
+        </div>
+    )
 }
 
 export default SubHeader
