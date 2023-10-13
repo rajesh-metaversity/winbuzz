@@ -25,65 +25,63 @@ const UserDetailDropDown = () => {
     setAnchorEl(false)
   }
   return (
-    <>
-     <ModalComponent Elememt={<BonusRules />} open={openModal} setOpen={setOpen} />
-      <Button
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        sx={{ color: "black" }}
-      >
-        Demo <ArrowDropDownIcon />
-      </Button>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <ul className="ul-drop-user">
-          <li>
-            <List name="Wallet Amount" bot="(Inclusive bonus)" value="0.29" />
-          </li>
-          <li>
-            <List name="Net Exposure" bot="" value="0.9" />
-          </li>
-          <li>
-            <List name="Bonus" bot="" value="0.10" />
-          </li>
-          <li style={{borderBottom: "1px solid #b88831", marginBottom: "5px"}}>
-            <List name="Available Withdrawal" bot="" value="0.29" />
-          </li>
-          <li> </li>
-          <li></li>
-          <li className="list-bottom-border">My Bets</li>
-          <li className="list-bottom-border"> Betting Profit and Loss</li>
-          <li className="list-bottom-border">Account Statement</li>
-          <li className="list-bottom-border">Market Analysis</li>
-          <li className="list-bottom-border">Change Password</li>
-          <li className="list-bottom-border" onClick={()=>handleOpen()}>Bonus Rules</li>
-          <li className="refer_earn">Refer and Earn </li>
-          <li className="bonus">Awaiting Bonus 1290</li>
-          <Link to={mybets} className="link">
-          <li className="list-bottom-border" style={{borderTop: "1px solid #b88831", textDecoration: "none"}}>My Bets</li></Link>
-          <Link to={bets_profit_loss} className="link"><li className="list-bottom-border"> Betting Profit and Loss</li></Link>
-          <Link className="link"><li className="list-bottom-border">Account Statement</li></Link>
-          <Link className="link"><li className="list-bottom-border">Market Analysis</li></Link>
-          <Link to={passwordChange} className="link"><li className="list-bottom-border">Change Password</li></Link>
-          <li className="list-bottom-border">Bonus Rules</li>
-          <li className="logout-li">
-            Logout
-            <ExitToAppIcon />
-          </li>
-        </ul>
-        {/* <MenuItem onClick={handleClose}></MenuItem>
+		<>
+			<ModalComponent Elememt={<BonusRules />} open={openModal} setOpen={setOpen} />
+			<Button aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick} sx={{ color: 'black' }}>
+				Demo <ArrowDropDownIcon />
+			</Button>
+			<Menu
+				anchorEl={anchorEl}
+				open={open}
+				onClose={handleClose}
+				MenuListProps={{
+					'aria-labelledby': 'basic-button'
+				}}>
+				<ul className="ul-drop-user">
+					<li>
+						<List name="Wallet Amount" bot="(Inclusive bonus)" value="0.29" />
+					</li>
+					<li>
+						<List name="Net Exposure" bot="" value="0.9" />
+					</li>
+					<li>
+						<List name="Bonus" bot="" value="0.10" />
+					</li>
+					<li style={{ borderBottom: '1px solid #b88831', marginBottom: '5px' }}>
+						<List name="Available Withdrawal" bot="" value="0.29" />
+					</li>
+					<li className="refer_earn">Refer and Earn </li>
+					<li className="bonus">Awaiting Bonus 1290</li>
+					<Link to={mybets} className="link">
+						<li className="list-bottom-border" style={{ borderTop: '1px solid #b88831', textDecoration: 'none' }}>
+							My Bets
+						</li>
+					</Link>
+					<Link to={bets_profit_loss} className="link">
+						<li className="list-bottom-border"> Betting Profit and Loss</li>
+					</Link>
+					<Link className="link">
+						<li className="list-bottom-border">Account Statement</li>
+					</Link>
+					<Link className="link">
+						<li className="list-bottom-border">Market Analysis</li>
+					</Link>
+					<Link to={passwordChange} className="link">
+						<li className="list-bottom-border">Change Password</li>
+					</Link>
+					<li className="list-bottom-border" onClick={() => handleOpen()}>
+						Bonus Rules
+					</li>
+					<li className="logout-li">
+						Logout
+						<ExitToAppIcon />
+					</li>
+				</ul>
+				{/* <MenuItem onClick={handleClose}></MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem> */}
-      </Menu>
-    </>
+			</Menu>
+		</>
   );
 };
 
