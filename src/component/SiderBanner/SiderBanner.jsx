@@ -23,32 +23,50 @@ var settings = {
 const SiderBanner = () => {
     const location = useLocation
     console.log("loaction,", location)
-	const arr = [1, 2, 3, 4,5,6];
+    const arr = [1, 2, 3, 4, 5, 6];
+
+	const imageArray = Array.from({ length: 10 });
 	return (
-		<div>
-			<Slider {...settings}>
-				{arr.map((sliderdata, index) => (
-					<div key={index}>
-						<Grid container>
-							<Grid
-								item
-								// xs={12}
-								sx={{
-									padding: '0.25rem',
-									backgroundColor: '#fff',
-									borderRadius: '0.375rem',
-									overflowX: 'hidden',
-									border: '1px solid #dee2e6',
-									maxHeight: 'auto',
-									cursor: 'pointer'
-								}}>
-								<img src={banner1} alt="" width="100%" height="200px" style={{ objectFit: 'cover' }} />
+		<>
+			<div className="side_banner_cont">
+				<div className="play_games">Play Games</div>
+				<Slider {...settings}>
+					{arr.map((sliderdata, index) => (
+						<div key={index}>
+							<Grid container>
+								<Grid
+									item
+									// xs={12}
+									sx={{
+										backgroundColor: '#fff',
+										borderRadius: '0.375rem',
+										overflowX: 'hidden',
+										maxHeight: 'auto',
+										cursor: 'pointer'
+									}}>
+									<img src={banner1} alt="" width="100%" height="160px" style={{ objectFit: '' }} />
+								</Grid>
 							</Grid>
-						</Grid>
-					</div>
-				))}
-			</Slider>
-		</div>
+						</div>
+					))}
+				</Slider>
+			</div>
+
+			<div className="side_banner-sub_cont">
+				<div className="play_games">Play Games</div>
+				<div className="bottom_images">
+					{imageArray?.map((_, index) => (
+						<span key={index} className="image_cont">
+							<img src={banner1} alt="" className="image" />
+                            <div className="over-lay">
+							<button className="play-button">Play Now</button>
+
+                            </div>
+						</span>
+					))}
+				</div>
+			</div>
+		</>
 	);
 };
 

@@ -9,6 +9,7 @@ import BettingProfitLoss from "../component/BettingProfitLoss/BettingProfitLoss"
 import { account_statement, mybets ,casino} from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
+import GameDetail from "../pages/gameDeatail/GameDetail";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
         path: "/password_change",
         element: <ChangePassword />,
       },
+      {
+        path: "/game_detail",
+        element: <GameDetail />
+      }
     ],
   },
   {
