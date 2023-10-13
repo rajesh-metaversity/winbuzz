@@ -6,16 +6,18 @@
 
     .game-detail-left-col {
         width: 70%;
-        display: block;
+        border: 1px solid green;
+
     }
 
     .game-detail-right-col {
         flex: 1;
-        border: 1px solid blue;
+        border: 2px solid #a5d9fe;
+        border: 2px solid #a5d9fe;
+        border: 2px solid #a5d9fe;
+        border-top: 0px;
+        border-radius: 10px;
 
     }
 
-   
-
-   
 }

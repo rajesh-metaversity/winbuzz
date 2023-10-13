@@ -1,0 +1,167 @@
+.right_cont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+    .heading {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background: grey;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        overflow: hidden;
+        
+        .bet_slip {
+        clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+        background: #72bbef;
+        width: 30%;
+        height: 100%;
+        padding: 5px 10px;
+        color: white;
+    }
+
+    .close {
+        flex: 1;
+        text-align: right;
+        // padding: 5px 10px;
+    }
+    }
+
+    .bet_details {
+        padding: 10px 20px;
+        padding-top: 0px;
+
+        .team_name {
+          font-size: 12px;
+
+        }
+
+        .bet_number {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            margin-top: 20px;
+
+            .odds {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+
+                label {
+                    position: absolute;
+                    left: 10px;
+                    bottom: -4px;
+                    font-size: 10px;
+                    background-color: #fff;
+                    color: black;
+                    text-transform: capitalize;
+                    color: rgba(0, 0, 0, .38);
+                }
+
+            }
+
+            .bet_inputs {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+            }
+
+        }
+
+        .numbers {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            row-gap: 10px;
+            column-gap: 5px;
+            padding: 10px 0;
+            cursor: pointer;
+
+            .bets {
+                border: 1px solid #65bae2;
+                border-radius: 15px;
+                text-align: center;
+                color: #65bae2;
+
+                &:hover {
+                    border: 1px solid #65bae2;
+                    background: linear-gradient(180deg, #a5d9fe 0, #0469b1);
+                    color: #fff !important;
+                    // font-size: 12px;
+                    font-weight: 300;
+
+                }
+            }
+        }
+
+        .min_max {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            row-gap: 5px;
+            column-gap: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            .inner {
+                text-align: center;
+                border-radius: 20px;
+                padding: 5px;
+            }
+
+        }
+
+        .order_buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+
+
+            button:nth-child(1) {
+                background: none;
+                border: 1px solid #6394c9 !important;
+                border-radius: 50px;
+                text-transform: capitalize;
+                padding: 10px 0;
+                color: #6394c9;
+                font-size: .9rem;
+                cursor: pointer;
+            }
+
+            button:nth-child(2) {
+                background-color: #F5F5F5;
+                color: #999999;
+                border-color: #F5F5F5;
+                box-shadow: none;
+                border: none;
+                border-radius: 50px;
+                font-size: .9rem;
+                cursor: pointer;
+
+                &:hover {
+                    font-weight: 300;
+                    width: 100%;
+                    background: #4caf50;
+                    font-size: .9rem;
+                    height: 36px;
+                    border-radius: 50px;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-transform: capitalize;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+    }
+
+    p {
+        margin: 0;
+    }
+
+}
