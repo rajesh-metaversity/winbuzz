@@ -1,16 +1,12 @@
-
-import LeftTable from './LeftTable'
-import RightTable from './RightTable'
-import './style.scss'
-
+import Iframes from '../../component/Iframes/Iframes'
+import './styles.scss'
 const GameDetail = () => {
   return (
       <div className='game_detail-cont'>
           <div className="game-detail-left-col">
-              <LeftTable />
+           <Iframes/>
           </div>
           <div className="game-detail-right-col">
-              <RightTable />
             </div>
     </div>
   )
