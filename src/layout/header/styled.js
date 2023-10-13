@@ -11,11 +11,12 @@ export const MyTextField = sytled(TextField)({
 
   "& .MuiInputBase-input": {
     color: "white",
-    width: "200px",
+    width: "250px",
   },
   "& .MuiOutlinedInput-root": {
     borderRadius: "30px",
     border: "1px solid white",
+    height: "38px",
   },
   "& .MuiOutlinedInput-notchedOutline": {
     border: "none",
