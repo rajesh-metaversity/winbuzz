@@ -1,17 +1,14 @@
-
-import LeftTable from './LeftTable'
-import RightTable from './RightTable'
-import './style.scss'
-
+import Iframes from '../../component/Iframes/Iframes'
+import './styles.scss'
 const GameDetail = () => {
   return (
       <div className='game_detail-cont'>
-          
-          <LeftTable />
-          <RightTable />
-          
+          <div className="game-detail-left-col">
+           <Iframes/>
+          </div>
+          <div className="game-detail-right-col">
+            </div>
     </div>
   )
 }
-
 export default GameDetail

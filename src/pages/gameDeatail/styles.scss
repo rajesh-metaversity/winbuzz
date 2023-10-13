@@ -4,17 +4,18 @@
     width: 100%;
     gap: 20px;
 
-    .left_cont {
+    .game-detail-left-col {
         width: 70%;
-        border: 1px solid green;
+        display: block;
     }
 
-    .right_cont {
+    .game-detail-right-col {
         flex: 1;
         border: 1px solid blue;
+
     }
 
+   
 
-
-
+   
 }

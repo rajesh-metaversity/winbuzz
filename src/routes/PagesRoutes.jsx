@@ -9,7 +9,7 @@ import BettingProfitLoss from "../component/BettingProfitLoss/BettingProfitLoss"
 import { account_statement, mybets ,casino} from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
-import GameDetail from "../pages/gameDeatail/GameDetail";
+import GameDetail from "../pages/gameDeatail/GameDetail.jsx";
 
 
 export const router = createBrowserRouter([
