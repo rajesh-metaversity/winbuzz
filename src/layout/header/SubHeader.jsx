@@ -59,7 +59,11 @@ const SubHeader = () => {
                 {listArray.map(items => {
                     return (
                         <>
-                            <Link to={items.url}>{items.name}</Link><li></li></>
+                        <li>
+
+                            <Link to={items.url}>{items.name}</Link>
+                        </li>
+                        </>
                     )
                 })}
             </ul>
