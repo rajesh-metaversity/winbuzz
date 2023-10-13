@@ -1,5 +1,8 @@
 import Iframes from '../../component/Iframes/Iframes'
-import './styles.scss'
+import RightTable from './RightTable'
+import RightTableBottom from './RightTableBottom'
+import './style.scss'
+
 const GameDetail = () => {
   return (
       <div className='game_detail-cont'>
@@ -7,6 +10,9 @@ const GameDetail = () => {
            <Iframes/>
           </div>
           <div className="game-detail-right-col">
+              <RightTable />
+              <RightTableBottom />
+
             </div>
     </div>
   )
