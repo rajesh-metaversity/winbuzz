@@ -2,7 +2,9 @@
 
 const LeftTable = () => {
   return (
-    <div className="left_cont">LeftTable</div>
+      <div className="left_cont">
+          jh
+    </div>
   )
 }
 
