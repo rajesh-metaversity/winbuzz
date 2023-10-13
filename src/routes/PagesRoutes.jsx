@@ -5,6 +5,8 @@ import SignUp from "../pages/signUp/SignUp";
 import AccountStatement from "../pages/AccountStatement/AccountStatement";
 import MyBets from "../component/MyBets/MyBets";
 import ChangePassword from "../component/ChangePassword/ChangePassword";
+import Casino from "../pages/casino/Casino";
+import { account_statement, casino } from "./PagesUrl";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +18,10 @@ export const router = createBrowserRouter([
         element: <DashBoard />,
       },
 
-     
+      {
+        path: casino,
+        element: <Casino />
+      }
 
     ],
     
@@ -25,7 +30,7 @@ export const router = createBrowserRouter([
     path: "/sign-up",
     element: <SignUp />,
   },
-  {path: "/account_statement",
+  {path: account_statement,
   element: <AccountStatement />
 },
 {
