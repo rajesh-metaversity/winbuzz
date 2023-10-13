@@ -8,29 +8,30 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        background: grey;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        overflow: hidden;
         
         .bet_slip {
         clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-        
-        background: blue;
+        background: #72bbef;
         width: 30%;
+        height: 100%;
+        padding: 5px 10px;
+        color: white;
     }
 
     .close {
         flex: 1;
-        justify-content: flex-end;
         text-align: right;
-        background: grey;
+        // padding: 5px 10px;
     }
-
-
     }
 
     .bet_details {
         padding: 10px 20px;
         padding-top: 0px;
-
-
 
         .team_name {
           font-size: 12px;
@@ -41,8 +42,7 @@
             display: flex;
             justify-content: space-between;
             flex-direction: column;
-            margin-top: 10px;
-
+            margin-top: 20px;
 
             .odds {
                 display: flex;
@@ -51,11 +51,14 @@
 
                 label {
                     position: absolute;
+                    left: 10px;
                     bottom: -4px;
                     font-size: 10px;
-
+                    background-color: #fff;
+                    color: black;
+                    text-transform: capitalize;
+                    color: rgba(0, 0, 0, .38);
                 }
-
 
             }
 
