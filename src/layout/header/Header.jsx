@@ -50,8 +50,7 @@ const HeaderComponent = () => {
                   login
                 </li>
                 <Link to="/sign-up">
-
-                <li className="header-register">Register</li>
+                  <li className="header-register">Register</li>
                 </Link>
               </>
             ) : (
@@ -74,6 +73,7 @@ const HeaderComponent = () => {
                     hiddenLabel
                     variant="outlined"
                     size="small"
+                    placeholder="Search event"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
