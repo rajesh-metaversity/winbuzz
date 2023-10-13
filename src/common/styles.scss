@@ -8,10 +8,12 @@
     width: 100%;
     display: flex;
     height: calc(100% - 64px);
-    .sider-container {
+    .sider-layout-container {
       width: 15%;
-      background-color: firebrick;
       height: 100%;
+      background-color: white;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
     }
     .content {
       width: 60%;

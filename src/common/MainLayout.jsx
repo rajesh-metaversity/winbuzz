@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import "./styles.scss";
 import HeaderComponent from "../layout/header/Header";
 import SiderBanner from "../component/SiderBanner/SiderBanner";
+import SiderBar from "../layout/sider/Sider";
 // import MyBets from "../component/MyBets/MyBets";
 
 const MainLayout = () => {
@@ -12,7 +13,9 @@ const MainLayout = () => {
           <HeaderComponent />
         </div>
         <div className="content-container">
-          <div className="sider-container"></div>
+          <div className="sider-layout-container">
+            <SiderBar />
+          </div>
           <div className="content">
             <Outlet />
           </div>
@@ -20,7 +23,6 @@ const MainLayout = () => {
             <SiderBanner />
           </div>
         </div>
-        
       </div>
     </div>
   );
