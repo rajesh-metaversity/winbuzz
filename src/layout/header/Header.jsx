@@ -15,88 +15,103 @@ import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDro
 
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
+import RulesModal from '../../component/RulesModal/RulesModal';
 const HeaderComponent = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-
+  const [modalValue, setModalValue] = useState(0);
+  const modalElement = {
+		0: <LoginForm />,
+		1: <RulesModal />
+  };
   return (
-    <>
-      <ModalComponent Elememt={<LoginForm />} open={open} setOpen={setOpen} />
-      <div className="header-container">
-        <div className="header-left-col">
-          <img src={logo} alt="" />
-        </div>
-        <div className="header-right-col">
-          <ul>
-            {!isLogin ? (
-              <>
-                <li className="header-rule">Rules</li>
-                <li>
-                  <MyTextField
-                    hiddenLabel
-                    variant="outlined"
-                    size="small"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </li>
-                <li onClick={() => handleOpen()} className="header-login">
-                  login
-                </li>
-                <Link to="/sign-up">
-                  <li className="header-register">Register</li>
-                </Link>
-              </>
-            ) : (
-              <>
-                <li>
-                  <ButtonComponent
-                    name={"Deposit"}
-                    icon={<AccountBalanceIcon />}
-                    bg={"green"}
-                  />
-                </li>
-                <ButtonComponent
-                  name="Withdraw"
-                  icon={<AddCardIcon />}
-                  bg={"red"}
-                />
-                <li className="header-rule">Rules</li>
-                <li>
-                  <MyTextField
-                    hiddenLabel
-                    variant="outlined"
-                    size="small"
-                    placeholder="Search event"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </li>
-                <li className="header-balance">
-                  Bal:0.29
-                  <span>Exp:0</span>
-                </li>
-                <li className="header-user-name" id="basic-menu">
-                  <UserDetailDropDown />
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-      </div>
-      <SubHeader />
-    </>
+		<>
+			<ModalComponent Elememt={modalElement[modalValue]} open={open} setOpen={setOpen} />
+			<div className="header-container">
+				<div className="header-left-col">
+					<img src={logo} alt="" />
+				</div>
+				<div className="header-right-col">
+					<ul>
+						{!isLogin ? (
+							<>
+								<li
+									className="header-rule"
+									onClick={() => {
+										setModalValue(1);
+										handleOpen();
+									}}>
+									Rules
+								</li>
+								<li>
+									<MyTextField
+										hiddenLabel
+										variant="outlined"
+										size="small"
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position="start">
+													<SearchIcon />
+												</InputAdornment>
+											)
+										}}
+									/>
+								</li>
+								<li
+									onClick={() => {
+										setModalValue(0);
+										handleOpen();
+									}}
+									className="header-login">
+									login
+								</li>
+								<Link to="/sign-up">
+									<li className="header-register">Register</li>
+								</Link>
+							</>
+						) : (
+							<>
+								<li>
+									<ButtonComponent name={'Deposit'} icon={<AccountBalanceIcon />} bg={'green'} />
+								</li>
+								<ButtonComponent name="Withdraw" icon={<AddCardIcon />} bg={'red'} />
+								<li
+									className="header-rule"
+									onClick={() => {
+										setModalValue(1);
+										handleOpen();
+									}}>
+									Rules
+								</li>
+								<li>
+									<MyTextField
+										hiddenLabel
+										variant="outlined"
+										size="small"
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position="start">
+													<SearchIcon />
+												</InputAdornment>
+											)
+										}}
+									/>
+								</li>
+								<li className="header-balance">
+									Bal:0.29
+									<span>Exp:0</span>
+								</li>
+								<li className="header-user-name" id="basic-menu">
+									<UserDetailDropDown />
+								</li>
+							</>
+						)}
+					</ul>
+				</div>
+			</div>
+			<SubHeader />
+		</>
   );
 };
 export default HeaderComponent;

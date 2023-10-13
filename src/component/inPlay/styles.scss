@@ -51,44 +51,7 @@
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 0 5px 0 #989898;
-  .inplay-titile-box {
-    width: 100%;
-    background-image: linear-gradient(90deg, #686666 50%, #707070);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .inplay-title-left-col {
-      padding: 0.4rem 0.5rem;
-      border-top-left-radius: 1rem;
-      font-family: "Lato", sans-serif;
-      color: #fff;
-      text-transform: uppercase;
-      font-size: 13px;
-      font-weight: 400;
-      background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
-      display: inline-flex;
-      clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-      width: 30%;
-      display: flex;
-      gap: 5px;
-      align-items: center;
-    }
-    .inplay-title-right-col {
-      width: 53%;
-      height: 100%;
-      ul {
-        margin: 0%;
-        padding: 0%;
-        display: flex;
-        li {
-          list-style: none;
-          text-align: center;
-          width: 33%;
-          color: white;
-        }
-      }
-    }
-  }
+  
   .odd-container {
     // padding: 10px;
     margin: 10px;
@@ -225,6 +188,47 @@
         align-items: center;
         color: white;
         gap: 5px;
+      }
+    }
+  }
+}
+
+
+
+.inplay-titile-box {
+  width: 100%;
+  background-image: linear-gradient(90deg, #686666 50%, #707070);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .inplay-title-left-col {
+    padding: 0.4rem 0.5rem;
+    border-top-left-radius: 1rem;
+    font-family: "Lato", sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 400;
+    background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    display: inline-flex;
+    clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+    width: 30%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .inplay-title-right-col {
+    width: 53%;
+    height: 100%;
+    ul {
+      margin: 0%;
+      padding: 0%;
+      display: flex;
+      li {
+        list-style: none;
+        text-align: center;
+        width: 33%;
+        color: white;
       }
     }
   }
