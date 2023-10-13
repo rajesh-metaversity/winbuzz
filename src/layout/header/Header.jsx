@@ -34,16 +34,16 @@ const HeaderComponent = () => {
 				</div>
 				<div className="header-right-col">
 					<ul>
-						<li
-              className="header-rule"
-							onClick={() => {
-								setModalValue(1);
-								handleOpen();
-							}}>
-							Rulesss
-						</li>
 						{!isLogin ? (
 							<>
+								<li
+									className="header-rule"
+									onClick={() => {
+										setModalValue(1);
+										handleOpen();
+									}}>
+									Rules
+								</li>
 								<li>
 									<MyTextField
 										hiddenLabel
@@ -76,7 +76,14 @@ const HeaderComponent = () => {
 									<ButtonComponent name={'Deposit'} icon={<AccountBalanceIcon />} bg={'green'} />
 								</li>
 								<ButtonComponent name="Withdraw" icon={<AddCardIcon />} bg={'red'} />
-
+								<li
+									className="header-rule"
+									onClick={() => {
+										setModalValue(1);
+										handleOpen();
+									}}>
+									Rules
+								</li>
 								<li>
 									<MyTextField
 										hiddenLabel
