@@ -1,6 +1,7 @@
 
 import LeftTable from './LeftTable'
 import RightTable from './RightTable'
+import RightTableBottom from './RightTableBottom'
 import './style.scss'
 
 const GameDetail = () => {
@@ -11,6 +12,8 @@ const GameDetail = () => {
           </div>
           <div className="game-detail-right-col">
               <RightTable />
+              <RightTableBottom />
+
             </div>
     </div>
   )
