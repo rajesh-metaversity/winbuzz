@@ -1,0 +1,29 @@
+.casino_card_container {
+    width: 100%;
+    gap: 2px;
+    display: flex;
+    flex-wrap: wrap;
+.casino-card-t{
+    width: 16.4%;
+    display: flex;
+    height: 130px;
+    flex-direction: column;
+    .casino_card {
+        width: 100%;
+        background-image: url(../../assets/img/ooulette1.jpeg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        height: 80%;
+    }
+    .casion-card-footer {
+        height: 20%;
+        background: #a70011;
+        width: calc(100% - 20px);
+        padding: 4px 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+}
