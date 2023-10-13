@@ -1,0 +1,20 @@
+.game_detail-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+
+    .left_cont {
+        width: 70%;
+        border: 1px solid green;
+    }
+
+    .right_cont {
+        flex: 1;
+        border: 1px solid blue;
+    }
+
+
+
+
+}
