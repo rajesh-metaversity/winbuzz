@@ -11,7 +11,10 @@
     justify-content: center;
     color: #fff;
     margin: 0;
-
+    a {
+      color: white;
+      text-decoration: none;
+    }
     li {
       padding: 5px 20px;
       line-height: 20px;
@@ -47,18 +50,6 @@
           border-radius: 50%;
           background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
         }
-      }
-
-      &:nth-child(8) {
-        color: #fffa00;
-      }
-
-      &:nth-child(9) {
-        color: #fffa00;
-      }
-
-      &:nth-child(10) {
-        color: #fffa00;
       }
     }
   }

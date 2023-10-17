@@ -6,11 +6,10 @@ import AccountStatement from "../pages/AccountStatement/AccountStatement";
 import MyBets from "../component/MyBets/MyBets";
 import ChangePassword from "../component/ChangePassword/ChangePassword";
 import BettingProfitLoss from "../component/BettingProfitLoss/BettingProfitLoss";
-import { account_statement, mybets ,casino} from "./PagesUrl";
+import { account_statement, mybets, casino, game_detail } from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
 import GameDetail from "../pages/gameDeatail/GameDetail.jsx";
-
 
 export const router = createBrowserRouter([
   {
@@ -45,9 +44,9 @@ export const router = createBrowserRouter([
         element: <ChangePassword />,
       },
       {
-        path: "/game_detail",
-        element: <GameDetail />
-      }
+        path: game_detail,
+        element: <GameDetail />,
+      },
     ],
   },
   {
