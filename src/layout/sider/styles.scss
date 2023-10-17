@@ -71,6 +71,9 @@
     font-size: 12px;
     margin: 0%;
     background-color: #ebebeb;
+    // p {
+      //     width: 70%;
+      //   }
   }
   li {
     list-style: none;
@@ -92,6 +95,9 @@
       margin: 0%;
       display: flex;
       gap: 5px;
+        overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
     }
     span {
       img {

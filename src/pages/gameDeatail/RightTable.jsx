@@ -1,5 +1,6 @@
 import './RightTable.scss';
 import CloseIcon from '@mui/icons-material/Close';
+import RightTableBottom from './RightTableBottom';
 
 
 const RightTable = () => {
@@ -7,7 +8,8 @@ const RightTable = () => {
 
     const minMax = ["Min", "Max", "All", "Clear"]
     const buttonColors = ["#ffce00", "#75b7ff", "#a5ff93", "#fffc9f"];
-	return (
+    return (
+        <>
 		<div className="right_cont">
 			<div className="heading">
 				<span className='bet_slip'>Bet Slip</span>
@@ -34,8 +36,10 @@ const RightTable = () => {
                     <button>Cancel Order</button>
                     <button>Place Order</button>
                 </span>
-			</div>
-		</div>
+            </div>
+            </div>
+            <RightTableBottom />
+            </>
 	);
 };
 

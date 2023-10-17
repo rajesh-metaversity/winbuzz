@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
+    border: 1px solid #a5d9fe;
+    border-top: 0px;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    box-shadow: 0 0 5px 0 #989898;
+    margin-bottom: 30px;
 
     .heading {
         display: flex;
@@ -12,6 +17,7 @@
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
         overflow: hidden;
+        align-items: center;
         
         .bet_slip {
         clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
@@ -25,7 +31,10 @@
     .close {
         flex: 1;
         text-align: right;
-        // padding: 5px 10px;
+        justify-content: center;
+        color: white;
+        padding-right: 10px;
+        height: 100%;
     }
     }
 
@@ -35,7 +44,6 @@
 
         .team_name {
           font-size: 12px;
-
         }
 
         .bet_number {
