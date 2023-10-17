@@ -1,18 +1,18 @@
-import Iframes from '../../component/Iframes/Iframes'
-import RightTable from './RightTable'
-import './styles.scss'
+import Iframes from '../../component/Iframes/Iframes';
+import { WebBetPlaceModule } from '../../component/betPlaceModule/BetPlaceModule';
+
+import './styles.scss';
 
 const GameDetail = () => {
-  return (
-    <div className='game_detail-cont'>
-      <div className="game-detail-left-col">
-        <Iframes />
-      </div>
-      <div className="game-detail-right-col">
-        <RightTable />
-
-      </div>
-    </div>
-  );
+	return (
+		<div className="game_detail-cont">
+			<div className="game-detail-left-col">
+				<Iframes />
+			</div>
+			<div className="game-detail-right-col">
+				<WebBetPlaceModule />
+			</div>
+		</div>
+	);
 };
 export default GameDetail;
