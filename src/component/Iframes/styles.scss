@@ -1,64 +1,63 @@
 .scorecard_heading {
-    width: calc(100% - 28px);
+  width: calc(100% - 28px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #dedddd;
+  padding: 6px 14px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  p {
+    margin: 0 !important;
+    padding: 0;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: #dedddd;
-    padding: 6px 14px;
-    border-radius: 6px;
+    gap: 4px;
 
-    p {
-        margin: 0 !important;
-        padding: 0;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-
-        svg {
-            font-size: 10px;
-            font-weight: bold;
-            background-color: #000;
-            color: #fff;
-            border-radius: 50%;
-            padding: 2px;
-            cursor: pointer;
-            font-weight: 800;
-        }
+    svg {
+      font-size: 10px;
+      font-weight: bold;
+      background-color: #000;
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px;
+      cursor: pointer;
+      font-weight: 800;
     }
+  }
 
-    .score_btn {
-        background-color: #4caf50;
-        border: unset;
-        padding: 2px 12px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        border-radius: 8px;
-        color: #fff;
-        cursor: pointer;
-        font-size: 12px;
-        svg {
-            color: #fff;
-            font-size: 14px;
-        }
+  .score_btn {
+    background-color: #4caf50;
+    border: unset;
+    padding: 2px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    svg {
+      color: #fff;
+      font-size: 14px;
     }
-
+  }
 }
 
 .score_board {
-    width: 100%;
-    background-image: url("../../assets/img/scoreboardbanner.jpeg");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    height: 100px;
-    margin-top: 10px;
-    transition: height 0.4s ease-in-out;
+  width: 100%;
+  background-image: url("../../assets/img/scoreboardbanner.jpeg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100px;
+  transition: height 0.4s ease-in-out;
 }
 
 .score_board2 {
-    width: 100%;
-    transition: height 0.4s ease-in-out;
-    height: 0px;
-    margin-top: 10px;
+  width: 100%;
+  transition: height 0.4s ease-in-out;
+  height: 0px;
+  margin-top: 10px;
 }
