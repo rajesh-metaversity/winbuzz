@@ -51,13 +51,16 @@
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 0 5px 0 #989898;
-  
+
   .odd-container {
     // padding: 10px;
     margin: 10px;
     border-radius: 4px;
     overflow: hidden;
     background-color: #28a745;
+    a {
+      text-decoration: none;
+    }
   }
 }
 .live {
@@ -192,8 +195,6 @@
     }
   }
 }
-
-
 
 .inplay-titile-box {
   width: 100%;
