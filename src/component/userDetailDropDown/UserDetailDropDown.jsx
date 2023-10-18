@@ -14,7 +14,7 @@ import {
 } from "../../routes/PagesUrl";
 import { Link, NavLink } from "react-router-dom";
 import { StyledMenu } from "./styled";
-const UserDetailDropDown = () => {
+const UserDetailDropDown = ({ name }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,7 +30,7 @@ const UserDetailDropDown = () => {
     setAnchorEl(false);
   };
 
-  const userId = localStorage.getItem("userId");
+ 
 
   return (
     <>
@@ -44,9 +44,16 @@ const UserDetailDropDown = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ color: "white" }}
+        sx={{ color: "white", padding: "0", minWidth: "auto" }}
       >
-        {userId} <ArrowDropDownIcon />
+        
+        {name != "Demo1" ? (
+          name
+        ) : (
+          <>
+            {name} <ArrowDropDownIcon />
+          </>
+        )}
       </Button>
       <StyledMenu
         sx={{

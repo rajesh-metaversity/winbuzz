@@ -1,7 +1,33 @@
-.sider-container {
-  width: 100%;
+.sider-active {
+  background-color: #b7862f;
+  width: 50%;
+  height: 100%;
   overflow: hidden;
   position: relative;
+  .slide-sider-active {
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transition: width 0.4s;
+    background-color: white;
+  }
+  .slide-sider-disable {
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    transition: width 0.4s;
+    background-color: white;
+  }
+}
+.sider-container {
+  overflow: hidden;
+  position: relative;
+
   .slide-sider-active {
     width: 0%;
     height: 100%;
@@ -72,8 +98,8 @@
     margin: 0%;
     background-color: #ebebeb;
     // p {
-      //     width: 70%;
-      //   }
+    //     width: 70%;
+    //   }
   }
   li {
     list-style: none;
@@ -95,9 +121,9 @@
       margin: 0%;
       display: flex;
       gap: 5px;
-        overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     span {
       img {
