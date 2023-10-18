@@ -1,13 +1,13 @@
 import { dynamicBaseQuery } from "../BadRequestHandler/BadRequestHandler";
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
 
-export const Logout = createApi({
-    reducerPath: "logout",
+export const ChangePassword = createApi({
+    reducerPath: "changepassword",
     baseQuery: dynamicBaseQuery,
     endpoints: builder => ({
-        Logout: builder.mutation({
+        ChangePassword: builder.mutation({
             query: body => ({
-				url: 'login/logout',
+				url: '/enduser/change-password',
 				method: 'POST',
 				body
 			})
@@ -17,4 +17,4 @@ export const Logout = createApi({
     })
 })
 
-export const {useLogoutMutation} = Logout
+export const {useChangePasswordMutation} = ChangePassword
