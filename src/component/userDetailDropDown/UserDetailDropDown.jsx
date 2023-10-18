@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import List from "./list";
@@ -13,7 +13,12 @@ import {
   passwordChange,
 } from "../../routes/PagesUrl";
 import { Link, NavLink } from "react-router-dom";
+import { useLogoutMutation } from "../../Services/Auth/Logout";
+import { useDispatch } from "react-redux";
+import { setIslogin } from "../../App/LoginSlice";
 const UserDetailDropDown = () => {
+
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -28,6 +33,23 @@ const UserDetailDropDown = () => {
     setOpen(true);
     setAnchorEl(false);
   };
+
+  const [trigger, { data, isLoading, isError }] = useLogoutMutation();
+
+  // console.log("logoutData", data.stat)
+
+  useEffect(() => {
+    if (data?.status) {
+      dispatch(setIslogin(false));
+  
+    }
+
+  }, [data])
+
+
+
+
+
   return (
     <>
       <ModalComponent
@@ -93,7 +115,7 @@ const UserDetailDropDown = () => {
           <li className="list-bottom-border" onClick={() => handleOpen()}>
             Bonus Rules
           </li>
-          <li className="logout-li">
+          <li className="logout-li" onClick={() => trigger()} >
             Logout
             <ExitToAppIcon />
           </li>

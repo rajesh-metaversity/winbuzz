@@ -52,7 +52,7 @@ const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody,
 						{/* <DatePicker defaultValue={dayjs('2022-04-17')} /> */}
 					</div>
 					<div className="input_field">
-						<label htmlFor="form">Date</label>
+						<label htmlFor="form">To Date</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
 							<DatePicker defaultValue={accountStatementBody?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
 						</LocalizationProvider>

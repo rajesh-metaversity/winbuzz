@@ -30,12 +30,14 @@
     padding-left: 10px;
     border-bottom: 1px solid #dddddd;
     text-decoration: none !important;
+    cursor: pointer;
   }
   .logout-li {
     padding-inline: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     svg {
       font-size: 18px;

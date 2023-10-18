@@ -9,7 +9,9 @@ export const isLoginSlice = createSlice({
     },
   },
 });
+
 export const { setIslogin } = isLoginSlice.actions;
+
 export const isLoginSelector = (state) => state.isLogin.isLogin;
 const betSlipInitialState = { data: null };
 export const betModuleDataSlice = createSlice({
