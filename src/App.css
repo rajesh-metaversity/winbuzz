@@ -1,10 +1,12 @@
-
 body {
   margin: 0;
   padding: 0%;
   box-sizing: border-box;
 }
 
-*{
+* {
   font-family: Lato, Avenir, verdana Nunito !important;
+}
+.MuiTableCell-body {
+  border: 1px solid rgb(202, 202, 202) !important;
 }

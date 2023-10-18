@@ -16,14 +16,15 @@ import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDro
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
 import RulesModal from "../../component/RulesModal/RulesModal";
+import { home } from "../../routes/PagesUrl";
 const HeaderComponent = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const [modalValue, setModalValue] = useState(0);
   const modalElement = {
-    0: <LoginForm />,
-    1: <RulesModal />,
+    0: <LoginForm setOpen={setOpen} />,
+    1: <RulesModal setOpen={setOpen}/>,
   };
   return (
     <>
@@ -34,7 +35,9 @@ const HeaderComponent = () => {
       />
       <div className="header-container">
         <div className="header-left-col">
-          <img src={logo} alt="" />
+          <Link to={home}>
+            <img src={logo} alt="" />
+          </Link>
         </div>
         <div className="header-right-col">
           <ul>
