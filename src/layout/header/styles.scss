@@ -95,3 +95,46 @@
     }
   }
 }
+
+.mobile-header-container {
+  width: calc(100% - 20px);
+  background-color: black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+  .mobile-header-left-col {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    svg {
+      color: white;
+      font-size: 19px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    img {
+      // padding: 0px 0 0 20px;
+      width: 90%;
+    }
+  }
+  .mobile-header-middle-col {
+    width: 10%;
+    display: flex;
+    align-items: baseline;
+    justify-content: right;
+    svg {
+      color: white;
+    }
+  }
+  .mobile-header-right-col {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: end;
+  }
+}

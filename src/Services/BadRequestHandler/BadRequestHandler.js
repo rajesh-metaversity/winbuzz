@@ -13,7 +13,7 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 		const status = result?.error?.status;
 		if (status === 401) {
 			localStorage.clear();
-			// window.location.replace('/');
+			window.location.replace('/');
 		}
 		console.log(responseMessage);
 	}
