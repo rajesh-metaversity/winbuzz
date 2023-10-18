@@ -6,7 +6,15 @@ import AccountStatement from "../pages/AccountStatement/AccountStatement";
 import MyBets from "../component/MyBets/MyBets";
 import ChangePassword from "../component/ChangePassword/ChangePassword";
 import BettingProfitLoss from "../component/BettingProfitLoss/BettingProfitLoss";
-import { account_statement, mybets, casino, game_detail } from "./PagesUrl";
+import {
+  account_statement,
+  mybets,
+  casino,
+  game_detail,
+  passwordChange,
+  bets_profit_loss,
+  signUp,
+} from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
 import GameDetail from "../pages/gameDeatail/GameDetail.jsx";
@@ -32,7 +40,7 @@ export const router = createBrowserRouter([
     children: [
       { path: account_statement, element: <AccountStatement /> },
       {
-        path: "/bets_Profit_loss",
+        path: "/",
         element: <BettingProfitLoss />,
       },
       {
@@ -40,7 +48,7 @@ export const router = createBrowserRouter([
         element: <MyBets />,
       },
       {
-        path: "/password_change",
+        path: passwordChange,
         element: <ChangePassword />,
       },
       {
@@ -50,7 +58,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/sign-up",
+    path: signUp,
     element: <SignUp />,
   },
 ]);

@@ -1,5 +1,5 @@
-import logo from '../../assets/img/logo.png'
-import CloseIcon from '@mui/icons-material/Close';
+import logo from "../../assets/img/logo.png";
+import CloseIcon from "@mui/icons-material/Close";
 ///styles
 import "./styles.scss"
 import { useEffect, useState } from 'react';
@@ -11,7 +11,6 @@ const LoginForm = () => {
 	const nav = useNavigate();
 	const dispatch = useDispatch();
 	const [trigger, { data, error: isError, isLoading }] = useLoginMutation();
-	const loginCheck = useSelector(isLoginSelector);
 	const [loginData, setloginData] = useState({
 		userId: '',
 		password: '',

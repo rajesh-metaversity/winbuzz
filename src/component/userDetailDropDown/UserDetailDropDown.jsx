@@ -13,6 +13,7 @@ import {
   passwordChange,
 } from "../../routes/PagesUrl";
 import { Link, NavLink } from "react-router-dom";
+import { StyledMenu } from "./styled";
 const UserDetailDropDown = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -40,17 +41,30 @@ const UserDetailDropDown = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ color: "black" }}
+        sx={{ color: "white" }}
       >
         Demo <ArrowDropDownIcon />
       </Button>
-      <Menu
+      <StyledMenu
+        sx={{
+          "&.MuiList-root ": {
+            "&::after": {
+              content: '""',
+              height: "30px",
+              width: "30px",
+              top: 0,
+              backgroundColor: "#ffffff",
+            },
+          },
+        }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
+
+        // className="drop-menu"
       >
         <ul className="ul-drop-user">
           <li>
@@ -104,7 +118,7 @@ const UserDetailDropDown = () => {
 			<Button aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick} sx={{ color: 'black' }}>
 				Demo <ArrowDropDownIcon />
 			</Button>
-			<Menu
+			<StyledMenu
 				anchorEl={anchorEl}
 				open={open}
 				onClose={handleClose}
@@ -154,8 +168,8 @@ const UserDetailDropDown = () => {
 				{/* <MenuItem onClick={handleClose}></MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem> */}
-			</Menu>
-		</>
+      </StyledMenu>
+    </>
   );
 };
 
