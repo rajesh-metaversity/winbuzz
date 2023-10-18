@@ -7,6 +7,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import LoginForm from "../../component/loginForm/LoginForm";
 import ModalComponent from "../../component/modal/Modal";
+import PersonIcon from "@mui/icons-material/Person";
 ///styles
 import "./styles.scss";
 import { MyTextField } from "./styled";
@@ -21,10 +22,15 @@ import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
-export const WebHeaderComponent = () => {
+import CloseIcon from "@mui/icons-material/Close";
+export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
   const loginCheck = useSelector(isLoginSelector);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    console.log("hui2");
+
+    setOpen(true);
+  };
   const [modalValue, setModalValue] = useState(0);
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
@@ -128,7 +134,7 @@ export const WebHeaderComponent = () => {
                     <span>Exp:0</span>
                   </li>
                   <li className="header-user-name" id="basic-menu">
-                    <UserDetailDropDown />
+                    <UserDetailDropDown name="Demo1" />
                   </li>
                 </>
               )}
@@ -141,19 +147,56 @@ export const WebHeaderComponent = () => {
   } else {
     return (
       <>
+        <ModalComponent
+          Elememt={modalElement[modalValue]}
+          open={open}
+          setOpen={setOpen}
+        />
         <div className="mobile-header-container">
           <div className="mobile-header-left-col">
-            <MenuIcon />
+            {siderOpen ? (
+              <CloseIcon onClick={() => setSiderOpen(!siderOpen)} />
+            ) : (
+              <MenuIcon onClick={() => setSiderOpen(!siderOpen)} />
+            )}
+
             <Link to={home}>
               <img src={logo} alt="" />
             </Link>
           </div>
-          <div className="mobile-header-middle-col">
+          {/* <div className="mobile-header-middle-col">
             <SearchIcon />
-          </div>
+          </div> */}
           <div className="mobile-header-right-col">
-            <ButtonComponent name="Login" bg="#b88831" clr="white" />
-            <ButtonComponent name="Register" bg="white" clr="#b88831" />
+            {loginCheck ? (
+              <>
+                <SearchIcon />
+                <li className="header-balance">
+                  Bal:0.29
+                  <span>Exp:0</span>
+                </li>
+                <span className="user">
+                  <UserDetailDropDown name={<PersonIcon />} />
+                </span>
+              </>
+            ) : (
+              <>
+                <SearchIcon />
+                <span
+                  onClick={() => {
+                    setModalValue(0);
+                    handleOpen();
+                    console.log("hui");
+                  }}
+                  style={{ color: "white" }}
+                >
+                  <ButtonComponent name="Login" bg="#b88831" clr="white" />
+                </span>
+                <Link to="/sign-up">
+                  <ButtonComponent name="Register" bg="white" clr="#b88831" />
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </>
