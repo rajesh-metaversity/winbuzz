@@ -1,15 +1,23 @@
+import { useEffect } from "react";
+import { useActiveMatchMutation, useInPlayQuery } from "../../Services/ActiveSportList/ActiveMatch";
 import InPlayHeading from "./InPlay";
 import InplayCollapse from "./InplayCollapse";
 ///styles
 import "./styles.scss";
 const Inplay = () => {
+  const {data} = useInPlayQuery();
+
+
+
+
   return (
     <>
-      <InPlayHeading />
-      {[1, 2, 3].map((res) => {
+      <InPlayHeading headName = {"IN PLAY"} />
+      {data?.data?.map((res) => {
+        console.log(res, "Dasdsd")
         return (
           <>
-            <InplayCollapse />
+            <InplayCollapse name={res?.name} data={res?.matchList}/>
           </>
         );
       })}
