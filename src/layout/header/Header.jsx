@@ -31,12 +31,18 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
 
     setOpen(true);
   };
+  const userId = localStorage.getItem("userId");
   const [modalValue, setModalValue] = useState(0);
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
     1: <RulesModal setOpen={setOpen} />,
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
+  // const {data} = useBalanceQuery({});
+
+  // console.log(data, "sdasdasda")
+
   if (!isBreakPoint) {
     return (
       <>
@@ -134,7 +140,7 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
                     <span>Exp:0</span>
                   </li>
                   <li className="header-user-name" id="basic-menu">
-                    <UserDetailDropDown name="Demo1" />
+                    <UserDetailDropDown name={userId} />
                   </li>
                 </>
               )}

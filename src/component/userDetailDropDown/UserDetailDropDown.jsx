@@ -29,6 +29,9 @@ const UserDetailDropDown = ({ name }) => {
     setOpen(true);
     setAnchorEl(false);
   };
+
+ 
+
   return (
     <>
       <ModalComponent
@@ -43,6 +46,7 @@ const UserDetailDropDown = ({ name }) => {
         onClick={handleClick}
         sx={{ color: "white", padding: "0", minWidth: "auto" }}
       >
+        
         {name != "Demo1" ? (
           name
         ) : (
