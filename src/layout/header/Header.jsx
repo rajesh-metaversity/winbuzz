@@ -21,6 +21,7 @@ import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useBalanceQuery } from "../../Services/Balance/BalanceApi";
 export const WebHeaderComponent = () => {
   const loginCheck = useSelector(isLoginSelector);
   const [open, setOpen] = useState(false);
@@ -31,6 +32,11 @@ export const WebHeaderComponent = () => {
     1: <RulesModal setOpen={setOpen} />,
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
+  // const {data} = useBalanceQuery({});
+
+  // console.log(data, "sdasdasda")
+
   if (!isBreakPoint) {
     return (
       <>

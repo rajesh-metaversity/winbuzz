@@ -7,32 +7,62 @@ const InPlayOddRow = ({ live }) => {
     lay: "#f8d0ce",
     disable: "#dedddd",
   };
+
+  console.log(live, "sdsas");
+
   return (
     <div className={`odds-row-container ${live}`}>
       <div className="odds-row-left-col">
-        <span>12/10/2023 13:00</span>
-        <p>MELBOURNE STARS T10 VS HOBART HURRICANES T10</p>
+        <span>{live?.openDate}</span>
+        <p>{live?.matchName}</p>
       </div>
       <div className="odds-row-middle-col">
-        <span className="live-inplay"></span>
+        {live?.inPlay && <span className="live-inplay"></span>}
         <img src={tv} alt="" />
-        <SportsEsportsIcon />
-        <span>F</span>
+        {live?.gm && <SportsEsportsIcon />}
+        {live?.F && <span>F</span>}
+        {live?.bm && <span>BM</span>}
       </div>
 
       <div className="odds-row-right-col">
         <ul>
           <li>
-            <OddsButton bg={oddsBg["back"]} />
-            <OddsButton bg={oddsBg["lay"]} />
+            <button className="odds-btn" style={{ background: oddsBg["back"] }}>
+              <span>{live?.team1Back}</span>
+              <span>0</span>
+            </button>
+            <button className="odds-btn" style={{ background: oddsBg["lay"] }}>
+              <span>{live?.team1Lay}</span>
+              <span>0</span>
+            </button>
+            {/* <OddsButton back1= bg={oddsBg["back"]} /> */}
+            {/* <OddsButton bg={oddsBg["lay"]} /> */}
           </li>
           <li>
-            <OddsButton bg={oddsBg["disable"]} />
-            <OddsButton bg={oddsBg["disable"]} />
+            <button
+              className="odds-btn"
+              style={{ background: oddsBg["disable"] }}>
+              <span>{live?.drawBack}</span>
+              <span>0</span>
+            </button>
+            <button
+              className="odds-btn"
+              style={{ background: oddsBg["disable"] }}>
+              <span>{live?.drawLay}</span>
+              <span>0</span>
+            </button>
           </li>
           <li>
-            <OddsButton bg={oddsBg["back"]} />
-            <OddsButton bg={oddsBg["lay"]} />
+            <button className="odds-btn" style={{ background: oddsBg["back"] }}>
+              <span>{live?.team2Back}</span>
+              <span>0</span>
+            </button>
+            <button className="odds-btn" style={{ background: oddsBg["lay"] }}>
+              <span>{live?.team2Lay}</span>
+              <span>0</span>
+            </button>
+            {/* <OddsButton bg={oddsBg["back"]} />
+            <OddsButton bg={oddsBg["lay"]} /> */}
           </li>
         </ul>
       </div>

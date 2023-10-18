@@ -18,6 +18,7 @@ import {
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
 import GameDetail from "../pages/gameDeatail/GameDetail.jsx";
+import SportData from "../component/SportData/SportData";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: casino,
         element: <Casino />,
+      },
+      {
+        path: game_detail,
+        element: <SportData/>,
       },
     ],
   },

@@ -29,6 +29,9 @@ const UserDetailDropDown = () => {
     setOpen(true);
     setAnchorEl(false);
   };
+
+  const userId = localStorage.getItem("userId");
+
   return (
     <>
       <ModalComponent
@@ -43,7 +46,7 @@ const UserDetailDropDown = () => {
         onClick={handleClick}
         sx={{ color: "white" }}
       >
-        Demo <ArrowDropDownIcon />
+        {userId} <ArrowDropDownIcon />
       </Button>
       <StyledMenu
         sx={{
