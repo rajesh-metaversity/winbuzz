@@ -2,9 +2,9 @@ import Button from "@mui/material/Button";
 import sytled from "@mui/material/styles/styled";
 
 export const MyButton = sytled(Button)(
-  `&:hover {
-        background: green;
-      }`,
+  // `&:hover {
+  //       background: green;
+  //     }`,
   {
     border: "none",
     color: "#fff",

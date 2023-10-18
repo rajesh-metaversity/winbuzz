@@ -9,14 +9,14 @@
     display: flex;
     height: calc(100% - 64px);
     .sider-layout-container {
-      // width: 15%;
+      width: 15%;
       height: 100%;
       background-color: white;
       border-left: 1px solid #ddd;
       border-right: 1px solid #ddd;
     }
     .content {
-      width: 60%;
+      width: calc(60% - 20px);
       height: 100%;
       padding: 10px;
       background-color: white;
