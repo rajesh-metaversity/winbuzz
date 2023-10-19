@@ -1,0 +1,222 @@
+.bets_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  @media screen and (max-width: 780px) {
+    gap: 0px;
+
+  }
+
+  .combo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (max-width: 780px) {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+
+    }
+
+    .left {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      text-align: end;
+      margin-right: 50px;
+
+
+
+      p {
+        padding-top: 30px;
+        font-size: 20px;
+        margin: 0;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: #333;
+      }
+
+      .matched {
+        display: flex;
+        align-items: flex-start;
+        gap: 50px;
+      }
+
+      @media screen and (max-width: 780px) {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: left;
+        margin: 0;
+
+        p {
+          background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+          padding-top: 0px;
+          color: white;
+          padding: 8px 13px;
+          font-size: 13px;
+
+        }
+
+      }
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+
+      @media screen and (max-width: 780px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: calc(100% - 20px);
+        padding-left: 20px;
+        padding-right: 20px;
+        column-gap: 5px;
+        row-gap: 15px;
+      }
+
+      span {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+
+        @media screen and (max-width: 780px) {
+          position: relative;
+          margin: 0;
+
+        }
+
+        label {
+          margin-bottom: 5px;
+
+          @media screen and (max-width: 780px) {
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            z-index: 888;
+            background: #202020;
+            color: white;
+            font-size: 12px;
+          }
+        }
+
+        select {
+          padding: 10px 30px;
+          padding-left: 0px;
+          background: #f3f3f3;
+          border: none;
+          border: 1px solid #d1d1d1;
+          border-radius: 5px;
+
+          @media screen and (max-width: 780px) {
+            background: transparent;
+            border: 1px solid rgba(170, 170, 170, .3);
+          }
+        }
+
+        input {
+          padding: 10px;
+          background: #f3f3f3;
+          border: none;
+          border: 1px solid #d1d1d1;
+          border-radius: 5px;
+
+          @media screen and (max-width: 780px) {
+            background: transparent !important;
+            border: 1px solid rgba(170, 170, 170, .3);
+
+          }
+        }
+      }
+
+      button {
+        background: #198754;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: white;
+        margin-top: 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #157347;
+        }
+
+        @media screen and (max-width: 780px) {
+          margin-top: 0px;
+          padding: 0px;
+          width: 100%;
+          height: 100%;
+
+        }
+      }
+
+
+    }
+
+    .pdf-excel {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px;
+
+    }
+  }
+
+  .mybets_table {
+
+    @media screen and (max-width: 780px) {
+      padding: 10px;
+      padding-top: 5px;
+      background: none;
+
+    }
+
+    .css-rqglhn-MuiTable-root {
+      // background-color: none;
+
+      @media screen and (max-width: 780px) {
+        background-color: black;
+
+      }
+
+
+    }
+
+    th {
+      border: 1px solid rgba(120, 130, 140, .13) !important;
+
+    }
+
+    .bet_table-body {
+
+      @media screen and (max-width: 780px) {
+        background: #202020;
+
+        td {
+          border: 1px solid rgba(120, 130, 140, .13) !important;
+
+        }
+      }
+
+
+
+    }
+
+
+  }
+
+  table {
+    th {
+      color: #fff;
+      font-weight: 700;
+      background-color: #333;
+      border-right: 1px solid white;
+      border-left: 1px solid white;
+    }
+  }
+}
