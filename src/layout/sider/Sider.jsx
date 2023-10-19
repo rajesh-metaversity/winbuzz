@@ -1,73 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cricket from "../../assets/img/cricket.svg";
 import football from "../../assets/img/football.svg";
 import arrow from "../../assets/img/rightArrow.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 ///styles
 import "./styles.scss";
+import { useActiveSportMutation } from "../../Services/ActiveSportList/ActiveSportList";
+import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
+import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 const SiderBar = () => {
-  const siderList = [
-    {
-      name: "Cricket",
-      icon: cricket,
-      matchname: "New Zealand v bangladesh",
-    },
-    {
-      name: "Football",
-      icon: football,
-      matchname: "India v Pakistan",
-    },
-    {
-      name: "Tennis",
-      icon: "",
-      matchname: "Australia v Sri Lanka",
-    },
-    {
-      name: "Horse Racing",
-      icon: "",
-    },
-    {
-      name: "Grayhound Racing",
-      icon: "Kabadi",
-    },
-    {
-      name: "Politics",
-      icon: "",
-    },
-    {
-      name: "Casino",
-      icon: "",
-    },
-    {
-      name: "Sport book",
-      icon: "",
-    },
-    {
-      name: "Int Casino",
-      icon: "",
-    },
-    {
-      name: "Binary",
-      icon: "",
-    },
-  ];
+  const [trigger, { data, isLoading, isError }] = useActiveSportMutation();
+  const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
+    useActiveMatchMutation();
+
+  useEffect(() => {
+    trigger();
+  }, []);
+
+
   const [matchName, setMatchName] = useState("second");
   const [activeSlide, setActiveSlide] = useState(false);
+  const isBreakPoint = useMediaQuery("(max-width: 780px)");
   return (
-    <div className="sider-container">
+    <div className={isBreakPoint ? "sider-active" : "sider-container"} onClick={(e)=>e.stopPropagation()}>
       <ul className="sider-container-ul">
-        {siderList.map((item) => {
+        {data?.data.map((item) => {
           return (
             <>
               <li
                 onClick={() => {
-                  setMatchName(item.name);
+                  setMatchName(item?.sportName);
                   setActiveSlide(true);
+                  trigge(item.sportId);
                 }}
               >
                 <p>
-                  <img src={item.icon} alt="cricket" />
-                  {item.name}
+                  <img src={item?.sportImage} alt="cricket" />
+                  {item.sportName}
                 </p>
                 <span>
                   <img src={arrow} alt="" />
@@ -85,12 +54,12 @@ const SiderBar = () => {
             <ArrowBackIosNewIcon /> Previuos
           </p>
           <p className="matchName">{matchName}</p>
-          {siderList.map((item) => {
-            if (item.matchname) {
+          {activeMatch?.data.map((item) => {
+            if (item.matchName) {
               return (
                 <>
                   <li onClick={() => setActiveSlide(true)}>
-                    <p>{item.matchname}</p>
+                    <p>{item.matchName}</p>
                     <span>
                       <img src={arrow} alt="" />
                     </span>
