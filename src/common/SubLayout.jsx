@@ -2,6 +2,7 @@ import React from "react";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { Outlet } from "react-router-dom";
 import SiderBar from "../layout/sider/Sider";
+import MobileFooter from "../layout/mobileFooter/MobileFooter";
 
 const Sublayout = () => {
   return (
@@ -22,6 +23,7 @@ const Sublayout = () => {
         </div> */}
         </div>
       </div>
+      <MobileFooter />
     </div>
   );
 };
