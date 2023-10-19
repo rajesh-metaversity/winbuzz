@@ -205,6 +205,7 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
             )}
           </div>
         </div>
+        <SubHeader />
       </>
     );
   }

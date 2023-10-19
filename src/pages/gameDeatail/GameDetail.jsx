@@ -8,7 +8,6 @@ const GameDetail = () => {
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
         <Iframes />
-        jdhafkj
         <MatchedDetailBetComp />
       </div>
       <div className="game-detail-right-col">

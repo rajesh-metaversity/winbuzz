@@ -28,10 +28,9 @@ const TopBanner = () => {
     });
   }, []);
 
-  const arr = [1, 2, 3, 4, 5, 6];
   return (
     // <div className="img_cont">
-    <Slider {...settings}>
+    <Slider {...settings} className="img_cont">
       {data?.data?.map((sliderdata, index) => (
         <div key={index}>
           <Grid container>
