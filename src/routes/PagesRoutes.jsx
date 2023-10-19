@@ -14,6 +14,7 @@ import {
   passwordChange,
   bets_profit_loss,
   signUp,
+  game_list,
 } from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
         element: <Casino />,
       },
       {
-        path: game_detail,
+        path: game_list,
         element: <SportData/>,
       },
     ],
