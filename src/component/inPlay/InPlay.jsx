@@ -1,13 +1,13 @@
 import inplayico from "../../assets/img/inplayico.png";
 
 
-const InPlayHeading = () => {
+const InPlayHeading = ({headName}) => {
   return (
     <>
       <div className="inplay-container">
         <div className="inplay-heading">
           <img src={inplayico} alt="" />
-          In Play
+         {headName}
         </div>
       </div>
     </>

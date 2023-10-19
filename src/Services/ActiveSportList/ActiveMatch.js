@@ -10,6 +10,9 @@ export const activeMatch = createApi({
     activeMatch: builder.mutation({
       query: (id) => "betfair_api/active_match/" + id,
     }),
+    inPlay: builder.query({
+      query: () => "betfair_api/active_match/",
+    }),
   }),
 });
-export const { useActiveMatchMutation } = activeMatch;
+export const { useActiveMatchMutation,  useInPlayQuery} = activeMatch;

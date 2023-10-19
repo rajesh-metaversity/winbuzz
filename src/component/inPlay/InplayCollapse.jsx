@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import InPlayOddRow from "./InPlayOddRow";
 import Title from "./Title";
 import { game_detail } from "../../routes/PagesUrl";
-const InplayCollapse = () => {
+const InplayCollapse = ({data, name}) => {
   return (
     <>
       <div className="in-play-collapse-container">
-        <Title name={"Cricket"} />
+        <Title name={name} />
         <div className="odd-container">
-          {["liv2", "live", "livw"].map((res) => {
+          {data?.map((res) => {
             return (
               <Link to={game_detail} key={res}>
                 <InPlayOddRow live={res} />

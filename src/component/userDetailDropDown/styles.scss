@@ -30,20 +30,22 @@
     padding-left: 10px;
     border-bottom: 1px solid #dddddd;
     text-decoration: none !important;
+    cursor: pointer;
   }
   .logout-li {
     padding-inline: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    cursor: pointer;
     svg {
       font-size: 18px;
     }
   }
 
   .refer_earn {
-    background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    background: transparent
+      linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
     border-radius: 100px;
     text-align: center;
     color: white;
@@ -61,5 +63,20 @@
   .link {
     text-decoration: none;
     color: black;
+  }
+}
+
+.drop-menu {
+  position: absolute;
+  &::after {
+    content: "";
+    height: 0;
+    position: absolute;
+    bottom: 100%;
+    right: 50%;
+    margin-right: -5px;
+    border-width: 0 6px 6px 6px;
+    border-style: solid;
+    border-color: #ffffff transparent;
   }
 }

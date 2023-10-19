@@ -1,6 +1,6 @@
 import Iframes from "../../component/Iframes/Iframes";
 import { WebBetPlaceModule } from "../../component/betPlaceModule/BetPlaceModule";
-
+import MatchedDetailBetComp from "../../component/matchedDetail/MatchedDetailBetComp";
 import "./styles.scss";
 
 const GameDetail = () => {
@@ -8,6 +8,8 @@ const GameDetail = () => {
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
         <Iframes />
+        jdhafkj
+        <MatchedDetailBetComp />
       </div>
       <div className="game-detail-right-col">
         <WebBetPlaceModule />

@@ -3,6 +3,9 @@
   height: 100vh;
   .header-layout {
     height: auto;
+    position: sticky;
+    top: 0%;
+    z-index: 100;
   }
   .content-container {
     width: 100%;
@@ -14,15 +17,38 @@
       background-color: white;
       border-left: 1px solid #ddd;
       border-right: 1px solid #ddd;
+      @media screen and (max-width: 780px) {
+        position: fixed;
+        z-index: 100;
+        width: 0%;
+        transition: width 0.4s;
+        top: 64px;
+        background-color: transparent;
+        border-right: none;
+      }
+    }
+    .sider-layout-active {
+      width: 100%;
+      position: fixed;
+      z-index: 100;
+      height: calc(100vh - 64px);
+      background-color: transparent;
+      border-left: 1px solid #ddd;
+      border-right: none;
+      transition: width 0.4s;
+      top: 64px;
     }
     .content {
-      width: 60%;
+      width: calc(60% - 20px);
       height: 100%;
       padding: 10px;
       background-color: white;
+      @media screen and (max-width: 780px) {
+        width: calc(100% - 20px);
+      }
     }
     .sub-content {
-      width: 84%;
+      width: calc(84% - 20%);
       padding: 10px;
     }
     .banner-sider {
