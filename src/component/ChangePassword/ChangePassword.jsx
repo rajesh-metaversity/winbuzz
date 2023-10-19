@@ -22,7 +22,6 @@ const ChangePassword = () => {
 	});
 
 	const handleSubmit = (values, actions) => {
-		console.log(values, 'Value');
 		actions.setSubmitting(false);
 		trigger(values);
 
@@ -37,13 +36,6 @@ const ChangePassword = () => {
 			})
 		}
 	};
-
-	console.log("initialValue", initialValues)
-	console.log(data, "changedata")
-
-	// useEffect(() => {
-	// 	trigger(initialValues);
-	// }, []);
 
 	return (
 		<div className="change_password_cont">

@@ -7,14 +7,11 @@ import "./styles.scss";
 const Inplay = () => {
   const {data} = useInPlayQuery();
 
-
-
-
   return (
     <>
       <InPlayHeading headName = {"IN PLAY"} />
       {data?.data?.map((res) => {
-        console.log(res, "Dasdsd")
+        if(res?.matchList?.length == 0) return <></>
         return (
           <>
             <InplayCollapse name={res?.name} data={res?.matchList}/>

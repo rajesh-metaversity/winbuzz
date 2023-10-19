@@ -25,7 +25,6 @@ const LoginForm = ({ setOpen }) => {
   useEffect(() => {
     if (data) {
       if (data.status === false) {
-        console.log("cjec");
         //   message.error(data?.message);
         dispatch(setIslogin(false));
       } else if (data?.token) {
