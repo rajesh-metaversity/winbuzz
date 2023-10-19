@@ -5,8 +5,8 @@ export const BalanceApi = createApi({
   reducerPath: "BalanceApi",
   baseQuery: dynamicBaseQuery,
   endpoints: (builder) => ({
-    balanceApi: builder.query({
-      query: body => ({
+    balanceApi: builder.mutation({
+      query: (body) => ({
         url: "enduser/get-user-balance",
         method: "POST",
         body,
@@ -15,4 +15,4 @@ export const BalanceApi = createApi({
   }),
 });
 
-export const { useBalanceApiQuery } = BalanceApi;
+export const { useBalanceApiMutation } = BalanceApi;
