@@ -1,8 +1,13 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import styled from '@mui/material/styles/styled';
 
-const polygonVal = 'polygon(0px 0px, 76% 0%, 85% 100%, 0% 100%)'
-const skewVal = "skew(43deg)"
+export const polygonVal = 'polygon(0px 0px, 76% 0%, 85% 100%, 0% 100%)';
+export const skewVal = "skew(43deg)";
+
+export const MainDiv = styled(Box)({
+    marginTop: '10px'
+})
+
 export const PolygonStrip = styled(Box)(({ props }) => ({
     width: '100%',
     background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
@@ -28,11 +33,11 @@ export const GridContainer = styled(Grid)(({ props }) => ({
     backgroundColor: props === 'betgrid' ? '#ffffff' : '#f1f1f1',
     borderBottom: props === 'betgrid' ? '1px solid rgb(128 128 128 / 14%)' : 0,
     boxShadow: props === 'betgrid' ? 'rgb(0 0 0 / 5%) -2px 3px 6px, rgb(0 0 0 / 12%) 1px 1px 3px' : 'none',
-    borderRadius: props === 'betgrid' ? '5px' : 0,
+    borderRadius: props === 'betgrid' ? '0px 0px 5px 5px' : 0,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBlock: props === 'betgrid' ? '5px' : 0
+    padding: props === 'betgrid' ? '0px 0px' : 0,
 }));
 
 export const P = styled('p')(({ props }) => ({
@@ -45,17 +50,17 @@ export const P = styled('p')(({ props }) => ({
     padding: props === 'matchodds' ? '6px 2px 6px 10px' : props === 'left' ? '0px 0px 0px 8.35938px' : 0,
 }))
 
-export const BetTypoPara = styled('p')({
+export const BetTypoPara = styled(Typography)(({ props }) => ({
     textAlign: 'center',
-    fontSize: '12px',
+    fontSize: props === 'fancyp' ? '10px' : '12px',
     margin: 'auto 0'
-})
+}))
 
-export const BetTypoSpan = styled('p')({
-    fontSize: '9px',
+export const BetTypoSpan = styled(Typography)(({ props }) => ({
+    fontSize: props === 'fancyp' ? '10px' : '9px',
     textAlign: 'center',
     margin: 'auto 0'
-})
+}))
 
 export const BackGrid = styled(Grid)({
     backgroundColor: '#A5D9FE',

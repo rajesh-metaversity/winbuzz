@@ -1,13 +1,13 @@
 import { dynamicBaseQuery } from "../BadRequestHandler/BadRequestHandler";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
 
-export const BalanceApi = createApi({
-  reducerPath: "BalanceApi",
+export const Message = createApi({
+  reducerPath: "message",
   baseQuery: dynamicBaseQuery,
   endpoints: (builder) => ({
-    balanceApi: builder.query({
+    Message: builder.query({
       query: body => ({
-        url: "enduser/get-user-balance",
+        url: "/enduser/get-user-message",
         method: "POST",
         body,
       }),
@@ -15,4 +15,4 @@ export const BalanceApi = createApi({
   }),
 });
 
-export const { useBalanceApiQuery } = BalanceApi;
+export const { useMessageQuery } = Message;
