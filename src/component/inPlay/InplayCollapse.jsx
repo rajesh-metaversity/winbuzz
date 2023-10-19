@@ -7,7 +7,7 @@ const InplayCollapse = ({data, name}) => {
   const nav = useNavigate()
 
   const handleGameDetailsPage = (id)=>{
-    nav(`game_detail/${id}`)
+    nav(`/game_detail/${id}`)
   }
 
   return (
