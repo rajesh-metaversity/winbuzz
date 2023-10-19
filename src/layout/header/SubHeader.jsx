@@ -12,7 +12,6 @@ const SubHeader = () => {
     trigger();
   }, []);
 
-
   // const listArray = [
   //   {
   //     name: "Cricket",
@@ -61,9 +60,9 @@ const SubHeader = () => {
   //   },
   // ];
 
-  const handleSportDetailsPage = (val, name)=>{
-    nav(`/game_detail/${val}`, {state:name})
-  }
+  const handleSportDetailsPage = (val, name) => {
+    nav(`/game_list/${val}`, { state: name });
+  };
 
   return (
     <div className="sub_header_cont">
@@ -72,13 +71,19 @@ const SubHeader = () => {
           return (
             <>
               <li>
-                <div onClick={()=>handleSportDetailsPage(items?.sportId, items.sportName)} >{items.sportName}</div>
+                <div
+                  onClick={() =>
+                    handleSportDetailsPage(items?.sportId, items.sportName)
+                  }
+                >
+                  {items.sportName}
+                </div>
               </li>
             </>
           );
         })}
         <li>
-          <Link to="casino">Int Casino</Link  >
+          <Link to="casino">Int Casino</Link>
         </li>
       </ul>
     </div>
