@@ -33,9 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	// },
 }));
 
-function createData(name, calories, fat, carbs, protein, sname) {
-	return { name, calories, fat, carbs, protein, sname };
-}
 
 const AccountStatement = () => {
 	const [accountStatementBody, setAccountStatementBody] = useState({
