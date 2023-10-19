@@ -6,6 +6,9 @@ import SiderBar from "../layout/sider/Sider";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
+import { useBalanceApiQuery } from "../Services/Balance/BalanceApi";
+import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
+import MobileFooter from "../layout/mobileFooter/MobileFooter";
 // import MyBets from "../component/MyBets/MyBets";
 
 const MainLayout = () => {
@@ -18,13 +21,20 @@ const MainLayout = () => {
       document.body.style.overflow = "visible";
     }
   }, [siderOpen]);
+
+  const {data} = useBalanceApiQuery();
+
+
+
   return (
     <div>
       <div className="main-layout-container">
         <div className="header-layout">
+          <HeaderMessage/>
           <WebHeaderComponent
             setSiderOpen={setSiderOpen}
             siderOpen={siderOpen}
+            balanceData={data?.data}
           />
         </div>
         <div className="content-container">
@@ -37,6 +47,8 @@ const MainLayout = () => {
             <SiderBar />
           </div>
           <div className="content">
+           
+
             <Outlet />
           </div>
           {!isBreakPoint ? (
@@ -48,6 +60,7 @@ const MainLayout = () => {
           )}
         </div>
       </div>
+      <MobileFooter />
     </div>
   );
 };

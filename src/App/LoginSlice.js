@@ -25,7 +25,6 @@ export const betModuleDataSlice = createSlice({
 });
 export const { setBetSlipData } = betModuleDataSlice.actions;
 export const betSlipSelector = (state) => {
-  // console.log(state);
   return state.betSlip;
 };
 

@@ -23,12 +23,15 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
+import { useBalanceApiQuery } from "../../Services/Balance/BalanceApi";
+export const WebHeaderComponent = ({
+  balanceData,
+  setSiderOpen,
+  siderOpen,
+}) => {
   const loginCheck = useSelector(isLoginSelector);
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    console.log("hui2");
-
     setOpen(true);
   };
   const userId = localStorage.getItem("userId");
@@ -39,9 +42,6 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-  // const {data} = useBalanceQuery({});
-
-  // console.log(data, "sdasdasda")
 
   if (!isBreakPoint) {
     return (
@@ -66,8 +66,7 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
                     onClick={() => {
                       setModalValue(1);
                       handleOpen();
-                    }}
-                  >
+                    }}>
                     Rules
                   </li>
                   <li>
@@ -89,8 +88,7 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
                       setModalValue(0);
                       handleOpen();
                     }}
-                    className="header-login"
-                  >
+                    className="header-login">
                     login
                   </li>
                   <Link to="/sign-up">
@@ -116,8 +114,7 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
                     onClick={() => {
                       setModalValue(1);
                       handleOpen();
-                    }}
-                  >
+                    }}>
                     Rules
                   </li>
                   <li>
@@ -136,8 +133,11 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
                     />
                   </li>
                   <li className="header-balance">
-                    Bal:0.29
-                    <span>Exp:0</span>
+                    Bal: {balanceData?.balance}
+                    <span>
+                      Exp:{""}
+                      {balanceData?.libality}
+                    </span>
                   </li>
                   <li className="header-user-name" id="basic-menu">
                     <UserDetailDropDown name={userId} />
@@ -178,8 +178,8 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
               <>
                 <SearchIcon />
                 <li className="header-balance">
-                  Bal:0.29
-                  <span>Exp:0</span>
+                  Bal:{balanceData?.balance}
+                  <span>Exp:{balanceData?.libality}</span>
                 </li>
                 <span className="user">
                   <UserDetailDropDown name={<PersonIcon />} />
@@ -192,10 +192,8 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
                   onClick={() => {
                     setModalValue(0);
                     handleOpen();
-                    console.log("hui");
                   }}
-                  style={{ color: "white" }}
-                >
+                  style={{ color: "white" }}>
                   <ButtonComponent name="Login" bg="#b88831" clr="white" />
                 </span>
                 <Link to="/sign-up">
@@ -205,6 +203,7 @@ export const WebHeaderComponent = ({ setSiderOpen, siderOpen }) => {
             )}
           </div>
         </div>
+        <SubHeader />
       </>
     );
   }

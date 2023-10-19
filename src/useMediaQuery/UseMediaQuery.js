@@ -4,9 +4,7 @@ export function useMediaQuery(query) {
   React.useEffect(() => {
     const matchQueryList = window.matchMedia(query);
     setMatches(matchQueryList.matches);
-    // console.log(matchQueryList)
     function handleChange(e) {
-      // console.log(e.matches,query)
       setMatches(e.matches);
     }
     matchQueryList.addEventListener("change", handleChange);

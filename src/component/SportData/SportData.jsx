@@ -16,7 +16,6 @@ const SportData = () => {
     trigger(id);
   }, [id]);
 
-  console.log(data?.data, "sdssdsdsd")
 
   return (
     <>
