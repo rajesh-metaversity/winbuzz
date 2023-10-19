@@ -48,8 +48,21 @@
       }
     }
     .sub-content {
-      width: calc(84% - 20%);
+      width: calc(84% - 20px);
       padding: 10px;
+      @media screen and (max-width: 780px) {
+          width: calc(100% - 5px);
+          padding: 2px;
+        }
+      
+        @media screen and (max-width: 780px) {
+          background-color: #202020;
+          overflow: hidden;
+          width: 100% !important;
+      
+      
+      
+        }
     }
     .banner-sider {
       width: 25%;

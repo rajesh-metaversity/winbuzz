@@ -80,13 +80,16 @@ const MyBets = () => {
 					</span>
 					<button>Search</button>
 				</div>
+				<div className='pdf-excel'><span className='pdf'>pdf</span><span className='excel'>exel</span></div>
+
 			</div>
 
+			<div className='mybets_table'>
 			<TableContainer component={Paper}>
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell>Event Name</TableCell>
+							<TableCell >Event Name</TableCell>
 							<TableCell>Nation</TableCell>
 							<TableCell>Bet Type</TableCell>
 							<TableCell>User Rate</TableCell>
@@ -96,7 +99,7 @@ const MyBets = () => {
 							<TableCell>Match Date</TableCell>
 						</TableRow>
 					</TableHead>
-					<TableBody>
+					<TableBody className='bet_table-body'>
 						{data?.data?.dataList.map(row => (
 							<TableRow key={row.id}>
 								{/* <TableCell>{row.id}</TableCell> */}
@@ -112,7 +115,8 @@ const MyBets = () => {
 						))}
 					</TableBody>
 				</Table>
-			</TableContainer>
+				</TableContainer>
+				</div>
 		</div>
 	);
 };

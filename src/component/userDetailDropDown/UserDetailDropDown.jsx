@@ -12,7 +12,7 @@ import { useLogoutMutation } from '../../Services/Auth/Logout';
 import { useDispatch } from 'react-redux';
 import { setIslogin } from '../../App/LoginSlice';
 import { StyledMenu } from './styled';
-const UserDetailDropDown = () => {
+const UserDetailDropDown = ({ name }) => {
 	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
