@@ -48,7 +48,7 @@
       }
     }
     .sub-content {
-      width: 84%;
+      width: calc(84% - 10px);
       padding: 10px;
     }
     .banner-sider {
