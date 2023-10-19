@@ -168,7 +168,7 @@ const UserDetailDropDown = () => {
 					</li>
 					<li className="logout-li">
 						Logout
-						<ExitToAppIcon />
+						<ExitToAppcon />
 					</li>
 				</ul>
 				{/* <MenuItem onClick={handleClose}></MenuItem>
