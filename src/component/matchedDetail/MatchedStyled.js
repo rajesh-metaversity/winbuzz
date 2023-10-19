@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import styled from '@mui/material/styles/styled';
 
 export const polygonVal = 'polygon(0px 0px, 76% 0%, 85% 100%, 0% 100%)';
@@ -50,17 +50,17 @@ export const P = styled('p')(({ props }) => ({
     padding: props === 'matchodds' ? '6px 2px 6px 10px' : props === 'left' ? '0px 0px 0px 8.35938px' : 0,
 }))
 
-export const BetTypoPara = styled('p')({
+export const BetTypoPara = styled(Typography)(({ props }) => ({
     textAlign: 'center',
-    fontSize: '12px',
+    fontSize: props === 'fancyp' ? '10px' : '12px',
     margin: 'auto 0'
-})
+}))
 
-export const BetTypoSpan = styled('p')({
-    fontSize: '9px',
+export const BetTypoSpan = styled(Typography)(({ props }) => ({
+    fontSize: props === 'fancyp' ? '10px' : '9px',
     textAlign: 'center',
     margin: 'auto 0'
-})
+}))
 
 export const BackGrid = styled(Grid)({
     backgroundColor: '#A5D9FE',
