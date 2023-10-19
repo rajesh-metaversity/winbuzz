@@ -140,7 +140,7 @@ export const WebHeaderComponent = ({
                     </span>
                   </li>
                   <li className="header-user-name" id="basic-menu">
-                    <UserDetailDropDown name={userId} />
+                    {userId} <UserDetailDropDown name={userId} />
                   </li>
                 </>
               )}
