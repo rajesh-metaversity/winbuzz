@@ -8,8 +8,6 @@ const InPlayOddRow = ({ live }) => {
     disable: "#dedddd",
   };
 
-  console.log(live, "sdsas");
-
   return (
     <div className={`odds-row-container ${live}`}>
       <div className="odds-row-left-col">

@@ -15,7 +15,6 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 			localStorage.clear();
 			window.location.replace('/');
 		}
-		console.log(responseMessage);
 	}
 	return result;
 	// if (result?.data.status === 200 || result?.data.status) {
