@@ -3,18 +3,15 @@ import React, { useState } from 'react'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { GridContainer, P, PolygonStrip, CustomTab } from './fancyBetStyled';
 import { BackGrid, BetTypoPara, BetTypoSpan, LayGrid, MainDiv } from '../matchedDetail/MatchedStyled';
+import FancyTabs from './FancyTabs';
 
 const FancyBetComp = () => {
 
-    const [value, setValue] = useState(0)
-
-
-    const handleChange = (e) => {
-        setValue(e.target.value)
-    }
-
     return (
         <MainDiv>
+             
+
+            {/* <FancyTabs handleChange={handleChange} value={value}/> */}
             <GridContainer container props={'fancy'} >
                 <Grid item xs={4}>
                     <PolygonStrip>
@@ -29,16 +26,7 @@ const FancyBetComp = () => {
                 </Grid>
             </GridContainer>
 
-            <Box>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" sx={{
-                    display: 'flex', alignItems: 'center',
-                    '& .MuiTabs-indicator': {
-                        display: 'none'
-                    }
-                }}>
-                    <CustomTab label="all" />
-                </Tabs>
-            </Box>
+           
 
             <GridContainer container props={'fancy'} xxx={'lol'} >
                 <Grid item xs={4}>
