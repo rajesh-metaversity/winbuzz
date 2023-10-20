@@ -1,7 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Grid, Tabs } from "@mui/material";
 import React, { useState } from "react";
-import { Tabs } from "react-bootstrap";
-import { CustomTab } from "./fancyBetStyled";
+
+import { CustomTab, GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
 import './FancyTabs.scss'
 
@@ -9,20 +9,27 @@ const FancyTabs = ({ data }) => {
   const [value, setValue] = useState(0);
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
-
   const tabsVal = data ? Object.keys(data) : [];
-
-  console.log(tabsVal, "ASDadasd");
-
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
-  console.log(fancyData, "sdfsdfs");
+  // console.log(data[fancyData], "sddsdsd")
 
   return (
     <>
-      <Box>
+     <GridContainer container props={'fancy'} >
+                <Grid item xs={4}>
+                    <PolygonStrip>
+                        <P props={'fancyodds'}>
+                            Fancy
+                        </P>
+                    </PolygonStrip>
+                </Grid>
+                <Grid item xs={8}>
+
+                </Grid>
+            </GridContainer>
         <ul className="fancy_tabs">
           <li
             className={activeValue === 0 && "active"}
@@ -53,21 +60,13 @@ const FancyTabs = ({ data }) => {
             }
           })}
         </ul>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            "& .MuiTabs-indicator": {
-              display: "none",
-            },
-          }}>
-          <CustomTab label="all" />
-        </Tabs>
-      </Box>
-      <FancyBetComp />
+        {data[fancyData]?.length && (
+        <FancyBetComp
+          fancyItem={data[fancyData]}
+          fancyData={fancyData}
+        />
+      )}
+      {/* <FancyBetComp /> */}
     </>
   );
 };

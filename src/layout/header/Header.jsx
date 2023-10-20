@@ -8,12 +8,10 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import LoginForm from "../../component/loginForm/LoginForm";
 import ModalComponent from "../../component/modal/Modal";
 import PersonIcon from "@mui/icons-material/Person";
-///styles
 import "./styles.scss";
 import { MyTextField } from "./styled";
 import { useState } from "react";
 import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDropDown";
-
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
 import RulesModal from "../../component/RulesModal/RulesModal";
@@ -139,7 +137,7 @@ export const WebHeaderComponent = ({
                     </span>
                   </li>
                   <li className="header-user-name" id="basic-menu">
-                    {userId} <UserDetailDropDown name={userId} />
+                    <UserDetailDropDown name={userId} />
                   </li>
                 </>
               )}
