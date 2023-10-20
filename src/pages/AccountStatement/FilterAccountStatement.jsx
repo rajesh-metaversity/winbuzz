@@ -2,8 +2,10 @@ import { MenuItem } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { SelectStyles } from './styles';
+import { DatStyles, SelectStyles } from './styles';
 import dayjs from 'dayjs';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import FileOpenIcon from '@mui/icons-material/FileOpen';
 
 const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody, submit }) => {
 	const handleChange = (name, e) => {
@@ -45,24 +47,21 @@ const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody,
 						submit();
 					}}>
 					<div className="input_field">
-						<label htmlFor="form">Form</label>
+						<label htmlFor="form">From</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DatePicker defaultValue={accountStatementBody?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} />
+							<DatStyles defaultValue={accountStatementBody?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} />
 						</LocalizationProvider>
 						{/* <DatePicker defaultValue={dayjs('2022-04-17')} /> */}
 					</div>
 					<div className="input_field">
 						<label htmlFor="form">To Date</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DatePicker defaultValue={accountStatementBody?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
+							<DatStyles defaultValue={accountStatementBody?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
 						</LocalizationProvider>
 						{/* <DatePicker defaultValue={dayjs('2022-04-17')} /> */}
 					</div>
 					<div className="input_field">
-						{/* <label htmlFor="form">All</label>
-						
-							<input type="date" /> */}
-
+						<label htmlFor="form">All</label>
 						<SelectStyles value={accountStatementBody?.type} onChange={typeHandler}>
 							{/* <MenuItem value="">
 								<em>None</em>
@@ -72,10 +71,19 @@ const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody,
 							<MenuItem value={3}>Deposit/Withdraw Report</MenuItem>
 						</SelectStyles>
 					</div>
+
 					<div className="search">
 						<button className="search_btn">Search</button>
 					</div>
 				</form>
+			</div>
+			<div className="pdf">
+				<span className="pdf-icon">
+					<PictureAsPdfIcon />
+				</span>
+				<span className="excel-icon">
+					<FileOpenIcon />
+				</span>
 			</div>
 		</div>
 	);

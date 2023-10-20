@@ -37,6 +37,10 @@ const ChangePassword = () => {
 		}
 	};
 
+
+
+	
+
 	return (
 		<div className="change_password_cont">
 			<p>Change Password</p>

@@ -68,7 +68,6 @@ const BettingProfitLoss = () => {
 	//   trigger(bettingPnl)
 	// }, [])
 
-	console.log('bettingPnl', bettingPnl);
 	return (
 		<div className="betting_profit-loss_cont">
 			<div className="right">

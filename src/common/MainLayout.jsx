@@ -6,8 +6,11 @@ import SiderBar from "../layout/sider/Sider";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
-import { useBalanceApiQuery } from "../Services/Balance/BalanceApi";
+import { useBalanceApiMutation } from "../Services/Balance/BalanceApi";
 import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
+import MobileFooter from "../layout/mobileFooter/MobileFooter";
+import { isLoginSelector } from "../App/LoginSlice";
+import { useSelector } from "react-redux";
 // import MyBets from "../component/MyBets/MyBets";
 
 const MainLayout = () => {
@@ -21,15 +24,19 @@ const MainLayout = () => {
     }
   }, [siderOpen]);
 
-  const {data} = useBalanceApiQuery();
-
-
+  const [trigger, { data }] = useBalanceApiMutation();
+  const loginCheck = useSelector(isLoginSelector);
+  useEffect(() => {
+    if (loginCheck) {
+      trigger();
+    }
+  }, [loginCheck]);
 
   return (
     <div>
       <div className="main-layout-container">
         <div className="header-layout">
-          <HeaderMessage/>
+          <HeaderMessage />
           <WebHeaderComponent
             setSiderOpen={setSiderOpen}
             siderOpen={siderOpen}
@@ -57,6 +64,7 @@ const MainLayout = () => {
           )}
         </div>
       </div>
+      <MobileFooter />
     </div>
   );
 };

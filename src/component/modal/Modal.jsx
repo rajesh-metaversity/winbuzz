@@ -4,7 +4,6 @@ import { StyledDialouge } from "./styled";
 
 const ModalComponent = ({ Elememt, open, setOpen }) => {
   const handleClose = () => setOpen(false);
-  console.log(open, "hui2");
   return (
     <>
       <StyledDialouge
