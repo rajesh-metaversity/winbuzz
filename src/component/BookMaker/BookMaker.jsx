@@ -33,6 +33,7 @@ const BookMaker = ({ data }) => {
 
             <GridContainer container props={"betgrid"} gap={0}>
               {data?.map((data) => {
+                if(data?.t === "TOSS") return <></>
                 return (
                   <Grid
                     key={data}
