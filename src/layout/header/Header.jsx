@@ -23,7 +23,6 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useBalanceApiQuery } from "../../Services/Balance/BalanceApi";
 export const WebHeaderComponent = ({
   balanceData,
   setSiderOpen,
