@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useBettingProfitLossMutation } from '../../Services/BettingProfitLoss/BettingProfitLoss';
 import './BettingProfitLoss.scss';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, MenuItem, Select } from '@mui/material';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { BettingStyled } from './styled';
+import { BettingStyled, SelectStyles } from './styled';
+import { ActiveSport, useActiveSportQuery } from '../../Services/ActiveSportList/ActiveSportList';
+import { useActiveMatchMutation } from '../../Services/ActiveSportList/ActiveMatch';
+import { store } from '../../App/Store';
 const dateFormat = 'YYYY-MM-DD';
 
 const BettingProfitLoss = () => {
+	const { data: activSport, isLoadin, isErro } = useActiveSportQuery();
+	const [triger, { data: matchData, isLoadi, isErrr }] = useActiveMatchMutation();
+
 	const [bettingPnl, setBettingPnl] = useState({
-		sportId: 4,
+		sportId: '',
 		fromDate: dayjs().subtract(7, 'day'),
 		toDate: dayjs(),
 		index: 0,
@@ -21,7 +27,7 @@ const BettingProfitLoss = () => {
 		totalPages: 1
 	});
 	const rows = [
-		{ id: 1, name: 'John Doe', age: 30, address: '123 Main St' }
+		{ id: 1, name: 'John Doe', age: 30, address: '123 Main St', amount: 33 }
 		// Add more data as needed
 	];
 
@@ -41,8 +47,6 @@ const BettingProfitLoss = () => {
 		const bettingPnl2 = { ...bettingPnl };
 		bettingPnl2.fromDate = bettingPnl2.fromDate.format(dateFormat);
 		bettingPnl2.toDate = bettingPnl2.toDate.format(dateFormat);
-		console.log(bettingPnl2, 'bettingPnl2');
-
 		trigger(bettingPnl2);
 	};
 
@@ -64,15 +68,52 @@ const BettingProfitLoss = () => {
 			});
 		}
 	};
-	// useEffect(() => {
-	//   trigger(bettingPnl)
-	// }, [])
+
+	const getMatchDetail = id => {
+		console.log(id, 'jjjgj');
+		setBettingPnl(prev => {
+			return {
+				...prev,
+				sportId: id
+			};
+		});
+		triger(id);
+	};
+
+	const matchHandler = name => {
+		setBettingPnl(prev => {
+			return {
+				...prev,
+				matchId: name
+			};
+		});
+	};
 
 	return (
 		<div className="betting_profit-loss_cont">
 			<div className="right">
 				<p>betting profit loss</p>
 				<div className="dates_cont">
+					<div className="input_field">
+						<SelectStyles onChange={e => getMatchDetail(e.target.value)} value={bettingPnl.sportId}>
+							{activSport?.data?.map(curElm => (
+								<MenuItem key={curElm.sportId} value={curElm?.sportId}>
+									{curElm?.sportName}
+								</MenuItem>
+							))}
+						</SelectStyles>
+					</div>
+
+					<div className="input_field">
+						<SelectStyles onChange={e => matchHandler(e.target.value)} value={bettingPnl?.matchId}>
+							{matchData?.data?.map(el => (
+								<MenuItem value={el?.matchId} key={el?.matchId}>
+									{el?.matchName}
+								</MenuItem>
+							))}
+						</SelectStyles>
+					</div>
+
 					<div className="right_date">
 						<label htmlFor="form">Form</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -85,6 +126,7 @@ const BettingProfitLoss = () => {
 							<BettingStyled defaultValue={bettingPnl?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
 						</LocalizationProvider>
 					</div>
+
 					<button
 						className="search_button"
 						onClick={e => {
@@ -95,29 +137,41 @@ const BettingProfitLoss = () => {
 					</button>
 				</div>
 			</div>
-			<TableContainer component={Paper}>
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell>No</TableCell>
-							<TableCell>Date</TableCell>
-							<TableCell>Event Type</TableCell>
-							<TableCell>Event</TableCell>
-							<TableCell>Amount</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{rows.map(row => (
-							<TableRow key={row.id}>
-								<TableCell>{row.id}</TableCell>
-								<TableCell>{row.name}</TableCell>
-								<TableCell>{row.age}</TableCell>
-								<TableCell>{row.address}</TableCell>
+
+			<div className="mybets_table">
+				<TableContainer component={Paper}>
+					<Table>
+						<TableHead>
+							<TableRow>
+								<TableCell>No</TableCell>
+								<TableCell>Date</TableCell>
+								<TableCell>Event Type</TableCell>
+								<TableCell>Event</TableCell>
+								<TableCell>Amount</TableCell>
+								<TableCell>Date</TableCell>
+								<TableCell>Event Type</TableCell>
+								<TableCell>Event</TableCell>
+								<TableCell>Amount</TableCell>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
+						</TableHead>
+						<TableBody className="bet_table-body">
+							{rows.map(row => (
+								<TableRow key={row.id}>
+									<TableCell>{row.id}</TableCell>
+									<TableCell>{row.name}</TableCell>
+									<TableCell>{row.age}</TableCell>
+									<TableCell>{row.address}</TableCell>
+									<TableCell>{row.amount}</TableCell>
+									<TableCell>{row.name}</TableCell>
+									<TableCell>{row.age}</TableCell>
+									<TableCell>{row.address}</TableCell>
+									<TableCell>{row.amount}</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</div>
 		</div>
 	);
 };

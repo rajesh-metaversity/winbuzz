@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./SubHeader.scss";
-import { useActiveSportMutation } from "../../Services/ActiveSportList/ActiveSportList";
+import { useActiveSportQuery } from '../../Services/ActiveSportList/ActiveSportList';
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import play from "../../assets/img/in-play.png";
@@ -9,12 +9,9 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
 const SubHeader = () => {
   const [activeTabs, setActiveTabs] = useState(0);
-  const [trigger, { data }] = useActiveSportMutation();
+  const { data } = useActiveSportQuery();
   const nav = useNavigate();
 
-  useEffect(() => {
-    trigger();
-  }, []);
 
   const handleSportDetailsPage = (val, name) => {
     nav(`/game_list/${val}`, { state: name });
