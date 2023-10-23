@@ -9,7 +9,7 @@ const InPlayOddRow = ({ live }) => {
   };
 
   return (
-    <div className={`odds-row-container ${live}`}>
+    <div className={`odds-row-container live`}>
       <div className="odds-row-left-col">
         <span>{live?.openDate}</span>
         <p>{live?.matchName}</p>
@@ -39,13 +39,15 @@ const InPlayOddRow = ({ live }) => {
           <li>
             <button
               className="odds-btn"
-              style={{ background: oddsBg["disable"] }}>
+              style={{ background: oddsBg["disable"] }}
+            >
               <span>{live?.drawBack}</span>
               <span>0</span>
             </button>
             <button
               className="odds-btn"
-              style={{ background: oddsBg["disable"] }}>
+              style={{ background: oddsBg["disable"] }}
+            >
               <span>{live?.drawLay}</span>
               <span>0</span>
             </button>

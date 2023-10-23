@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import InPlayOddRow from "./InPlayOddRow";
 import Title from "./Title";
-import { game_detail } from "../../routes/PagesUrl";
 const InplayCollapse = ({ data, name }) => {
   const nav = useNavigate();
 

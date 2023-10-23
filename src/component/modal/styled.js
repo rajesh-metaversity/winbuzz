@@ -10,6 +10,8 @@ export const StyledDialouge = styled(Dialog)(({ theme }) => ({
       width: "100%",
       maxHeight: "calc(100% - 0px)",
       height: "100%",
+      background: "transparent",
+      
     },
   },
 }));

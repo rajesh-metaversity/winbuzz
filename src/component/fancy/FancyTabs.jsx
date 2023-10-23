@@ -1,7 +1,7 @@
-import { Box, Grid, Tabs } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useState } from "react";
 
-import { CustomTab, GridContainer, P, PolygonStrip } from "./fancyBetStyled";
+import {  GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
 import './FancyTabs.scss'
 
@@ -14,7 +14,6 @@ const FancyTabs = ({ data }) => {
     setValue(e.target.value);
   };
 
-  // console.log(data[fancyData], "sddsdsd")
 
   return (
     <>
