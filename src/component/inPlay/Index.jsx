@@ -5,7 +5,9 @@ import InplayCollapse from "./InplayCollapse";
 ///styles
 import "./styles.scss";
 const Inplay = () => {
-  const {data} = useInPlayQuery();
+  const { data } = useInPlayQuery();
+  
+  // console.log("dataID", data)
 
   return (
     <>

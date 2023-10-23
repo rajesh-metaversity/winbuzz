@@ -46,15 +46,14 @@ const GameDetail = () => {
     });
   }, [id]);
 
-  // console.log(odds, "DSfdsdfsa")
 
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
-        <Iframes />
-        <MatchedDetailBetComp data={odds} />
-        <BookMaker data={odds?.Bookmaker} />
-        <FancyTabs data={odds} />
+        <Iframes odds={odds } />
+        <MatchedDetailBetComp  data={odds}/>
+        <BookMaker data={odds?.Bookmaker}/>
+        <FancyTabs  data={odds}/>
       </div>
       <div className="game-detail-right-col">
         <MyBetsModule />

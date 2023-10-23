@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InPlayOddRow from "./InPlayOddRow";
 import Title from "./Title";
 const InplayCollapse = ({ data, name }) => {
