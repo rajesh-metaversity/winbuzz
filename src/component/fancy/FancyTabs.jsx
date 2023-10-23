@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import { Tabs } from "react-bootstrap";
-import { CustomTab } from "./fancyBetStyled";
+// import { Tabs } from "react-bootstrap";
+// import { CustomTab } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
 import './FancyTabs.scss'
 
@@ -18,7 +18,6 @@ const FancyTabs = ({ data }) => {
     setValue(e.target.value);
   };
 
-  console.log(fancyData, "sdfsdfs");
 
   return (
     <>
@@ -53,7 +52,7 @@ const FancyTabs = ({ data }) => {
             }
           })}
         </ul>
-        <Tabs
+        {/* <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
@@ -65,7 +64,7 @@ const FancyTabs = ({ data }) => {
             },
           }}>
           <CustomTab label="all" />
-        </Tabs>
+        </Tabs> */}
       </Box>
       <FancyBetComp />
     </>
