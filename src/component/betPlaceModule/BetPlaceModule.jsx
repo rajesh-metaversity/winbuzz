@@ -1,5 +1,5 @@
+import Heading from "./Heading";
 import "./styles.scss";
-import CloseIcon from "@mui/icons-material/Close";
 
 export const WebBetPlaceModule = () => {
   const betNumberArray = [50, 10, 60, 800, 50, 30, 33, 33];
@@ -8,12 +8,7 @@ export const WebBetPlaceModule = () => {
   const buttonColors = ["#ffce00", "#75b7ff", "#a5ff93", "#fffc9f"];
   return (
     <div className="right_cont">
-      <div className="heading">
-        <span className="bet_slip">Bet Slip</span>
-        <span className="close">
-          <CloseIcon />
-        </span>
-      </div>
+      <Heading />
 
       <div className="bet_details">
         <span className="team_name">
