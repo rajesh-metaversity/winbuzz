@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { Outlet } from "react-router-dom";
 import SiderBar from "../layout/sider/Sider";
 import MobileFooter from "../layout/mobileFooter/MobileFooter";
-import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
 import { useBalanceApiMutation } from "../Services/Balance/BalanceApi";
 import { isLoginSelector } from "../App/LoginSlice";
+import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
 import { useSelector } from "react-redux";
 const Sublayout = () => {
   const [siderOpen, setSiderOpen] = useState(false);
-  const isBreakPoint = useMediaQuery("(max-width: 780px)");
   useEffect(() => {
     if (siderOpen) {
       document.body.style.overflow = "hidden";
@@ -29,6 +28,7 @@ const Sublayout = () => {
     <div>
       <div className="main-layout-container">
         <div className="header-layout">
+          <HeaderMessage />
           <WebHeaderComponent
             setSiderOpen={setSiderOpen}
             siderOpen={siderOpen}
@@ -42,6 +42,7 @@ const Sublayout = () => {
             }
             onClick={() => setSiderOpen(!siderOpen)}
           >
+            
             <SiderBar />
           </div>
           <div className="sub-content">
