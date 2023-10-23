@@ -5,7 +5,7 @@ export const ActiveSport = createApi({
     reducerPath: "activeSport",
     baseQuery: dynamicBaseQuery,
     endpoints: builder => ({
-        activeSport: builder.mutation({
+        activeSport: builder.query({
             query: body => ({
 				url: 'sport/active-sport-list',
 				method: 'POST',
@@ -17,5 +17,5 @@ export const ActiveSport = createApi({
     })
 })
 
-export const { useActiveSportMutation } = ActiveSport
+export const { useActiveSportQuery } = ActiveSport
 
