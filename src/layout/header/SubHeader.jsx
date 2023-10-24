@@ -1,17 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./SubHeader.scss";
-import { useActiveSportQuery } from '../../Services/ActiveSportList/ActiveSportList';
-import { useEffect, useState } from "react";
+import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import play from "../../assets/img/in-play.png";
-import { casino } from "../../routes/PagesUrl";
+import { casino, home } from "../../routes/PagesUrl";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
+export let sportName;
 const SubHeader = () => {
-  const [activeTabs, setActiveTabs] = useState(0);
+  const [activeTabs, setActiveTabs] = useState(300);
+  const [gameName, setGameName] = useState("");
+  sportName = gameName;
   const { data } = useActiveSportQuery();
   const nav = useNavigate();
-
 
   const handleSportDetailsPage = (val, name) => {
     nav(`/game_list/${val}`, { state: name });
@@ -47,11 +49,24 @@ const SubHeader = () => {
       <>
         <div className="mobile-sub-header-container">
           <ul>
+            <li
+              onClick={() => {
+                setGameName("");
+                setActiveTabs(300);
+              }}
+              className={activeTabs == 300 ? "active-tabs" : ""}
+            >
+              <img src={play} alt="" />
+              <span>
+                <Link to={home}>In play</Link>
+              </span>
+            </li>
             {data?.data.map((items, index) => {
               return (
-                <>
+                <React.Fragment key={items.sportId + items.sportName + index}>
                   <li
                     onClick={() => {
+                      setGameName(items.sportName);
                       setActiveTabs(index);
                       handleSportDetailsPage(items?.sportId, items.sportName);
                     }}
@@ -60,7 +75,7 @@ const SubHeader = () => {
                     <img src={play} alt="" />
                     <span>{items.sportName}</span>
                   </li>
-                </>
+                </React.Fragment>
               );
             })}
             <li

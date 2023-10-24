@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import "./styles.scss";
 
-import SiderBanner from "../component/SiderBanner/SiderBanner";
+import { SiderBanner } from "../component/SiderBanner/SiderBanner";
 import SiderBar from "../layout/sider/Sider";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
 import MobileFooter from "../layout/mobileFooter/MobileFooter";
 import { isLoginSelector } from "../App/LoginSlice";
 import { useSelector } from "react-redux";
+import TopBanner from "../component/topBanner/TopBanner";
 // import MyBets from "../component/MyBets/MyBets";
 
 const MainLayout = () => {
@@ -31,7 +32,7 @@ const MainLayout = () => {
       trigger();
     }
   }, [loginCheck]);
-
+  const location = window.location.pathname;
   return (
     <div>
       <div className="main-layout-container">
@@ -53,6 +54,7 @@ const MainLayout = () => {
             <SiderBar />
           </div>
           <div className="content">
+            {isBreakPoint && <TopBanner />}
             <Outlet />
           </div>
           {!isBreakPoint ? (
