@@ -5,6 +5,7 @@
   border-radius: 10px;
   box-shadow: 0 0 5px 0 #989898;
   align-items: center;
+
   .heading {
     display: flex;
     justify-content: space-between;
@@ -156,5 +157,175 @@
 
   p {
     margin: 0;
+  }
+}
+
+.mobilemodal {
+  background-color: #65bae2;
+  padding: 2px 4px;
+  width: 100%;
+
+  .matchinfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .teamname {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      text-transform: capitalize;
+
+      strong {
+        font-weight: bold;
+        font-size: 12px;
+      }
+    }
+
+    .minmax {
+      display: flex;
+      flex-direction: column;
+
+      small {
+        font-size: 9.6px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .oddsstake {
+    margin: 5px auto;
+
+    // .heading {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: space-between;
+
+
+    // }
+
+    .inputparent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .form {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1rem;
+
+        .stakeinput {
+          background-color: #ffffff;
+          height: 40px;
+          border-radius: 4px;
+        }
+
+        .incredecre {
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          width: 50%;
+          flex-direction: column;
+
+          p {
+            text-transform: capitalize;
+            text-align: left;
+            font-size: 11px;
+          }
+
+          .inc,
+          .dec {
+            color: #000;
+            font-weight: bold;
+            font-size: 20px;
+            background-image: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+            ;
+            padding: 0;
+            height: 40px;
+            display: inline-block;
+            min-width: 30.38px;
+            border-radius: 2px;
+          }
+
+          .betinput {
+            background-color: #ffffff;
+            min-width: 80px;
+            height: 40px;
+          }
+
+        }
+
+
+      }
+
+      .stakeee {
+        p {
+          text-transform: capitalize;
+          text-align: left;
+          font-size: 11px;
+          // width: 50%;
+        }
+      }
+    }
+  }
+
+
+  .stakeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+
+    .betStakebutton {
+      margin-top: 3px;
+      width: calc(25% - 3px);
+      background: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      height: 35px;
+      color: #222;
+    }
+  }
+
+  .minmaxclear {
+    margin: 5px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-weight: 500;
+    font-size: 12px;
+    height: 35px;
+    line-height: normal;
+
+    button {
+      &:hover {
+        background-color: initial !important;
+      }
+    }
+
+  }
+
+  .calcelplacebet {
+    margin-bottom: 5px;
+    padding: 0 6px;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    button {
+      width: calc(50% - 3px);
+      margin-right: 2px;
+    }
   }
 }

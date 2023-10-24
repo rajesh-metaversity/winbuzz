@@ -1,6 +1,8 @@
+import { Box, Button, Typography } from "@mui/material";
 import "./styles.scss";
 import CloseIcon from "@mui/icons-material/Close";
-
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 export const WebBetPlaceModule = () => {
   const betNumberArray = [50, 10, 60, 800, 50, 30, 33, 33];
 
@@ -55,3 +57,125 @@ export const WebBetPlaceModule = () => {
     </div>
   );
 };
+
+export const MobileBetPlaceModal = () => {
+  const betNumberArray = [50, 10, 60, 800, 50, 30, 33, 33];
+  const minmaxclear = ['min', 'max', 'clear']
+  const cancelPlaceBet = ['cancel', 'placebet'];
+
+  const minMaxClearColor = (btntype) => {
+    if (btntype === 'min') {
+      return '#ffce00'
+    } else if (btntype === 'max') {
+      return '#75b7ff'
+    } else if (btntype === 'clear') {
+      return '#fffc9f'
+    } else if (btntype === 'cancel') {
+      return '#ffffff'
+    } else if (btntype === 'placebet') {
+      return '#229600'
+    }
+  };
+
+
+  return (
+    <Box className="mobilemodal">
+      <Box className="matchinfo">
+        <Box className="teamname" >
+          south africa
+          <Typography component='strong'>
+            south africa v Bangladesh
+          </Typography>
+        </Box>
+        <Box className="minmax">
+          <Typography component='small'>
+            Min Bet:
+          </Typography>
+          <Typography component='small'>
+            max bet:
+          </Typography>
+        </Box>
+      </Box>
+      <Box className="oddsstake">
+        <Box className="inputparent">
+
+          <Stack
+            className="form"
+            component="form"
+            noValidate
+            autoComplete="off"
+          >
+            <Box className="incredecre">
+
+              <Typography component='p'>
+                odds
+              </Typography>
+              <Box sx={{ display: 'flex' }}>
+                <Button disableRipple className="inc">
+                  -
+                </Button>
+                <TextField
+                  InputProps={{ disableUnderline: true, }}
+                  className="betinput"
+                  hiddenLabel
+                  id="filled-hidden-label-small"
+                  defaultValue="2.02"
+                  variant="filled"
+                  size="small"
+                />
+                <Button disableRipple className="dec" size="small">
+                  +
+                </Button>
+              </Box>
+            </Box>
+
+            <Box sx={{ width: '50%' }} className="stakeee">
+              <Typography component='p'>
+                stake
+              </Typography>
+              <TextField
+
+                InputProps={{ disableUnderline: true }}
+                className="stakeinput"
+                hiddenLabel
+                id="filled-hidden-label-small"
+                defaultValue="0"
+                variant="filled"
+                size="small"
+              />
+            </Box>
+          </Stack>
+        </Box>
+      </Box>
+      <Box className="stakeButton">
+        {betNumberArray.map((val, idx) => (
+          <Button disableRipple key={idx} className="betStakebutton">
+            {val}
+          </Button>
+        ))}
+      </Box>
+      <Box className="minmaxclear">
+        {minmaxclear.map((val, idx) => (
+          <Button disableRipple key={idx} size="small" sx={{
+            backgroundColor: `
+            ${minMaxClearColor(val)}
+          `}}>
+            {val}
+          </Button>
+        ))}
+      </Box>
+
+      <Box className="calcelplacebet">
+        {cancelPlaceBet.map((val, idx) => (
+          <Button disableRipple key={idx} size="small" sx={{
+            color: `${val === 'cancel' ? '#000' : '#ffffff'}`
+            , backgroundColor: `
+            ${minMaxClearColor(val)}
+          `}}>
+            {val}
+          </Button>
+        ))}
+      </Box>
+    </Box >
+  )
+}
