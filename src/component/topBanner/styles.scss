@@ -11,3 +11,29 @@
     height: 100%;
   }
 }
+
+.mobile-top-banner-img {
+  height: auto;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-auto-flow: column;
+  overflow-x: scroll;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  // justify-content: space-between;
+  @media screen and (min-width: 780px) {
+    display: none;
+  }
+
+  .img-div {
+    width: 170px;
+    height: 21vw;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+}

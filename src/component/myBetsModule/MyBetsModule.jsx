@@ -3,11 +3,7 @@ import Heading from "../betPlaceModule/Heading";
 ////styles
 import "./styles.scss";
 const MyBetsModule = () => {
-  return (
-    <div className="my-bets-module-container">
-      <Heading />
-    </div>
-  );
+  return <div className="my-bets-module-container">{/* <Heading /> */}</div>;
 };
 
 export default MyBetsModule;

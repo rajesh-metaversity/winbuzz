@@ -44,7 +44,8 @@
       padding: 10px;
       background-color: white;
       @media screen and (max-width: 780px) {
-        width: calc(100% - 20px);
+        width: calc(100% - 10px);
+        padding: 5px;
       }
     }
     .sub-content {
