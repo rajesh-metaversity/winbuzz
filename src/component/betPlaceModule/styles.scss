@@ -31,7 +31,6 @@
   border-radius: 10px;
   box-shadow: 0 0 5px 0 #989898;
   align-items: center;
-<<<<<<< HEAD
 
   .heading {
     display: flex;
@@ -59,8 +58,6 @@
       cursor: pointer;
     }
   }
-=======
->>>>>>> 7d242a60bb52bd70e39b359fee449cb5f95548b8
 
   .bet_details {
     padding: 10px 20px;
@@ -143,6 +140,11 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5px;
+
+      .active_button {
+        background: #4caf50;
+        color: white;
+      }
 
       button:nth-child(1) {
         background: none;

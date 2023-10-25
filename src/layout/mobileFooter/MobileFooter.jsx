@@ -7,18 +7,31 @@ import megaphone from "../../assets/img/megaphone.png";
 
 ///styles
 import "./styles.scss";
+import { Link, useNavigate } from "react-router-dom";
 const MobileFooter = () => {
+
+  const nav = useNavigate()
+
+  const CricketPage = () => {
+    nav("game_list/4")
+
+  }
   return (
     <div className="mobile-footer-container">
       <div className="mobile-footer-left-col">
         <ul>
-          <li>
+          <li onClick={() => CricketPage()} className="link">
             <img src={football} alt="" />
-            <span>Sports</span>
+            <Link className="link">
+            <span >Sports</span>
+            </Link>
           </li>
           <li>
             <img src={inPlay} alt="" />
+            <Link to="/" className="link">
+
             <span>In Play</span>
+            </Link>
           </li>
         </ul>
       </div>
