@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Iframes from "../../component/Iframes/Iframes";
 import { WebBetPlaceModule } from "../../component/betPlaceModule/BetPlaceModule";
-import FancyBetComp from "../../component/fancy/FancyBetComp";
+import MyBetsModule from "../../component/myBetsModule/MyBetsModule";
 import MatchedDetailBetComp from "../../component/matchedDetail/MatchedDetailBetComp";
 import "./styles.scss";
 import { socket } from "./Socket";
@@ -46,19 +46,17 @@ const GameDetail = () => {
     });
   }, [id]);
 
-  
-  // console.log(odds, "DSfdsdfsa")
-
 
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
-        <Iframes />
+        <Iframes odds={odds } />
         <MatchedDetailBetComp  data={odds}/>
         <BookMaker data={odds?.Bookmaker}/>
         <FancyTabs  data={odds}/>
       </div>
       <div className="game-detail-right-col">
+        <MyBetsModule />
         <WebBetPlaceModule />
       </div>
     </div>

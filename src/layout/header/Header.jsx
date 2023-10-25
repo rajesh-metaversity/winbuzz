@@ -15,7 +15,7 @@ import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDro
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
 import RulesModal from "../../component/RulesModal/RulesModal";
-import { home } from "../../routes/PagesUrl";
+import { deposit, home } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
@@ -38,7 +38,6 @@ export const WebHeaderComponent = ({
     1: <RulesModal setOpen={setOpen} />,
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
-
 
   if (!isBreakPoint) {
     return (
@@ -63,7 +62,8 @@ export const WebHeaderComponent = ({
                     onClick={() => {
                       setModalValue(1);
                       handleOpen();
-                    }}>
+                    }}
+                  >
                     Rules
                   </li>
                   <li>
@@ -85,7 +85,8 @@ export const WebHeaderComponent = ({
                       setModalValue(0);
                       handleOpen();
                     }}
-                    className="header-login">
+                    className="header-login"
+                  >
                     login
                   </li>
                   <Link to="/sign-up">
@@ -93,14 +94,16 @@ export const WebHeaderComponent = ({
                   </Link>
                 </>
               ) : (
-                <>
+                  <>
+                    <Link to={deposit}>
                   <li>
                     <ButtonComponent
                       name={"Deposit"}
                       icon={<AccountBalanceIcon />}
                       bg={"green"}
                     />
-                  </li>
+                      </li>
+                      </Link>
                   <ButtonComponent
                     name="Withdraw"
                     icon={<AddCardIcon />}
@@ -111,7 +114,8 @@ export const WebHeaderComponent = ({
                     onClick={() => {
                       setModalValue(1);
                       handleOpen();
-                    }}>
+                    }}
+                  >
                     Rules
                   </li>
                   <li>
@@ -129,7 +133,9 @@ export const WebHeaderComponent = ({
                       }}
                     />
                   </li>
-                  <li className="header-balance">
+                    <li className="header-balance">
+                      {/* <span className="user_id">{userId }</span> */}
+                      
                     Bal: {balanceData?.balance}
                     <span>
                       Exp:{""}
@@ -174,10 +180,13 @@ export const WebHeaderComponent = ({
             {loginCheck ? (
               <>
                 <SearchIcon />
+                <div style={{alignItems: "center", display: "flex", flexDirection: "column"}}>
+                <span style={{ color: "white", fontSize: "13px" }}>{userId}</span>
                 <li className="header-balance">
                   Bal:{balanceData?.balance}
                   <span>Exp:{balanceData?.libality}</span>
-                </li>
+                  </li>
+                  </div>
                 <span className="user">
                   <UserDetailDropDown name={<PersonIcon />} />
                 </span>
@@ -190,7 +199,8 @@ export const WebHeaderComponent = ({
                     setModalValue(0);
                     handleOpen();
                   }}
-                  style={{ color: "white" }}>
+                  style={{ color: "white" }}
+                >
                   <ButtonComponent name="Login" bg="#b88831" clr="white" />
                 </span>
                 <Link to="/sign-up">

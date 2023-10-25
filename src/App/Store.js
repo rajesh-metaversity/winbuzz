@@ -5,17 +5,17 @@ import { Login } from "../Services/Auth/Login";
 import { betModuleDataSlice, isLoginSlice } from "./LoginSlice";
 import { ActiveSport } from "../Services/ActiveSportList/ActiveSportList";
 import { activeMatch } from "../Services/ActiveSportList/ActiveMatch";
-// import { MyBets } from "../Services/MyBets/MyBets";
-// import { Logout } from "../Services/Auth/Logout";
-// import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
-// import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
+import { Logout } from "../Services/Auth/Logout";
+import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
+import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
 import { bannerList } from "../Services/BannerList/BannerList";
 import { BalanceApi } from "../Services/Balance/BalanceApi";
 import { Message } from "../Services/Message/Message";
 import { MyBets } from "../Services/MyBets/MyBets";
-import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
-import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
-import { Logout } from "../Services/Auth/Logout";
+import { Qtech } from "../Services/Qtech/Qtech";
+// import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
+// import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
+// import { Logout } from "../Services/Auth/Logout";
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +32,8 @@ export const store = configureStore({
     [bannerList.reducerPath]: bannerList.reducer,
     [BalanceApi.reducerPath]: BalanceApi.reducer,
     [Message.reducerPath]: Message.reducer,
+    [Qtech.reducerPath]: Qtech.reducer,
+
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -48,7 +50,9 @@ export const store = configureStore({
       .concat(activeMatch.middleware)
       .concat(bannerList.middleware)
       .concat(BalanceApi.middleware)
-      .concat(Message.middleware),
+      .concat(Message.middleware)
+      .concat(Qtech.middleware)
+  
 });
 
 setupListeners(store.dispatch);

@@ -14,7 +14,13 @@ export const GridContainer = styled(Grid)(({ props, xxx }) => ({
     margin: xxx === 'lol' ? '0px 0px 0px 0px' : '10px auto'
 }))
 
-export const PolygonStrip = styled(Box)(() => ({
+export const PolygonStrip = styled(Box)(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        '&::after': {
+            content: '""',
+            display: 'none'
+        }
+    },
     width: '100%',
     background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
     clipPath: polygonVal,
@@ -22,7 +28,7 @@ export const PolygonStrip = styled(Box)(() => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     position: 'relative',
-    minWidth: '300px',
+    minWidth: '200px',
     '&::after': {
         content: '""',
         width: '32px',

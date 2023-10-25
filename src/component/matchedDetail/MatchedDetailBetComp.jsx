@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import {
   BackGrid,
   BetTypoPara,
@@ -11,7 +11,11 @@ import {
 } from "./MatchedStyled";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
+import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 const MatchedDetailBetComp = ({ data }) => {
+
+  const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
   return (
     <>
       {data?.Odds?.map((item, id) => {
@@ -45,6 +49,7 @@ const MatchedDetailBetComp = ({ data }) => {
                   <Grid
                     key={data}
                     container
+                    gap={0.4}
                     sx={{
                       borderRadius: 0,
                       alignItems: "center",
@@ -55,10 +60,10 @@ const MatchedDetailBetComp = ({ data }) => {
                         borderBottom: "0px ",
                       },
                     }}>
-                    <Grid item md={5}>
+                    <Grid item md={5} xs={5.5}>
                       <P props={"left"}>{data?.name}</P>
                     </Grid>
-                    <Grid item md={6} sx={{ padding: "0px 4px" }}>
+                    <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
                       <Grid container>
                         {data === 1 ? (
                           <Suspend />
@@ -72,15 +77,17 @@ const MatchedDetailBetComp = ({ data }) => {
                                 {data?.ex?.availableToBack?.map((res, id) => {
                                   return (
                                     <BackGrid
+                                      onClick={() => console.log('workingback')}
                                       key={id + "back"}
+                                      className={id == 1 || id == 2 ? 'backgrid_' : ''}
                                       item
                                       md={3.9}
-                                      xs={3.2}>
-                                      <BetTypoPara>{res?.price}</BetTypoPara>
-                                      <BetTypoSpan>{res?.size}</BetTypoSpan>
+                                      xs={12}>
+                                      <BetTypoPara>{res?.price ? res?.price : 0}</BetTypoPara>
+                                      <BetTypoSpan>{res?.size ? res?.size : 0}</BetTypoSpan>
                                     </BackGrid>
                                   );
-                                })}
+                                }).reverse()}
                               </Grid>
                             </Grid>
 
@@ -90,12 +97,15 @@ const MatchedDetailBetComp = ({ data }) => {
                                 gap={{ md: "1%", xs: "2%" }}
                                 sx={{ justifyContent: "center" }}>
                                 {data?.ex?.availableToLay?.map((res, id) => {
+                                  console.log(res, id, 'laksdhjf')
                                   return (
                                     <LayGrid
+                                      onClick={() => console.log('workinglay')}
+                                      className={id == 1 || id == 2 ? 'backgrid_' : ''}
                                       key={id + "lay"}
                                       item
                                       md={3.9}
-                                      xs={3.2}>
+                                      xs={12}>
                                       <BetTypoPara>{res?.price}</BetTypoPara>
                                       <BetTypoSpan>{res?.size}</BetTypoSpan>
                                     </LayGrid>
@@ -110,7 +120,10 @@ const MatchedDetailBetComp = ({ data }) => {
                   </Grid>
                 );
               })}
+
+              <MobileBetPlaceModal />
             </GridContainer>
+
           </MainDiv>
         );
       })}

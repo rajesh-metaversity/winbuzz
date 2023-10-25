@@ -89,6 +89,20 @@
         font-weight: 700;
         font-size: 12px;
         color: white;
+        white-space: nowrap;
+
+        .user_id {
+          // display: none;
+
+          @media screen and (max-width: 780px) {
+            .user_id {
+              display: flex;
+            }
+            
+          }
+
+
+        }
         span {
           color: #09f109;
         }
@@ -102,7 +116,8 @@
   background-color: black;
   padding: 10px;
   display: flex;
-  align-items: center;
+  // align-items: center;
+  align-items: end;
   height: 44px;
   justify-content: space-between;
   .mobile-header-left-col {
@@ -134,7 +149,8 @@
   .mobile-header-right-col {
     width: auto;
     display: flex;
-    align-items: center;
+    // align-items: center;
+    align-items: end;
     gap: 10px;
     justify-content: end;
     a {
