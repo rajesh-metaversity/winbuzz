@@ -1,5 +1,3 @@
-
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 export const activeMatch = createApi({
   reducerPath: "activeMatch",
@@ -13,6 +11,8 @@ export const activeMatch = createApi({
     inPlay: builder.query({
       query: () => "betfair_api/active_match/",
     }),
+   
   }),
 });
-export const { useActiveMatchMutation,  useInPlayQuery} = activeMatch;
+export const { useActiveMatchMutation, useInPlayQuery } =
+  activeMatch;
