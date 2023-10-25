@@ -114,6 +114,11 @@
       grid-template-columns: 1fr 1fr;
       gap: 5px;
 
+      .active_button {
+        background: #4caf50;
+        color: white;
+      }
+
       button:nth-child(1) {
         background: none;
         border: 1px solid #6394c9 !important;
@@ -158,3 +163,4 @@
     margin: 0;
   }
 }
+
