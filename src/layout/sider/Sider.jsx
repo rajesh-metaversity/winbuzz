@@ -17,7 +17,7 @@ import tennisImage from '../../assets/tennis.svg';
 import footballImage from '../../assets/football.svg';
 import horseRidingImage from '../../assets/horse.svg';
 import kabaddiImage from '../../assets/kabaddi.svg';
-const sportImages = {
+export const sportImages = {
 	Cricket: cricketImage,
 	Tennis: tennisImage,
 	Football: footballImage,

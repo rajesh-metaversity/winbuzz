@@ -8,6 +8,7 @@ import { casino, home } from "../../routes/PagesUrl";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
 export let sportName;
+import { sportImages } from "../sider/Sider";
 const SubHeader = () => {
   const [activeTabs, setActiveTabs] = useState(300);
   const [gameName, setGameName] = useState("");
@@ -18,6 +19,8 @@ const SubHeader = () => {
   const handleSportDetailsPage = (val, name) => {
     nav(`/game_list/${val}`, { state: name });
   };
+
+  console.log("sportsImages", sportImages)
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   if (!isBreakPoint) {
     return (
@@ -57,6 +60,7 @@ const SubHeader = () => {
               className={activeTabs == 300 ? "active-tabs" : ""}
             >
               <img src={play} alt="" />
+
               <span>
                 <Link to={home}>In play</Link>
               </span>
@@ -72,7 +76,8 @@ const SubHeader = () => {
                     }}
                     className={activeTabs == index ? "active-tabs" : ""}
                   >
-                    <img src={play} alt="" />
+                    {/* <img src={play} alt="" /> */}
+                    <img src={sportImages[items.sportName] } />
                     <span>{items.sportName}</span>
                   </li>
                 </React.Fragment>
