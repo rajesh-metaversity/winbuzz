@@ -32,7 +32,6 @@ const MainLayout = () => {
       trigger();
     }
   }, [loginCheck]);
-  const location = window.location.pathname;
   return (
     <div>
       <div className="main-layout-container">
@@ -54,7 +53,7 @@ const MainLayout = () => {
             <SiderBar />
           </div>
           <div className="content">
-            {isBreakPoint && <TopBanner />}
+            <TopBanner />
             <Outlet />
           </div>
           {!isBreakPoint ? (
