@@ -1,15 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Routes from "./routes/Routes";
 import { useEffect } from "react";
-import { setIslogin } from "./App/LoginSlice";
-import { useQtechAuthQuery } from './Services/Qtech/Qtech';
+import { isLoginSelector, setIslogin } from "./App/LoginSlice";
+import { useQtechAuthQuery } from "./Services/Qtech/Qtech";
 
 function App() {
   const dispatch = useDispatch();
-  
-  const { data: qtechAuth } = useQtechAuthQuery('', { pollingInterval: 3000 });
-  
+  const isLogin = useSelector(isLoginSelector);
+
   useEffect(() => {
     if (localStorage.getItem("session")) {
       dispatch(setIslogin(true));
@@ -20,9 +19,18 @@ function App() {
 
   return (
     <>
+      {isLogin && <IfLoginComp />}
       <Routes />
     </>
   );
 }
 
+const IfLoginComp = () => {
+  const { data: qtechAuth } = useQtechAuthQuery("", { pollingInterval: 3000 });
+  useEffect(() => {
+    localStorage.setItem("casino-token", qtechAuth?.data?.access_token);
+  }, [qtechAuth]);
+
+  return <></>;
+};
 export default App;
