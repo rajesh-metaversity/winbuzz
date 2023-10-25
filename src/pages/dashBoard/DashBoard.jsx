@@ -9,7 +9,7 @@ const DashBoard = () => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   return (
     <div>
-      {!isBreakPoint && <TopBanner />}
+      {/* {!isBreakPoint && <TopBanner />} */}
 
       <Inplay />
       {isBreakPoint && (
