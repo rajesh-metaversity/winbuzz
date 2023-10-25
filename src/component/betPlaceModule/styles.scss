@@ -191,6 +191,43 @@
   }
 }
 
+.my_bets-cont {
+  margin-top: 20px;
+  border-radius: 10px;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: grey;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    overflow: hidden;
+    .my_bets {
+      clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+      background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+      width: 30%;
+      height: 100%;
+      padding: 5px 10px;
+      color: white;
+
+    
+    }
+
+    .close {
+      flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    cursor: pointer;
+
+    }
+
+  }
+
+ 
+}
+
 .mobilemodal {
   background-color: #65bae2;
   padding: 2px 4px;

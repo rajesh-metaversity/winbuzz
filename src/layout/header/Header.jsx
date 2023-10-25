@@ -15,7 +15,7 @@ import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDro
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
 import RulesModal from "../../component/RulesModal/RulesModal";
-import { home } from "../../routes/PagesUrl";
+import { deposit, home } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
@@ -94,14 +94,16 @@ export const WebHeaderComponent = ({
                   </Link>
                 </>
               ) : (
-                <>
+                  <>
+                    <Link to={deposit}>
                   <li>
                     <ButtonComponent
                       name={"Deposit"}
                       icon={<AccountBalanceIcon />}
                       bg={"green"}
                     />
-                  </li>
+                      </li>
+                      </Link>
                   <ButtonComponent
                     name="Withdraw"
                     icon={<AddCardIcon />}

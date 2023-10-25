@@ -8,3 +8,4 @@ export const game_list = "/game_list/:id";
 
 export const casino = "/casino";
 export const signUp = "/sign-up";
+export const deposit = '/deposit'

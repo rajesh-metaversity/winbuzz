@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import { useState } from "react";
 import Heading from "./Heading";
 import "./styles.scss";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const WebBetPlaceModule = () => {
   const betNumberArray = [50, 10, 60, 800, 50, 30, 33, 33];
@@ -32,6 +33,7 @@ export const WebBetPlaceModule = () => {
   }
 
   return (
+    <>
     <div className="right_cont">
       <Heading />
 
@@ -74,7 +76,17 @@ export const WebBetPlaceModule = () => {
           <button style={{background: inputValue.length > 0 ? "#4caf50" : ""}} className={inputValue.length > 0 ? "place-order_button" : ""}>Place Order</button>
         </span>
       </div>
+      </div>
+      <div className="my_bets-cont">
+
+      <div className="heading">
+      <span className="my_bets">My bets</span>
+      <span className="close">
+        <CloseIcon />
+      </span>
     </div>
+      </div>
+      </>
   );
 };
 
