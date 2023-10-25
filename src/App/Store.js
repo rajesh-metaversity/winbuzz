@@ -5,17 +5,16 @@ import { Login } from "../Services/Auth/Login";
 import { betModuleDataSlice, isLoginSlice } from "./LoginSlice";
 import { ActiveSport } from "../Services/ActiveSportList/ActiveSportList";
 import { activeMatch } from "../Services/ActiveSportList/ActiveMatch";
-// import { MyBets } from "../Services/MyBets/MyBets";
-// import { Logout } from "../Services/Auth/Logout";
-// import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
-// import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
+import { Logout } from "../Services/Auth/Logout";
+import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
+import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
 import { bannerList } from "../Services/BannerList/BannerList";
 import { BalanceApi } from "../Services/Balance/BalanceApi";
 import { Message } from "../Services/Message/Message";
 import { MyBets } from "../Services/MyBets/MyBets";
-import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
-import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
-import { Logout } from "../Services/Auth/Logout";
+// import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
+// import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
+// import { Logout } from "../Services/Auth/Logout";
 
 export const store = configureStore({
   reducer: {

@@ -1,32 +1,47 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import cricket from "../../assets/img/cricket.svg";
 import football from "../../assets/img/football.svg";
 import arrow from "../../assets/img/rightArrow.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Link, useNavigate } from "react-router-dom";
 ///styles
 import "./styles.scss";
-import { useActiveSportMutation } from "../../Services/ActiveSportList/ActiveSportList";
-import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
+import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
+import {
+  useActiveMatchMutation,
+  useInPlayQuery,
+} from "../../Services/ActiveSportList/ActiveMatch";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
+
 const SiderBar = () => {
-  const [trigger, { data, isLoading, isError }] = useActiveSportMutation();
+  // const useJJJJJJJ = useInPlayQuery();
+
+  // console.log("dataID", useJJJJJJJ?.data?.data)
+  const { data, isLoading, isError } = useActiveSportQuery();
   const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
     useActiveMatchMutation();
-
-  useEffect(() => {
-    trigger();
-  }, []);
-
 
   const [matchName, setMatchName] = useState("second");
   const [activeSlide, setActiveSlide] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
+  const nav = useNavigate();
+
+  const handleGameDetailsPage = (id) => {
+    nav(`/game_detail/${id}`);
+  };
+
   return (
-    <div className={isBreakPoint ? "sider-active" : "sider-container"} onClick={(e)=>e.stopPropagation()}>
+    <div
+      className={isBreakPoint ? "sider-active" : "sider-container"}
+      onClick={(e) => e.stopPropagation()}
+    >
       <ul className="sider-container-ul">
         {data?.data.map((item) => {
           return (
-            <>
+            <React.Fragment
+              key={item.sportId + item.sportName + item.sportImage}
+            >
               <li
                 onClick={() => {
                   setMatchName(item?.sportName);
@@ -42,7 +57,7 @@ const SiderBar = () => {
                   <img src={arrow} alt="" />
                 </span>
               </li>
-            </>
+            </React.Fragment>
           );
         })}
       </ul>
@@ -55,11 +70,14 @@ const SiderBar = () => {
           </p>
           <p className="matchName">{matchName}</p>
           {activeMatch?.data.map((item) => {
+            // console.log("item", item?.matchId)
             if (item.matchName) {
               return (
                 <>
                   <li onClick={() => setActiveSlide(true)}>
-                    <p>{item.matchName}</p>
+                    <p onClick={() => handleGameDetailsPage(item?.matchId)}>
+                      {item.matchName}
+                    </p>
                     <span>
                       <img src={arrow} alt="" />
                     </span>

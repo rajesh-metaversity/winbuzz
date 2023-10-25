@@ -39,7 +39,6 @@ export const WebHeaderComponent = ({
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-
   if (!isBreakPoint) {
     return (
       <>
@@ -63,7 +62,8 @@ export const WebHeaderComponent = ({
                     onClick={() => {
                       setModalValue(1);
                       handleOpen();
-                    }}>
+                    }}
+                  >
                     Rules
                   </li>
                   <li>
@@ -85,7 +85,8 @@ export const WebHeaderComponent = ({
                       setModalValue(0);
                       handleOpen();
                     }}
-                    className="header-login">
+                    className="header-login"
+                  >
                     login
                   </li>
                   <Link to="/sign-up">
@@ -111,7 +112,8 @@ export const WebHeaderComponent = ({
                     onClick={() => {
                       setModalValue(1);
                       handleOpen();
-                    }}>
+                    }}
+                  >
                     Rules
                   </li>
                   <li>
@@ -190,7 +192,8 @@ export const WebHeaderComponent = ({
                     setModalValue(0);
                     handleOpen();
                   }}
-                  style={{ color: "white" }}>
+                  style={{ color: "white" }}
+                >
                   <ButtonComponent name="Login" bg="#b88831" clr="white" />
                 </span>
                 <Link to="/sign-up">

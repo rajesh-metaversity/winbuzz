@@ -5,7 +5,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { home } from "../../routes/PagesUrl";
 
-const Iframes = () => {
+const Iframes = ({ odds }) => {
+  console.log("ODDS", odds)
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -14,7 +15,19 @@ const Iframes = () => {
           <Link to={home}>
             <ArrowBackIcon />
           </Link>
-          <strong>NEWZELEND VS BANGLADESH</strong> 13/10/2023
+          {/* {odds?.Odds?.map((data) => console.log(data.matchName, "data"))} */}
+          {/* {odds?.Odds?.map((el) => {
+            // console.log(el, "eldfvfv")
+            return (
+              <>
+                <p>{el?.eventTime }</p>
+
+              </>
+            )
+          })} */}
+          <strong >{odds?.Odds?.length ? odds?.Odds[0].matchName : ""}</strong> 
+          <stong>{odds?.Odds?.length ? odds?.Odds[0].eventTime : "" }</stong>
+          
         </p>
         <button onClick={() => setToggle(!toggle)} className="score_btn">
           <RemoveRedEyeIcon />

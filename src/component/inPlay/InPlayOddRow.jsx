@@ -1,7 +1,10 @@
 import OddsButton from "../oddsButton/OddsButton";
 import tv from "../../assets/img/tv.svg";
+import ball from "../../assets/img/ball.png";
+import star from "../../assets/img/star.png";
+
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-const InPlayOddRow = ({ live }) => {
+const InPlayOddRow = ({ live, index }) => {
   const oddsBg = {
     back: "#a5d9fe",
     lay: "#f8d0ce",
@@ -9,20 +12,30 @@ const InPlayOddRow = ({ live }) => {
   };
 
   return (
-    <div className={`odds-row-container ${live}`}>
-      <div className="odds-row-left-col">
-        <span>{live?.openDate}</span>
-        <p>{live?.matchName}</p>
-      </div>
-      <div className="odds-row-middle-col">
-        {live?.inPlay && <span className="live-inplay"></span>}
-        <img src={tv} alt="" />
-        {live?.gm && <SportsEsportsIcon />}
-        {live?.F && <span>F</span>}
-        {live?.bm && <span>BM</span>}
+    <div className={`odds-row-container  ${index == 1 && "live"}`}>
+      <div className="betmobileparent">
+        <div className="cricket_ball">
+          <img src={ball} alt="ball" />
+        </div>
+        <div className="left_combo">
+          <div className="odds-row-left-col">
+            <span>{live?.openDate}</span>
+            <p>{live?.matchName}</p>
+          </div>
+          <div className="odds-row-middle-col">
+            {live?.inPlay && <span className="live-inplay"></span>}
+            <img src={tv} alt="" />
+            {live?.gm && <SportsEsportsIcon />}
+            {live?.F && <span>F</span>}
+            {live?.bm && <span>BM</span>}
+          </div>
+        </div>
       </div>
 
       <div className="odds-row-right-col">
+        <div className="img_right-col" style={{ width: "10%" }}>
+          <img src={star} alt="sss" />
+        </div>
         <ul>
           <li>
             <button className="odds-btn" style={{ background: oddsBg["back"] }}>
@@ -39,13 +52,15 @@ const InPlayOddRow = ({ live }) => {
           <li>
             <button
               className="odds-btn"
-              style={{ background: oddsBg["disable"] }}>
+              style={{ background: oddsBg["disable"] }}
+            >
               <span>{live?.drawBack}</span>
               <span>0</span>
             </button>
             <button
               className="odds-btn"
-              style={{ background: oddsBg["disable"] }}>
+              style={{ background: oddsBg["disable"] }}
+            >
               <span>{live?.drawLay}</span>
               <span>0</span>
             </button>

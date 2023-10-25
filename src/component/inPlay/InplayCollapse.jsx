@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InPlayOddRow from "./InPlayOddRow";
 import Title from "./Title";
-import { game_detail } from "../../routes/PagesUrl";
 const InplayCollapse = ({ data, name }) => {
   const nav = useNavigate();
 
@@ -14,13 +13,13 @@ const InplayCollapse = ({ data, name }) => {
       <div className="in-play-collapse-container">
         <Title name={name} />
         <div className="odd-container">
-          {data?.map((res) => {
+          {data?.map((res, index) => {
             return (
               <div
                 onClick={() => handleGameDetailsPage(res?.matchId)}
                 key={res}
               >
-                <InPlayOddRow live={res} />
+                <InPlayOddRow live={res} index={index} />
               </div>
             );
           })}

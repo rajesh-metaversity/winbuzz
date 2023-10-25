@@ -28,6 +28,13 @@
 .inplay-container {
   width: 100%;
   height: auto;
+  @media screen and (max-width: 780px) {
+    background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    width: 60%;
+    padding-block: 5px;
+    padding: 0 0 0px 15px;
+    clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+  }
   .inplay-heading {
     width: 100%;
     display: flex;
@@ -37,6 +44,12 @@
     font-weight: bolder;
     gap: 5px;
     padding-block: 10px;
+    @media screen and (max-width: 780px) {
+      padding-block: 5px;
+      font-size: 12px;
+      color: white;
+      font-weight: bold;
+    }
     img {
       width: 1.9rem;
     }
@@ -52,12 +65,21 @@
   overflow: hidden;
   box-shadow: 0 0 5px 0 #989898;
 
+  @media screen and (max-width: 780px) {
+    border-radius: 0px;
+  }
+
   .odd-container {
     // padding: 10px;
     margin: 10px;
     border-radius: 4px;
     overflow: hidden;
     background-color: #28a745;
+
+    @media screen and (max-width: 780px) {
+      margin: 0px;
+      border-radius: 0px;
+    }
     a {
       text-decoration: none;
     }
@@ -87,88 +109,170 @@
   background-color: rgba(248, 249, 250, 1);
   padding-block: 5px;
   border-left: 4px solid white;
+  // background: red;
   cursor: pointer;
 
+  // @media screen and (max-width:780px) {
+  //     .betmobileparent {
+  //       width: 100%;
+  //       display: flex;
+  //       align-items: center;
+  //       justify-content: space-between;
+  //       background: grey;
+  //     }
+
+  //     .cricket_ball {
+  //       display: block !important;
+  //     }
+  //   }
+
+  @media screen and (max-width: 780px) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 0px;
+    padding-block: 0px;
+    padding-bottom: 5px;
+  }
   &:hover {
     border-left: 4px solid #b88831;
   }
 
-  .odds-row-left-col {
-    width: 30%;
-    padding-block: 5px;
-    height: 100%;
-    padding-left: 10px;
-    margin-bottom: 10px;
-    span {
-      color: #a1a1a1;
-      width: 100%;
-      display: block;
-      text-align: left;
-      white-space: normal;
-      font-size: 0.8rem;
-      font-weight: 400;
-      padding-left: 0 !important;
-    }
-    p {
-      font-size: 0.8rem;
-      line-height: 1.1;
-      color: #333;
-      margin: 0%;
-    }
-  }
-  .odds-row-middle-col {
-    width: 16%;
+  .betmobileparent {
     display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 4px;
+    justify-content: space-between;
     height: 100%;
-    .live-inplay {
-      font-weight: 500;
-      font-style: normal;
-      font-size: 10px;
-      height: 10px;
-      width: 10px;
-      line-height: 20px;
-      display: inline-block;
-      margin-left: 5px;
-      margin-right: 0;
-      color: #fff;
-      background: #3c1404;
-      border-radius: 50px;
-      -webkit-transition: all 1.5s ease-in-out;
-      -moz-transition: all 1.5s ease-in-out;
-      -o-transition: all 1.5s ease-in-out;
-      -ms-transition: all 1.5s ease-in-out;
-      transition: all 1.5s ease-in-out;
-      -webkit-animation-direction: normal;
-      -webkit-animation-duration: 2s;
-      -webkit-animation-iteration-count: infinite;
-      -webkit-animation-name: blink2;
-      -webkit-animation-timing-function: ease-in-out;
+    width: 100%;
+
+    @media screen and (max-width: 780px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      border-bottom: 1px solid white;
     }
-    img {
-      width: 1.2rem;
+
+    .cricket_ball {
+      display: none;
+      width: 8%;
+
+      @media screen and (max-width: 780px) {
+        display: flex;
+      }
     }
-    svg {
-      font-size: 1.3rem;
-    }
-    span {
-      font-weight: 500;
-      font-style: normal;
-      font-size: 10px;
-      height: 20px;
-      width: 30px;
-      line-height: 20px;
-      display: inline-block;
-      margin-left: 4px;
-      margin-right: 0;
-      color: #fff;
-      text-align: center;
-      background: #8b8b8b;
-      border-radius: 50px;
+
+    .left_combo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 92%;
+
+      @media screen and (max-width: 780px) {
+        background: #dedddd;
+        width: calc(92% - 5px);
+        padding-right: 10px;
+        clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 5% 100%);
+      }
+
+      .odds-row-left-col {
+        width: 50%;
+        padding-block: 5px;
+        height: 100%;
+        padding-left: 10px;
+        margin-bottom: 10px;
+        @media screen and (max-width: 780px) {
+          display: flex;
+          flex-direction: column-reverse;
+          width: calc(100% - 200px);
+          margin-bottom: 0px;
+          margin-left: 10px;
+          clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 5% 100%) !important;
+          // background: blue;
+        }
+        span {
+          color: #a1a1a1;
+          width: 100%;
+          display: block;
+          text-align: left;
+          white-space: normal;
+          font-size: 0.8rem;
+          font-weight: 400;
+          padding-left: 0 !important;
+        }
+        p {
+          font-size: 0.8rem;
+          line-height: 1.1;
+          color: #333;
+          margin: 0%;
+          white-space: nowrap;
+        }
+      }
+      .odds-row-middle-col {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 4px;
+        height: 100%;
+        @media screen and (max-width: 780px) {
+          width: calc(100% - 10px);
+          // background: blue;
+          height: 100%;
+        }
+        .live-inplay {
+          font-weight: 500;
+          font-style: normal;
+          font-size: 10px;
+          height: 10px;
+          width: 10px;
+          line-height: 20px;
+          display: inline-block;
+          margin-left: 5px;
+          margin-right: 0;
+          color: #fff;
+          background: #3c1404;
+          border-radius: 50px;
+          -webkit-transition: all 1.5s ease-in-out;
+          -moz-transition: all 1.5s ease-in-out;
+          -o-transition: all 1.5s ease-in-out;
+          -ms-transition: all 1.5s ease-in-out;
+          transition: all 1.5s ease-in-out;
+          -webkit-animation-direction: normal;
+          -webkit-animation-duration: 2s;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-name: blink2;
+          -webkit-animation-timing-function: ease-in-out;
+        }
+        img {
+          width: 1.2rem;
+        }
+        svg {
+          font-size: 1.3rem;
+        }
+        span {
+          font-weight: 500;
+          font-style: normal;
+          font-size: 10px;
+          height: 20px;
+          width: 30px;
+          line-height: 20px;
+          display: inline-block;
+          margin-left: 4px;
+          margin-right: 0;
+          color: #fff;
+          text-align: center;
+          background: #8b8b8b;
+          border-radius: 50px;
+        }
+      }
     }
   }
+
   .odds-row-right-col {
     width: 55%;
     height: 100%;
@@ -176,13 +280,43 @@
     display: flex;
     align-items: center;
     justify-content: end;
+    @media screen and (max-width: 780px) {
+      // width: calc(100% - 10px);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .img_right-col {
+      display: none;
+      img {
+        width: 60%;
+      }
+      @media screen and (max-width: 780px) {
+        display: flex;
+        width: 10%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
     ul {
       margin: 0%;
       display: flex;
       gap: 5px;
       justify-content: end;
+      // justify-content: center;
       padding: 0%;
       height: 100%;
+      width: 100%;
+
+      @media screen and (max-width: 780px) {
+        // width: auto;
+        justify-content: end;
+        flex: 1;
+        gap: 2px;
+      }
       li {
         list-style: none;
         width: 30%;
@@ -191,6 +325,20 @@
         align-items: center;
         color: white;
         gap: 5px;
+
+        @media screen and (max-width: 780px) {
+          width: auto;
+          display: flex;
+          gap: 2px;
+        }
+
+        // .odds-btn {
+
+        //   @media screen and (max-width: 780px) {
+
+        //     // width: 100%;
+        //   }
+        // }
       }
     }
   }
@@ -202,6 +350,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 780px) {
+    display: none;
+  }
   .inplay-title-left-col {
     padding: 0.4rem 0.5rem;
     border-top-left-radius: 1rem;

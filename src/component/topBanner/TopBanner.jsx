@@ -2,7 +2,6 @@
 import "./styles.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import banner1 from "../../assets/banner-2.jpg";
 import Slider from "react-slick";
 import { Grid } from "@mui/material";
 import { useEffect } from "react";
@@ -27,37 +26,49 @@ const TopBanner = () => {
       type: 1,
     });
   }, []);
-
   return (
     // <div className="img_cont">
-    <Slider {...settings} className="img_cont">
-      {data?.data?.map((sliderdata, index) => (
-        <div key={index}>
-          <Grid container>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                padding: "0.25rem",
-                backgroundColor: "#fff",
-                borderRadius: "0.375rem",
-                overflowX: "hidden",
-                border: "1px solid #dee2e6",
-                maxHeight: "68px",
-                cursor: "pointer",
-              }}>
-              <img
-                src={sliderdata?.path}
-                alt=""
-                width="100%"
-                height="100%"
-                style={{ objectFit: "cover" }}
-              />
+    <>
+      <Slider {...settings} className="img_cont">
+        {data?.data?.map((sliderdata, index) => (
+          <div key={index + sliderdata?.path}>
+            <Grid container>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  padding: "0.25rem",
+                  backgroundColor: "#fff",
+                  borderRadius: "0.375rem",
+                  overflowX: "hidden",
+                  border: "1px solid #dee2e6",
+                  maxHeight: "68px",
+                  cursor: "pointer",
+                }}
+              >
+                <img
+                  src={sliderdata?.path}
+                  alt=""
+                  width="100%"
+                  height="100%"
+                  style={{ objectFit: "cover" }}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
-      ))}
-    </Slider>
+          </div>
+        ))}
+      </Slider>
+      <div className="mobile-top-banner-img">
+        {data?.data?.map((sliderdata, index) => (
+          <img
+            src={sliderdata?.path}
+            alt="topbanner"
+            className="img-div"
+            key={index + sliderdata?.path}
+          />
+        ))}
+      </div>
+    </>
     // </div>
   );
 };

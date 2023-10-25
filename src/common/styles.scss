@@ -47,7 +47,8 @@
       padding: 10px;
       background-color: white;
       @media screen and (max-width: 780px) {
-        width: calc(100% - 20px);
+        width: calc(100% - 10px);
+        padding: 5px;
       }
     }
     .sub-content {
@@ -59,7 +60,7 @@
       }
 
       @media screen and (max-width: 780px) {
-        background-color: #202020;
+        // background-color: #202020;
         overflow: hidden;
         width: 100% !important;
       }
