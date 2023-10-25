@@ -54,7 +54,7 @@ const MainLayout = () => {
             <SiderBar />
           </div>
           <div className="content">
-            {isBreakPoint && <TopBanner />}
+        <TopBanner />
             <Outlet />
           </div>
           {!isBreakPoint ? (

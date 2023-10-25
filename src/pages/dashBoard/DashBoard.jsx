@@ -8,17 +8,15 @@ import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 const DashBoard = () => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   return (
-    <div>
-      {!isBreakPoint && <TopBanner />}
-
-      <Inplay />
-      {isBreakPoint && (
-        <>
-          <SiderBanner />
-          <SportData />
-        </>
-      )}
-    </div>
+		<div>
+			<Inplay />
+			{isBreakPoint && (
+				<>
+					<SiderBanner />
+					<SportData />
+				</>
+			)}
+		</div>
   );
 };
 

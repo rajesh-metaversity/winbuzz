@@ -131,7 +131,9 @@ export const WebHeaderComponent = ({
                       }}
                     />
                   </li>
-                  <li className="header-balance">
+                    <li className="header-balance">
+                      {/* <span className="user_id">{userId }</span> */}
+                      
                     Bal: {balanceData?.balance}
                     <span>
                       Exp:{""}
@@ -176,10 +178,13 @@ export const WebHeaderComponent = ({
             {loginCheck ? (
               <>
                 <SearchIcon />
+                <div style={{alignItems: "center", display: "flex", flexDirection: "column"}}>
+                <span style={{ color: "white", fontSize: "13px" }}>{userId}</span>
                 <li className="header-balance">
                   Bal:{balanceData?.balance}
                   <span>Exp:{balanceData?.libality}</span>
-                </li>
+                  </li>
+                  </div>
                 <span className="user">
                   <UserDetailDropDown name={<PersonIcon />} />
                 </span>
