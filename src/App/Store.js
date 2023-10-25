@@ -34,6 +34,8 @@ export const store = configureStore({
     [Message.reducerPath]: Message.reducer,
     [Qtech.reducerPath]: Qtech.reducer,
 
+    
+
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
