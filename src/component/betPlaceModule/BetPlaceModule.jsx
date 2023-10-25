@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 import { Box, Button, Typography } from "@mui/material";
-import "./styles.scss";
-import CloseIcon from "@mui/icons-material/Close";
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-=======
 import Heading from "./Heading";
 import "./styles.scss";
 
->>>>>>> 7d242a60bb52bd70e39b359fee449cb5f95548b8
 export const WebBetPlaceModule = () => {
   const betNumberArray = [50, 10, 60, 800, 50, 30, 33, 33];
 
