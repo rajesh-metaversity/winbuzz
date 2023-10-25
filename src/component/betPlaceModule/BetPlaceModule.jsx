@@ -156,24 +156,24 @@ export const MobileBetPlaceModal = () => {
       </Box>
       <Box className="minmaxclear">
         {minmaxclear.map((val, idx) => (
-          <Button disableRipple key={idx} size="small" sx={{
+          <button disableRipple key={idx} size="small" style={{
             backgroundColor: `
             ${minMaxClearColor(val)}
           `}}>
             {val}
-          </Button>
+          </button>
         ))}
       </Box>
 
       <Box className="calcelplacebet">
         {cancelPlaceBet.map((val, idx) => (
-          <Button disableRipple key={idx} size="small" sx={{
+          <button disableRipple key={idx} size="small" style={{
             color: `${val === 'cancel' ? '#000' : '#ffffff'}`
             , backgroundColor: `
             ${minMaxClearColor(val)}
           `}}>
             {val}
-          </Button>
+          </button>
         ))}
       </Box>
     </Box >

@@ -121,7 +121,6 @@ const MatchedDetailBetComp = ({ data }) => {
                 );
               })}
 
-
               <MobileBetPlaceModal />
             </GridContainer>
 
