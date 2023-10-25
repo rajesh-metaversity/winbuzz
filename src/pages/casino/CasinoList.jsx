@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQtechMutation } from '../../Services/Qtech/Qtech';
 
 const CasinoList = ({ list }) => {
-	const [active, setActive] = useState(0);
+  const [active, setActive] = useState(0);
 
 	console.log(list, 'list');
 
@@ -22,6 +22,7 @@ const CasinoList = ({ list }) => {
 	// 	}
 	// }, [qtechAuth?.data?.access_token]);
 
+
 	return (
 		<>
 			{/* <div>{trigge }</div> */}
@@ -31,7 +32,10 @@ const CasinoList = ({ list }) => {
 						// console.log(item, "item")
 						return (
 							<>
-								<li className={index === active && 'active'} onClick={() => setActive(index)} key={item.gameCode}>
+                <li className={index === active && 'active'} onClick={() => {
+                  setActive(index);
+
+                }} key={item.gameCode}>
 									{item.name}
 								</li>
 							</>
