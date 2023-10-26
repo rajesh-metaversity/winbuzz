@@ -11,8 +11,11 @@ export const activeMatch = createApi({
     inPlay: builder.query({
       query: () => "betfair_api/active_match/",
     }),
+    myIp: builder.query({
+      query: () => "/betfair_api/my-ip",
+    }),
    
   }),
 });
-export const { useActiveMatchMutation, useInPlayQuery } =
+export const { useActiveMatchMutation, useInPlayQuery, useMyIpQuery } =
   activeMatch;

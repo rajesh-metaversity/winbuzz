@@ -13,8 +13,36 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 const MatchedDetailBetComp = ({ data }) => {
-
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
+//   {
+//     "userIp":"157.37.143.123",
+//     "isFancy":false,
+//     "isBack":true,
+//     "odds":1.42,
+//     "stake":100,
+//     "name":"Nepal",
+//     "marketName":"Match Odds",
+//     "selectionId":2857971,
+//     "priceValue":1.42,
+//     "placeTime":"2023-10-29 20:44:36.443",
+//     "marketId":"1.220241369",
+//     "matchId":"32746824",
+//     "deviceInfo":{
+//        "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+//        "browser":"Chrome",
+//        "device":"Macintosh",
+//        "deviceType":"desktop",
+//        "os":"Windows",
+//        "os_version":"windows-10",
+//        "browser_version":"108.0.0.0",
+//        "orientation":"landscape"
+//     }
+//  }
+
+  const handleBackBet = ()=>{
+
+  }
 
   return (
     <>
@@ -77,7 +105,7 @@ const MatchedDetailBetComp = ({ data }) => {
                                 {data?.ex?.availableToBack?.map((res, id) => {
                                   return (
                                     <BackGrid
-                                      onClick={() => console.log('workingback')}
+                                      onClick={() => handleBackBet()}
                                       key={id + "back"}
                                       className={id == 1 || id == 2 ? 'backgrid_' : ''}
                                       item

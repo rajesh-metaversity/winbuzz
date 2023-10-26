@@ -8,6 +8,7 @@ import { socket } from "./Socket";
 import { useParams } from "react-router-dom";
 import BookMaker from "../../component/BookMaker/BookMaker";
 import FancyTabs from "../../component/fancy/FancyTabs";
+import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
 
 const GameDetail = () => {
   const { id } = useParams();
@@ -45,6 +46,11 @@ const GameDetail = () => {
       eventId: id,
     });
   }, [id]);
+
+  const {data} = useMyIpQuery();
+
+
+  console.log(data, "sdadasa")
 
 
   return (
