@@ -1,16 +1,16 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
-
 const CasinoCard = ({ gameLists, providerFilter }) => {
   const nav = useNavigate();
 
-  const handleNav = (id) => {
-    nav(`/game/${id}`);
+  const handleNav = (id, name) => {
+    nav(`/game/${id}/${name}`);
   };
+
   return (
     <div className="casino_card_container">
       {gameLists?.map((res) => {
-        // console.log(res)
+       
         if (res.category.includes(providerFilter) || providerFilter === "ALL")
           return (
             <>
@@ -21,7 +21,9 @@ const CasinoCard = ({ gameLists, providerFilter }) => {
                 ></div>
                 <div
                   className="casion-card-footer"
-                  onClick={() => handleNav(res?.id)}
+                  onClick={() => {
+                    handleNav(res?.id, res?.name);
+                  }}
                 >
                   Play Now
                 </div>
