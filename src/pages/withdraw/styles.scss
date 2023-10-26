@@ -1,0 +1,115 @@
+.container {
+    padding: 0 !important;
+}
+
+.withdrawparent {
+    margin-bottom: 10px;
+
+    .heading {
+        border-radius: 5px 5px 5px 5px;
+        display: flex;
+        min-height: 30px;
+        align-items: center;
+        justify-content: flex-start;
+        background-image: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+        padding-inline: 20px;
+        width: calc(100% - 20px);
+
+        p {
+            color: #ffffff
+        }
+    }
+}
+
+.inputwithbutton {
+    margin: 4px auto;
+    width: 100%;
+    padding: 10px;
+
+    .wc {
+        font-size: 17px !important;
+    }
+
+    .withdrawcoins {
+        width: 100%;
+        max-width: 200px;
+        background: #f1f5f8 !important;
+        border: 0rem solid #f1f5f8 !important;
+
+        &:focus-within {
+            border: 0 !important;
+            outline: none;
+        }
+
+        &:hover {
+            border: 0;
+        }
+    }
+
+    .buttonstakeparent {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 5px auto;
+
+        .stakebutton {
+            background-color: #fff;
+            max-width: 100px;
+            width: 100%;
+            outline: 0;
+            border: 1px solid #000;
+            cursor: pointer;
+            margin: auto 3px;
+            padding: 8px;
+            border-radius: 4px;
+            color: #0088cc;
+        }
+    }
+}
+
+.select_ {
+    width: 100%;
+}
+
+.paymentstabs {
+    margin: 10px auto;
+    padding: 20px;
+
+    .tabsparent {
+        background-image: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    }
+
+    .tabs {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        opacity: 1;
+
+        .tab {
+            align-items: center;
+            background: #fff;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            margin: 15px 19px;
+            width: 243px !important;
+            max-width: 243px;
+            opacity: 1;
+
+            .tabImg {
+                background: #f1f5f8;
+                border-radius: 50%;
+                display: block;
+                height: 70px;
+                margin: auto;
+                padding: 7px;
+                width: 70px;
+            }
+        }
+    }
+}
