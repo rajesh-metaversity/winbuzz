@@ -13,6 +13,8 @@ import { BalanceApi } from "../Services/Balance/BalanceApi";
 import { Message } from "../Services/Message/Message";
 import { MyBets } from "../Services/MyBets/MyBets";
 import { Qtech } from "../Services/Qtech/Qtech";
+import { stake } from "../Services/stake/Deposit";
+import { Withdraw } from "../Services/Withdraw/Withdraw";
 // import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
 // import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
 // import { Logout } from "../Services/Auth/Logout";
@@ -33,8 +35,8 @@ export const store = configureStore({
     [BalanceApi.reducerPath]: BalanceApi.reducer,
     [Message.reducerPath]: Message.reducer,
     [Qtech.reducerPath]: Qtech.reducer,
-
-    
+    [stake.reducerPath]: stake.reducer,
+    [Withdraw.reducerPath]: Withdraw.reducer
 
   },
   // Adding the api middleware enables caching, invalidation, polling,
@@ -54,7 +56,9 @@ export const store = configureStore({
       .concat(BalanceApi.middleware)
       .concat(Message.middleware)
       .concat(Qtech.middleware)
-  
+      .concat(stake.middleware)
+      .concat(Withdraw.middleware)
+
 });
 
 setupListeners(store.dispatch);
