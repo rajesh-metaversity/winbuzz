@@ -43,24 +43,17 @@ const Casino = () => {
   }, [gamelist?.data]);
 
   return (
-    <div>
-      <div className="casino-page-container">
-        <Title name={"INT CASINO"} />
-        <div className="casino-center-col">
-          <CasinoList list={QtechProvider} setGameCode={setGameCode} type={1} />
-          <CasinoList
-            list={category}
-            type={2}
-            setProviderFilter={setProviderFilter}
-          />
-          <CasinoCard
-            list={category}
-            gameLists={gameLists}
-            providerFilter={providerFilter}
-          />
-        </div>
-      </div>
-    </div>
+		<div>
+			<div className="casino-page-container">
+				<Title name={'INT CASINO'} />
+				<div className="casino-center-col">
+					<p className="int_casino">Int Casino</p>
+					<CasinoList list={QtechProvider} setGameCode={setGameCode} type={1} />
+					<CasinoList list={category} type={2} setProviderFilter={setProviderFilter} />
+					<CasinoCard list={category} gameLists={gameLists} providerFilter={providerFilter} />
+				</div>
+			</div>
+		</div>
   );
 };
 
