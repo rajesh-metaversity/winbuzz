@@ -14,6 +14,7 @@ import { Message } from "../Services/Message/Message";
 import { MyBets } from "../Services/MyBets/MyBets";
 import { Qtech } from "../Services/Qtech/Qtech";
 import { stake } from "../Services/stake/Deposit";
+import { Withdraw } from "../Services/Withdraw/Withdraw";
 // import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
 // import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
 // import { Logout } from "../Services/Auth/Logout";
@@ -35,6 +36,8 @@ export const store = configureStore({
     [Message.reducerPath]: Message.reducer,
     [Qtech.reducerPath]: Qtech.reducer,
     [stake.reducerPath]: stake.reducer,
+    [Withdraw.reducerPath]: Withdraw.reducer
+
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -53,7 +56,9 @@ export const store = configureStore({
       .concat(BalanceApi.middleware)
       .concat(Message.middleware)
       .concat(Qtech.middleware)
-      .concat(stake.middleware),
+      .concat(stake.middleware)
+      .concat(Withdraw.middleware)
+
 });
 
 setupListeners(store.dispatch);
