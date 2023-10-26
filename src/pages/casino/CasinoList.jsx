@@ -26,23 +26,35 @@ const CasinoList = ({ list }) => {
 	return (
 		<>
 			{/* <div>{trigge }</div> */}
+				<p className='int_casino'>Int Casino</p>
 			<div className="int_casoini_list_all">
 				<ul>
 					{list?.map((item, index) => {
 						// console.log(item, "item")
 						return (
 							<>
-                <li className={index === active && 'active'} onClick={() => {
-                  setActive(index);
-
-                }} key={item.gameCode}>
-									{item.name}
+								<li
+									className={index === active && 'active'}
+									onClick={() => {
+										setActive(index);
+									}}
+									key={item?.gameCode}>
+									{item?.name}
 								</li>
 							</>
 						);
 					})}
 				</ul>
+				
 			</div>
+			{/* <div className='int_casino_sub-list'>
+			<ul className=''>
+				<li>wferfve</li>
+				<li>wferfve</li>
+				<li>wferfve</li>
+				<li>wferfve</li>
+				</ul>
+				</div> */}
 		</>
 	);
 };
