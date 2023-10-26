@@ -27,10 +27,10 @@ export const Qtech = createApi({
       }),
     }),
     casinoIframe: builder.mutation({
-      query: (args) => ({
+      query: (body) => ({
         url: "/gamelink",
         method: "POST",
-        args,
+        body,
       }),
     }),
   }),

@@ -4,41 +4,47 @@ import logo from "../../assets/img/logo.png";
 import "./styles.scss";
 import { useCasinoIframeMutation } from "../../Services/Qtech/Qtech";
 import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 const CasinoIframe = () => {
+  const { id, matchId } = useParams();
   const casinoData = {
     playerId: "121212",
     currency: "INR",
     country: "IN",
     gender: "M",
-    gameName: gameId,
+    gameName: id,
     birthDate: "1986-01-01",
     lang: "en_IN",
     mode: "real",
     device: window.innerWidth > 1024 ? "desktop" : "mobile",
-    returnUrl: "/provider",
-    token: localStorage.getItem("qtech_token"),
+    returnUrl: "/casino",
+    token: localStorage.getItem("casino-token"),
     walletSessionId: localStorage.getItem("token"),
   };
 
   const [trigger, { data }] = useCasinoIframeMutation();
-
   useEffect(() => {
-    trigger();
+    trigger(casinoData);
   }, []);
 
-  console.log(data);
+  const nav = useNavigate();
+  const handleNav = () => {
+    nav("/");
+  };
   return (
     <div>
       <div className="casino-iframe-header">
         <div className="casino-iframe-header-left-col">
-          <HomeIcon />
-          <img src={logo} alt="" />
-          <span>Vip Rouletes</span>
+          <span onClick={() => handleNav()}>
+            <HomeIcon />
+          </span>
+          <img src={logo} alt="" onClick={() => handleNav()} />
+          <span>{matchId}</span>
         </div>
-        <div className="casino-iframe-header-right-col">8787887878</div>
+        <div className="casino-iframe-header-right-col"></div>
       </div>
       <div className="casino-iframe">
-        <iframe src="" frameborder="0"></iframe>
+        <iframe src={data?.data?.url} frameBorder="0"></iframe>
       </div>
     </div>
   );

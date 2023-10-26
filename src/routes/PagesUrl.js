@@ -10,4 +10,4 @@ export const casino = "/casino";
 export const signUp = "/sign-up";
 export const deposit = "/deposit";
 export const withdraw = "/withdraw";
-export const game = "/game/:id";
+export const game = "/game/:id/:matchId";
