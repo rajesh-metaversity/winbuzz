@@ -17,16 +17,16 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setBetSlipData } from "../../App/LoginSlice";
 import moment from "moment";
-const MatchedDetailBetComp = ({ data, ip }) => {
+const MatchedDetailBetComp = ({ data, ip, prevOdds }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [isBetModals, setIsBetModals] = useState(false)
 
-  
 
-  const {id} = useParams();
+
+  const { id } = useParams();
   const dispatch = useDispatch()
 
   const handleBackBet = (marketName, marketId, matchName, sid, odds, priceValue, isBack, isFancy, fullmatchName) => {
@@ -43,7 +43,7 @@ const MatchedDetailBetComp = ({ data, ip }) => {
       placeTime: pTime,
       marketId: marketId,
       matchId: id,
-      matchName:fullmatchName
+      matchName: fullmatchName
     }))
   };
 
@@ -54,18 +54,18 @@ const MatchedDetailBetComp = ({ data, ip }) => {
         return (
           <MainDiv key={index}>
             <GridContainer container>
-              <Grid item xs={4}>
+              <Grid item xs={6} md={4}>
                 <PolygonStrip>
                   <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
                   <P props={"matchodds"}>{item?.Name}</P>
                 </PolygonStrip>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item display={{ xs: 'none', md: 'block' }} md={2}>
                 <P props={"minmax"}>
                   MIN: {item?.minBet} MAX: {item?.maxBet}
                 </P>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={3} >
                 <P props={"back"}>back</P>
               </Grid>
               <Grid item xs={3}>
@@ -101,10 +101,10 @@ const MatchedDetailBetComp = ({ data, ip }) => {
                           <>
                             <Grid item xs={6}>
                               <Grid
-                              
+
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center", cursor:"pointer" }}>
+                                sx={{ justifyContent: "center", cursor: "pointer" }}>
                                 {dataRunn?.ex?.availableToBack
                                   ?.map((res, id) => {
                                     return (
@@ -146,7 +146,7 @@ const MatchedDetailBetComp = ({ data, ip }) => {
                               <Grid
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center", cursor:"pointer" }}>
+                                sx={{ justifyContent: "center", cursor: "pointer" }}>
                                 {dataRunn?.ex?.availableToLay?.map(
                                   (res, id) => {
                                     return (
@@ -186,15 +186,15 @@ const MatchedDetailBetComp = ({ data, ip }) => {
                     {
                       isBetModals && <MobileBetPlaceModal />
                     }
-                    
+
                   </Grid>
-                  
+
                 );
               })}
 
-              
+
             </GridContainer>
-            
+
           </MainDiv>
         );
       })}

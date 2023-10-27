@@ -8,7 +8,7 @@ export const MainDiv = styled(Box)({
     marginTop: '10px'
 })
 
-export const PolygonStrip = styled(Box)(({ props }) => ({
+export const PolygonStrip = styled(Box)(({ props, theme }) => ({
     width: '100%',
     background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
     clipPath: polygonVal,
@@ -16,17 +16,22 @@ export const PolygonStrip = styled(Box)(({ props }) => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     position: 'relative',
-    minWidth: '300px',
-    '&::after': {
-        content: '""',
-        width: '32px',
-        height: '32px',
-        background: 'linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)',
-        position: 'absolute',
-        right: '57px',
-        top: '0px',
-        transform: skewVal,
+    minWidth: '200px',
+    [theme.breakpoints.up("md")]: {
+
+        '&::after': {
+
+            content: '""',
+            width: '32px',
+            height: '32px',
+            background: 'linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)',
+            position: 'absolute',
+            right: '57px',
+            top: '0px',
+            transform: skewVal,
+        }
     }
+
 }))
 
 export const GridContainer = styled(Grid)(({ props }) => ({
@@ -74,8 +79,8 @@ export const BackGrid = styled(Grid)(({ theme }) => ({
     minHeight: '35px',
     borderRadius: '2px',
     '.backgrid_': {
-            display: 'none'
-        }
+        display: 'none'
+    }
 
 }))
 

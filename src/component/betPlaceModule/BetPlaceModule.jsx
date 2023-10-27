@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
@@ -26,16 +26,18 @@ export const WebBetPlaceModule = () => {
 
   const handleNumberClick = (number) => {
     setInputValue(number.toString());
-    const newObj = { ...selector.data, stake: number, deviceInfo:{
-             "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
-             "browser":"Chrome",
-             "device":"Macintosh",
-             "deviceType":"desktop",
-             "os":"Windows",
-             "os_version":"windows-10",
-             "browser_version":"108.0.0.0",
-             "orientation":"landscape"
-          } };
+    const newObj = {
+      ...selector.data, stake: number, deviceInfo: {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+        "browser": "Chrome",
+        "device": "Macintosh",
+        "deviceType": "desktop",
+        "os": "Windows",
+        "os_version": "windows-10",
+        "browser_version": "108.0.0.0",
+        "orientation": "landscape"
+      }
+    };
     setBetData(newObj)
   };
 
@@ -49,83 +51,76 @@ export const WebBetPlaceModule = () => {
     }
   };
 
-  const handlePlaceBet = ()=>{
+  const handlePlaceBet = () => {
     trigger(betData)
   }
 
 
   return (
     <>
-    {
-      (selector?.data != null) && <>
-      <div className="right_cont">
-        <Heading  isBack={selector?.data?.isBack}/>
+      {
+        (selector?.data != null) && <>
+          <div className="right_cont">
+            <Heading isBack={selector?.data?.isBack} />
 
-        <div className="bet_details">
-          <span className="team_name">
-            <p>{selector?.data?.matchName}</p>
-            <p>{selector?.data?.name}</p>
-          </span>
-          <div className="bet_number">
-            <span className="odds">
-              <label>Odds</label>
-            </span>
-            <span className="bet_inputs">
-              <input type="number" value={selector?.data?.odds} />
-              <input
-                placeholder="Stakes"
-                type="number"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-            </span>
+            <div className="bet_details">
+              <span className="team_name">
+                <p>{selector?.data?.matchName}</p>
+                <p>{selector?.data?.name}</p>
+              </span>
+              <div className="bet_number">
+                <span className="odds">
+                  <label>Odds</label>
+                </span>
+                <span className="bet_inputs">
+                  <input type="number" value={selector?.data?.odds} />
+                  <input
+                    placeholder="Stakes"
+                    type="number"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                </span>
+              </div>
+              <span className="numbers">
+                {betNumberArray?.data.map((el) => {
+                  console.log(el, "fsdfsdfsdfs");
+                  return (
+                    <p
+                      key={el}
+                      className="bets"
+                      onClick={() => handleNumberClick(el?.value)}>
+                      {el?.key}
+                    </p>
+                  );
+                })}
+              </span>
+              <span className="min_max">
+                {minMax.map((items, index) => (
+                  <p
+                    key={items}
+                    style={{ background: buttonColors[index] }}
+                    className="inner"
+                    onClick={() => handleButtonClick(items)}>
+                    {items}
+                  </p>
+                ))}
+              </span>
+              <span className="order_buttons">
+                <button>Cancel Order</button>
+                <button
+                  onClick={handlePlaceBet}
+                  style={{ background: inputValue.length > 0 ? "#4caf50" : "", color: inputValue.length > 0 ? "#fff" : "" }}
+                  className={inputValue.length > 0 ? "place-order_button" : ""}>
+                  Place Order
+                </button>
+              </span>
+            </div>
           </div>
-          <span className="numbers">
-            {betNumberArray?.data.map((el) => {
-              console.log(el, "fsdfsdfsdfs");
-              return (
-                <p
-                  key={el}
-                  className="bets"
-                  onClick={() => handleNumberClick(el?.value)}>
-                  {el?.key}
-                </p>
-              );
-            })}
-          </span>
-          <span className="min_max">
-            {minMax.map((items, index) => (
-              <p
-                key={items}
-                style={{ background: buttonColors[index] }}
-                className="inner"
-                onClick={() => handleButtonClick(items)}>
-                {items}
-              </p>
-            ))}
-          </span>
-          <span className="order_buttons">
-            <button>Cancel Order</button>
-            <button
-            onClick={handlePlaceBet}
-              style={{ background: inputValue.length > 0 ? "#4caf50" : "", color: inputValue.length > 0 ? "#fff" : "" }}
-              className={inputValue.length > 0 ? "place-order_button" : ""}>
-              Place Order
-            </button>
-          </span>
-        </div>
-      </div>
-      
-      </>
-    }
-    <div className={`my_bets-cont ${selector?.data != null}?"bet_my_bet":"my_bets"`}>
-        <div className="heading">
-          <span className="my_bets">My bets</span>
-          <span className="close">
-            <CloseIcon />
-          </span>
-        </div>
-      </div>
+
+        </>
+      }
+
     </>
   );
 };
@@ -135,6 +130,7 @@ export const MobileBetPlaceModal = () => {
   const { data: betNumberArray } = useStakeQuery();
   const [inputValue, setInputValue] = useState("");
   const [betData, setBetData] = useState();
+  const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
 
 
@@ -158,18 +154,20 @@ export const MobileBetPlaceModal = () => {
 
   const handleButtonClick = (id) => {
     setInputValue(id.toString());
-    const newObj = { ...selector.data, stake: id, deviceInfo:{
-      "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
-      "browser":"Chrome",
-      "device":"Macintosh",
-      "deviceType":"desktop",
-      "os":"Windows",
-      "os_version":"windows-10",
-      "browser_version":"108.0.0.0",
-      "orientation":"landscape"
-   } };
-setBetData(newObj)
-    
+    const newObj = {
+      ...selector.data, stake: id, deviceInfo: {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+        "browser": "Chrome",
+        "device": "Macintosh",
+        "deviceType": "desktop",
+        "os": "Windows",
+        "os_version": "windows-10",
+        "browser_version": "108.0.0.0",
+        "orientation": "landscape"
+      }
+    };
+    setBetData(newObj)
+
   };
 
   const [trigger, { data, error, isLoading }] = usePlaceBetsMutation();
@@ -184,12 +182,15 @@ setBetData(newObj)
   //   }
   // };
 
-  const handlePlaceBet = ()=>{
+  const handlePlaceBet = () => {
     trigger(betData)
   }
 
   return (
-    <Box className="mobilemodal">
+
+      <>
+      {
+      isBreakPoint && <Box className="mobilemodal">
       <Box className="matchinfo">
         <Box className="teamname">
           {selector?.data?.name}
@@ -247,7 +248,7 @@ setBetData(newObj)
       </Box>
       <Box className="stakeButton">
         {betNumberArray?.data?.map((val, idx) => (
-          <Button disableRipple key={idx} onClick={()=>handleButtonClick(val?.value)} className="betStakebutton">
+          <Button disableRipple key={idx} onClick={() => handleButtonClick(val?.value)} className="betStakebutton">
             {val?.key}
           </Button>
         ))}
@@ -270,20 +271,24 @@ setBetData(newObj)
 
       <Box className="calcelplacebet">
 
-          <button
-            onClick={handlePlaceBet}
+        <button
+          onClick={handlePlaceBet}
 
-            size="small"
-            style={{
-              color: "#ffffff",
-              backgroundColor: `
+          size="small"
+          style={{
+            color: "#ffffff",
+            backgroundColor: `
             ${minMaxClearColor("placebet")}
           `,
-            }}>
-            Place Bet
-          </button>
-       
+          }}>
+          Place Bet
+        </button>
+
       </Box>
-    </Box>
+    </Box>}
+    </>
+      
+  
+    
   );
 };
