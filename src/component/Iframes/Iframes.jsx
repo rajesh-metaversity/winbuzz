@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { home } from "../../routes/PagesUrl";
 
 const Iframes = ({ odds }) => {
-  console.log("ODDS", odds)
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -17,7 +16,6 @@ const Iframes = ({ odds }) => {
           </Link>
           {/* {odds?.Odds?.map((data) => console.log(data.matchName, "data"))} */}
           {/* {odds?.Odds?.map((el) => {
-            // console.log(el, "eldfvfv")
             return (
               <>
                 <p>{el?.eventTime }</p>

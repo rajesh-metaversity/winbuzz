@@ -20,12 +20,12 @@ const GameDetail = () => {
       setOdds((odds) => {
         e["All"] = e
           ? Object.keys(e).reduce(
-              (ac, key) =>
-                ["Odds", "All", "Bookmaker"].includes(key)
-                  ? ac
-                  : [...ac, ...e[key]],
-              []
-            )
+            (ac, key) =>
+              ["Odds", "All", "Bookmaker"].includes(key)
+                ? ac
+                : [...ac, ...e[key]],
+            []
+          )
           : [];
 
         if (JSON.stringify(odds) !== JSON.stringify(e)) {
@@ -47,7 +47,7 @@ const GameDetail = () => {
     });
   }, [id]);
 
-  const {data} = useMyIpQuery();
+  const { data } = useMyIpQuery();
 
 
   console.log(data?.ip, "sdadasa")
@@ -56,14 +56,14 @@ const GameDetail = () => {
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
-        <Iframes odds={odds } />
-        <MatchedDetailBetComp  ip={data?.ip} data={odds}/>
-        <BookMaker ip={data?.ip} data={odds?.Bookmaker}/>
-        <FancyTabs  data={odds} ip={data?.ip}/>
+        <Iframes odds={odds} />
+        <MatchedDetailBetComp prevOdds={prevOdds} ip={data?.ip} data={odds} />
+        <BookMaker ip={data?.ip} data={odds?.Bookmaker} />
+        <FancyTabs data={odds} ip={data?.ip} />
       </div>
       <div className="game-detail-right-col">
-        <MyBetsModule />
         <WebBetPlaceModule />
+        <MyBetsModule />
       </div>
     </div>
   );

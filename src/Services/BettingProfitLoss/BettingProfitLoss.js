@@ -7,14 +7,21 @@ export const BettingProfitLoss = createApi({
     endpoints: builder => ({
         BettingProfitLoss: builder.mutation({
             query: body => ({
-				url: 'report/profit-loss-match-wise',
-				method: 'POST',
-				body
-			})
-
+                url: 'report/profit-loss-match-wise',
+                method: 'POST',
+                body
+            })
+        }),
+        BetListByMatch: builder.query({
+            query: (args) => ({
+                url: 'enduser/bet-list-by-matchid',
+                method: 'POST',
+                body: args
+            })
         })
 
     })
+
 })
 
-export const {useBettingProfitLossMutation} = BettingProfitLoss
+export const { useBetListByMatchQuery, useBettingProfitLossMutation } = BettingProfitLoss
