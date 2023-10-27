@@ -12,9 +12,17 @@ export const MyBets = createApi({
 				body
 			})
 
-        })
+        }),
+        placeBets: builder.mutation({
+            query: body => ({
+				url: '/enduser/place-bets',
+				method: 'POST',
+				body
+			})
+
+        }),
 
     })
 })
 
-export const {useMyBetsMutation} = MyBets
+export const {useMyBetsMutation, usePlaceBetsMutation} = MyBets

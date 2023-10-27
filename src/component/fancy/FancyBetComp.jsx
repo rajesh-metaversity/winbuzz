@@ -10,14 +10,40 @@ import {
   MainDiv,
 } from "../matchedDetail/MatchedStyled";
 import FancyTabs from "./FancyTabs";
+import { setBetSlipData } from "../../App/LoginSlice";
+import { useDispatch } from "react-redux";
+import moment from "moment";
+import { useParams } from "react-router-dom";
 
-const FancyBetComp = ({ fancyItem, fancyData }) => {
-  console.log(fancyItem, "dsadasdasd");
+const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
+  console.log(fancyData, "fancyData");
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
+  const {id} = useParams();
+
+  const dispatch = useDispatch()
+
+  const handleBackBet = (marketId,matchName,sid, odds, priceValue, isBack, isFancy, marketName)=>{
+    dispatch(
+      setBetSlipData({
+        userIp: ip,
+        odds: odds,
+        name: matchName,
+        marketName: marketName,
+        selectionId: 0,
+        priceValue: priceValue,
+        placeTime: pTime,
+        marketId: sid,
+        matchId: id,
+        isFancy: isFancy,
+        isBack: isBack,
+      })
+    );
+  }
 
   return (
     <MainDiv>
-      {/* <FancyTabs handleChange={handleChange} value={value}/> */}
-
       <GridContainer container props={"fancy"} xxx={"lol"}>
         <Grid item xs={4}>
           <PolygonStrip>
@@ -38,6 +64,7 @@ const FancyBetComp = ({ fancyItem, fancyData }) => {
       <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
         {fancyItem?.length > 0 &&
             fancyItem?.map((item, id)=>{
+              console.log(item, "Sdcscsacsadc")
                 return (
                     <Grid
                     key={id}
@@ -61,15 +88,28 @@ const FancyBetComp = ({ fancyItem, fancyData }) => {
                     <Grid item md={6} sx={{ padding: "0px 4px" }}>
                       <Grid container>
                         <>
-                          <Grid item xs={5.9}>
+                        <Grid item xs={5.9}>
                             <Grid
                               container
                               gap={{ md: "1%", xs: "2%" }}
                               sx={{ justifyContent: "flex-end" }}>
-                              <BackGrid item md={3.9} xs={3.2}>
-                                <BetTypoPara>{item?.b1}</BetTypoPara>
-                                <BetTypoSpan>{item?.bs1}</BetTypoSpan>
-                              </BackGrid>
+                              <LayGrid item md={3.9} xs={3.2}
+                              onClick={() =>
+                                handleBackBet(
+                                  item?.mid,
+                                  item?.nation,
+                                  item?.sid,
+                                  item?.l1,
+                                  item?.ls1,
+                                  false,
+                                  true,
+                                  fancyData
+                                )
+                              }
+                              >
+                                <BetTypoPara>{item?.l1}</BetTypoPara>
+                                <BetTypoSpan>{item?.ls1}</BetTypoSpan>
+                              </LayGrid>
                             </Grid>
                           </Grid>
                           <Grid item xs={5.9}>
@@ -77,10 +117,22 @@ const FancyBetComp = ({ fancyItem, fancyData }) => {
                               container
                               gap={{ md: "1%", xs: "2%" }}
                               sx={{ justifyContent: "space-evenly" }}>
-                              <LayGrid item md={3.9} xs={3.2} sx={{ mx: 0.5 }}>
-                                <BetTypoPara>{item?.l1}</BetTypoPara>
-                                <BetTypoSpan>{item?.ls1}</BetTypoSpan>
-                              </LayGrid>
+                              <BackGrid item md={3.9} xs={3.2} sx={{ mx: 0.5 }}
+                                onClick={() =>
+                                  handleBackBet(
+                                    item?.mid,
+                                    item?.nation,
+                                    item?.sid,
+                                    item?.b1,
+                                    item?.bs1,
+                                    true,
+                                    true,
+                                    fancyData
+                                  )
+                                }>
+                                <BetTypoPara>{item?.b1}</BetTypoPara>
+                                <BetTypoSpan>{item?.bs1}</BetTypoSpan>
+                              </BackGrid>
                               <Grid
                                 item
                                 md={7}
@@ -91,6 +143,7 @@ const FancyBetComp = ({ fancyItem, fancyData }) => {
                               </Grid>
                             </Grid>
                           </Grid>
+                         
                         </>
                       </Grid>
                     </Grid>
