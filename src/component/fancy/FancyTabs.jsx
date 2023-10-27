@@ -5,7 +5,7 @@ import {  GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
 import './FancyTabs.scss'
 
-const FancyTabs = ({ data }) => {
+const FancyTabs = ({ data, ip }) => {
   const [value, setValue] = useState(0);
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
@@ -63,6 +63,7 @@ const FancyTabs = ({ data }) => {
         <FancyBetComp
           fancyItem={data[fancyData]}
           fancyData={fancyData}
+          ip={ip}
         />
       )}
       {/* <FancyBetComp /> */}

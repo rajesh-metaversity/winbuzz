@@ -13,6 +13,15 @@ export const stake = createApi({
         body,
       }),
     }),
+    depositbalance: builder.query({
+      query: body => ({
+				url: 'enduser/depsosit-request-client',
+				method: 'POST',
+				body
+			})
+
+    }),
+
     depositBank: builder.query({
       query: (body) => ({
         url: "/deposit-type/get_sub",
@@ -20,6 +29,15 @@ export const stake = createApi({
         body,
       }),
     }),
+
+    depositbalanceSubmit: builder.mutation({
+      query: body => ({
+				url: '/enduser/self-deposit-app',
+				method: 'POST',
+				body
+			})
+    }),
+
   }),
 });
-export const { useStakeQuery, useDepositBankQuery } = stake;
+export const { useStakeQuery, useDepositBankQuery, useDepositbalanceQuery, useDepositbalanceSubmitMutation } = stake;

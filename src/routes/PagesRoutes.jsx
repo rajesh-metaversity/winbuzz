@@ -26,6 +26,7 @@ import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import MyBets from "../pages/MyBets/MyBets";
 import Withdraw from "../pages/withdraw/Withdraw";
 import CasinoIframe from "../pages/casinoIframe/CasinoIframe";
+import Deposit from "../pages/Deposit/Deposit";
 
 export const router = createBrowserRouter([
   {
@@ -68,10 +69,10 @@ export const router = createBrowserRouter([
         path: game_detail,
         element: <GameDetail />,
       },
-      // {
-      //   path: deposit,
-      //   element: <Deposit />,
-      // },
+      {
+        path: deposit,
+        element: <Deposit />,
+      },
       {
         path: withdraw,
         element: <Withdraw />,

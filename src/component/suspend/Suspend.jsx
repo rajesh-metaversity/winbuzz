@@ -1,9 +1,9 @@
 import { SuspendComp, SuspendTypo } from "./suspendStyled";
 
-const Suspend = () => {
+const Suspend = ({status}) => {
   return (
     <SuspendComp>
-      <SuspendTypo>suspended</SuspendTypo>
+      <SuspendTypo>{status}</SuspendTypo>
     </SuspendComp>
   );
 };
