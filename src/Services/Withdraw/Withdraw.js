@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
-
 export const Withdraw = createApi({
     reducerPath: 'qtech',
     baseQuery: fetchBaseQuery({

@@ -113,3 +113,64 @@
         }
     }
 }
+
+.withdrawcoinsparent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+
+    .withdrawcoins {
+        background-image: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+        border-radius: 5px;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 14px 63px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+
+
+.tableparent_ {
+
+    .tabletopheading {
+        color: #fff;
+        padding: 6px;
+        background-image: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    }
+
+    .action {
+        border: 2px solid #b7862f;
+        background: #fff;
+        font-weight: 600;
+        padding: 5px 12px;
+        text-transform: capitalize;
+    }
+
+    .status {
+        background: #ffa7265e;
+        border-radius: 4px;
+        color: #d58004;
+        font-weight: 600;
+        padding: 6px 18px;
+        user-select: none;
+        text-transform: capitalize;
+    }
+
+    .statuspending {
+        background-color: #ffa7265e;
+    }
+
+    .statusreject {
+        background-color: #dc354559;
+    }
+}
+
+.white {
+    color: #fff;
+}

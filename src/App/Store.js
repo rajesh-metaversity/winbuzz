@@ -14,7 +14,7 @@ import { Message } from "../Services/Message/Message";
 import { MyBets } from "../Services/MyBets/MyBets";
 import { Qtech } from "../Services/Qtech/Qtech";
 import { stake } from "../Services/stake/Deposit";
-import { Withdraw } from "../Services/Withdraw/Withdraw";
+import { Withdraw } from "../Services/withdraw/Withdraw";
 // import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
 // import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
 // import { Logout } from "../Services/Auth/Logout";

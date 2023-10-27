@@ -1,12 +1,13 @@
-import { AppBar, Box, Container, FormControl, Grid, MenuItem, Select, Tab, Tabs, TextField, Typography, useTheme } from "@mui/material";
+import { Box, Container, FormControl, Grid, MenuItem, Select, Tab, Tabs, TextField, Typography, useTheme } from "@mui/material";
 import './styles.scss';
 import { useState } from "react";
 import PropTypes from 'prop-types';
-import { useWithdrawQuery } from "../../Services/Withdraw/Withdraw";
-// import Tab from '@mui/material/Tab';
-// import TabContext from '@mui/lab/TabContext';
-// import TabList from '@mui/lab/TabList';
-// import TabPanel from '@mui/lab/TabPanel';
+import { useWithdrawQuery } from "../../Services/withdraw/Withdraw";
+import Upi from "./Upi";
+import Bank from "./Bank";
+import Previouswithdraw from "./Previouswithdraw";
+import WithdrawButton from "./WithdrawButton";
+import Paytm from "./Paytm";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -20,8 +21,8 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box sx={{ p: 0 }}>
+          {children}
         </Box>
       )}
     </div>
@@ -34,19 +35,12 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
-
-
 const Withdraw = () => {
   const stakeval = ['+100', '+500', '+1k', '+5k', '+10k', '+25px']
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [border, setBorder] = useState(0)
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setBorder(newValue)
@@ -54,10 +48,6 @@ const Withdraw = () => {
 
   const { data: paymentImage } = useWithdrawQuery()
   console.log(paymentImage?.data[0]?.image, 'alskdjfh')
-  // const handleChangeIndex = (index) => {
-  //   setValue(index);
-  // };
-
 
   return (
     <Container maxWidth="lg" className="container">
@@ -123,13 +113,17 @@ const Withdraw = () => {
 
         <Box className="tabsparent">
           <Tabs
-            sx={
-              {
+            sx={{
+              justifyContent: 'space-evenly',
+
+              '& .MuiTabs-flexContainer': {
                 justifyContent: 'space-evenly',
-                '&. MuiTabs-flexcontainer': {
-                  justifyContent: 'space-evenly'
-                }
+                padding: { md: '0 40px', xs: '0' },
+                width: '100%',
+                flexWrap: 'wrap !important',
+
               }
+            }
             }
             className="tabs"
             value={value}
@@ -142,29 +136,37 @@ const Withdraw = () => {
             aria-label="full width tabs example"
           >
             {paymentImage?.data?.map((imgdata, index) => (
-              <Tab TouchRippleProps={{}} className="tab" key={imgdata.id} sx={{ border: `${value === index ? '1px solid #b6842d' : 0}` }} label={
-                <img src={imgdata.image} className="tabImg" />
+              <Tab TouchRippleProps={{
+                style: {
+                  display: 'none'
+                }
+              }} className="tab" key={imgdata.id} sx={{ border: `${value === index ? '1px solid #b6842d' : 0}` }} label={
+                <>
+                  <img src={imgdata.image} className="tabImg" />
+                  <Typography component='p' sx={{ fontSize: 14, marginTop: 1 }}>
+                    {imgdata?.withdrawType}
+                  </Typography>
+                </>
               } />
             ))}
           </Tabs>
         </Box>
 
-        {/* <SwipeableViews */}
-        {/* axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={value}
-          onChangeIndex={handleChangeIndex} */}
-        {/* > */}
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+        <TabPanel value={value} index={0} >
+          <Bank />
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+        <TabPanel value={value} index={1}  >
+          <Upi />
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+        <TabPanel value={value} index={2} >
+          <Paytm />
         </TabPanel>
-        {/* </SwipeableViews> */}
+
+        <WithdrawButton />
+
+        <Previouswithdraw />
       </Box>
+
 
     </Container>
   )
