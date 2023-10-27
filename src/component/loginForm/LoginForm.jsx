@@ -42,7 +42,6 @@ const LoginForm = ({ setOpen }) => {
         //   nav(changePassword_Web_Screen);
       } else if (data.passwordtype !== "old") {
         // setloginCheck(false);
-        // console.log(data);
         localStorage.setItem("session", JSON.stringify(data));
       }
     }

@@ -40,17 +40,7 @@ const BettingProfitLoss = () => {
   const [trigger, { data, isLoading, isError }] =
     useBettingProfitLossMutation();
 
-  const rows = data?.data?.market?.map((curElm) => {
-    console.log(curElm);
-    // return {
-    //   id: 1,
-    //   name: "John Doe",
-    //   age: 30,
-    //   address: "123 Main St",
-    //   amount: 33,
-    // };
-  });
-  console.log(data, "matchData");
+  
   useEffect(() => {
     submitHandler();
     if (data?.data?.dataList) {
@@ -88,7 +78,6 @@ const BettingProfitLoss = () => {
   };
 
   const getMatchDetail = (id) => {
-    console.log(id, "jjjgj");
     setBettingPnl((prev) => {
       return {
         ...prev,

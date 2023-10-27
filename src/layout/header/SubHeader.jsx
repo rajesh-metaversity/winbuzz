@@ -20,92 +20,81 @@ const SubHeader = () => {
     nav(`/game_list/${val}`, { state: name });
   };
 
-  console.log("sportsImages", sportImages)
-  const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  const isBreakPoint = useMediaQuery('(max-width: 780px)');
   if (!isBreakPoint) {
-    return (
-      <div className="sub_header_cont">
-        <ul className="sub_header_ul">
-          {data?.data.map((items) => {
-            return (
-              <>
-                <li>
-                  <div
-                    onClick={() =>
-                      handleSportDetailsPage(items?.sportId, items.sportName)
-                    }
-                  >
-                    {items.sportName}
-                  </div>
-                </li>
-              </>
-            );
-          })}
-          <li>
-            <Link to={casino}>Int Casino</Link>
-          </li>
-        </ul>
-      </div>
-    );
+		return (
+			<div className="sub_header_cont">
+				<ul className="sub_header_ul">
+					{data?.data.map((items, index) => {
+						return (
+							<React.Fragment key={items?.sportId + items.sportName + index}>
+								<li>
+									<div onClick={() => handleSportDetailsPage(items?.sportId, items.sportName)}>{items.sportName}</div>
+								</li>
+							</React.Fragment>
+						);
+					})}
+					<li>
+						<Link to={casino}>Int Casino</Link>
+					</li>
+				</ul>
+			</div>
+		);
   } else {
-    return (
-      <>
-        <div className="mobile-sub-header-container">
-          <ul>
-            <li
-              onClick={() => {
-                setGameName("");
-                setActiveTabs(300);
-              }}
-              className={activeTabs == 300 ? "active-tabs" : ""}
-            >
-              <img src={play} alt="" />
+		return (
+			<>
+				<div className="mobile-sub-header-container">
+					<ul>
+						<li
+							onClick={() => {
+								setGameName('');
+								setActiveTabs(300);
+							}}
+							className={activeTabs == 300 ? 'active-tabs' : ''}>
+							<img src={play} alt="" />
 
-              <span>
-                <Link to={home}>In play</Link>
-              </span>
-            </li>
-            {data?.data.map((items, index) => {
-              return (
-                <React.Fragment key={items.sportId + items.sportName + index}>
-                  <li
-                    onClick={() => {
-                      setGameName(items.sportName);
-                      setActiveTabs(index);
-                      handleSportDetailsPage(items?.sportId, items.sportName);
-                    }}
-                    className={activeTabs == index ? "active-tabs" : ""}
-                  >
-                    {/* <img src={play} alt="" /> */}
-                    <img src={sportImages[items.sportName] } />
-                    <span>{items.sportName}</span>
-                  </li>
-                </React.Fragment>
-              );
-            })}
-            <li
-              onClick={() => setActiveTabs(data?.data.length)}
-              className={activeTabs == data?.data.length ? "active-tabs" : ""}
-            >
-              <img src={play} alt="" />
-              <span>
-                <Link to={casino}>Int Casino</Link>
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div className="mobile-subheader-deposit">
-          <div className="mobile-subheader-deposit-left-col">
-            <AccountBalanceIcon />
-            Deposit
-          </div>
-          <div className="mobile-subheader-deposit-right-col">
-            <AddCardIcon />
-            Withdraw
-          </div>
-        </div>
-      </>
-    );
+							<span>
+								<Link to={home}>In play</Link>
+							</span>
+						</li>
+						;
+						{data?.data.map((items, index) => {
+							return (
+								<React.Fragment key={items.sportId + items.sportName + index}>
+									<li
+										onClick={() => {
+											setGameName(items.sportName);
+											setActiveTabs(index);
+											handleSportDetailsPage(items?.sportId, items.sportName);
+										}}
+										className={activeTabs == index ? 'active-tabs' : ''}>
+										{/* <img src={play} alt="" /> */}
+										<img src={sportImages[items.sportName]} />
+										<span>{items.sportName}</span>
+									</li>
+								</React.Fragment>
+							);
+						})}
+						<li onClick={() => setActiveTabs(data?.data.length)} className={activeTabs == data?.data.length ? 'active-tabs' : ''}>
+							<img src={play} alt="" />
+							<span>
+								<Link to={casino}>Int Casino</Link>
+							</span>
+						</li>
+					</ul>
+				</div>
+				<div className="mobile-subheader-deposit">
+					<div className="mobile-subheader-deposit-left-col">
+						<AccountBalanceIcon />
+						Deposit
+					</div>
+					<div className="mobile-subheader-deposit-right-col">
+						<AddCardIcon />
+						Withdraw
+					</div>
+				</div>
+			</>
+		);
   }
 };
 
