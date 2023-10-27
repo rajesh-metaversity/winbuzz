@@ -50,16 +50,16 @@ const GameDetail = () => {
   const {data} = useMyIpQuery();
 
 
-  console.log(data, "sdadasa")
+  console.log(data?.ip, "sdadasa")
 
 
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
         <Iframes odds={odds } />
-        <MatchedDetailBetComp  data={odds}/>
-        <BookMaker data={odds?.Bookmaker}/>
-        <FancyTabs  data={odds}/>
+        <MatchedDetailBetComp  ip={data?.ip} data={odds}/>
+        <BookMaker ip={data?.ip} data={odds?.Bookmaker}/>
+        <FancyTabs  data={odds} ip={data?.ip}/>
       </div>
       <div className="game-detail-right-col">
         <MyBetsModule />

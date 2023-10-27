@@ -12,44 +12,47 @@ import {
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
-const MatchedDetailBetComp = ({ data }) => {
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setBetSlipData } from "../../App/LoginSlice";
+import moment from "moment";
+const MatchedDetailBetComp = ({ data, ip }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
+  const [isBetModals, setIsBetModals] = useState(false)
 
-//   {
-//     "userIp":"157.37.143.123",
-//     "isFancy":false,
-//     "isBack":true,
-//     "odds":1.42,
-//     "stake":100,
-//     "name":"Nepal",
-//     "marketName":"Match Odds",
-//     "selectionId":2857971,
-//     "priceValue":1.42,
-//     "placeTime":"2023-10-29 20:44:36.443",
-//     "marketId":"1.220241369",
-//     "matchId":"32746824",
-//     "deviceInfo":{
-//        "userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
-//        "browser":"Chrome",
-//        "device":"Macintosh",
-//        "deviceType":"desktop",
-//        "os":"Windows",
-//        "os_version":"windows-10",
-//        "browser_version":"108.0.0.0",
-//        "orientation":"landscape"
-//     }
-//  }
+  
 
-  const handleBackBet = ()=>{
+  const {id} = useParams();
+  const dispatch = useDispatch()
 
-  }
+  const handleBackBet = (marketName, marketId, matchName, sid, odds, priceValue, isBack, isFancy, fullmatchName) => {
+    setIsBetModals(true)
+    dispatch(setBetSlipData({
+      userIp: ip,
+      isFancy: isFancy,
+      isBack: isBack,
+      odds: odds,
+      name: matchName,
+      marketName: marketName,
+      selectionId: sid,
+      priceValue: priceValue,
+      placeTime: pTime,
+      marketId: marketId,
+      matchId: id,
+      matchName:fullmatchName
+    }))
+  };
+
 
   return (
     <>
-      {data?.Odds?.map((item, id) => {
-        console.log(item, "dsfsadfasd");
+      {data?.Odds?.map((item, index) => {
         return (
-          <MainDiv key={id}>
+          <MainDiv key={index}>
             <GridContainer container>
               <Grid item xs={4}>
                 <PolygonStrip>
@@ -71,11 +74,10 @@ const MatchedDetailBetComp = ({ data }) => {
             </GridContainer>
 
             <GridContainer container props={"betgrid"} gap={0}>
-              {item?.runners?.map((data) => {
-                console.log(data, "ASDasdas");
+              {item?.runners?.map((dataRunn, id) => {
                 return (
                   <Grid
-                    key={data}
+                    key={id}
                     container
                     gap={0.4}
                     sx={{
@@ -89,33 +91,54 @@ const MatchedDetailBetComp = ({ data }) => {
                       },
                     }}>
                     <Grid item md={5} xs={5.5}>
-                      <P props={"left"}>{data?.name}</P>
+                      <P props={"left"}>{dataRunn?.name}</P>
                     </Grid>
                     <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
                       <Grid container>
-                        {data === 1 ? (
+                        {dataRunn === 1 ? (
                           <Suspend />
                         ) : (
                           <>
                             <Grid item xs={6}>
                               <Grid
+                              
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center" }}>
-                                {data?.ex?.availableToBack?.map((res, id) => {
-                                  return (
-                                    <BackGrid
-                                      onClick={() => handleBackBet()}
-                                      key={id + "back"}
-                                      className={id == 1 || id == 2 ? 'backgrid_' : ''}
-                                      item
-                                      md={3.9}
-                                      xs={12}>
-                                      <BetTypoPara>{res?.price ? res?.price : 0}</BetTypoPara>
-                                      <BetTypoSpan>{res?.size ? res?.size : 0}</BetTypoSpan>
-                                    </BackGrid>
-                                  );
-                                }).reverse()}
+                                sx={{ justifyContent: "center", cursor:"pointer" }}>
+                                {dataRunn?.ex?.availableToBack
+                                  ?.map((res, id) => {
+                                    return (
+                                      <BackGrid
+                                        onClick={() =>
+                                          handleBackBet(
+                                            item?.Name,
+                                            item?.marketId,
+                                            dataRunn?.name,
+                                            dataRunn?.selectionId,
+                                            res?.price,
+                                            res?.size,
+                                            true,
+                                            false,
+                                            item?.matchName
+                                          )
+                                        }
+                                        key={id + "back"}
+                                        className={
+                                          id == 1 || id == 2 ? "backgrid_" : ""
+                                        }
+                                        item
+                                        md={3.9}
+                                        xs={12}>
+                                        <BetTypoPara>
+                                          {res?.price ? res?.price : 0}
+                                        </BetTypoPara>
+                                        <BetTypoSpan>
+                                          {res?.size ? res?.size : 0}
+                                        </BetTypoSpan>
+                                      </BackGrid>
+                                    );
+                                  })
+                                  .reverse()}
                               </Grid>
                             </Grid>
 
@@ -123,35 +146,55 @@ const MatchedDetailBetComp = ({ data }) => {
                               <Grid
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center" }}>
-                                {data?.ex?.availableToLay?.map((res, id) => {
-                                  console.log(res, id, 'laksdhjf')
-                                  return (
-                                    <LayGrid
-                                      onClick={() => console.log('workinglay')}
-                                      className={id == 1 || id == 2 ? 'backgrid_' : ''}
-                                      key={id + "lay"}
-                                      item
-                                      md={3.9}
-                                      xs={12}>
-                                      <BetTypoPara>{res?.price}</BetTypoPara>
-                                      <BetTypoSpan>{res?.size}</BetTypoSpan>
-                                    </LayGrid>
-                                  );
-                                })}
+                                sx={{ justifyContent: "center", cursor:"pointer" }}>
+                                {dataRunn?.ex?.availableToLay?.map(
+                                  (res, id) => {
+                                    return (
+                                      <LayGrid
+                                        onClick={() =>
+                                          handleBackBet(
+                                            item?.Name,
+                                            item?.marketId,
+                                            dataRunn?.name,
+                                            dataRunn?.selectionId,
+                                            res?.price,
+                                            res?.size,
+                                            false,
+                                            false,
+                                            item?.matchName,
+                                          )
+                                        }
+                                        className={
+                                          id == 1 || id == 2 ? "backgrid_" : ""
+                                        }
+                                        key={id + "lay"}
+                                        item
+                                        md={3.9}
+                                        xs={12}>
+                                        <BetTypoPara>{res?.price}</BetTypoPara>
+                                        <BetTypoSpan>{res?.size}</BetTypoSpan>
+                                      </LayGrid>
+                                    );
+                                  }
+                                )}
                               </Grid>
                             </Grid>
                           </>
                         )}
                       </Grid>
                     </Grid>
+                    {
+                      isBetModals && <MobileBetPlaceModal />
+                    }
+                    
                   </Grid>
+                  
                 );
               })}
 
-              <MobileBetPlaceModal />
+              
             </GridContainer>
-
+            
           </MainDiv>
         );
       })}

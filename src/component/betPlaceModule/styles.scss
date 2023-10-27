@@ -9,11 +9,16 @@
 
   .bet_slip {
     clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-    background: #72bbef;
     width: 30%;
     height: 100%;
     padding: 5px 10px;
     color: white;
+  }
+  .back{
+    background: #72bbef;
+  }
+  .lay{
+    background: #f8d0ce;
   }
 
   .close {
@@ -32,6 +37,8 @@
   border-radius: 10px;
   box-shadow: 0 0 5px 0 #989898;
   align-items: center;
+  position: sticky;
+  top: 170px;
 
   .heading {
     display: flex;
@@ -44,7 +51,6 @@
 
     .bet_slip {
       clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-      background: #72bbef;
       width: 30%;
       height: 100%;
       padding: 5px 10px;
@@ -195,7 +201,6 @@
 .my_bets-cont {
   margin-top: 20px;
   border-radius: 10px;
-
   .heading {
     display: flex;
     justify-content: space-between;
@@ -227,6 +232,15 @@
   }
 
  
+}
+
+.bet_my_bet{
+  position: sticky;
+  top: 170px;
+}
+.my_bets{
+  position: sticky;
+  top: 485px;
 }
 
 .mobilemodal {
