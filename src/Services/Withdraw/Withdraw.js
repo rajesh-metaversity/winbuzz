@@ -13,7 +13,35 @@ export const Withdraw = createApi({
     endpoints: builder => ({
         Withdraw: builder.query({
             query: args => ({
-                url: 'withtype-subadmin/get',
+                url: '/withtype-subadmin/get',
+                method: 'POST',
+                body: args
+            })
+        }),
+        WithdrawStake: builder.query({
+            query: args => ({
+                url: "/request-stack",
+                method: 'POST',
+                body: args
+            })
+        }),
+        WithdrawClientList: builder.query({
+            query: args => ({
+                url: "/enduser/withdraw-request-client",
+                method: 'POST',
+                body: args
+            })
+        }),
+        BankAccount: builder.query({
+            query: args => ({
+                url: "/get/client-bank",
+                method: 'POST',
+                body: args
+            })
+        }),
+        withdrawBalance: builder.mutation({
+            query: args => ({
+                url: "/self-withdraw-app",
                 method: 'POST',
                 body: args
             })
@@ -22,4 +50,4 @@ export const Withdraw = createApi({
 })
 
 
-export const { useWithdrawQuery } = Withdraw;
+export const { useWithdrawQuery, useWithdrawStakeQuery, useWithdrawClientListQuery, useBankAccountQuery, useWithdrawBalanceMutation } = Withdraw;

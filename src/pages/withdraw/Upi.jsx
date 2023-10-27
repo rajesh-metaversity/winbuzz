@@ -1,6 +1,6 @@
-import { FormControl, Grid, InputLabel, OutlinedInput, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography, styled } from '@mui/material';
+import { FormControl, FormControlLabel, Grid, InputLabel, OutlinedInput, Paper, Radio, RadioGroup, Table, TableBody, TableContainer, TableHead, TableRow, Typography, styled } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-const Upi = () => {
+const Upi = ({upiDetails}) => {
 
     const tableheading = ['account number', 'account name', 'action']
 
@@ -34,17 +34,6 @@ const Upi = () => {
     }));
 
 
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-    }
-
-    const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ];
 
     return (
         <div>
@@ -98,13 +87,22 @@ const Upi = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <StyledTableRow key={row.name}>
-                                {tabledata?.map((rowdata, index) => (
-                                    <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
-                                        {rowdata}
-                                    </StyledTableCell>
-                                ))}
+                        {upiDetails?.map((row, ind) => (
+                            <StyledTableRow key={row?.accountNumber + ind + row?.id}>
+
+                                    <StyledTableCell key={ind} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                        {row?.accountNumber}
+                                </StyledTableCell>
+                                <StyledTableCell key={ind} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                        {row?.accountHolderName}
+                                </StyledTableCell>
+                               
+                                     <StyledTableCell>
+                                <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Matched" name="radio-buttons-group" onChange={""}>
+                                <FormControlLabel value={true } control={<Radio />}  />
+							</RadioGroup>
+                            </StyledTableCell>
+
                             </StyledTableRow>
                         ))}
                     </TableBody>

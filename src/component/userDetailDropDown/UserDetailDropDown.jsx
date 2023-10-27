@@ -36,7 +36,6 @@ const UserDetailDropDown = ({ name }) => {
 
   const [trigger, { data, isLoading, isError }] = useLogoutMutation();
 
-  // console.log("logoutData", data.stat)
 
   useEffect(() => {
     if (data?.status) {

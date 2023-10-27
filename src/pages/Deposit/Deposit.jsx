@@ -45,7 +45,6 @@ const Deposit = () => {
 		submitData.append('amount', amount);
 		submitData.append('image', files || '');
 		trigger(submitData);
-		console.log(submitData, 'submitdata');
 	};
 
 	return (

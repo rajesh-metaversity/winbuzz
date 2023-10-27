@@ -23,11 +23,7 @@ const MyBets = () => {
 		trigger(bets);
 	}, [bets.betType, bets.isDeleted]);
 
-	console.log(data?.data, 'MYBETSdata');
-	const rows = [
-		{ id: 1, name: 'John Doe', age: 30, address: '123 Main St' }
-		// Add more data as needed
-	];
+	
 
 	const matchedHandler = (name, el) => {
 		setBets(prev => {
@@ -36,7 +32,6 @@ const MyBets = () => {
 				isDeleted: el
 			};
 		});
-		console.log(el, 'el');
 	};
 
 	const handleChange = e => {
