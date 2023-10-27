@@ -1,24 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./SubHeader.scss";
-import { useActiveSportMutation } from "../../Services/ActiveSportList/ActiveSportList";
-import { useEffect, useState } from "react";
+import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import play from "../../assets/img/in-play.png";
-import { casino } from "../../routes/PagesUrl";
+import { casino, home } from "../../routes/PagesUrl";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
+export let sportName;
+import { sportImages } from "../sider/Sider";
 const SubHeader = () => {
-  const [activeTabs, setActiveTabs] = useState(0);
-  const [trigger, { data }] = useActiveSportMutation();
+  const [activeTabs, setActiveTabs] = useState(300);
+  const [gameName, setGameName] = useState("");
+  sportName = gameName;
+  const { data } = useActiveSportQuery();
   const nav = useNavigate();
-
-  useEffect(() => {
-    trigger();
-  }, []);
 
   const handleSportDetailsPage = (val, name) => {
     nav(`/game_list/${val}`, { state: name });
   };
+
+  console.log("sportsImages", sportImages)
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   if (!isBreakPoint) {
     return (
@@ -50,20 +52,35 @@ const SubHeader = () => {
       <>
         <div className="mobile-sub-header-container">
           <ul>
+            <li
+              onClick={() => {
+                setGameName("");
+                setActiveTabs(300);
+              }}
+              className={activeTabs == 300 ? "active-tabs" : ""}
+            >
+              <img src={play} alt="" />
+
+              <span>
+                <Link to={home}>In play</Link>
+              </span>
+            </li>
             {data?.data.map((items, index) => {
               return (
-                <>
+                <React.Fragment key={items.sportId + items.sportName + index}>
                   <li
                     onClick={() => {
+                      setGameName(items.sportName);
                       setActiveTabs(index);
                       handleSportDetailsPage(items?.sportId, items.sportName);
                     }}
                     className={activeTabs == index ? "active-tabs" : ""}
                   >
-                    <img src={play} alt="" />
+                    {/* <img src={play} alt="" /> */}
+                    <img src={sportImages[items.sportName] } />
                     <span>{items.sportName}</span>
                   </li>
-                </>
+                </React.Fragment>
               );
             })}
             <li

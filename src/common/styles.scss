@@ -1,6 +1,9 @@
 .main-layout-container {
   width: 100%;
   height: 100vh;
+  @media screen and (max-width: 780px) {
+  height: 100%;
+  }
   .header-layout {
     height: auto;
     position: sticky;
@@ -19,10 +22,10 @@
       border-right: 1px solid #ddd;
       @media screen and (max-width: 780px) {
         position: fixed;
-        z-index: 100;
+        z-index: 103;
         width: 0%;
         transition: width 0.4s;
-        top: 64px;
+        top: 90px;
         background-color: transparent;
         border-right: none;
       }
@@ -30,13 +33,13 @@
     .sider-layout-active {
       width: 100%;
       position: fixed;
-      z-index: 100;
-      height: calc(100vh - 64px);
+      z-index: 103;
+      height: calc(100vh - 90px);
       background-color: transparent;
       border-left: 1px solid #ddd;
       border-right: none;
       transition: width 0.4s;
-      top: 64px;
+      top: 90px;
     }
     .content {
       width: calc(60% - 20px);
@@ -44,25 +47,23 @@
       padding: 10px;
       background-color: white;
       @media screen and (max-width: 780px) {
-        width: calc(100% - 20px);
+        width: calc(100% - 10px);
+        padding: 5px;
       }
     }
     .sub-content {
       width: calc(84% - 20px);
       padding: 10px;
       @media screen and (max-width: 780px) {
-          width: calc(100% - 5px);
-          padding: 2px;
-        }
-      
-        @media screen and (max-width: 780px) {
-          background-color: #202020;
-          overflow: hidden;
-          width: 100% !important;
-      
-      
-      
-        }
+        width: calc(100% - 5px);
+        padding: 2px;
+      }
+
+      @media screen and (max-width: 780px) {
+        // background-color: #202020;
+        overflow: hidden;
+        width: 100% !important;
+      }
     }
     .banner-sider {
       width: 25%;

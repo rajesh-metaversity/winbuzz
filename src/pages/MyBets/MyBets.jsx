@@ -4,6 +4,8 @@ import { useMyBetsMutation } from '../../Services/MyBets/MyBets';
 import './MyBets.scss';
 import {RadioStyled} from './styled'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import FileOpenIcon from '@mui/icons-material/FileOpen';
 
 const MyBets = () => {
 	const [bets, setBets] = useState({
@@ -70,17 +72,17 @@ const MyBets = () => {
 							<option value={3}>Lay</option>
 						</select>
 					</span>
-					<span>
+					{/* <span>
 						<label>From</label>
 						<input type="date" />
 					</span>
 					<span>
 						<label>To</label>
 						<input type="date" />
-					</span>
+					</span> */}
 					<button>Search</button>
 				</div>
-				<div className='pdf-excel'><span className='pdf'>pdf</span><span className='excel'>exel</span></div>
+				<div className='pdf-excel'><span className='pdf'><PictureAsPdfIcon /></span><span className='excel'><FileOpenIcon /></span></div>
 
 			</div>
 
@@ -106,9 +108,9 @@ const MyBets = () => {
 								<TableCell>{row.eventName}</TableCell>
 								<TableCell>{row.nation}</TableCell>
                                 <TableCell>{row.address}</TableCell>
-                                <TableCell>{row.rate}</TableCell>
-                                <TableCell>{row.amount}</TableCell>
-                                <TableCell>{row.pnl}</TableCell>
+                                <TableCell style={{color: row.rate >= 0 ? "green" : "red"}}>{row.rate}</TableCell>
+                                <TableCell style={{color: row.amount >= 0 ? "green" : "red"}}>{row.amount}</TableCell>
+                                <TableCell style={{color: row.pnl >= 0 ? "green" : "red"}}>{row.pnl}</TableCell>
                                 <TableCell>{row.time}</TableCell>
                                 <TableCell>{row.address}</TableCell>
 							</TableRow>

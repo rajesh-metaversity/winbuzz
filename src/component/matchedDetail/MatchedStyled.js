@@ -62,12 +62,22 @@ export const BetTypoSpan = styled(Typography)(({ props }) => ({
     margin: 'auto 0'
 }))
 
-export const BackGrid = styled(Grid)({
+export const BackGrid = styled(Grid)(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        '.backgrid_': {
+            display: 'block'
+        }
+    },
+
     backgroundColor: '#A5D9FE',
     padding: ' 4px 0px',
     minHeight: '35px',
     borderRadius: '2px',
-})
+    '.backgrid_': {
+            display: 'none'
+        }
+
+}))
 
 export const LayGrid = styled(Grid)({
     backgroundColor: '#F8D0CE',

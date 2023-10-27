@@ -8,14 +8,14 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 		}
 	});
 	const result = await rawBaseQuery(args, WebApi, extraOptions);
-	if (result?.error) {
-		const responseMessage = result?.error?.data?.message;
-		const status = result?.error?.status;
-		if (status === 401) {
-			localStorage.clear();
-			window.location.replace('/');
+		if (result?.error) {
+			const responseMessage = result?.error?.data?.message;
+			const status = result?.error?.status;
+			if (status === 401) {
+				localStorage.clear();
+				window.location.replace('/');
+			}
 		}
-	}
 	return result;
 	// if (result?.data.status === 200 || result?.data.status) {
 	//   message.success(result?.data?.message);

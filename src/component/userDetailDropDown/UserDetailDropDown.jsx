@@ -47,7 +47,7 @@ const UserDetailDropDown = ({ name }) => {
   return (
     <>
       <ModalComponent
-        Elememt={<BonusRules />}
+        Elememt={<BonusRules setOpen={setOpen} open={openModal} />}
         open={openModal}
         setOpen={setOpen}
       />
@@ -58,13 +58,7 @@ const UserDetailDropDown = ({ name }) => {
         onClick={handleClick}
         sx={{ color: "white", padding: "0", minWidth: "auto" }}
       >
-        {name != "Demo1" ? (
-          name
-        ) : (
-          <>
-            {name} <ArrowDropDownIcon />
-          </>
-        )}
+        {name} <ArrowDropDownIcon />
       </Button>
       <StyledMenu
         sx={{

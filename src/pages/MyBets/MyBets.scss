@@ -2,11 +2,18 @@
   display: flex;
   flex-direction: column;
   gap: 50px;
+  
 
   @media screen and (max-width: 780px) {
     gap: 0px;
+    background: #202020;
+    border-radius: 10px;
+    overflow: hidden;
+    // flex-wrap: nowrap;
 
   }
+
+ 
 
   .combo {
     display: flex;
@@ -14,13 +21,17 @@
     align-items: center;
     width: 100%;
 
+    @media screen and (max-width: 1024px) {
+      flex-wrap: wrap;
+      
+    }
     @media screen and (max-width: 780px) {
       display: flex;
       flex-direction: column;
       text-align: left;
+      flex-wrap: nowrap;
 
     }
-
     .left {
       display: flex;
       justify-content: space-between;
@@ -75,7 +86,7 @@
         width: calc(100% - 20px);
         padding-left: 20px;
         padding-right: 20px;
-        column-gap: 5px;
+        column-gap: 25px;
         row-gap: 15px;
       }
 
@@ -97,7 +108,7 @@
             position: absolute;
             top: -8px;
             left: 10px;
-            z-index: 888;
+            z-index: 88;
             background: #202020;
             color: white;
             font-size: 12px;
@@ -115,6 +126,7 @@
           @media screen and (max-width: 780px) {
             background: transparent;
             border: 1px solid rgba(170, 170, 170, .3);
+            color: #939393;
           }
         }
 
@@ -128,6 +140,7 @@
           @media screen and (max-width: 780px) {
             background: transparent !important;
             border: 1px solid rgba(170, 170, 170, .3);
+            color: #939393;
 
           }
         }
@@ -151,6 +164,7 @@
           padding: 0px;
           width: 100%;
           height: 100%;
+          background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
 
         }
       }
@@ -159,10 +173,24 @@
     }
 
     .pdf-excel {
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      padding: 5px;
+      display: none;
+     
+      @media screen and (max-width: 780px) {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        padding: 5px;
+  
+        .pdf {
+          color: red;
+        }
+
+        .excel {
+          color: green;
+        }
+
+        
+      }
 
     }
   }
@@ -173,6 +201,7 @@
       padding: 10px;
       padding-top: 5px;
       background: none;
+      white-space: nowrap;
 
     }
 
@@ -190,6 +219,12 @@
     th {
       border: 1px solid rgba(120, 130, 140, .13) !important;
 
+      @media screen and (max-width: 780px) {
+        padding: 5px;
+        
+      }
+     
+
     }
 
     .bet_table-body {
@@ -199,6 +234,13 @@
 
         td {
           border: 1px solid rgba(120, 130, 140, .13) !important;
+          color: white;
+
+          @media screen and (max-width: 780px) {
+            padding: 5px;
+
+            
+          }
 
         }
       }
@@ -219,4 +261,6 @@
       border-left: 1px solid white;
     }
   }
+
+
 }
