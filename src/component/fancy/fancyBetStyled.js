@@ -48,9 +48,9 @@ export const P = styled(Typography)(({ props }) => ({
     fontWeight: 600,
     textTransform: props === 'minmax' ? 'uppercase' : 'capitalize',
     letterSpacing: 0.5,
-    margin: props === 'fancyodds' ? 'auto 0 auto 30px' : 0,
+    margin: props === 'fancyodds' ? 'auto 0 auto 2px' : 0,
     textAlign: props === 'left' ? 'left' : 'center',
-    padding: props === 'fancyodds' ? '6px 2px 6px 10px' : props === 'left' ? '0px 0px 0px 8.35938px' : 0,
+    padding: props === 'fancyodds' ? '6px 2px 6px 1px' : props === 'left' ? '0px 0px 0px 8.35938px' : 0,
 }))
 
 export const CustomTab = styled(Tab)({

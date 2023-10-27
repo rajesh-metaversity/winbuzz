@@ -14,6 +14,7 @@ import { setBetSlipData } from "../../App/LoginSlice";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
+import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 
 const FancyBetComp = ({ fancyItem, fancyData }) => {
 	return (

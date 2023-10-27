@@ -17,16 +17,16 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setBetSlipData } from "../../App/LoginSlice";
 import moment from "moment";
-const MatchedDetailBetComp = ({ data, ip }) => {
+const MatchedDetailBetComp = ({ data, ip, prevOdds }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [isBetModals, setIsBetModals] = useState(false)
 
-  
 
-  const {id} = useParams();
+
+  const { id } = useParams();
   const dispatch = useDispatch()
 
   const handleBackBet = (marketName, marketId, matchName, sid, odds, priceValue, isBack, isFancy, fullmatchName) => {
@@ -43,7 +43,7 @@ const MatchedDetailBetComp = ({ data, ip }) => {
       placeTime: pTime,
       marketId: marketId,
       matchId: id,
-      matchName:fullmatchName
+      matchName: fullmatchName
     }))
   };
 
