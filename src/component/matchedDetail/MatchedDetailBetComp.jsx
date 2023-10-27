@@ -11,7 +11,7 @@ import {
 } from "./MatchedStyled";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
-import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
+// import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 const MatchedDetailBetComp = ({ data }) => {
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
@@ -121,7 +121,7 @@ const MatchedDetailBetComp = ({ data }) => {
                 );
               })}
 
-              <MobileBetPlaceModal />
+              {/* <MobileBetPlaceModal /> */}
             </GridContainer>
 
           </MainDiv>

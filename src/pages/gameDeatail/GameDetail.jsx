@@ -19,12 +19,12 @@ const GameDetail = () => {
       setOdds((odds) => {
         e["All"] = e
           ? Object.keys(e).reduce(
-              (ac, key) =>
-                ["Odds", "All", "Bookmaker"].includes(key)
-                  ? ac
-                  : [...ac, ...e[key]],
-              []
-            )
+            (ac, key) =>
+              ["Odds", "All", "Bookmaker"].includes(key)
+                ? ac
+                : [...ac, ...e[key]],
+            []
+          )
           : [];
 
         if (JSON.stringify(odds) !== JSON.stringify(e)) {
@@ -50,14 +50,14 @@ const GameDetail = () => {
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
-        <Iframes odds={odds } />
-        <MatchedDetailBetComp  data={odds}/>
-        <BookMaker data={odds?.Bookmaker}/>
-        <FancyTabs  data={odds}/>
+        <Iframes odds={odds} />
+        <MatchedDetailBetComp data={odds} />
+        <BookMaker data={odds?.Bookmaker} />
+        <FancyTabs data={odds} />
       </div>
       <div className="game-detail-right-col">
-        <MyBetsModule />
         <WebBetPlaceModule />
+        <MyBetsModule />
       </div>
     </div>
   );
