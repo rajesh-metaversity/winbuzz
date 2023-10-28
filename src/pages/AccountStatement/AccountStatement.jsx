@@ -14,7 +14,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: '#333333',
 		color: theme.palette.common.white,
-		border: `1px solid ${theme.palette.common.white}`,
+		// border: `1px solid ${theme.palette.common.white}`,
 		fontSize: 12
 	},
 	[`&.${tableCellClasses.body}`]: {
@@ -70,7 +70,7 @@ const AccountStatement = () => {
 							<TableRow
 								sx={{
 									'& .MuiTableCell-root': {
-										padding: '8px'
+										padding: '4px'
 									}
 								}}>
 								<StyledTableCell>Sr No</StyledTableCell>

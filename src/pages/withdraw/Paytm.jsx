@@ -18,7 +18,7 @@ import {
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
 import { useState } from 'react';
-const Paytm = ({ paytmDetails, setWithdrawDetails }) => {
+const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
 	const tableheading = ['Account number', 'account Holder name', 'action'];
 	const [radioValue, setRadioSelectValue] = useState('a');
 
@@ -46,13 +46,14 @@ const Paytm = ({ paytmDetails, setWithdrawDetails }) => {
 	}));
 
 	const handleRadioChange = (event, index) => {
-
-		const selectedPaytmDetails = index;
-		setSelectedAccount(selectedPaytmDetails);
-		setWithdrawDetails(selectedAccount);
-		setRadioSelectValue(event);
+		console.log(index, "indexdd")
+		// const selectedPaytmDetails = index;
+		setSelectedAccount(index);
+		setWithdrawDetails({...withdrawDetail, ...index});
+		setRadioSelectValue(event.target.value);
 	};
 
+	console.log(radioValue, "dfvfdvfedv")
 	return (
 		<div>
 			<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
