@@ -7,7 +7,6 @@ const MyBetsModule = () => {
   const { id } = useParams()
 
   const { data: betlistbymatch } = useBetListByMatchQuery({ matchId: id })
-  console.log(betlistbymatch, 'laksjdfh')
 
   return (
     <>

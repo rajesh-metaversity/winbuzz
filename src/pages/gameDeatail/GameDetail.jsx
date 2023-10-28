@@ -54,10 +54,7 @@ const GameDetail = () => {
 
   const { data } = useMyIpQuery();
   const { data: oddsPnl } = useOddsPnlQuery({ matchId: id });
-  const {data: FancyPnl} = useFancyPnlQuery({ matchId: id })
-
-
-  console.log(FancyPnl?.data, "Dasdds")
+  const { data: FancyPnl } = useFancyPnlQuery({ matchId: id });
 
   return (
     <div className="game_detail-cont">
@@ -80,7 +77,6 @@ const GameDetail = () => {
           data={odds?.Bookmaker}
           showId={2}
           PnlOdds={oddsPnl?.data}
-
         />
         <FancyTabs
           minMax={minMax}

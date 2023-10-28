@@ -32,7 +32,6 @@ const MatchedDetailBetComp = ({
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [slectionIds, setSlectionIds] = useState(false);
 
-  console.log(prevOdds?.Odds, "dsfsfsfsd");
 
   const { id } = useParams();
   const dispatch = useDispatch();
