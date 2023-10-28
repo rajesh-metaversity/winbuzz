@@ -64,25 +64,35 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
   return (
     <>
       <MainDiv>
+
         <GridContainer container>
-          <Grid item xs={4}>
+          <Grid item xs={7} md={4}>
             <PolygonStrip>
               <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
               <P props={"matchodds"}>Bookmaker</P>
             </PolygonStrip>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item md={2} xs={5}>
             <P props={"minmax"}>
               MIN: {data && data[0]?.minBet} MAX: {data && data[0]?.maxBet}
             </P>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item display={{ xs: "none", md: "block" }} xs={3}>
             <P props={"back"}>back</P>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item display={{ xs: "none", md: "block" }} xs={3}>
             <P props={"lay"}>lay</P>
           </Grid>
         </GridContainer>
+        <Grid container>
+          <Grid item xs={7}></Grid>
+          <Grid item display={{ xs: "block", md: "none" }} xs={2}>
+            <P props={"back"}>back</P>
+          </Grid>
+          <Grid item display={{ xs: "block", md: "none" }} xs={3}>
+            <P props={"lay"}>lay</P>
+          </Grid>
+        </Grid>
 
         <GridContainer container props={"betgrid"} gap={0}>
           {data?.map((dataBook, id) => {
@@ -104,25 +114,25 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                 <Grid item md={5} xs={5.5}>
                   <P props={"left"}>{dataBook?.nation}</P>
                   {PnlOdds?.map((item, id) => {
-                        if (!item?.marketId?.includes("BM")) return <></>;
-                        const oddsPnl = {
-                          [item?.selection1]: item?.pnl1,
-                          [item?.selection2]: item?.pnl2,
-                          [item?.selection3]: item?.pnl3,
-                        };
-                        return (
-                          <div className="sub_title" key={id}>
-                            <span
-                              className={
-                                oddsPnl[dataBook.sid] < 0
-                                  ? "text_danger"
-                                  : "text_success"
-                              }>
-                              {oddsPnl[dataBook.sid] || "0.0"}
-                            </span>
-                          </div>
-                        );
-                      })}
+                    if (!item?.marketId?.includes("BM")) return <></>;
+                    const oddsPnl = {
+                      [item?.selection1]: item?.pnl1,
+                      [item?.selection2]: item?.pnl2,
+                      [item?.selection3]: item?.pnl3,
+                    };
+                    return (
+                      <div className="sub_title" key={id}>
+                        <span
+                          className={
+                            oddsPnl[dataBook.sid] < 0
+                              ? "text_danger"
+                              : "text_success"
+                          }>
+                          {oddsPnl[dataBook.sid] || "0.0"}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </Grid>
                 <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
                   <Grid container>
@@ -136,20 +146,22 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                             gap={{ md: "1%", xs: "2%" }}
                             sx={{ justifyContent: "center" }}>
                             <BackGrid
+                              className="back"
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
                               xs={0}>
-                              <BetTypoPara>0</BetTypoPara>
-                              <BetTypoSpan>0</BetTypoSpan>
+                              <BetTypoPara></BetTypoPara>
+                              <BetTypoSpan></BetTypoSpan>
                             </BackGrid>
                             <BackGrid
+                              className="back"
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
                               xs={0}>
-                              <BetTypoPara>0</BetTypoPara>
-                              <BetTypoSpan>0</BetTypoSpan>
+                              <BetTypoPara></BetTypoPara>
+                              <BetTypoSpan></BetTypoSpan>
                             </BackGrid>
                             <BackGrid
                               item
@@ -185,11 +197,11 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                             gap={{ md: "1%", xs: "2%" }}
                             sx={{ justifyContent: "center" }}>
                             <LayGrid
-                            className={
-                              (dataBook?.l1 > prevOdds[id]?.l1
-                                ? "odds-down-color"
-                                : "") + "lay"
-                            }
+                              className={
+                                (dataBook?.l1 > prevOdds[id]?.l1
+                                  ? "odds-down-color"
+                                  : "") + "lay"
+                              }
                               item
                               md={3.9}
                               xs={12}
@@ -211,20 +223,22 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                               <BetTypoSpan>{dataBook?.ls1}</BetTypoSpan>
                             </LayGrid>
                             <LayGrid
+                              className="lay"
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
                               xs={0}>
-                              <BetTypoPara>0</BetTypoPara>
-                              <BetTypoSpan>0</BetTypoSpan>
+                              <BetTypoPara></BetTypoPara>
+                              <BetTypoSpan></BetTypoSpan>
                             </LayGrid>
                             <LayGrid
+                              className="lay"
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
                               xs={0}>
-                              <BetTypoPara>0</BetTypoPara>
-                              <BetTypoSpan>0</BetTypoSpan>
+                              <BetTypoPara></BetTypoPara>
+                              <BetTypoSpan></BetTypoSpan>
                             </LayGrid>
                           </Grid>
                         </Grid>
@@ -232,9 +246,9 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                     )}
                   </Grid>
                 </Grid>
-                {(dataBook?.sid == selectionids ) && (
+                {(dataBook?.sid == selectionids) && (
                   <MobileBetPlaceModal
-                  minMax={minMax}
+                    minMax={minMax}
                   />
                 )}
               </Grid>
