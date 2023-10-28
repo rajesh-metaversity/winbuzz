@@ -17,7 +17,6 @@ import { useParams } from "react-router-dom";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 
 const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax }) => {
-  console.log(fancyData, "fancyData");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");

@@ -6,15 +6,14 @@ import { useEffect, useState } from "react";
 import Heading from "./Heading";
 import "./styles.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { useSelector } from "react-redux";
-import { betSlipSelector } from "../../App/LoginSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { betSlipSelector, setBetSlipData } from "../../App/LoginSlice";
 import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
 
 export const WebBetPlaceModule = ({ minMax }) => {
   const { data: betNumberArray } = useStakeQuery();
   const [betData, setBetData] = useState();
-  const [betModalsOpen, setBetModalOpen] = useState(true);
 
   const selector = useSelector(betSlipSelector);
 
@@ -79,12 +78,12 @@ export const WebBetPlaceModule = ({ minMax }) => {
               </div>
               <span className="numbers">
                 {betNumberArray?.data.map((el, id) => {
-                  console.log(el, "fsdfsdfsdfs");
                   return (
                     <p
                       key={id}
                       className="bets"
-                      onClick={() => handleNumberClick(el?.value)}>
+                      onClick={() => handleNumberClick(el?.value)}
+                    >
                       {el?.key}
                     </p>
                   );
@@ -94,13 +93,15 @@ export const WebBetPlaceModule = ({ minMax }) => {
                 <p
                   style={{ background: "#ffce00" }}
                   className="inner"
-                  onClick={() => handleButtonClick(minMax?.minBet)}>
+                  onClick={() => handleButtonClick(minMax?.minBet)}
+                >
                   Min
                 </p>
                 <p
                   style={{ background: "#75b7ff" }}
                   className="inner"
-                  onClick={() => handleButtonClick(minMax?.maxBet)}>
+                  onClick={() => handleButtonClick(minMax?.maxBet)}
+                >
                   Max
                 </p>
                 <p style={{ background: "#a5ff93" }} className="inner">
@@ -109,7 +110,8 @@ export const WebBetPlaceModule = ({ minMax }) => {
                 <p
                   style={{ background: "#fffc9f" }}
                   className="inner"
-                  onClick={() => setInputValue("")}>
+                  onClick={() => setInputValue("")}
+                >
                   Clear
                 </p>
               </span>
@@ -121,7 +123,8 @@ export const WebBetPlaceModule = ({ minMax }) => {
                     background: inputValue.length > 0 ? "#4caf50" : "",
                     color: inputValue.length > 0 ? "#fff" : "",
                   }}
-                  className={inputValue.length > 0 ? "place-order_button" : ""}>
+                  className={inputValue.length > 0 ? "place-order_button" : ""}
+                >
                   Place Order
                 </button>
               </span>
@@ -134,12 +137,11 @@ export const WebBetPlaceModule = ({ minMax }) => {
 };
 
 export const MobileBetPlaceModal = ({ minMax }) => {
-  const selector = useSelector(betSlipSelector);
+  let selector = useSelector(betSlipSelector);
   const { data: betNumberArray } = useStakeQuery();
   const [inputValue, setInputValue] = useState("");
   const [betData, setBetData] = useState();
-  const minmaxclear = ["min", "max", "clear"];
-  const cancelPlaceBet = ["cancel", "placebet"];
+  const minmaxclear = ["min", "max", "All in", "clear"];
 
   const minMaxClearColor = (btntype) => {
     if (btntype === "min") {
@@ -150,12 +152,12 @@ export const MobileBetPlaceModal = ({ minMax }) => {
       return "#fffc9f";
     } else if (btntype === "cancel") {
       return "#ffffff";
+    } else if (btntype === "All in") {
+      return "#a5ff93";
     } else if (btntype === "placebet") {
       return "#229600";
     }
   };
-
-  console.log(minMax, "fsfsdfs")
 
   const handleButtonClick = (id) => {
     setInputValue(id.toString());
@@ -185,25 +187,22 @@ export const MobileBetPlaceModal = ({ minMax }) => {
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-
-  const handleMinMax=(id)=>{
-    if(id === 0){
+  const handleMinMax = (id) => {
+    if (id === 0) {
       setInputValue(minMax?.minBet);
-    }else if(id === 1){
+    } else if (id === 1) {
       setInputValue(minMax?.maxBet);
-      
-    }else{
+    } else {
       setInputValue("");
-
     }
-
-  }
-
+  };
+  let dispatch = useDispatch();
   return (
     <>
-      {isBreakPoint && (
+      {isBreakPoint && selector?.data?.name && (
         <Box
-          className={`mobilemodal ${selector?.data?.isBack ? "back" : "lay"}`}>
+          className={`mobilemodal ${selector?.data?.isBack ? "back" : "lay"}`}
+        >
           <Box className="matchinfo">
             <Box className="teamname">
               {selector?.data?.name}
@@ -222,11 +221,23 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                 className="form"
                 component="form"
                 noValidate
-                autoComplete="off">
+                autoComplete="off"
+              >
                 <Box className="incredecre">
                   <Typography component="p">odds</Typography>
                   <Box sx={{ display: "flex" }}>
-                    <Button disableRipple className="inc">
+                    <Button
+                      disableRipple
+                      className="inc"
+                      onClick={() =>
+                        dispatch(
+                          setBetSlipData({
+                            ...selector.data,
+                            odds: selector?.data?.odds - 1.0,
+                          })
+                        )
+                      }
+                    >
                       -
                     </Button>
                     <TextField
@@ -239,7 +250,19 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                       size="small"
                       value={selector?.data?.odds}
                     />
-                    <Button disableRipple className="dec" size="small">
+                    <Button
+                      disableRipple
+                      className="dec"
+                      size="small"
+                      onClick={() =>
+                        dispatch(
+                          setBetSlipData({
+                            ...selector.data,
+                            odds: selector?.data?.odds + 1.0,
+                          })
+                        )
+                      }
+                    >
                       +
                     </Button>
                   </Box>
@@ -267,7 +290,8 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                 disableRipple
                 key={idx}
                 onClick={() => handleButtonClick(val?.value)}
-                className="betStakebutton">
+                className="betStakebutton"
+              >
                 {val?.key}
               </Button>
             ))}
@@ -275,20 +299,31 @@ export const MobileBetPlaceModal = ({ minMax }) => {
           <Box className="minmaxclear">
             {minmaxclear.map((val, idx) => (
               <button
-              onClick={()=>handleMinMax(idx)}
+                onClick={() => handleMinMax(idx)}
                 key={idx}
                 size="small"
                 style={{
                   backgroundColor: `
 				  ${minMaxClearColor(val)}
 				`,
-                }}>
+                }}
+              >
                 {val}
               </button>
             ))}
           </Box>
 
           <Box className="calcelplacebet">
+            <button
+              onClick={() => dispatch(setBetSlipData({}))}
+              size="small"
+              style={{
+                color: "black",
+                backgroundColor: "white",
+              }}
+            >
+              Cancel
+            </button>
             <button
               onClick={handlePlaceBet}
               size="small"
@@ -297,7 +332,8 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                 backgroundColor: `
 				  ${minMaxClearColor("placebet")}
 				`,
-              }}>
+              }}
+            >
               Place Bet
             </button>
           </Box>
