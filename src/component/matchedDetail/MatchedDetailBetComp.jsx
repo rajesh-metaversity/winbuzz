@@ -24,9 +24,9 @@ const MatchedDetailBetComp = ({ data, ip }) => {
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [slectionIds, setSlectionIds] = useState(false)
 
-  
 
-  const {id} = useParams();
+
+  const { id } = useParams();
   const dispatch = useDispatch()
 
   const handleBackBet = (marketName, marketId, matchName, sid, odds, priceValue, isBack, isFancy, fullmatchName) => {
@@ -44,7 +44,7 @@ const MatchedDetailBetComp = ({ data, ip }) => {
       placeTime: pTime,
       marketId: marketId,
       matchId: id,
-      matchName:fullmatchName
+      matchName: fullmatchName
     }))
   };
 
@@ -55,24 +55,35 @@ const MatchedDetailBetComp = ({ data, ip }) => {
         return (
           <MainDiv key={index}>
             <GridContainer container>
-              <Grid item xs={4}>
+              <Grid item xs={7} md={4}>
                 <PolygonStrip>
                   <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
                   <P props={"matchodds"}>{item?.Name}</P>
                 </PolygonStrip>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item md={2} xs={5}>
                 <P props={"minmax"}>
                   MIN: {item?.minBet} MAX: {item?.maxBet}
                 </P>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item display={{ xs: 'none', md: 'block' }} xs={3}>
                 <P props={"back"}>back</P>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item display={{ xs: 'none', md: 'block' }} xs={3}>
                 <P props={"lay"}>lay</P>
               </Grid>
             </GridContainer>
+            <Grid container>
+              <Grid item xs={7}>
+
+              </Grid>
+              <Grid item display={{ xs: 'block', md: 'none' }} xs={2}>
+                <P props={"back"}>back</P>
+              </Grid>
+              <Grid item display={{ xs: 'block', md: 'none' }} xs={3}>
+                <P props={"lay"}>lay</P>
+              </Grid>
+            </Grid>
 
             <GridContainer container props={"betgrid"} gap={0}>
               {item?.runners?.map((dataRunn, id) => {
@@ -103,10 +114,10 @@ const MatchedDetailBetComp = ({ data, ip }) => {
                           <>
                             <Grid item xs={6}>
                               <Grid
-                              
+
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center", cursor:"pointer" }}>
+                                sx={{ justifyContent: "center", cursor: "pointer" }}>
                                 {dataRunn?.ex?.availableToBack
                                   ?.map((res, id) => {
                                     return (
@@ -148,7 +159,7 @@ const MatchedDetailBetComp = ({ data, ip }) => {
                               <Grid
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center", cursor:"pointer" }}>
+                                sx={{ justifyContent: "center", cursor: "pointer" }}>
                                 {dataRunn?.ex?.availableToLay?.map(
                                   (res, id) => {
                                     return (
@@ -188,15 +199,15 @@ const MatchedDetailBetComp = ({ data, ip }) => {
                     {
                       dataRunn?.selectionId === slectionIds && <MobileBetPlaceModal />
                     }
-                    
+
                   </Grid>
-                  
+
                 );
               })}
 
-              
+
             </GridContainer>
-            
+
           </MainDiv>
         );
       })}

@@ -21,12 +21,12 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
-  const {id} = useParams();
-  const [selectionIds,setSelectionIds] = useState()
+  const { id } = useParams();
+  const [selectionIds, setSelectionIds] = useState()
 
   const dispatch = useDispatch()
 
-  const handleBackBet = (marketId,matchName,sid, odds, priceValue, isBack, isFancy, marketName)=>{
+  const handleBackBet = (marketId, matchName, sid, odds, priceValue, isBack, isFancy, marketName) => {
     setSelectionIds(sid)
     dispatch(
       setBetSlipData({
@@ -48,113 +48,113 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
   return (
     <MainDiv>
       <GridContainer container props={"fancy"} xxx={"lol"}>
-        <Grid item xs={4}>
+        <Grid item xs={6} md={6}>
           <PolygonStrip>
             <P props={"fancyodds"}>{fancyData}</P>
           </PolygonStrip>
         </Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={1}>
-          <P props={"back"}>no</P>
+        <Grid item md={2}></Grid>
+        <Grid item xs={3} md={1}>
+          <P props={"lay"}>no</P>
         </Grid>
-        <Grid item xs={1}>
-          <P props={"lay"}>yes</P>
+        <Grid item xs={3} md={1}>
+          <P props={"back"}>yes</P>
         </Grid>
 
-        <Grid item xs={2}></Grid>
+        <Grid item md={2}></Grid>
       </GridContainer>
 
       <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
         {fancyItem?.length > 0 &&
-            fancyItem?.map((item, id)=>{
-                return (
-                    <Grid
-                    key={id}
-                    container
-                    sx={{
-                      borderRadius: 0,
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "4px 0px",
-                      borderBottom: "1px solid #ccc",
-                      ":last-child": {
-                        borderBottom: "0px ",
-                      },
-                    }}>
-                    <Grid item md={5}>
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
-                        <P props={"fancyodds"}>{item?.nation}</P>
-                      </Box>
-                    </Grid>
-                    <Grid item md={6} sx={{ padding: "0px 4px" }}>
-                      <Grid container>
-                        <>
-                        <Grid item xs={5.9}>
-                            <Grid
-                              container
-                              gap={{ md: "1%", xs: "2%" }}
-                              sx={{ justifyContent: "flex-end" }}>
-                              <LayGrid item md={3.9} xs={3.2}
-                              onClick={() =>
-                                handleBackBet(
-                                  item?.mid,
-                                  item?.nation,
-                                  item?.sid,
-                                  item?.l1,
-                                  item?.ls1,
-                                  false,
-                                  true,
-                                  fancyData
-                                )
-                              }
-                              >
-                                <BetTypoPara>{item?.l1}</BetTypoPara>
-                                <BetTypoSpan>{item?.ls1}</BetTypoSpan>
-                              </LayGrid>
-                            </Grid>
-                          </Grid>
-                          <Grid item xs={5.9}>
-                            <Grid
-                              container
-                              gap={{ md: "1%", xs: "2%" }}
-                              sx={{ justifyContent: "space-evenly" }}>
-                              <BackGrid item md={3.9} xs={3.2} sx={{ mx: 0.5 }}
-                                onClick={() =>
-                                  handleBackBet(
-                                    item?.mid,
-                                    item?.nation,
-                                    item?.sid,
-                                    item?.b1,
-                                    item?.bs1,
-                                    true,
-                                    true,
-                                    fancyData
-                                  )
-                                }>
-                                <BetTypoPara>{item?.b1}</BetTypoPara>
-                                <BetTypoSpan>{item?.bs1}</BetTypoSpan>
-                              </BackGrid>
-                              <Grid
-                                item
-                                md={7}
-                                xs={8.5}
-                                sx={{ alignItems: "center", flexDirection: "column" }}>
-                                <BetTypoPara props={"fancyp"}>Min Bet: {item?.minBet}</BetTypoPara>
-                                <BetTypoSpan>Max Market: {item?.maxBet}</BetTypoSpan>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                         
-                        </>
+          fancyItem?.map((item, id) => {
+            return (
+              <Grid
+                key={id}
+                container
+                sx={{
+                  borderRadius: 0,
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "4px 0px",
+                  borderBottom: "1px solid #ccc",
+                  ":last-child": {
+                    borderBottom: "0px ",
+                  },
+                }}>
+                <Grid item md={6} xs={6}>
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
+                    <P props={"fancyodds"}>{item?.nation}</P>
+                  </Box>
+                </Grid>
+                <Grid item md={6} xs={6} sx={{ padding: "0px 4px" }}>
+                  <Grid container>
+                    <>
+                      <Grid item xs={6} md={5.9}>
+                        <Grid
+                          container
+                          gap={{ md: "1%", xs: "2%" }}
+                          sx={{ justifyContent: "flex-end" }}>
+                          <LayGrid item md={4} xs={12}
+                            onClick={() =>
+                              handleBackBet(
+                                item?.mid,
+                                item?.nation,
+                                item?.sid,
+                                item?.l1,
+                                item?.ls1,
+                                false,
+                                true,
+                                fancyData
+                              )
+                            }
+                          >
+                            <BetTypoPara>{item?.l1}</BetTypoPara>
+                            <BetTypoSpan>{item?.ls1}</BetTypoSpan>
+                          </LayGrid>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    {item?.sid == selectionIds && <MobileBetPlaceModal />}
+                      <Grid item xs={6} md={5.9}>
+                        <Grid
+                          container
+                          gap={{ md: "1%", xs: "2%" }}
+                          sx={{ justifyContent: "space-evenly", flexWrap: 'nowrap' }}>
+                          <BackGrid item md={4} xs={12} sx={{ mx: 0.5 }}
+                            onClick={() =>
+                              handleBackBet(
+                                item?.mid,
+                                item?.nation,
+                                item?.sid,
+                                item?.b1,
+                                item?.bs1,
+                                true,
+                                true,
+                                fancyData
+                              )
+                            }>
+                            <BetTypoPara>{item?.b1}</BetTypoPara>
+                            <BetTypoSpan>{item?.bs1}</BetTypoSpan>
+                          </BackGrid>
+                          <Grid
+                            display={{ xs: 'none', md: 'block' }}
+                            item
+                            md={8}
+                            sx={{ alignItems: "center", flexDirection: "column" }}>
+                            <BetTypoPara props={"fancyp"}>Min Bet: {item?.minBet}</BetTypoPara>
+                            <BetTypoSpan>Max Market: {item?.maxBet}</BetTypoSpan>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+
+                    </>
                   </Grid>
-                )
-            })
+                </Grid>
+                {item?.sid == selectionIds && <MobileBetPlaceModal />}
+              </Grid>
+            )
+          })
         }
-       
+
       </GridContainer>
     </MainDiv>
   );

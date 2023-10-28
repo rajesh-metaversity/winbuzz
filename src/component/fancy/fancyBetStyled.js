@@ -29,16 +29,21 @@ export const PolygonStrip = styled(Box)(({ theme }) => ({
     justifyContent: 'flex-start',
     position: 'relative',
     minWidth: '200px',
-    '&::after': {
-        content: '""',
-        width: '32px',
-        height: '32px',
-        background: 'linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)',
-        position: 'absolute',
-        right: '57px',
-        top: '0px',
-        transform: skewVal,
+    [theme.breakpoints.up("md")]: {
+
+        '&::after': {
+
+            content: '""',
+            width: '32px',
+            height: '32px',
+            background: 'linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)',
+            position: 'absolute',
+            right: '57px',
+            top: '0px',
+            transform: skewVal,
+        }
     }
+
 }))
 
 export const P = styled(Typography)(({ props }) => ({

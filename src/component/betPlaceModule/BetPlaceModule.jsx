@@ -124,9 +124,8 @@ export const WebBetPlaceModule = () => {
         </>
       )}
       <div
-        className={`my_bets-cont ${
-          selector?.data != null
-        }?"bet_my_bet":"my_bets"`}>
+        className={`my_bets-cont ${selector?.data != null
+          }?"bet_my_bet":"my_bets"`}>
         <div className="heading">
           <span className="my_bets">My bets</span>
           <span className="close">
@@ -200,7 +199,7 @@ export const MobileBetPlaceModal = () => {
   return (
     <>
       {isBreakPoint && (
-        <Box className="mobilemodal">
+        <Box className={`mobilemodal ${selector?.data?.isBack ? 'back' : 'lay'}`}>
           <Box className="matchinfo">
             <Box className="teamname">
               {selector?.data?.name}
