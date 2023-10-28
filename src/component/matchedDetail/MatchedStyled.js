@@ -74,18 +74,17 @@ export const BackGrid = styled(Grid)(({ theme }) => ({
         }
     },
 
-    backgroundColor: '#A5D9FE',
+    // backgroundColor: '#A5D9FE',
     padding: ' 4px 0px',
     minHeight: '35px',
     borderRadius: '2px',
     '.backgrid_': {
         display: 'none'
     }
-
 }))
 
 export const LayGrid = styled(Grid)({
-    backgroundColor: '#F8D0CE',
+    // backgroundColor: '#F8D0CE',
     padding: '4px 0px',
     minHeight: '35px',
     width: '33.3333%',

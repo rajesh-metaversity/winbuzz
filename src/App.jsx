@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
+import "./App.scss";
 import Routes from "./routes/Routes";
 import { useEffect } from "react";
 import { isLoginSelector, setIslogin } from "./App/LoginSlice";

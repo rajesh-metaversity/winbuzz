@@ -16,7 +16,7 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 
-const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
+const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax }) => {
   console.log(fancyData, "fancyData");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -26,7 +26,11 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
 
   const dispatch = useDispatch()
 
-  const handleBackBet = (marketId, matchName, sid, odds, priceValue, isBack, isFancy, marketName) => {
+  const handleBackBet = (marketId, matchName, sid, odds, priceValue, isBack, isFancy, marketName, min, max) => {
+    setMinMax({
+      minBet:min,
+      maxBet:max
+    })
     setSelectionIds(sid)
     dispatch(
       setBetSlipData({
@@ -96,6 +100,11 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
                           gap={{ md: "1%", xs: "2%" }}
                           sx={{ justifyContent: "flex-end" }}>
                           <LayGrid item md={4} xs={12}
+                          className={
+                            ( Number(item?.l1) < Number(prevOdds[id]?.l1)
+                              ? "odds-down-color "
+                              : " hiuhiuhiu ") + "lay"
+                          }
                             onClick={() =>
                               handleBackBet(
                                 item?.mid,
@@ -105,7 +114,9 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
                                 item?.ls1,
                                 false,
                                 true,
-                                fancyData
+                                fancyData,
+                                item?.minBet,
+                                item?.maxBet
                               )
                             }
                           >
@@ -120,6 +131,11 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
                           gap={{ md: "1%", xs: "2%" }}
                           sx={{ justifyContent: "space-evenly", flexWrap: 'nowrap' }}>
                           <BackGrid item md={4} xs={12} sx={{ mx: 0.5 }}
+                          className={
+                            ( Number(item?.b1) < Number(prevOdds[id]?.b1)
+                              ? "odds-up-color "
+                              : " hiuhiuhiu ") + "back"
+                          }
                             onClick={() =>
                               handleBackBet(
                                 item?.mid,
@@ -129,7 +145,9 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
                                 item?.bs1,
                                 true,
                                 true,
-                                fancyData
+                                fancyData,
+                                item?.minBet,
+                                item?.maxBet
                               )
                             }>
                             <BetTypoPara>{item?.b1}</BetTypoPara>
@@ -149,7 +167,7 @@ const FancyBetComp = ({ fancyItem, fancyData, ip }) => {
                     </>
                   </Grid>
                 </Grid>
-                {item?.sid == selectionIds && <MobileBetPlaceModal />}
+                {item?.sid == selectionIds && <MobileBetPlaceModal minMax={minMax} />}
               </Grid>
             )
           })

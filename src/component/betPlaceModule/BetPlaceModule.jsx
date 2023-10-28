@@ -11,7 +11,7 @@ import { betSlipSelector } from "../../App/LoginSlice";
 import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
 
-export const WebBetPlaceModule = () => {
+export const WebBetPlaceModule = ({ minMax }) => {
   const { data: betNumberArray } = useStakeQuery();
   const [betData, setBetData] = useState();
   const [betModalsOpen, setBetModalOpen] = useState(true);
@@ -20,7 +20,6 @@ export const WebBetPlaceModule = () => {
 
   const [trigger, { data, error, isLoading }] = usePlaceBetsMutation();
 
-  const minMax = ["Min", "Max", "All", "Clear"];
   const buttonColors = ["#ffce00", "#75b7ff", "#a5ff93", "#fffc9f"];
   const [inputValue, setInputValue] = useState("");
 
@@ -45,12 +44,7 @@ export const WebBetPlaceModule = () => {
   };
 
   const handleButtonClick = (id) => {
-    console.log("iddfvfdv", id);
-    if (id === "Min") {
-      setInputValue(1);
-    } else if (id === "Clear") {
-      setInputValue("");
-    }
+    setInputValue(id);
   };
 
   const handlePlaceBet = () => {
@@ -97,15 +91,27 @@ export const WebBetPlaceModule = () => {
                 })}
               </span>
               <span className="min_max">
-                {minMax.map((items, index) => (
-                  <p
-                    key={index}
-                    style={{ background: buttonColors[index] }}
-                    className="inner"
-                    onClick={() => handleButtonClick(items)}>
-                    {items}
-                  </p>
-                ))}
+                <p
+                  style={{ background: "#ffce00" }}
+                  className="inner"
+                  onClick={() => handleButtonClick(minMax?.minBet)}>
+                  Min
+                </p>
+                <p
+                  style={{ background: "#75b7ff" }}
+                  className="inner"
+                  onClick={() => handleButtonClick(minMax?.maxBet)}>
+                  Max
+                </p>
+                <p style={{ background: "#a5ff93" }} className="inner">
+                  All
+                </p>
+                <p
+                  style={{ background: "#fffc9f" }}
+                  className="inner"
+                  onClick={() => setInputValue("")}>
+                  Clear
+                </p>
               </span>
               <span className="order_buttons">
                 <button>Cancel Order</button>
@@ -123,21 +129,11 @@ export const WebBetPlaceModule = () => {
           </div>
         </>
       )}
-      <div
-        className={`my_bets-cont ${selector?.data != null
-          }?"bet_my_bet":"my_bets"`}>
-        <div className="heading">
-          <span className="my_bets">My bets</span>
-          <span className="close">
-            <CloseIcon />
-          </span>
-        </div>
-      </div>
     </>
   );
 };
 
-export const MobileBetPlaceModal = () => {
+export const MobileBetPlaceModal = ({ minMax }) => {
   const selector = useSelector(betSlipSelector);
   const { data: betNumberArray } = useStakeQuery();
   const [inputValue, setInputValue] = useState("");
@@ -158,6 +154,8 @@ export const MobileBetPlaceModal = () => {
       return "#229600";
     }
   };
+
+  console.log(minMax, "fsfsdfs")
 
   const handleButtonClick = (id) => {
     setInputValue(id.toString());
@@ -181,25 +179,31 @@ export const MobileBetPlaceModal = () => {
 
   const [trigger, { data, error, isLoading }] = usePlaceBetsMutation();
 
-  // const handleButtonClick = (id) => {
-  //   console.log("iddfvfdv", id);
-  //   if (id === "Min") {
-  //     setInputValue(1);
-  //   } else if (id === "Clear") {
-  //     setInputValue("");
-  //   }
-  // };
-
   const handlePlaceBet = () => {
     trigger(betData);
   };
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
+
+  const handleMinMax=(id)=>{
+    if(id === 0){
+      setInputValue(minMax?.minBet);
+    }else if(id === 1){
+      setInputValue(minMax?.maxBet);
+      
+    }else{
+      setInputValue("");
+
+    }
+
+  }
+
   return (
     <>
       {isBreakPoint && (
-        <Box className={`mobilemodal ${selector?.data?.isBack ? 'back' : 'lay'}`}>
+        <Box
+          className={`mobilemodal ${selector?.data?.isBack ? "back" : "lay"}`}>
           <Box className="matchinfo">
             <Box className="teamname">
               {selector?.data?.name}
@@ -271,7 +275,7 @@ export const MobileBetPlaceModal = () => {
           <Box className="minmaxclear">
             {minmaxclear.map((val, idx) => (
               <button
-                disableRipple
+              onClick={()=>handleMinMax(idx)}
                 key={idx}
                 size="small"
                 style={{

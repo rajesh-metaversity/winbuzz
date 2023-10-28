@@ -15,9 +15,6 @@ const MyBetsModule = () => {
 
         <div className="heading">
           <span className="my_bets">My bets</span>
-          {/* <span className="close">
-            <CloseIcon />
-          </span> */}
         </div>
         <div className="my-bets-module-container">
           <Grid container className="gridcontainer">
@@ -39,8 +36,8 @@ const MyBetsModule = () => {
           </Grid>
 
           {betlistbymatch?.data && Object.keys(betlistbymatch?.data)?.map((matchdatakeys) => (
-            betlistbymatch?.data[matchdatakeys]?.map((betlistdata) => (
-              <Grid container sx={{
+            betlistbymatch?.data[matchdatakeys]?.map((betlistdata, id) => (
+              <Grid container key={id} sx={{
                 backgroundColor: betlistdata?.back ?
                   '#A5D9FE' :
                   '#F8D0CE',

@@ -18,16 +18,31 @@ import moment from "moment";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 import { useState } from "react";
 
-const BookMaker = ({ data, ip }) => {
+const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const dispatch = useDispatch();
-  const {id} = useParams();
-  const [selectionids, setSlectionIds] = useState()
+  const { id } = useParams();
+  const [selectionids, setSlectionIds] = useState();
 
-  const handleBackBet = (marketId,matchName,sid, odds, priceValue, isBack, isFancy, fullmatchName ) => {
-    setSlectionIds(sid)
+  const handleBackBet = (
+    marketId,
+    matchName,
+    sid,
+    odds,
+    priceValue,
+    isBack,
+    isFancy,
+    fullmatchName,
+    min,
+    max
+  ) => {
+    setMinMax({
+      minBet: min,
+      maxBet: max,
+    });
+    setSlectionIds(sid);
     dispatch(
       setBetSlipData({
         userIp: ip,
@@ -58,7 +73,7 @@ const BookMaker = ({ data, ip }) => {
           </Grid>
           <Grid item xs={2}>
             <P props={"minmax"}>
-              {/* MIN: {data[0]?.minBet} MAX: {data[0]?.maxBet} */}
+              MIN: {data && data[0]?.minBet} MAX: {data && data[0]?.maxBet}
             </P>
           </Grid>
           <Grid item xs={3}>
@@ -88,6 +103,26 @@ const BookMaker = ({ data, ip }) => {
                 }}>
                 <Grid item md={5} xs={5.5}>
                   <P props={"left"}>{dataBook?.nation}</P>
+                  {PnlOdds?.map((item, id) => {
+                        if (!item?.marketId?.includes("BM")) return <></>;
+                        const oddsPnl = {
+                          [item?.selection1]: item?.pnl1,
+                          [item?.selection2]: item?.pnl2,
+                          [item?.selection3]: item?.pnl3,
+                        };
+                        return (
+                          <div className="sub_title" key={id}>
+                            <span
+                              className={
+                                oddsPnl[dataBook.sid] < 0
+                                  ? "text_danger"
+                                  : "text_success"
+                              }>
+                              {oddsPnl[dataBook.sid] || "0.0"}
+                            </span>
+                          </div>
+                        );
+                      })}
                 </Grid>
                 <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
                   <Grid container>
@@ -116,23 +151,30 @@ const BookMaker = ({ data, ip }) => {
                               <BetTypoPara>0</BetTypoPara>
                               <BetTypoSpan>0</BetTypoSpan>
                             </BackGrid>
-                            <BackGrid item md={3.9} xs={12} onClick={() =>
-                                  handleBackBet(
-                                    dataBook?.mid,
-                                    dataBook?.nation,
-                                    dataBook?.sid,
-                                    dataBook?.b1,
-                                    dataBook?.bs1,
-                                    true,
-                                    false,
-                                    dataBook?.matchName
-                                  )
-                                }
-                                >
-                              <BetTypoPara
-                                >
-                                {dataBook?.b1}
-                              </BetTypoPara>
+                            <BackGrid
+                              item
+                              md={3.9}
+                              xs={12}
+                              className={
+                                (dataBook?.b1 > prevOdds[id]?.b1
+                                  ? "odds-up-color "
+                                  : "") + "back"
+                              }
+                              onClick={() =>
+                                handleBackBet(
+                                  dataBook?.mid,
+                                  dataBook?.nation,
+                                  dataBook?.sid,
+                                  dataBook?.b1,
+                                  dataBook?.bs1,
+                                  true,
+                                  false,
+                                  dataBook?.matchName,
+                                  data[0]?.minBet,
+                                  data[0]?.maxBet
+                                )
+                              }>
+                              <BetTypoPara>{dataBook?.b1}</BetTypoPara>
                               <BetTypoSpan>{dataBook?.bs1}</BetTypoSpan>
                             </BackGrid>
                           </Grid>
@@ -142,20 +184,29 @@ const BookMaker = ({ data, ip }) => {
                             container
                             gap={{ md: "1%", xs: "2%" }}
                             sx={{ justifyContent: "center" }}>
-                            <LayGrid item md={3.9} xs={12} 
-                            onClick={() =>
-                              handleBackBet(
-                                dataBook?.mid,
-                                dataBook?.nation,
-                                dataBook?.sid,
-                                dataBook?.l1,
-                                dataBook?.ls1,
-                                false,
-                                false,
-                                dataBook?.matchName
-                              )
+                            <LayGrid
+                            className={
+                              (dataBook?.l1 > prevOdds[id]?.l1
+                                ? "odds-down-color"
+                                : "") + "lay"
                             }
-                            >
+                              item
+                              md={3.9}
+                              xs={12}
+                              onClick={() =>
+                                handleBackBet(
+                                  dataBook?.mid,
+                                  dataBook?.nation,
+                                  dataBook?.sid,
+                                  dataBook?.l1,
+                                  dataBook?.ls1,
+                                  false,
+                                  false,
+                                  dataBook?.matchName,
+                                  data[0]?.minBet,
+                                  data[0]?.maxBet
+                                )
+                              }>
                               <BetTypoPara>{dataBook?.l1}</BetTypoPara>
                               <BetTypoSpan>{dataBook?.ls1}</BetTypoSpan>
                             </LayGrid>
@@ -181,10 +232,11 @@ const BookMaker = ({ data, ip }) => {
                     )}
                   </Grid>
                 </Grid>
-                {
-                  dataBook?.sid == selectionids && <MobileBetPlaceModal />
-                }
-                
+                {(dataBook?.sid == selectionids ) && (
+                  <MobileBetPlaceModal
+                  minMax={minMax}
+                  />
+                )}
               </Grid>
             );
           })}

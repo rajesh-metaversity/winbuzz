@@ -5,7 +5,7 @@ import {  GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
 import './FancyTabs.scss'
 
-const FancyTabs = ({ data, ip }) => {
+const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
   const [value, setValue] = useState(0);
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
@@ -64,6 +64,9 @@ const FancyTabs = ({ data, ip }) => {
           fancyItem={data[fancyData]}
           fancyData={fancyData}
           ip={ip}
+          prevOdds={prevOdds[fancyData]}
+          setMinMax={setMinMax}
+          minMax={minMax}
         />
       )}
       {/* <FancyBetComp /> */}
