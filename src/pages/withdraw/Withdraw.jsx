@@ -26,35 +26,38 @@ TabPanel.propTypes = {
 };
 
 const Withdraw = () => {
-	const [withdrawAmount, setWithdrawAmount] = useState(0);
+  // const [withdrawAmount, setWithdrawAmount] = useState();
+
+  const [withdrawType, setWithdrawType] = useState("")
 
 	const [withdrawDetails, setWithdrawDetails] = useState({
-		accountHolderName: 'af dhj',
+		accountHolderName: '',
 		bankName: '',
 		accountType: '',
-		amount: 100,
+		amount: "",
 		ifsc: '',
-		accountNumber: '9876543211',
-		withdrawType: '64a406f0c0d78f0108e6043e',
-		withdrawMode: 'Normal'
+		accountNumber: '',
+		withdrawType: '',
+		withdrawMode: ""
 	});
-	const [userWithdrawDetails, setUserWithdrawDetails] = useState([]);
-	const theme = useTheme();
-	const [value, setValue] = useState(0);
-	const [border, setBorder] = useState(0);
+  
+  console.log(withdrawDetails, 'sdvcdsv');
+  const [userWithdrawDetails, setUserWithdrawDetails] = useState([]);
 
-	const handleChange = (event, newValue) => {
+  const theme = useTheme();
+  const [value, setValue] = useState(0);
+  const [border, setBorder] = useState(0);
+
+  const handleChange = (event, newValue) => {
 		setValue(newValue);
 		setBorder(newValue);
-	};
-
+  };
 
 	const { data: paymentImage } = useWithdrawQuery();
 
 	const { data: stakeBalance } = useWithdrawStakeQuery();
 
 	const { data: accountDetails } = useBankAccountQuery();
-
 
 	const imageHandler = id => {
 		const withdrawDetail = accountDetails?.data?.filter(el => el.withdrawType == id);
@@ -65,7 +68,13 @@ const Withdraw = () => {
 
 	const withdrawHandler = () => {
 		trigger(withdrawDetails);
-	};
+  };
+  
+  const handleSelectChange = (event) => {
+    setWithdrawType(event.target.value); 
+  };
+
+  console.log(withdrawType, "withdrawtype")
 
 	return (
 		<Container maxWidth="lg" className="container">
@@ -81,12 +90,12 @@ const Withdraw = () => {
 						Withdraw Coins
 					</Typography>
 					<TextField
-						// InputProps={{
-						// 	disableUnderline: true
-						// }}
 						variant="outlined"
-						value={withdrawAmount}
-						onChange={e => setWithdrawAmount(e.target.value)}
+						value={withdrawDetails?.amount}
+            onChange={(e) => setWithdrawDetails((prev) => {
+              return {
+                ...prev,amount: e.target.value
+            }})}
 						size="small"
 						className="withdrawcoins"
 						placeholder="Withdraw Coins"
@@ -99,7 +108,10 @@ const Withdraw = () => {
 
 					<Box className="buttonstakeparent">
 						{stakeBalance?.data?.map((stake, id) => (
-							<button key={id + stake} className="stakebutton" size="large" onClick={() => setWithdrawAmount(stake?.value)}>
+							<button key={id + stake} className="stakebutton" size="large" onClick={(e) => setWithdrawDetails((prev) => {
+                return {
+                  ...prev,amount: +withdrawDetails?.amount + +stake?.value
+              }})}>
 								{stake?.key}
 							</button>
 						))}
@@ -108,7 +120,13 @@ const Withdraw = () => {
 			</Grid>
 
 			<FormControl sx={{ m: 0 }} className="select_">
-				<Select
+        <Select
+          onChange={(e) => setWithdrawDetails((prev) => {
+            return {
+              ...prev, withdrawMode: e.target.value
+            }
+          })}
+          value={withdrawDetails?.withdrawMode}
 					sx={{
 						'& .mui-focused & .muioutlinedinput-notchedoutline': {
 							border: '1px solid #484850',
@@ -121,9 +139,8 @@ const Withdraw = () => {
 					<MenuItem value="">
 						<em>None</em>
 					</MenuItem>
-					<MenuItem value={10}>Ten</MenuItem>
-					<MenuItem value={20}>Twenty</MenuItem>
-					<MenuItem value={30}>Thirty</MenuItem>
+					<MenuItem value={"INSTANT"}>INSTANT</MenuItem>
+					<MenuItem value={"NORMAL"}>NORMAL</MenuItem>
 				</Select>
 			</FormControl>
 
@@ -173,13 +190,13 @@ const Withdraw = () => {
 				</Box>
 
 				<TabPanel value={value} index={0}>
-					<Bank bankDetails={userWithdrawDetails} />
+					<Bank bankDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<Upi upiDetails={userWithdrawDetails} />
+					<Upi upiDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 				<TabPanel value={value} index={2}>
-					<Paytm paytmDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} />
+					<Paytm paytmDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 
 				<WithdrawButton withdrawHandler={withdrawHandler} />

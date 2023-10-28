@@ -17,8 +17,11 @@ import {
 	Typography,
 	styled
 } from '@mui/material';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-const Bank = ({ bankDetails }) => {
+import TableCell, { tableCellClasses,  } from '@mui/material/TableCell';
+import { useState } from 'react';
+const Bank = ({ bankDetails, setWithdrawDetails,withdrawDetail  }) => {
+	const [radioValue, setRadioValue] = useState()
+	const [selectedField, setSelectedField] = useState(null)
 	const tableheading = ['account number', 'Account Holder Name', 'Bank Name/Address', 'IFSC Code', 'Account Type/ Currency', 'action'];
 
 	const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -41,8 +44,11 @@ const Bank = ({ bankDetails }) => {
 		}
 	}));
 
-	const bankSelectHandler = () => {
-
+	const bankHandler = (id, event) => {
+		setRadioValue(id.target.value);
+        console.log(event, "sdcs")
+        setSelectedField(event)
+        setWithdrawDetails({...withdrawDetail,...event})
 	}
 
 
@@ -60,6 +66,7 @@ const Bank = ({ bankDetails }) => {
 							sx={{ width: '100%' }}
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
+							value={selectedField?.accountNumber}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -76,6 +83,7 @@ const Bank = ({ bankDetails }) => {
 							size="small"
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
+							value={selectedField?.accountHolderName}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -92,6 +100,7 @@ const Bank = ({ bankDetails }) => {
 							size="small"
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
+							value={selectedField?.bankName}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -108,6 +117,7 @@ const Bank = ({ bankDetails }) => {
 							size="small"
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
+							value={selectedField?.ifsc}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -128,14 +138,14 @@ const Bank = ({ bankDetails }) => {
 								}
 							}}
 							size="small"
+							value={selectedField?.accountType}
 							displayEmpty
 							inputProps={{ 'aria-label': 'Without label' }}>
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={10}>Ten</MenuItem>
-							<MenuItem value={20}>Twenty</MenuItem>
-							<MenuItem value={30}>Thirty</MenuItem>
+							<MenuItem value={"Savings"}>Savings</MenuItem>
+							<MenuItem value={"Current"}>Current</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
@@ -173,10 +183,12 @@ const Bank = ({ bankDetails }) => {
                                 <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
                                         {bankData?.accountType}
                                 </StyledTableCell>
-                                <StyledTableCell>
-                                <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  name="radio-buttons-group" onChange={bankSelectHandler}>
+								<StyledTableCell>
+								<input type="radio" name="upiRadio" value={radioValue} onChange={event => bankHandler(event, bankData)} />
+
+                                {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  name="radio-buttons-group" onChange={bankSelectHandler}>
                                 <FormControlLabel value={true } control={<Radio />}  />
-							</RadioGroup>
+							</RadioGroup> */}
                             </StyledTableCell>
                             </StyledTableRow>
                              ))}
