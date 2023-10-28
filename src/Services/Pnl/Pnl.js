@@ -1,21 +1,21 @@
 import { dynamicBaseQuery } from "../BadRequestHandler/BadRequestHandler";
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
 
-export const MyBets = createApi({
-    reducerPath: "myBets",
+export const PnlApi = createApi({
+    reducerPath: "PnlApi",
     baseQuery: dynamicBaseQuery,
     endpoints: builder => ({
-        MyBets: builder.mutation({
+        oddsPnl: builder.query({
             query: body => ({
-				url: 'enduser/unsettled-bet',
+				url: '/enduser/user-odds-pnl',
 				method: 'POST',
 				body
 			})
 
         }),
-        placeBets: builder.mutation({
+        fancyPnl: builder.query({
             query: body => ({
-				url: '/enduser/place-bets',
+				url: '/enduser/user-fancy-pnl',
 				method: 'POST',
 				body
 			})
@@ -25,4 +25,4 @@ export const MyBets = createApi({
     })
 })
 
-export const {useMyBetsMutation, usePlaceBetsMutation} = MyBets
+export const {useOddsPnlQuery, useFancyPnlQuery} = PnlApi

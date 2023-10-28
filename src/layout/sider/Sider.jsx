@@ -72,7 +72,6 @@ const SiderBar = () => {
 					</p>
 					<p className="matchName">{matchName}</p>
 					{activeMatch?.data.map(item => {
-						// console.log("item", item?.matchId)
 						if (item.matchName) {
 							return (
 								<>

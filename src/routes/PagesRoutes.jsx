@@ -25,8 +25,8 @@ import BettingProfitLoss from "../pages/BettingProfitLoss/BettingProfitLoss";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import MyBets from "../pages/MyBets/MyBets";
 import Withdraw from "../pages/withdraw/Withdraw";
-import Deposit from "../pages/Deposit/Deposit";
 import CasinoIframe from "../pages/casinoIframe/CasinoIframe";
+import Deposit from "../pages/Deposit/Deposit";
 
 export const router = createBrowserRouter([
   {

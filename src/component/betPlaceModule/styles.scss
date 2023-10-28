@@ -1,3 +1,11 @@
+.back {
+  background-color: #72bbef;
+}
+
+.lay {
+  background-color: #f8d0ce;
+}
+
 .heading {
   display: flex;
   justify-content: space-between;
@@ -9,7 +17,6 @@
 
   .bet_slip {
     clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-    background: #72bbef;
     width: 30%;
     height: 100%;
     padding: 5px 10px;
@@ -32,6 +39,8 @@
   border-radius: 10px;
   box-shadow: 0 0 5px 0 #989898;
   align-items: center;
+  position: sticky;
+  top: 170px;
 
   .heading {
     display: flex;
@@ -44,7 +53,6 @@
 
     .bet_slip {
       clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-      background: #72bbef;
       width: 30%;
       height: 100%;
       padding: 5px 10px;
@@ -204,6 +212,7 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     overflow: hidden;
+
     .my_bets {
       clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
       background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
@@ -212,25 +221,34 @@
       padding: 5px 10px;
       color: white;
 
-    
+
     }
 
     .close {
       flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      cursor: pointer;
 
     }
 
   }
 
- 
+
+}
+
+.bet_my_bet {
+  position: sticky;
+  top: 170px;
+}
+
+.my_bets {
+  position: sticky;
+  top: 485px;
 }
 
 .mobilemodal {
-  background-color: #65bae2;
   padding: 2px 4px;
   width: 100%;
 

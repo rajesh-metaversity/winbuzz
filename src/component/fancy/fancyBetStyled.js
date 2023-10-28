@@ -29,16 +29,21 @@ export const PolygonStrip = styled(Box)(({ theme }) => ({
     justifyContent: 'flex-start',
     position: 'relative',
     minWidth: '200px',
-    '&::after': {
-        content: '""',
-        width: '32px',
-        height: '32px',
-        background: 'linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)',
-        position: 'absolute',
-        right: '57px',
-        top: '0px',
-        transform: skewVal,
+    [theme.breakpoints.up("md")]: {
+
+        '&::after': {
+
+            content: '""',
+            width: '32px',
+            height: '32px',
+            background: 'linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)',
+            position: 'absolute',
+            right: '57px',
+            top: '0px',
+            transform: skewVal,
+        }
     }
+
 }))
 
 export const P = styled(Typography)(({ props }) => ({
@@ -48,9 +53,9 @@ export const P = styled(Typography)(({ props }) => ({
     fontWeight: 600,
     textTransform: props === 'minmax' ? 'uppercase' : 'capitalize',
     letterSpacing: 0.5,
-    margin: props === 'fancyodds' ? 'auto 0 auto 30px' : 0,
+    margin: props === 'fancyodds' ? 'auto 0 auto 2px' : 0,
     textAlign: props === 'left' ? 'left' : 'center',
-    padding: props === 'fancyodds' ? '6px 2px 6px 10px' : props === 'left' ? '0px 0px 0px 8.35938px' : 0,
+    padding: props === 'fancyodds' ? '6px 2px 6px 1px' : props === 'left' ? '0px 0px 0px 8.35938px' : 0,
 }))
 
 export const CustomTab = styled(Tab)({

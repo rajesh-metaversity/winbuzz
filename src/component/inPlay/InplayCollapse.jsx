@@ -15,13 +15,10 @@ const InplayCollapse = ({ data, name }) => {
         <div className="odd-container">
           {data?.map((res, index) => {
             return (
-              <div
-                onClick={() => handleGameDetailsPage(res?.matchId)}
-                key={res}
-              >
-                <InPlayOddRow live={res} index={index} />
-              </div>
-            );
+				<div onClick={() => handleGameDetailsPage(res?.matchId)} key={res?.openDate + res?.matchName + index}>
+					<InPlayOddRow live={res} index={index} />
+				</div>
+			);
           })}
         </div>
       </div>

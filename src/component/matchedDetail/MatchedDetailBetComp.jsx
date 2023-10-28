@@ -12,42 +12,107 @@ import {
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
-const MatchedDetailBetComp = ({ data }) => {
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setBetSlipData } from "../../App/LoginSlice";
+import moment from "moment";
+const MatchedDetailBetComp = ({
+  data,
+  ip,
+  setMinMax,
+  prevOdds,
+  minMax,
+  showId,
+  PnlOdds,
+}) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
+  const [slectionIds, setSlectionIds] = useState(false);
+
+  console.log(prevOdds?.Odds, "dsfsfsfsd");
+
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const handleBackBet = (
+    marketName,
+    marketId,
+    matchName,
+    sid,
+    odds,
+    priceValue,
+    isBack,
+    isFancy,
+    fullmatchName,
+    min,
+    max
+  ) => {
+    setMinMax({
+      minBet: min,
+      maxBet: max,
+    });
+    setSlectionIds(sid);
+    dispatch(
+      setBetSlipData({
+        userIp: ip,
+        isFancy: isFancy,
+        isBack: isBack,
+        odds: odds,
+        name: matchName,
+        marketName: marketName,
+        selectionId: sid,
+        priceValue: priceValue,
+        placeTime: pTime,
+        marketId: marketId,
+        matchId: id,
+        matchName: fullmatchName,
+      })
+    );
+  };
 
   return (
     <>
-      {data?.Odds?.map((item, id) => {
-        console.log(item, "dsfsadfasd");
+      {data?.Odds?.map((item, index) => {
         return (
-          <MainDiv key={id}>
+          <MainDiv key={index}>
             <GridContainer container>
-              <Grid item xs={4}>
+              <Grid item xs={7} md={4}>
                 <PolygonStrip>
                   <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
                   <P props={"matchodds"}>{item?.Name}</P>
                 </PolygonStrip>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item md={2} xs={5}>
                 <P props={"minmax"}>
                   MIN: {item?.minBet} MAX: {item?.maxBet}
                 </P>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item display={{ xs: "none", md: "block" }} xs={3}>
                 <P props={"back"}>back</P>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item display={{ xs: "none", md: "block" }} xs={3}>
                 <P props={"lay"}>lay</P>
               </Grid>
             </GridContainer>
+            <Grid container>
+              <Grid item xs={7}></Grid>
+              <Grid item display={{ xs: "block", md: "none" }} xs={2}>
+                <P props={"back"}>back</P>
+              </Grid>
+              <Grid item display={{ xs: "block", md: "none" }} xs={3}>
+                <P props={"lay"}>lay</P>
+              </Grid>
+            </Grid>
 
             <GridContainer container props={"betgrid"} gap={0}>
-              {item?.runners?.map((data) => {
-                console.log(data, "ASDasdas");
+              {item?.runners?.map((dataRunn, id) => {
+                const prevOddRunners = prevOdds?.Odds[index]?.runners[id];
                 return (
                   <Grid
-                    key={data}
+                    key={id}
                     container
                     gap={0.4}
                     sx={{
@@ -61,33 +126,87 @@ const MatchedDetailBetComp = ({ data }) => {
                       },
                     }}>
                     <Grid item md={5} xs={5.5}>
-                      <P props={"left"}>{data?.name}</P>
+                      <P props={"left"}>{dataRunn?.name}</P>
+                      {PnlOdds?.map((item, id) => {
+                        if (item?.marketId?.includes("BM")) return <></>;
+                        const oddsPnl = {
+                          [item?.selection1]: item?.pnl1,
+                          [item?.selection2]: item?.pnl2,
+                          [item?.selection3]: item?.pnl3,
+                        };
+                        return (
+                          <div className="sub_title" key={id}>
+                            <span
+                              className={
+                                oddsPnl[dataRunn.selectionId] < 0
+                                  ? "text_danger"
+                                  : "text_success"
+                              }>
+                              {oddsPnl[dataRunn.selectionId] || "0.0"}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </Grid>
                     <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
                       <Grid container>
-                        {data === 1 ? (
+                        {dataRunn === 1 ? (
                           <Suspend />
                         ) : (
                           <>
                             <Grid item xs={6}>
                               <Grid
+                                className="odds-up-color "
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center" }}>
-                                {data?.ex?.availableToBack?.map((res, id) => {
-                                  return (
-                                    <BackGrid
-                                      onClick={() => console.log('workingback')}
-                                      key={id + "back"}
-                                      className={id == 1 || id == 2 ? 'backgrid_' : ''}
-                                      item
-                                      md={3.9}
-                                      xs={12}>
-                                      <BetTypoPara>{res?.price ? res?.price : 0}</BetTypoPara>
-                                      <BetTypoSpan>{res?.size ? res?.size : 0}</BetTypoSpan>
-                                    </BackGrid>
-                                  );
-                                }).reverse()}
+                                sx={{
+                                  justifyContent: "center",
+                                  cursor: "pointer",
+                                }}>
+                                {dataRunn?.ex?.availableToBack
+                                  ?.map((res, id) => {
+                                    const preElmBack =
+                                      prevOddRunners?.ex?.availableToBack[id]
+                                        .price;
+                                    const bg =
+                                      (dataRunn?.ex?.availableToBack[id].price >
+                                      preElmBack
+                                        ? "odds-up-color "
+                                        : "") + "back";
+                                    return (
+                                      <BackGrid
+                                        onClick={() =>
+                                          handleBackBet(
+                                            item?.Name,
+                                            item?.marketId,
+                                            dataRunn?.name,
+                                            dataRunn?.selectionId,
+                                            res?.price,
+                                            res?.size,
+                                            true,
+                                            false,
+                                            item?.matchName,
+                                            item?.minBet,
+                                            item?.maxBet
+                                          )
+                                        }
+                                        key={id + "back"}
+                                        className={`${bg} ${
+                                          id == 1 || id == 2 ? "backgrid_" : ""
+                                        }`}
+                                        item
+                                        md={3.9}
+                                        xs={12}>
+                                        <BetTypoPara>
+                                          {res?.price ? res?.price : 0}
+                                        </BetTypoPara>
+                                        <BetTypoSpan>
+                                          {res?.size ? res?.size : 0}
+                                        </BetTypoSpan>
+                                      </BackGrid>
+                                    );
+                                  })
+                                  .reverse()}
                               </Grid>
                             </Grid>
 
@@ -95,35 +214,66 @@ const MatchedDetailBetComp = ({ data }) => {
                               <Grid
                                 container
                                 gap={{ md: "1%", xs: "2%" }}
-                                sx={{ justifyContent: "center" }}>
-                                {data?.ex?.availableToLay?.map((res, id) => {
-                                  console.log(res, id, 'laksdhjf')
-                                  return (
-                                    <LayGrid
-                                      onClick={() => console.log('workinglay')}
-                                      className={id == 1 || id == 2 ? 'backgrid_' : ''}
-                                      key={id + "lay"}
-                                      item
-                                      md={3.9}
-                                      xs={12}>
-                                      <BetTypoPara>{res?.price}</BetTypoPara>
-                                      <BetTypoSpan>{res?.size}</BetTypoSpan>
-                                    </LayGrid>
-                                  );
-                                })}
+                                sx={{
+                                  justifyContent: "center",
+                                  cursor: "pointer",
+                                }}>
+                                {dataRunn?.ex?.availableToLay?.map(
+                                  (res, id) => {
+                                    const preElmLay =
+                                      prevOddRunners?.ex?.availableToLay[id]
+                                        .price;
+                                    const bg =
+                                      (dataRunn?.ex?.availableToLay[id].price <
+                                      preElmLay
+                                        ? "odds-down-color "
+                                        : "") + "lay";
+                                    return (
+                                      <LayGrid
+                                        onClick={() =>
+                                          handleBackBet(
+                                            item?.Name,
+                                            item?.marketId,
+                                            dataRunn?.name,
+                                            dataRunn?.selectionId,
+                                            res?.price,
+                                            res?.size,
+                                            false,
+                                            false,
+                                            item?.matchName,
+                                            item?.minBet,
+                                            item?.maxBet
+                                          )
+                                        }
+                                        // className={
+                                        //   id == 1 || id == 2 ? "backgrid_" : ""
+                                        // }
+                                        className={`${bg} ${
+                                          id == 1 || id == 2 ? "backgrid_" : ""
+                                        }`}
+                                        key={id + "lay"}
+                                        item
+                                        md={3.9}
+                                        xs={12}>
+                                        <BetTypoPara>{res?.price}</BetTypoPara>
+                                        <BetTypoSpan>{res?.size}</BetTypoSpan>
+                                      </LayGrid>
+                                    );
+                                  }
+                                )}
                               </Grid>
                             </Grid>
                           </>
                         )}
                       </Grid>
                     </Grid>
+                    {dataRunn?.selectionId === slectionIds && showId === 1 && (
+                      <MobileBetPlaceModal minMax={minMax} />
+                    )}
                   </Grid>
                 );
               })}
-
-              <MobileBetPlaceModal />
             </GridContainer>
-
           </MainDiv>
         );
       })}

@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: Lato, Avenir, verdana Nunito !important;
+}
+.MuiTableCell-body {
+  border: 1px solid rgb(202, 202, 202) !important;
+}
+
+
+.odds-up-color {
+  animation: odds-up-ani 0.5s;
+}
+.odds-down-color {
+  animation: odds-down-ani 0.5s;
+}
+
+@keyframes odds-down-ani {
+  from {
+    background-color: #fc4242;
+
+  }
+  to {
+    background-color: #fc4242;
+
+
+  }
+}
+@keyframes odds-up-ani {
+  from {
+    background-color: #03b37f ;
+  }
+  to {
+    background-color: #03b37f ;
+  }
+}

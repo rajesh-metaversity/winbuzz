@@ -38,54 +38,47 @@ export const SiderBanner = () => {
   }, []);
   if (!isBreakPoint) {
     return (
-      <>
-        <div className="side_banner_cont">
-          <div className="play_games">Play Games</div>
-          <Slider className="right_banner" {...settings}>
-            {data?.data?.map((sliderdata, index) => (
-              <div key={index}>
-                <Grid container>
-                  <Grid
-                    item
-                    // xs={12}
-                    sx={{
-                      backgroundColor: "#fff",
-                      borderRadius: "0.375rem",
-                      overflowX: "hidden",
-                      maxHeight: "auto",
-                      cursor: "pointer",
-                      width: "100%",
-                    }}
-                  >
-                    <img
-                      src={sliderdata?.path}
-                      alt=""
-                      width="100%"
-                      height="160px"
-                      style={{ objectFit: "" }}
-                    />
-                  </Grid>
-                </Grid>
-              </div>
-            ))}
-          </Slider>
-        </div>
+		<>
+			<div className="side_banner_cont">
+				<div className="play_games">Play Games</div>
+				<Slider className="right_banner" {...settings}>
+					{data?.data?.map((sliderdata, index) => (
+						<div key={index + sliderdata?.path}>
+							<Grid container>
+								<Grid
+									item
+									// xs={12}
+									sx={{
+										backgroundColor: '#fff',
+										borderRadius: '0.375rem',
+										overflowX: 'hidden',
+										maxHeight: 'auto',
+										cursor: 'pointer',
+										width: '100%'
+									}}>
+									<img src={sliderdata?.path} alt="" width="100%" height="160px" style={{ objectFit: '' }} />
+								</Grid>
+							</Grid>
+						</div>
+					))}
+				</Slider>
+			</div>
 
-        <div className="side_banner-sub_cont">
-          <div className="play_games">Play Games</div>
-          <div className="bottom_images">
-            {casinoData?.map((data, index) => (
-              <span key={index} className="image_cont">
-                <img src={data?.imageUrl} alt="" className="image" />
-                <div className="over-lay">
-                  <button className="play-button">Play Now</button>
-                </div>
-              </span>
-            ))}
-          </div>
-        </div>
-      </>
-    );
+			<div className="side_banner-sub_cont">
+				<div className="play_games">Play Games</div>
+				<div className="bottom_images">
+					{casinoData?.map((data, index) => (
+						<span key={index + data?.imageUrl} className="image_cont">
+							<img src={data?.imageUrl} alt="" className="image" />
+							<div className="over-lay">
+								<button className="play-button">Play Now</button>
+							</div>
+						</span>
+					))}
+				</div>
+			</div>
+		</>
+	);
   } else {
     return (
       <>
@@ -95,7 +88,7 @@ export const SiderBanner = () => {
         </div>
         <div className="mobile-casino-banner-conatainer">
           {data?.data?.map((sliderdata, index) => {
-            return <img src={sliderdata.path} alt="" key={index} />;
+            return <img src={sliderdata.path} alt="" key={index + sliderdata.path} />;
           })}
         </div>
       </>

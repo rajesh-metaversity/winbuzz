@@ -6,7 +6,7 @@ const CasinoList = ({ list, setGameCode, type, setProviderFilter }) => {
 
 	return (
 		<>
-			<p className="int_casino">Int Casino</p>
+			
 			<div className="int_casoini_list_all">
 				<ul>
 					{type == 1
