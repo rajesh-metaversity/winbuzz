@@ -55,7 +55,6 @@ const GameDetail = () => {
   const { data } = useMyIpQuery();
   const { data: oddsPnl } = useOddsPnlQuery({ matchId: id });
   const { data: FancyPnl } = useFancyPnlQuery({ matchId: id });
-
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">

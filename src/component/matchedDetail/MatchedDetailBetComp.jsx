@@ -12,7 +12,7 @@ import {
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setBetSlipData } from "../../App/LoginSlice";
@@ -26,12 +26,10 @@ const MatchedDetailBetComp = ({
   showId,
   PnlOdds,
 }) => {
-  const isBreakPoint = useMediaQuery("(max-width: 780px)");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [slectionIds, setSlectionIds] = useState(false);
-
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -71,7 +69,6 @@ const MatchedDetailBetComp = ({
       })
     );
   };
-
   return (
     <>
       {data?.Odds?.map((item, index) => {
@@ -123,7 +120,8 @@ const MatchedDetailBetComp = ({
                       ":last-child": {
                         borderBottom: "0px ",
                       },
-                    }}>
+                    }}
+                  >
                     <Grid item md={5} xs={5.5}>
                       <P props={"left"}>{dataRunn?.name}</P>
                       {PnlOdds?.map((item, id) => {
@@ -140,7 +138,8 @@ const MatchedDetailBetComp = ({
                                 oddsPnl[dataRunn.selectionId] < 0
                                   ? "text_danger"
                                   : "text_success"
-                              }>
+                              }
+                            >
                               {oddsPnl[dataRunn.selectionId] || "0.0"}
                             </span>
                           </div>
@@ -161,7 +160,8 @@ const MatchedDetailBetComp = ({
                                 sx={{
                                   justifyContent: "center",
                                   cursor: "pointer",
-                                }}>
+                                }}
+                              >
                                 {dataRunn?.ex?.availableToBack
                                   ?.map((res, id) => {
                                     const preElmBack =
@@ -195,7 +195,8 @@ const MatchedDetailBetComp = ({
                                         }`}
                                         item
                                         md={3.9}
-                                        xs={12}>
+                                        xs={12}
+                                      >
                                         <BetTypoPara>
                                           {res?.price ? res?.price : 0}
                                         </BetTypoPara>
@@ -216,7 +217,8 @@ const MatchedDetailBetComp = ({
                                 sx={{
                                   justifyContent: "center",
                                   cursor: "pointer",
-                                }}>
+                                }}
+                              >
                                 {dataRunn?.ex?.availableToLay?.map(
                                   (res, id) => {
                                     const preElmLay =
@@ -244,16 +246,15 @@ const MatchedDetailBetComp = ({
                                             item?.maxBet
                                           )
                                         }
-                                        // className={
-                                        //   id == 1 || id == 2 ? "backgrid_" : ""
-                                        // }
+                                     
                                         className={`${bg} ${
                                           id == 1 || id == 2 ? "backgrid_" : ""
                                         }`}
                                         key={id + "lay"}
                                         item
                                         md={3.9}
-                                        xs={12}>
+                                        xs={12}
+                                      >
                                         <BetTypoPara>{res?.price}</BetTypoPara>
                                         <BetTypoSpan>{res?.size}</BetTypoSpan>
                                       </LayGrid>
