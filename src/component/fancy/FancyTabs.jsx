@@ -1,33 +1,24 @@
 import { Grid } from "@mui/material";
 import React, { useState } from "react";
 
-import {  GridContainer, P, PolygonStrip } from "./fancyBetStyled";
+import { GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
-import './FancyTabs.scss'
+import "./FancyTabs.scss";
 
 const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
-  const [value, setValue] = useState(0);
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
   const tabsVal = data ? Object.keys(data) : [];
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-
 
   return (
     <>
-      <GridContainer container props={'fancy'} >
+      <GridContainer container props={"fancy"}>
         <Grid item xs={5} md={4}>
           <PolygonStrip>
-            <P props={'fancyodds'}>
-              Fancy
-            </P>
+            <P props={"fancyodds"}>Fancy</P>
           </PolygonStrip>
         </Grid>
-        <Grid item xs={7} md={8}>
-
-        </Grid>
+        <Grid item xs={7} md={8}></Grid>
       </GridContainer>
       <ul className="fancy_tabs">
         <li
@@ -35,7 +26,8 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
           onClick={() => {
             setActiveValue(0);
             setFancyData("All");
-          }}>
+          }}
+        >
           All
         </li>
         {tabsVal?.map((curElm, index) => {
@@ -51,7 +43,8 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
                   onClick={() => {
                     setActiveValue(index);
                     setFancyData(curElm);
-                  }}>
+                  }}
+                >
                   {curElm}
                 </li>
               </React.Fragment>

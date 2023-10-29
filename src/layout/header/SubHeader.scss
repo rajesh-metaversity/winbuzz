@@ -99,29 +99,31 @@
 .mobile-subheader-deposit {
   display: flex;
   align-items: center;
-
-  .mobile-subheader-deposit-left-col {
+  a {
     width: 50%;
-    background-color: darkgreen;
-    display: flex;
-    padding-block: 6px;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    svg {
+    .mobile-subheader-deposit-left-col {
+      width: 100%;
+      background-color: darkgreen;
+      display: flex;
+      padding-block: 6px;
+      align-items: center;
+      justify-content: center;
       color: white;
+      svg {
+        color: white;
+      }
     }
-  }
-  .mobile-subheader-deposit-right-col {
-    width: 50%;
-    background-color: darkred;
-    display: flex;
-    padding-block: 6px;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    svg {
+    .mobile-subheader-deposit-right-col {
+      width: 100%;
+      background-color: darkred;
+      display: flex;
+      padding-block: 6px;
+      align-items: center;
+      justify-content: center;
       color: white;
+      svg {
+        color: white;
+      }
     }
   }
 }

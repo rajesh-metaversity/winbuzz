@@ -8,12 +8,9 @@ import { useQtechAuthQuery } from "./Services/Qtech/Qtech";
 function App() {
   const dispatch = useDispatch();
   const isLogin = useSelector(isLoginSelector);
-
   useEffect(() => {
     if (localStorage.getItem("session")) {
       dispatch(setIslogin(true));
-
-
     }
   }, []);
 
@@ -30,7 +27,6 @@ const IfLoginComp = () => {
   useEffect(() => {
     localStorage.setItem("casino-token", qtechAuth?.data?.access_token);
   }, [qtechAuth]);
-
   return <></>;
 };
 export default App;

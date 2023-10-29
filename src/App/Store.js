@@ -16,9 +16,7 @@ import { Qtech } from "../Services/Qtech/Qtech";
 import { stake } from "../Services/stake/Deposit";
 import { Withdraw } from "../Services/withdraw/Withdraw";
 import { PnlApi } from "../Services/Pnl/Pnl";
-// import { ChangePassword } from "../Services/ChangePassword/ChangePassword";
-// import { BettingProfitLoss } from "../Services/BettingProfitLoss/BettingProfitLoss";
-// import { Logout } from "../Services/Auth/Logout";
+
 
 export const store = configureStore({
   reducer: {
