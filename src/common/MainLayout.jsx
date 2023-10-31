@@ -12,6 +12,7 @@ import MobileFooter from "../layout/mobileFooter/MobileFooter";
 import { isLoginSelector } from "../App/LoginSlice";
 import { useSelector } from "react-redux";
 import TopBanner from "../component/topBanner/TopBanner";
+import Loader from "../component/Loader/Loader";
 // import MyBets from "../component/MyBets/MyBets";
 
 const MainLayout = () => {
@@ -25,49 +26,58 @@ const MainLayout = () => {
     }
   }, [siderOpen]);
 
-  const [trigger, { data }] = useBalanceApiMutation();
+  const [trigger, { data, isLoading, isError }] = useBalanceApiMutation();
   const loginCheck = useSelector(isLoginSelector);
   useEffect(() => {
     if (loginCheck) {
       trigger();
     }
   }, [loginCheck]);
-  return (
-    <div>
-      <div className="main-layout-container">
-        <div className="header-layout">
-          <HeaderMessage />
-          <WebHeaderComponent
-            setSiderOpen={setSiderOpen}
-            siderOpen={siderOpen}
-            balanceData={data?.data}
-          />
-        </div>
-        <div className="content-container">
-          <div
-            className={
-              siderOpen ? "sider-layout-active" : "sider-layout-container"
-            }
-            onClick={() => setSiderOpen(!siderOpen)}
-          >
-            <SiderBar />
+
+  if (isLoading) {
+    return <Loader />
+
+  }
+  else {
+
+  
+    return (
+      <div>
+        <div className="main-layout-container">
+          <div className="header-layout">
+            <HeaderMessage />
+            <WebHeaderComponent
+              setSiderOpen={setSiderOpen}
+              siderOpen={siderOpen}
+              balanceData={data?.data}
+            />
           </div>
-          <div className="content">
-            <TopBanner />
-            <Outlet />
-          </div>
-          {!isBreakPoint ? (
-            <div className="banner-sider">
-              <SiderBanner />
+          <div className="content-container">
+            <div
+              className={
+                siderOpen ? "sider-layout-active" : "sider-layout-container"
+              }
+              onClick={() => setSiderOpen(!siderOpen)}
+            >
+              <SiderBar />
             </div>
-          ) : (
-            ""
-          )}
+            <div className="content">
+              <TopBanner />
+              <Outlet />
+            </div>
+            {!isBreakPoint ? (
+              <div className="banner-sider">
+                <SiderBanner />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
+        <MobileFooter />
       </div>
-      <MobileFooter />
-    </div>
-  );
+    )
+  }
 };
 
 export default MainLayout;

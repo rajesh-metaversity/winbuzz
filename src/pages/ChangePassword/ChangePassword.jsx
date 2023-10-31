@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useChangePasswordMutation } from '../../Services/ChangePassword/ChangePassword';
 import { useEffect, useState } from 'react';
+import Loader from '../../component/Loader/Loader';
 
 const ChangePassword = () => {
 	const initialValues = {
@@ -39,33 +40,39 @@ const ChangePassword = () => {
 
 
 
+	if (isLoading) {
+		return <Loader />
+	}
+	else {
+
 	
 
-	return (
-		<div className="change_password_cont">
-			<p>Change Password</p>
-			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-				{() => (
-					<Form>
-						<div className="change-password-div">
-							<Field type="password" name="currentPassword" placeholder="Old Password" values={initialValues.currentPassword } />
-							<ErrorMessage name="currentPassword" component="div" className="error_message" />
+		return (
+			<div className="change_password_cont">
+				<p>Change Password</p>
+				<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+					{() => (
+						<Form>
+							<div className="change-password-div">
+								<Field type="password" name="currentPassword" placeholder="Old Password" values={initialValues.currentPassword} />
+								<ErrorMessage name="currentPassword" component="div" className="error_message" />
 
-							<Field type="password" name="newPassword" placeholder="New Password" values={initialValues.newPassword }/>
-							<ErrorMessage name="newPassword" component="div" className="error_message" />
+								<Field type="password" name="newPassword" placeholder="New Password" values={initialValues.newPassword} />
+								<ErrorMessage name="newPassword" component="div" className="error_message" />
 
-							<Field type="password" name="confirmPassword" placeholder="Repeat Password" values={initialValues.confirmPassword }/>
-							<ErrorMessage name="confirmPassword" component="div" className="error_message" />
+								<Field type="password" name="confirmPassword" placeholder="Repeat Password" values={initialValues.confirmPassword} />
+								<ErrorMessage name="confirmPassword" component="div" className="error_message" />
 
-							<div className="save_button">
-								<button type="submit">Save</button>
+								<div className="save_button">
+									<button type="submit">Save</button>
+								</div>
 							</div>
-						</div>
-					</Form>
-				)}
-			</Formik>
-		</div>
-	);
+						</Form>
+					)}
+				</Formik>
+			</div>
+		)
+	}
 };
 
 export default ChangePassword;

@@ -24,7 +24,7 @@ var settings = {
 
 export const SiderBanner = () => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
-  const [trigger, { data }] = useBannerListDataMutation();
+  const [trigger, { data, isLoading, isError }] = useBannerListDataMutation();
   const [casinoData, setCasinoData] = useState([]);
   useEffect(() => {
     trigger({
@@ -36,7 +36,7 @@ export const SiderBanner = () => {
         setCasinoData(res?.data);
       });
   }, []);
-  if (!isBreakPoint) {
+  if (!isBreakPoint ) {
     return (
 		<>
 			<div className="side_banner_cont">

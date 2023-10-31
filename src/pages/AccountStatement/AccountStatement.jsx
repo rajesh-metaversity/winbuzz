@@ -8,6 +8,7 @@ import { useAccountStatementMutation } from '../../Services/accountStatement/Acc
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import FilterAccountStatement from './FilterAccountStatement';
+import Loader from '../../component/Loader/Loader';
 const dateFormat = 'YYYY-MM-DD';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -60,52 +61,60 @@ const AccountStatement = () => {
 		accountStatementBody2.toDate = accountStatementBody2.toDate.format(dateFormat);
 		trigger(accountStatementBody2);
 	};
-	return (
-		<div className="account_statement_section">
-			<FilterAccountStatement setAccountStatementBody={setAccountStatementBody} accountStatementBody={accountStatementBody} submit={submit} />
-			<div className='account-statement-table'>
-				<TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-					<Table sx={{ minWidth: 700 }} aria-label="customized table">
-						<TableHead sx={{ borderRadius: 0 }}>
-							<TableRow
-								sx={{
-									'& .MuiTableCell-root': {
-										padding: '4px'
-									}
-								}}>
-								<StyledTableCell>Sr No</StyledTableCell>
-								<StyledTableCell align="left">Date</StyledTableCell>
-								<StyledTableCell align="left">Credit&nbsp;</StyledTableCell>
-								<StyledTableCell align="left">Debit&nbsp;</StyledTableCell>
-								<StyledTableCell align="left">Balance&nbsp;</StyledTableCell>
-								<StyledTableCell align="left">Remark</StyledTableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{data?.data?.dataList.map(res => {
-								return (
-									<StyledTableRow key={res.name}>
-										<StyledTableCell component="th" scope="row">
-											{res?.sno}
-										</StyledTableCell>
-										<StyledTableCell align="left">{res?.date}</StyledTableCell>
-										<StyledTableCell align="left" sx={{ color: res?.credit >= 0 ? 'green' : 'red' }}>
-											{res?.credit}
-										</StyledTableCell>
-										<StyledTableCell align="left" sx={{ color: res?.debit >= 0 ? 'green' : 'red' }}>
-											{res?.debit}
-										</StyledTableCell>
-										<StyledTableCell align="left">{res?.pts}</StyledTableCell>
-										<StyledTableCell align="left">{res?.remark}</StyledTableCell>
-									</StyledTableRow>
-								);
-							})}
-						</TableBody>
-					</Table>
-				</TableContainer>
+
+	if (isLoading) {
+		return <Loader />
+	}
+	else {
+
+	
+		return (
+			<div className="account_statement_section">
+				<FilterAccountStatement setAccountStatementBody={setAccountStatementBody} accountStatementBody={accountStatementBody} submit={submit} />
+				<div className='account-statement-table'>
+					<TableContainer component={Paper} sx={{ borderRadius: 0 }}>
+						<Table sx={{ minWidth: 700 }} aria-label="customized table">
+							<TableHead sx={{ borderRadius: 0 }}>
+								<TableRow
+									sx={{
+										'& .MuiTableCell-root': {
+											padding: '4px'
+										}
+									}}>
+									<StyledTableCell>Sr No</StyledTableCell>
+									<StyledTableCell align="left">Date</StyledTableCell>
+									<StyledTableCell align="left">Credit&nbsp;</StyledTableCell>
+									<StyledTableCell align="left">Debit&nbsp;</StyledTableCell>
+									<StyledTableCell align="left">Balance&nbsp;</StyledTableCell>
+									<StyledTableCell align="left">Remark</StyledTableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{data?.data?.dataList.map(res => {
+									return (
+										<StyledTableRow key={res.name}>
+											<StyledTableCell component="th" scope="row">
+												{res?.sno}
+											</StyledTableCell>
+											<StyledTableCell align="left">{res?.date}</StyledTableCell>
+											<StyledTableCell align="left" sx={{ color: res?.credit >= 0 ? 'green' : 'red' }}>
+												{res?.credit}
+											</StyledTableCell>
+											<StyledTableCell align="left" sx={{ color: res?.debit >= 0 ? 'green' : 'red' }}>
+												{res?.debit}
+											</StyledTableCell>
+											<StyledTableCell align="left">{res?.pts}</StyledTableCell>
+											<StyledTableCell align="left">{res?.remark}</StyledTableCell>
+										</StyledTableRow>
+									);
+								})}
+							</TableBody>
+						</Table>
+					</TableContainer>
+				</div>
 			</div>
-		</div>
-	);
+		)
+	}
 };
 
 export default AccountStatement
