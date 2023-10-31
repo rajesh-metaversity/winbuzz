@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Bank from './Bank';
 import UPI from './UPI';
 import QR from './QR';
-
+import { toast } from 'react-toastify';
 const Deposit = () => {
 	const [files, setFiles] = useState(null);
 	const [amount, setAmount] = useState(0);
@@ -16,11 +16,14 @@ const Deposit = () => {
 	const { data: depositData, isLoading: load, isError: error } = useStakeQuery();
 	const { data, isLoading, isError } = useDepositBankQuery();
 	const { data: balance, isLoading: balanceLoading, isError: Error } = useDepositbalanceQuery();
-	const [trigger, { data: submitBalance, isLoading: submitLoading, isError: submitError }] = useDepositbalanceSubmitMutation();
+	const [trigger, { data: submitBalance ,status, error:badError, isError:eror, isLoading:loading  }] = useDepositbalanceSubmitMutation();
 
 	const bankHandler = () => {
 		setBank(data);
 	};
+
+	console.log(badError, "badError")
+	console.log(submitBalance, "submitBalance")
 
 	const [depositKey, setDepositKey] = useState(0);
 	const handleClickImage = (imageData, key) => {
@@ -39,6 +42,22 @@ const Deposit = () => {
 		UPI: 1,
 		QR: 2
 	};
+
+	useEffect(() => {
+
+		try {
+			if (submitBalance) {
+				toast.success(submitBalance?.message)
+			}
+
+			else {
+				toast.error (submitBalance?.message)
+			}
+			
+		} catch (error) {
+			toast.error (error?.submitBalance?.message)
+			}
+	}, [submitBalance])
 
 	const depositSubmitHandler = () => {
 		const submitData = new FormData();

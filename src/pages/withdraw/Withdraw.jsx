@@ -1,6 +1,6 @@
 import { Box, Container, FormControl, Grid, MenuItem, Select, Tab, Tabs, TextField, Typography, useTheme } from "@mui/material";
 import './styles.scss';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useBankAccountQuery, useWithdrawBalanceMutation, useWithdrawQuery, useWithdrawStakeQuery } from '../../Services/withdraw/Withdraw';
 import Upi from './Upi';
@@ -8,6 +8,7 @@ import Bank from './Bank';
 import Previouswithdraw from './Previouswithdraw';
 import WithdrawButton from './WithdrawButton';
 import Paytm from './Paytm';
+import { toast } from 'react-toastify';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -26,32 +27,30 @@ TabPanel.propTypes = {
 };
 
 const Withdraw = () => {
-  // const [withdrawAmount, setWithdrawAmount] = useState();
-
-  const [withdrawType, setWithdrawType] = useState("")
+	// const [withdrawAmount, setWithdrawAmount] = useState();
 
 	const [withdrawDetails, setWithdrawDetails] = useState({
 		accountHolderName: '',
 		bankName: '',
 		accountType: '',
-		amount: "",
+		amount: '',
 		ifsc: '',
 		accountNumber: '',
 		withdrawType: '',
-		withdrawMode: ""
+		withdrawMode: ''
 	});
-  
-  console.log(withdrawDetails, 'sdvcdsv');
-  const [userWithdrawDetails, setUserWithdrawDetails] = useState([]);
 
-  const theme = useTheme();
-  const [value, setValue] = useState(0);
-  const [border, setBorder] = useState(0);
+	console.log(withdrawDetails, 'sdvcdsv');
+	const [userWithdrawDetails, setUserWithdrawDetails] = useState([]);
 
-  const handleChange = (event, newValue) => {
+	const theme = useTheme();
+	const [value, setValue] = useState(0);
+	const [border, setBorder] = useState(0);
+
+	const handleChange = (event, newValue) => {
 		setValue(newValue);
 		setBorder(newValue);
-  };
+	};
 
 	const { data: paymentImage } = useWithdrawQuery();
 
@@ -59,22 +58,36 @@ const Withdraw = () => {
 
 	const { data: accountDetails } = useBankAccountQuery();
 
-	const imageHandler = id => {
+	const imageHandler = (id, id2) => {
+		console.log(id2, 'id2');
 		const withdrawDetail = accountDetails?.data?.filter(el => el.withdrawType == id);
 		setUserWithdrawDetails(withdrawDetail);
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				withdrawType: id2
+			};
+		});
 	};
 
-	const [trigger, { data: withdrawBalance, isError, isLoading }] = useWithdrawBalanceMutation();
+	const [trigger, { data: withdrawBalance, status, error, isError, isLoading }] = useWithdrawBalanceMutation();
+
+	console.log(withdrawBalance, 'withdrawBalance');
+	useEffect(() => {
+		try {
+			if (withdrawBalance) {
+				toast.success(withdrawBalance?.message);
+			} else {
+				toast.error(error?.data?.message);
+			}
+		} catch (error) {
+			toast.error(error?.data?.message);
+		}
+	}, [withdrawBalance, error]);
 
 	const withdrawHandler = () => {
 		trigger(withdrawDetails);
-  };
-  
-  const handleSelectChange = (event) => {
-    setWithdrawType(event.target.value); 
-  };
-
-  console.log(withdrawType, "withdrawtype")
+	};
 
 	return (
 		<Container maxWidth="lg" className="container">
@@ -92,10 +105,14 @@ const Withdraw = () => {
 					<TextField
 						variant="outlined"
 						value={withdrawDetails?.amount}
-            onChange={(e) => setWithdrawDetails((prev) => {
-              return {
-                ...prev,amount: e.target.value
-            }})}
+						onChange={e =>
+							setWithdrawDetails(prev => {
+								return {
+									...prev,
+									amount: e.target.value
+								};
+							})
+						}
 						size="small"
 						className="withdrawcoins"
 						placeholder="Withdraw Coins"
@@ -108,10 +125,18 @@ const Withdraw = () => {
 
 					<Box className="buttonstakeparent">
 						{stakeBalance?.data?.map((stake, id) => (
-							<button key={id + stake} className="stakebutton" size="large" onClick={(e) => setWithdrawDetails((prev) => {
-                return {
-                  ...prev,amount: +withdrawDetails?.amount + +stake?.value
-              }})}>
+							<button
+								key={id + stake}
+								className="stakebutton"
+								size="large"
+								onClick={e =>
+									setWithdrawDetails(prev => {
+										return {
+											...prev,
+											amount: +withdrawDetails?.amount + +stake?.value
+										};
+									})
+								}>
 								{stake?.key}
 							</button>
 						))}
@@ -120,13 +145,16 @@ const Withdraw = () => {
 			</Grid>
 
 			<FormControl sx={{ m: 0 }} className="select_">
-        <Select
-          onChange={(e) => setWithdrawDetails((prev) => {
-            return {
-              ...prev, withdrawMode: e.target.value
-            }
-          })}
-          value={withdrawDetails?.withdrawMode}
+				<Select
+					onChange={e =>
+						setWithdrawDetails(prev => {
+							return {
+								...prev,
+								withdrawMode: e.target.value
+							};
+						})
+					}
+					value={withdrawDetails?.withdrawMode}
 					sx={{
 						'& .mui-focused & .muioutlinedinput-notchedoutline': {
 							border: '1px solid #484850',
@@ -139,8 +167,8 @@ const Withdraw = () => {
 					<MenuItem value="">
 						<em>None</em>
 					</MenuItem>
-					<MenuItem value={"INSTANT"}>INSTANT</MenuItem>
-					<MenuItem value={"NORMAL"}>NORMAL</MenuItem>
+					<MenuItem value={'INSTANT'}>INSTANT</MenuItem>
+					<MenuItem value={'NORMAL'}>NORMAL</MenuItem>
 				</Select>
 			</FormControl>
 
@@ -177,7 +205,7 @@ const Withdraw = () => {
 								key={imgdata.id + index + imgdata?.withdrawType}
 								sx={{ border: `${value === index ? '1px solid #b6842d' : 0}` }}
 								label={
-									<div onClick={() => imageHandler(imgdata?.withdrawType)}>
+									<div onClick={() => imageHandler(imgdata?.withdrawType, imgdata.id)}>
 										<img src={imgdata.image} className="tabImg" />
 										<Typography component="p" sx={{ fontSize: 14, marginTop: 1 }}>
 											{imgdata?.withdrawType}
