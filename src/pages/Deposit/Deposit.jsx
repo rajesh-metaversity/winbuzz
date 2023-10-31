@@ -7,6 +7,7 @@ import Bank from './Bank';
 import UPI from './UPI';
 import QR from './QR';
 import { toast } from 'react-toastify';
+import Loader from '../../component/Loader/Loader';
 const Deposit = () => {
 	const [files, setFiles] = useState(null);
 	const [amount, setAmount] = useState(0);
@@ -160,7 +161,7 @@ const Deposit = () => {
 				)}
 
 				<button className="submit_button" onClick={() => depositSubmitHandler()}>
-					Submit
+					{loading ? <Loader /> : "Submit"}
 				</button>
 			</div>
 			<div className="footer">
@@ -188,20 +189,23 @@ const Deposit = () => {
 									<TableCell align="left">Status&nbsp;</TableCell>
 								</TableRow>
 							</TableHead>
-							<TableBody className="table_body">
-								{balance?.data?.map((item, index) => (
-									<TableRow key={index}>
-										<TableCell align="left">{item?.amount}</TableCell>
-										<TableCell align="left">
-											<img src={item?.image} />
-										</TableCell>
-										<TableCell align="left">{item?.time}</TableCell>
-										<TableCell align="left" className="table_td">
-											{item?.status}
-										</TableCell>
-									</TableRow>
-								))}
-							</TableBody>
+
+							{balanceLoading ? <Loader /> :
+								<TableBody className="table_body">
+									{balance?.data?.map((item, index) => (
+										<TableRow key={index}>
+											<TableCell align="left">{item?.amount}</TableCell>
+											<TableCell align="left">
+												<img src={item?.image} />
+											</TableCell>
+											<TableCell align="left">{item?.time}</TableCell>
+											<TableCell align="left" className="table_td">
+												{item?.status}
+											</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							}
 						</Table>
 					</TableContainer>
 				</div>

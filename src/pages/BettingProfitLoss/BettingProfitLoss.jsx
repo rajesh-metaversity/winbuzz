@@ -17,6 +17,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BettingStyled, SelectStyles } from "./styled";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
 import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
+import Loader from "../../component/Loader/Loader";
 const dateFormat = "YYYY-MM-DD";
 
 const BettingProfitLoss = () => {
@@ -96,87 +97,94 @@ const BettingProfitLoss = () => {
     });
   };
 
-  return (
-    <div className="betting_profit-loss_cont">
-      <div className="right">
-        <p>betting profit loss</p>
-        <div className="dates_cont">
-          <div className="input_field">
-            <SelectStyles
-              onChange={(e) => getMatchDetail(e.target.value)}
-              value={bettingPnl.sportId}
+  if (isLoading) {
+    return <Loader />
+  }
+  else {
+
+  
+
+    return (
+      <div className="betting_profit-loss_cont">
+        <div className="right">
+          <p>betting profit loss</p>
+          <div className="dates_cont">
+            <div className="input_field">
+              <SelectStyles
+                onChange={(e) => getMatchDetail(e.target.value)}
+                value={bettingPnl.sportId}
+              >
+                {activSport?.data?.map((curElm) => (
+                  <MenuItem key={curElm.sportId} value={curElm?.sportId}>
+                    {curElm?.sportName}
+                  </MenuItem>
+                ))}
+              </SelectStyles>
+            </div>
+
+            <div className="input_field">
+              <SelectStyles
+                onChange={(e) => matchHandler(e.target.value)}
+                value={bettingPnl?.matchId}
+              >
+                {matchData?.data?.map((el) => (
+                  <MenuItem value={el?.matchId} key={el?.matchId}>
+                    {el?.matchName}
+                  </MenuItem>
+                ))}
+              </SelectStyles>
+            </div>
+
+            <div className="right_date">
+              <label htmlFor="form">Form</label>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <BettingStyled
+                  defaultValue={bettingPnl?.fromDate}
+                  format="DD-MM-YYYY"
+                  onChange={(e) => handleChange("fromDate", e)}
+                />
+              </LocalizationProvider>
+            </div>
+            <div className="right_date">
+              <label htmlFor="form">To Date</label>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <BettingStyled
+                  defaultValue={bettingPnl?.toDate}
+                  format="DD-MM-YYYY"
+                  onChange={(e) => handleChange("toDate", e)}
+                />
+              </LocalizationProvider>
+            </div>
+
+            <button
+              className="search_button"
+              onClick={(e) => {
+                e.preventDefault();
+                submitHandler();
+              }}
             >
-              {activSport?.data?.map((curElm) => (
-                <MenuItem key={curElm.sportId} value={curElm?.sportId}>
-                  {curElm?.sportName}
-                </MenuItem>
-              ))}
-            </SelectStyles>
+              Search
+            </button>
           </div>
-
-          <div className="input_field">
-            <SelectStyles
-              onChange={(e) => matchHandler(e.target.value)}
-              value={bettingPnl?.matchId}
-            >
-              {matchData?.data?.map((el) => (
-                <MenuItem value={el?.matchId} key={el?.matchId}>
-                  {el?.matchName}
-                </MenuItem>
-              ))}
-            </SelectStyles>
-          </div>
-
-          <div className="right_date">
-            <label htmlFor="form">Form</label>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <BettingStyled
-                defaultValue={bettingPnl?.fromDate}
-                format="DD-MM-YYYY"
-                onChange={(e) => handleChange("fromDate", e)}
-              />
-            </LocalizationProvider>
-          </div>
-          <div className="right_date">
-            <label htmlFor="form">To Date</label>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <BettingStyled
-                defaultValue={bettingPnl?.toDate}
-                format="DD-MM-YYYY"
-                onChange={(e) => handleChange("toDate", e)}
-              />
-            </LocalizationProvider>
-          </div>
-
-          <button
-            className="search_button"
-            onClick={(e) => {
-              e.preventDefault();
-              submitHandler();
-            }}
-          >
-            Search
-          </button>
         </div>
-      </div>
 
-      <div className="mybets_table">
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>No</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Event Type</TableCell>
-                <TableCell>Event</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Event Type</TableCell>
-                <TableCell>Event</TableCell>
-                <TableCell>Amount</TableCell>
-              </TableRow>
-            </TableHead>
-            {/* <TableBody className="bet_table-body">
+        <div className="mybets_table">
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>No</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Event Type</TableCell>
+                  <TableCell>Event</TableCell>
+                  <TableCell>Amount</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Event Type</TableCell>
+                  <TableCell>Event</TableCell>
+                  <TableCell>Amount</TableCell>
+                </TableRow>
+              </TableHead>
+              {/* <TableBody className="bet_table-body">
               {rows.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
@@ -191,11 +199,12 @@ const BettingProfitLoss = () => {
                 </TableRow>
               ))}
             </TableBody> */}
-          </Table>
-        </TableContainer>
+            </Table>
+          </TableContainer>
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
 };
 
 export default BettingProfitLoss;

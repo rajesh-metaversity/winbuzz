@@ -34,7 +34,6 @@ const IfLoginComp = () => {
 	useEffect(() => {
 		localStorage.setItem('casino-token', qtechAuth?.data?.access_token);
 	}, [qtechAuth]);
-	console.log('hui');
 	return <></>;
 };
 export default App;

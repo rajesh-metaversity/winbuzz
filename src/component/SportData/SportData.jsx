@@ -4,6 +4,7 @@ import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMat
 import { useLocation, useParams } from "react-router-dom";
 import InPlayHeading from "../inPlay/InPlay";
 import { sportName } from "../../layout/header/SubHeader";
+import Loader from "../Loader/Loader";
 
 const SportData = () => {
 
@@ -11,22 +12,33 @@ const SportData = () => {
 
   const { state } = useLocation();
 
-  const [trigger, { data }] = useActiveMatchMutation();
+  const [trigger, { data, isLoading, isError }] = useActiveMatchMutation();
+  
+  console.log(isLoading, "isLOADING")
+
 
   useEffect(() => {
     trigger(id || 4);
   }, [id]);
 
-  return (
-    <>
-      <InPlayHeading headName={sportName || "EXCHANGE GAMES"} />
-      <InplayCollapse 
-        data={data?.data}
-        name={state}
+  if (isLoading) {
+    return <Loader />
+  }
+  
+  else {
+
+  
+    return (
+      <>
+        <InPlayHeading headName={sportName || "EXCHANGE GAMES"} />
+        <InplayCollapse
+          data={data?.data}
+          name={state}
      
-      />
-    </>
-  );
+        />
+      </>
+    )
+  }
 };
 
 export default SportData;

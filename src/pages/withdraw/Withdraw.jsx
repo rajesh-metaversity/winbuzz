@@ -9,6 +9,7 @@ import Previouswithdraw from './Previouswithdraw';
 import WithdrawButton from './WithdrawButton';
 import Paytm from './Paytm';
 import { toast } from 'react-toastify';
+import Loader from '../../component/Loader/Loader';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -52,12 +53,13 @@ const Withdraw = () => {
 		setBorder(newValue);
 	};
 
-	const { data: paymentImage } = useWithdrawQuery();
+	const { data: paymentImage, error: withdrawError, isLoading: paymentImageLoading } = useWithdrawQuery();
 
-	const { data: stakeBalance } = useWithdrawStakeQuery();
+	const { data: stakeBalance, error: stakeError, isLoading: stakeLoading } = useWithdrawStakeQuery();
 
-	const { data: accountDetails } = useBankAccountQuery();
+	const { data: accountDetails, error: bankError, isLoading: bankDetailsLoading } = useBankAccountQuery();
 
+	console.log('accountDetails', accountDetails);
 	const imageHandler = (id, id2) => {
 		console.log(id2, 'id2');
 		const withdrawDetail = accountDetails?.data?.filter(el => el.withdrawType == id);
@@ -88,6 +90,9 @@ const Withdraw = () => {
 	const withdrawHandler = () => {
 		trigger(withdrawDetails);
 	};
+
+	// console.log(isLoading, "isLOADING")
+	// debugger
 
 	return (
 		<Container maxWidth="lg" className="container">
@@ -218,7 +223,7 @@ const Withdraw = () => {
 				</Box>
 
 				<TabPanel value={value} index={0}>
-					<Bank bankDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
+					<Bank bankDetails={userWithdrawDetails} bankDetailsLoading={bankDetailsLoading} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 				<TabPanel value={value} index={1}>
 					<Upi upiDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
@@ -227,7 +232,7 @@ const Withdraw = () => {
 					<Paytm paytmDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 
-				<WithdrawButton withdrawHandler={withdrawHandler} />
+				<WithdrawButton withdrawHandler={withdrawHandler} name={isLoading ? <Loader /> : 'withdraw coins'} disable={isLoading} />
 
 				<Previouswithdraw />
 			</Box>

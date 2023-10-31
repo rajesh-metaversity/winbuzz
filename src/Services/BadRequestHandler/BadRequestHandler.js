@@ -12,12 +12,12 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 	if (result?.error) {
 		const responseMessage = result?.error?.data?.message;
 		const status = result?.error?.status;
-		// if (status === 401) {
-		// 	localStorage.clear();
-		// 	window.location.replace('/');
-		// } else {
-		// 	toast.error(result?.data?.message);
-		// }
+		if (status === 401) {
+			localStorage.clear();
+			window.location.replace('/');
+		} else {
+			toast.error(result?.data?.message);
+		}
 	}
 	return result;
 	// if (result?.data.status === 200 || result?.data.status) {

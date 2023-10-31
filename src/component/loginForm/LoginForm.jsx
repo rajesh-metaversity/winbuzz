@@ -10,6 +10,7 @@ import { useLoginMutation } from '../../Services/Auth/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoginSelector, setIslogin } from '../../App/LoginSlice';
 import { useNavigate } from 'react-router-dom';
+import Loader from "../Loader/Loader";
 const LoginForm = ({ setOpen }) => {
 	const nav = useNavigate();
 	const dispatch = useDispatch();
@@ -107,46 +108,55 @@ const LoginForm = ({ setOpen }) => {
 		}
 	}, [loginCheck]);
 
-	return (
-		<div className="login_modal">
-			<div className="cross_icon" onClick={() => setOpen(false)}>
-				<CloseIcon />
-			</div>
-			<div className="login_section">
-				<div className="winbuaa_logo">
-					<img src={logo} alt="" />
+	if (isLoading) {
+		return <Loader />
+	}
+
+	else {
+
+	
+
+		return (
+			<div className="login_modal">
+				<div className="cross_icon" onClick={() => setOpen(false)}>
+					<CloseIcon />
 				</div>
-				<form className="login-form">
-					<input
-						type="text"
-						placeholder="Username"
-						onChange={handleChange}
-						name="userId"
-						value={loginData.userId}
-						style={{
-							border: error.userId ? '1px solid red' : '1px solid transparent'
-						}}
-					/>
-					<input
-						placeholder="Password"
-						onChange={handleChange}
-						name="password"
-						type="password"
-						value={loginData.password}
-						style={{
-							border: error.password ? '1px solid red' : '1px solid transparent'
-						}}
-					/>
-				</form>
-				<div className="login_buttons">
-					<button className="login" onClick={onSumbit}>
-						LOGIN
-					</button>
-					<button className="login_with_demo">LOGINWITH DEMO ID</button>
-					<a href="#">Forgot Password</a>
+				<div className="login_section">
+					<div className="winbuaa_logo">
+						<img src={logo} alt="" />
+					</div>
+					<form className="login-form">
+						<input
+							type="text"
+							placeholder="Username"
+							onChange={handleChange}
+							name="userId"
+							value={loginData.userId}
+							style={{
+								border: error.userId ? '1px solid red' : '1px solid transparent'
+							}}
+						/>
+						<input
+							placeholder="Password"
+							onChange={handleChange}
+							name="password"
+							type="password"
+							value={loginData.password}
+							style={{
+								border: error.password ? '1px solid red' : '1px solid transparent'
+							}}
+						/>
+					</form>
+					<div className="login_buttons">
+						<button className="login" onClick={onSumbit}>
+							LOGIN
+						</button>
+						<button className="login_with_demo">LOGINWITH DEMO ID</button>
+						<a href="#">Forgot Password</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 };
 export default LoginForm;
