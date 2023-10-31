@@ -9,6 +9,8 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
 export let sportName;
 import { sportImages } from "../sider/Sider";
+import { useSelector } from "react-redux";
+import { isLoginSelector } from "../../App/LoginSlice";
 const SubHeader = () => {
   const [activeTabs, setActiveTabs] = useState(300);
   const [gameName, setGameName] = useState("");
@@ -19,7 +21,7 @@ const SubHeader = () => {
   const handleSportDetailsPage = (val, name) => {
     nav(`/game_list/${val}`, { state: name });
   };
-
+  const isLogin = useSelector(isLoginSelector);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   if (!isBreakPoint) {
     return (
@@ -64,7 +66,7 @@ const SubHeader = () => {
                 <Link to={home}>In play</Link>
               </span>
             </li>
-            ;
+
             {data?.data.map((items, index) => {
               return (
                 <React.Fragment key={items.sportId + items.sportName + index}>
@@ -94,20 +96,22 @@ const SubHeader = () => {
             </li>
           </ul>
         </div>
-        <div className="mobile-subheader-deposit">
-          <Link to={deposit}>
-            <div className="mobile-subheader-deposit-left-col">
-              <AccountBalanceIcon />
-              Deposit
-            </div>
-          </Link>
-          <Link to={withdraw}>
-            <div className="mobile-subheader-deposit-right-col">
-              <AddCardIcon />
-              Withdraw
-            </div>
-          </Link>
-        </div>
+        {isLogin && (
+          <div className="mobile-subheader-deposit">
+            <Link to={deposit}>
+              <div className="mobile-subheader-deposit-left-col">
+                <AccountBalanceIcon />
+                Deposit
+              </div>
+            </Link>
+            <Link to={withdraw}>
+              <div className="mobile-subheader-deposit-right-col">
+                <AddCardIcon />
+                Withdraw
+              </div>
+            </Link>
+          </div>
+        )}
       </>
     );
   }

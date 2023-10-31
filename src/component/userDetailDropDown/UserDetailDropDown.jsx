@@ -38,25 +38,16 @@ const UserDetailDropDown = ({ name }) => {
 
   const [trigger, { data, isLoading, isError }] = useLogoutMutation();
 
-
   useEffect(() => {
     if (data?.status) {
-      toast.success(data.message)
       dispatch(setIslogin(false));
+      toast.success(data.message);
     }
   }, [data]);
 
-  console.log(data, "isLoading")
-
-
-
-  
-
   if (isLoading) {
-    return <Loader />
-  }
-
-  else {
+    return <Loader />;
+  } else {
     return (
       <>
         <ModalComponent
@@ -92,7 +83,7 @@ const UserDetailDropDown = ({ name }) => {
             "aria-labelledby": "basic-button",
           }}
 
-        // className="drop-menu"
+          // className="drop-menu"
         >
           <ul className="ul-drop-user">
             <li>
@@ -115,21 +106,34 @@ const UserDetailDropDown = ({ name }) => {
             <Link to={mybets} className="link">
               <li
                 className="list-bottom-border"
-                style={{ borderTop: "1px solid #b88831", textDecoration: "none" }}
+                style={{
+                  borderTop: "1px solid #b88831",
+                  textDecoration: "none",
+                }}
+                onClick={() => handleClose()}
               >
                 My Bets
               </li>
             </Link>
             <Link to={bets_profit_loss} className="link">
-              <li className="list-bottom-border"> Betting Profit and Loss</li>
+              <li className="list-bottom-border" onClick={() => handleClose()}>
+                {" "}
+                Betting Profit and Loss
+              </li>
             </Link>
             <Link className="link" to={account_statement}>
-              <li className="list-bottom-border">Account Statement</li>
+              <li className="list-bottom-border" onClick={() => handleClose()}>
+                Account Statement
+              </li>
             </Link>
             <Link className="link">
               <li className="list-bottom-border">Market Analysis</li>
             </Link>
-            <Link to={passwordChange} className="link">
+            <Link
+              to={passwordChange}
+              className="link"
+              onClick={() => handleClose()}
+            >
               <li className="list-bottom-border">Change Password</li>
             </Link>
             <li className="list-bottom-border" onClick={() => handleOpen()}>
@@ -200,6 +204,6 @@ const UserDetailDropDown = ({ name }) => {
       </>
     );
   }
-}
+};
 
 export default UserDetailDropDown;

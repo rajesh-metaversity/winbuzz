@@ -41,7 +41,6 @@ const BettingProfitLoss = () => {
   const [trigger, { data, isLoading, isError }] =
     useBettingProfitLossMutation();
 
-  
   useEffect(() => {
     submitHandler();
     if (data?.data?.dataList) {
@@ -98,12 +97,8 @@ const BettingProfitLoss = () => {
   };
 
   if (isLoading) {
-    return <Loader />
-  }
-  else {
-
-  
-
+    return <Loader />;
+  } else {
     return (
       <div className="betting_profit-loss_cont">
         <div className="right">
@@ -126,6 +121,7 @@ const BettingProfitLoss = () => {
               <SelectStyles
                 onChange={(e) => matchHandler(e.target.value)}
                 value={bettingPnl?.matchId}
+                disabled={matchData?.data ? false : true}
               >
                 {matchData?.data?.map((el) => (
                   <MenuItem value={el?.matchId} key={el?.matchId}>
@@ -203,7 +199,7 @@ const BettingProfitLoss = () => {
           </TableContainer>
         </div>
       </div>
-    )
+    );
   }
 };
 
