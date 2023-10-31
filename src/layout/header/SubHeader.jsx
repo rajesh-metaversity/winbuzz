@@ -64,7 +64,7 @@ const SubHeader = () => {
                 <Link to={home}>In play</Link>
               </span>
             </li>
-            ;
+            
             {data?.data.map((items, index) => {
               return (
                 <React.Fragment key={items.sportId + items.sportName + index}>
@@ -81,7 +81,7 @@ const SubHeader = () => {
                     <span>{items.sportName}</span>
                   </li>
                 </React.Fragment>
-              );
+              )
             })}
             <li
               onClick={() => setActiveTabs(data?.data.length)}
