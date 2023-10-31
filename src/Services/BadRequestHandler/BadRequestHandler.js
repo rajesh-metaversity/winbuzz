@@ -1,5 +1,6 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // import { message } from "antd";
+import { toast } from 'react-toastify';
 export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 	const rawBaseQuery = fetchBaseQuery({
 		baseUrl: import.meta.env.VITE_BASE_URL,
@@ -8,14 +9,16 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 		}
 	});
 	const result = await rawBaseQuery(args, WebApi, extraOptions);
-		if (result?.error) {
-			const responseMessage = result?.error?.data?.message;
-			const status = result?.error?.status;
-			if (status === 401) {
-				localStorage.clear();
-				window.location.replace('/');
-			}
-		}
+	if (result?.error) {
+		const responseMessage = result?.error?.data?.message;
+		const status = result?.error?.status;
+		// if (status === 401) {
+		// 	localStorage.clear();
+		// 	window.location.replace('/');
+		// } else {
+		// 	toast.error(result?.data?.message);
+		// }
+	}
 	return result;
 	// if (result?.data.status === 200 || result?.data.status) {
 	//   message.success(result?.data?.message);

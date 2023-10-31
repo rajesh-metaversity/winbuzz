@@ -46,14 +46,33 @@ const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
 	}));
 
 	const handleRadioChange = (event, index) => {
-		console.log(index, "indexdd")
+		setRadioSelectValue(event.target.value);
+		console.log(index, 'indexdd');
+		const { id } = index;
+		const { accountNumber } = index
+		const { accountHolderName } = index
+		const { accountType } = index;
+
 		// const selectedPaytmDetails = index;
 		setSelectedAccount(index);
-		setWithdrawDetails({...withdrawDetail, ...index});
-		setRadioSelectValue(event.target.value);
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				accountNumber: accountNumber,
+				accountHolderName: accountHolderName,
+				accountType: accountType
+
+
+
+
+
+			}
+		})
+
+		// setWithdrawDetails({ ...withdrawDetail, ...index });
 	};
 
-	console.log(radioValue, "dfvfdvfedv")
+	console.log(radioValue, 'dfvfdvfedv');
 	return (
 		<div>
 			<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
@@ -103,15 +122,15 @@ const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
 					<TableBody>
 						{paytmDetails?.map((row, index) => (
 							<StyledTableRow key={row?.accountNumber + index}>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+								<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
 									{row?.accountNumber}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+								<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
 									{row?.accountHolderName}
 								</StyledTableCell>
 
 								<StyledTableCell>
-									<input type="radio" name="paytmRadio" value={radioValue} onChange={event => handleRadioChange(event, row)} />
+									<input type="radio" name="paytmRadio" value={row.id} checked={radioValue === row.id} onChange={event => handleRadioChange(event, row)} />
 								</StyledTableCell>
 							</StyledTableRow>
 						))}

@@ -16,14 +16,15 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 
-const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax }) => {
+const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, fancyPnl }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const { id } = useParams();
   const [selectionIds, setSelectionIds] = useState()
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
 
   const handleBackBet = (marketId, matchName, sid, odds, priceValue, isBack, isFancy, marketName, min, max) => {
     setMinMax({
@@ -89,6 +90,7 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax })
                     <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
                     <P props={"fancyodds"}>{item?.nation}</P>
                   </Box>
+                  <p style={{margin:"0", padding:"0px 0 0 12px", fontSize:"12px"}}>{fancyPnl?.find((pnl) =>pnl?.marketId === item?.sid)?.pnl || 0}</p>
                 </Grid>
                 <Grid item md={6} xs={6} sx={{ padding: "0px 4px" }}>
                   <Grid container>

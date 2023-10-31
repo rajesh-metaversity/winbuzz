@@ -85,6 +85,7 @@ const GameDetail = () => {
           data={odds}
           ip={data?.ip}
           showId={3}
+          fancyPnl={FancyPnl?.data}
         />
       </div>
       <div className="game-detail-right-col">

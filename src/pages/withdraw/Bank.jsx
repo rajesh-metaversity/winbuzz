@@ -44,11 +44,29 @@ const Bank = ({ bankDetails, setWithdrawDetails,withdrawDetail  }) => {
 		}
 	}));
 
-	const bankHandler = (id, event) => {
-		setRadioValue(id.target.value);
-        console.log(event, "sdcs")
+	const bankHandler = (e, event) => {
+		setRadioValue(e.target.value);
+
+		console.log(event, "evensdvc")
+		const { id } = event
+		const { accountNumber } = event;
+		const { accountType } = event;
+		const { accountHolderName } = event;
+		const { ifsc } = event
+		const { bankName } = event
         setSelectedField(event)
-        setWithdrawDetails({...withdrawDetail,...event})
+        // setWithdrawDetails({...withdrawDetail,...event})
+
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				accountHolderName: accountHolderName,
+				accountNumber: accountNumber,
+				accountType: accountType,
+				ifsc: ifsc,
+				bankName: bankName,
+			}
+		})
 	}
 
 
@@ -168,23 +186,23 @@ const Bank = ({ bankDetails, setWithdrawDetails,withdrawDetail  }) => {
 						{bankDetails?.map((bankData, index) => (
                             <StyledTableRow key={bankData?.accountNumber + index}>
                                
-                                    <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                    <StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
                                         {bankData?.accountNumber}
                                 </StyledTableCell>
-                                <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                <StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
                                         {bankData?.accountHolderName}
                                 </StyledTableCell>
-                                <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                <StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
                                         {bankData?.bankName}
                                 </StyledTableCell>
-                                <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                <StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
                                         {bankData?.ifsc}
                                 </StyledTableCell>
-                                <StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                                <StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
                                         {bankData?.accountType}
                                 </StyledTableCell>
 								<StyledTableCell>
-								<input type="radio" name="upiRadio" value={radioValue} onChange={event => bankHandler(event, bankData)} />
+								<input type="radio" name="upiRadio" value={bankData.id} checked={radioValue === bankData.id} onChange={event => bankHandler(event, bankData)} />
 
                                 {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  name="radio-buttons-group" onChange={bankSelectHandler}>
                                 <FormControlLabel value={true } control={<Radio />}  />

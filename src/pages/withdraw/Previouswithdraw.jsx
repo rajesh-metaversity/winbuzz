@@ -68,36 +68,36 @@ const Previouswithdraw = () => {
 					<TableBody>
 						{clientList?.data?.map((rowdata, index) => (
 							<StyledTableRow key={rowdata?.accountNumber + index + rowdata?.accountHolderName}>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.accountNumber}
 								</StyledTableCell>
 
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.accountHolderName}
 								</StyledTableCell>
 
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.amount}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.bankName}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.ifsc}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.accountType}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.time}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.remark}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									{rowdata?.status}
 								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+								<StyledTableCell  StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
 									Cancel
 								</StyledTableCell>
 							</StyledTableRow>

@@ -30,13 +30,30 @@ const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail }) => {
 		}
 	}));
 
-	const upiHandler = (id, event) => {
-        setRadioValue(id.target.value);
-        console.log(event, "sdcs")
-        setSelectedField(event)
-        setWithdrawDetails({...withdrawDetail, ...event})
+	const upiHandler = (e, event) => {
+		setRadioValue(e.target.value);
+		const { id } = event;
+		console.log(id, 'lkljkljk');
+		const { accountNumber } = event;
+		const { accountType } = event;
+		const { userId } = event;
+		const { withdrawType } = event;
+		const { accountHolderName } = event;
+		console.log(event, 'sdcs');
+		setSelectedField(event);
+
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				// withdrawType: id,
+				accountHolderName: accountHolderName,
+				accountNumber: accountNumber,
+				accountType: accountType
+			};
+		});
 	};
-console.log(selectedField, "selectedfield")
+
+	console.log(selectedField, 'selectedfield');
 	return (
 		<div>
 			<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
@@ -47,12 +64,11 @@ console.log(selectedField, "selectedfield")
 							size="small"
 							sx={{ width: '100%' }}
 							id="outlined-adornment-weight"
-                            aria-describedby="outlined-weight-helper-text"
-                            value={selectedField?.accountNumber}
+							aria-describedby="outlined-weight-helper-text"
+							value={selectedField?.accountNumber}
 							inputProps={{
 								'aria-label': 'weight'
-                            }}
-                            
+							}}
 						/>
 					</FormControl>
 				</Grid>
@@ -63,8 +79,8 @@ console.log(selectedField, "selectedfield")
 						<OutlinedInput
 							size="small"
 							id="outlined-adornment-weight"
-                            aria-describedby="outlined-weight-helper-text"
-                            value={selectedField?.accountHolderName}
+							aria-describedby="outlined-weight-helper-text"
+							value={selectedField?.accountHolderName}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -86,16 +102,16 @@ console.log(selectedField, "selectedfield")
 					</TableHead>
 					<TableBody>
 						{upiDetails?.map((row, ind) => (
-							<StyledTableRow key={row?.accountNumber + ind + row?.id}>
-								<StyledTableCell key={ind} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+							<StyledTableRow key={row?.id}>
+								<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
 									{row?.accountNumber}
 								</StyledTableCell>
-								<StyledTableCell key={ind} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+								<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
 									{row?.accountHolderName}
 								</StyledTableCell>
 
 								<StyledTableCell>
-									<input type="radio" name="upiRadio" value={radioValue} onChange={event => upiHandler(event, row)} />
+									<input type="radio" name="upiRadio" value={row.id} checked={radioValue === row.id} onChange={event => upiHandler(event, row)} />
 									{/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Matched" name="radio-buttons-group" onChange={""}>
                                 <FormControlLabel value={true } control={<Radio />}  />
 							</RadioGroup> */}
