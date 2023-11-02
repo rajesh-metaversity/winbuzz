@@ -105,6 +105,7 @@ const BettingProfitLoss = () => {
           <p>betting profit loss</p>
           <div className="dates_cont">
             <div className="input_field">
+            <label htmlFor="form" style={{fontSize: "12px"}}>Select Sport</label>
               <SelectStyles
                 onChange={(e) => getMatchDetail(e.target.value)}
                 value={bettingPnl.sportId}
@@ -118,6 +119,7 @@ const BettingProfitLoss = () => {
             </div>
 
             <div className="input_field">
+            <label htmlFor="form" style={{fontSize: "12px"}}>Select Match</label>
               <SelectStyles
                 onChange={(e) => matchHandler(e.target.value)}
                 value={bettingPnl?.matchId}

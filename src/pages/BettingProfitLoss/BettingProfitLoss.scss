@@ -42,6 +42,21 @@
        flex: 1;
        gap: 20px;
 
+       .input_field {
+
+         
+         
+         
+         label {
+           font-size: 12px;
+           
+           @media screen and (max-width: 780px) {
+             color: #939393;
+             
+            }
+        }
+       }
+
        @media screen and (max-width: 780px) {
         display: grid;
         grid-template-columns: 1fr 1fr;

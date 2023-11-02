@@ -109,13 +109,8 @@ const LoginForm = ({ setOpen }) => {
 	}, [loginCheck]);
 
 	if (isLoading) {
-		return <Loader />
-	}
-
-	else {
-
-	
-
+		return <Loader />;
+	} else {
 		return (
 			<div className="login_modal">
 				<div className="cross_icon" onClick={() => setOpen(false)}>
@@ -148,11 +143,12 @@ const LoginForm = ({ setOpen }) => {
 						/>
 					</form>
 					<div className="login_buttons">
-						<button className="login" onClick={onSumbit}>
+						<button className="login" onClick={onSumbit} >
 							LOGIN
 						</button>
 						<button className="login_with_demo">LOGINWITH DEMO ID</button>
-						<a href="#">Forgot Password</a>
+						<button className="login_with_demo" > <a href="#" >Forgot Password?</a></button>
+
 					</div>
 				</div>
 			</div>
