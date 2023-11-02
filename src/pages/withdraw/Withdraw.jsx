@@ -158,7 +158,10 @@ const Withdraw = () => {
 			</Grid>
 
 			<FormControl sx={{ m: 0 }} className="select_">
+				<label>Withdraw Type</label>
 				<Select
+					defaultValue="NORMAL"
+					
 					onChange={e =>
 						setWithdrawDetails(prev => {
 							return {
@@ -177,11 +180,13 @@ const Withdraw = () => {
 					size="small"
 					displayEmpty
 					inputProps={{ 'aria-label': 'Without label' }}>
-					<MenuItem value="">
-						<em>None</em>
-					</MenuItem>
-					<MenuItem value={'INSTANT'}>INSTANT</MenuItem>
+					
+					<MenuItem value="" disabled>
+        <em>Choose Withdraw Type</em>
+      </MenuItem>
+					
 					<MenuItem value={'NORMAL'}>NORMAL</MenuItem>
+					<MenuItem value={'INSTANT'}>INSTANT</MenuItem>
 				</Select>
 			</FormControl>
 
