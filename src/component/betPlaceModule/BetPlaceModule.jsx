@@ -10,130 +10,116 @@ import { useDispatch, useSelector } from "react-redux";
 import { betSlipSelector, setBetSlipData } from "../../App/LoginSlice";
 import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
+import { toast } from 'react-toastify';
 
 export const WebBetPlaceModule = ({ minMax }) => {
-  const { data: betNumberArray } = useStakeQuery();
-  const [betData, setBetData] = useState();
+	const { data: betNumberArray } = useStakeQuery();
+	const [betData, setBetData] = useState();
 
-  const selector = useSelector(betSlipSelector);
+	const selector = useSelector(betSlipSelector);
 
-  const [trigger, { data, error, isLoading }] = usePlaceBetsMutation();
+	const [trigger, { data, error, isLoading }] = usePlaceBetsMutation();
 
-  const buttonColors = ["#ffce00", "#75b7ff", "#a5ff93", "#fffc9f"];
-  const [inputValue, setInputValue] = useState("");
+	const buttonColors = ['#ffce00', '#75b7ff', '#a5ff93', '#fffc9f'];
+	const [inputValue, setInputValue] = useState('');
 
-  const handleNumberClick = (number) => {
-    setInputValue(number.toString());
-    const newObj = {
-      ...selector.data,
-      stake: number,
-      deviceInfo: {
-        userAgent:
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
-        browser: "Chrome",
-        device: "Macintosh",
-        deviceType: "desktop",
-        os: "Windows",
-        os_version: "windows-10",
-        browser_version: "108.0.0.0",
-        orientation: "landscape",
-      },
-    };
-    setBetData(newObj);
-  };
+	const handleNumberClick = number => {
+		setInputValue(number.toString());
+		const newObj = {
+			...selector.data,
+			stake: number,
+			deviceInfo: {
+				userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+				browser: 'Chrome',
+				device: 'Macintosh',
+				deviceType: 'desktop',
+				os: 'Windows',
+				os_version: 'windows-10',
+				browser_version: '108.0.0.0',
+				orientation: 'landscape'
+			}
+		};
+		setBetData(newObj);
+	};
 
-  const handleButtonClick = (id) => {
-    setInputValue(id);
-  };
+	const handleButtonClick = id => {
+		setInputValue(id);
+	};
 
-  const handlePlaceBet = () => {
-    trigger(betData);
-  };
+	const handlePlaceBet = () => {
+		trigger(betData);
+	};
 
-  return (
-    <>
-      {selector?.data != null && (
-        <>
-          <div className="right_cont">
-            <Heading isBack={selector?.data?.isBack} />
+	useEffect(() => {
+		if (data?.status) {
+			toast.success(data?.message);
+		} else {
+			toast.error(data?.message);
+		}
+	}, [data]);
 
-            <div className="bet_details">
-              <span className="team_name">
-                <p>{selector?.data?.matchName}</p>
-                <p>{selector?.data?.name}</p>
-              </span>
-              <div className="bet_number">
-                <span className="odds">
-                  <label>Odds</label>
-                </span>
-                <span className="bet_inputs">
-                  <input type="number" value={selector?.data?.odds} />
-                  <input
-                    placeholder="Stakes"
-                    type="number"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
-                </span>
-              </div>
-              <span className="numbers">
-                {betNumberArray?.data.map((el, id) => {
-                  return (
-                    <p
-                      key={id}
-                      className="bets"
-                      onClick={() => handleNumberClick(el?.value)}
-                    >
-                      {el?.key}
-                    </p>
-                  );
-                })}
-              </span>
-              <span className="min_max">
-                <p
-                  style={{ background: "#ffce00" }}
-                  className="inner"
-                  onClick={() => handleButtonClick(minMax?.minBet)}
-                >
-                  Min
-                </p>
-                <p
-                  style={{ background: "#75b7ff" }}
-                  className="inner"
-                  onClick={() => handleButtonClick(minMax?.maxBet)}
-                >
-                  Max
-                </p>
-                <p style={{ background: "#a5ff93" }} className="inner">
-                  All
-                </p>
-                <p
-                  style={{ background: "#fffc9f" }}
-                  className="inner"
-                  onClick={() => setInputValue("")}
-                >
-                  Clear
-                </p>
-              </span>
-              <span className="order_buttons">
-                <button>Cancel Order</button>
-                <button
-                  onClick={handlePlaceBet}
-                  style={{
-                    background: inputValue.length > 0 ? "#4caf50" : "",
-                    color: inputValue.length > 0 ? "#fff" : "",
-                  }}
-                  className={inputValue.length > 0 ? "place-order_button" : ""}
-                >
-                  Place Order
-                </button>
-              </span>
-            </div>
-          </div>
-        </>
-      )}
-    </>
-  );
+	return (
+		<>
+			{selector?.data != null && (
+				<>
+					<div className="right_cont">
+						<Heading isBack={selector?.data?.isBack} />
+
+						<div className="bet_details">
+							<span className="team_name">
+								<p>{selector?.data?.matchName}</p>
+								<p>{selector?.data?.name}</p>
+							</span>
+							<div className="bet_number">
+								<span className="odds">
+									<label>Odds</label>
+								</span>
+								<span className="bet_inputs">
+									<input type="number" value={selector?.data?.odds} />
+									<input placeholder="Stakes" type="number" value={inputValue} onChange={e => setInputValue(e.target.value)} />
+								</span>
+							</div>
+							<span className="numbers">
+								{betNumberArray?.data.map((el, id) => {
+									return (
+										<p key={id} className="bets" onClick={() => handleNumberClick(el?.value)}>
+											{el?.key}
+										</p>
+									);
+								})}
+							</span>
+							<span className="min_max">
+								<p style={{ background: '#ffce00' }} className="inner" onClick={() => handleButtonClick(minMax?.minBet)}>
+									Min
+								</p>
+								<p style={{ background: '#75b7ff' }} className="inner" onClick={() => handleButtonClick(minMax?.maxBet)}>
+									Max
+								</p>
+								<p style={{ background: '#a5ff93' }} className="inner">
+									All
+								</p>
+								<p style={{ background: '#fffc9f' }} className="inner" onClick={() => setInputValue('')}>
+									Clear
+								</p>
+							</span>
+							<span className="order_buttons">
+								<button>Cancel Order</button>
+								<button
+									onClick={handlePlaceBet}
+									style={{
+										background: inputValue.length > 0 ? '#4caf50' : '',
+										color: inputValue.length > 0 ? '#fff' : ''
+									}}
+									className={inputValue.length > 0 ? 'place-order_button' : ''}>
+									Place Order
+								</button>
+							</span>
+						</div>
+					</div>
+				</>
+			)}
+		</>
+	);
 };
 
 export const MobileBetPlaceModal = ({ minMax }) => {

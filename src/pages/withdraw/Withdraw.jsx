@@ -28,8 +28,6 @@ TabPanel.propTypes = {
 };
 
 const Withdraw = () => {
-	// const [withdrawAmount, setWithdrawAmount] = useState();
-
 	const [withdrawDetails, setWithdrawDetails] = useState({
 		accountHolderName: '',
 		bankName: '',
@@ -91,6 +89,16 @@ const Withdraw = () => {
 		trigger(withdrawDetails);
 	};
 
+	const valueChangeHandler = (name, value) => {
+		console.log(value,"val")
+		setWithdrawDetails((prev) => {
+			return {
+				...prev, 
+				[name]: value
+			}
+		})
+	}
+	console.log(withdrawDetails, "withdrawasdcs")
 	// console.log(isLoading, "isLOADING")
 	// debugger
 
@@ -223,16 +231,16 @@ const Withdraw = () => {
 				</Box>
 
 				<TabPanel value={value} index={0}>
-					<Bank bankDetails={userWithdrawDetails} bankDetailsLoading={bankDetailsLoading} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
+					<Bank valueChangeHandler={valueChangeHandler} bankDetails={userWithdrawDetails} bankDetailsLoading={bankDetailsLoading} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<Upi upiDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
+					<Upi valueChangeHandler={valueChangeHandler} upiDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 				<TabPanel value={value} index={2}>
-					<Paytm paytmDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
+					<Paytm valueChangeHandler={valueChangeHandler} paytmDetails={userWithdrawDetails} setWithdrawDetails={setWithdrawDetails} withdrawDetail={withdrawDetails} />
 				</TabPanel>
 
-				<WithdrawButton withdrawHandler={withdrawHandler} name={isLoading ? <Loader /> : 'withdraw coins'} disable={isLoading} />
+				<WithdrawButton  withdrawHandler={withdrawHandler} name={isLoading ? <Loader /> : 'withdraw coins'} disable={isLoading} />
 
 				<Previouswithdraw />
 			</Box>
