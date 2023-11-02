@@ -16,7 +16,7 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 			localStorage.clear();
 			window.location.replace('/');
 		} else {
-			toast.error(result?.data?.message);
+			toast.error(responseMessage);
 		}
 	}
 	return result;

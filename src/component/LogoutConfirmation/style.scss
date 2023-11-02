@@ -1,0 +1,50 @@
+.logout_cont {
+    width: 400px;
+
+    .heading {
+        width: 100%;
+        background-color: #34c38f;
+        padding: 10px;
+    }
+
+
+
+    .con {
+        padding: 10px;
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 20px;
+            margin-top: 12px;
+
+            button {
+                cursor: pointer;
+                padding-inline: 10px;
+                padding-block: 5px;
+                border-radius: 5px;
+
+                &:nth-child(1) {
+                    border: 1px solid gray;
+                    background-color: #ffffff;
+                    border-color: #d9d9d9;
+                    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+                    height: 32px;
+                    padding: 4px 15px;
+                    border-radius: 6px;
+                    outline: none;
+                }
+
+                &:nth-child(2) {
+                    background-color: #1677ff;
+                    border: none;
+                    color: white;
+                    outline: none;
+                }
+            }
+        }
+
+    }
+
+}

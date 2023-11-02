@@ -41,119 +41,104 @@ export const WebHeaderComponent = ({
 
   if (!isBreakPoint) {
     return (
-      <>
-        <ModalComponent
-          Elememt={modalElement[modalValue]}
-          open={open}
-          setOpen={setOpen}
-        />
-        <div className="header-container">
-          <div className="header-left-col">
-            <Link to={home}>
-              <img src={logo} alt="" />
-            </Link>
-          </div>
-          <div className="header-right-col">
-            <ul>
-              {!loginCheck ? (
-                <>
-                  <li
-                    className="header-rule"
-                    onClick={() => {
-                      setModalValue(1);
-                      handleOpen();
-                    }}
-                  >
-                    Rules
-                  </li>
-                  <li>
-                    <MyTextField
-                      hiddenLabel
-                      variant="outlined"
-                      size="small"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </li>
-                  <li
-                    onClick={() => {
-                      setModalValue(0);
-                      handleOpen();
-                    }}
-                    className="header-login"
-                  >
-                    login
-                  </li>
-                  <Link to="/sign-up">
-                    <li className="header-register">Register</li>
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link to={deposit}>
-                    <li>
-                      <ButtonComponent
-                        name={"Deposit"}
-                        icon={<AccountBalanceIcon />}
-                        bg={"green"}
-                      />
-                    </li>
-                  </Link>
-                  <Link to={withdraw}>
-                    <ButtonComponent
-                      name="Withdraw"
-                      icon={<AddCardIcon />}
-                      bg={"red"}
-                    />
-                  </Link>
-                  <li
-                    className="header-rule"
-                    onClick={() => {
-                      setModalValue(1);
-                      handleOpen();
-                    }}
-                  >
-                    Rules
-                  </li>
-                  <li>
-                    <MyTextField
-                      hiddenLabel
-                      variant="outlined"
-                      size="small"
-                      placeholder="Search Events"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </li>
-                  <li className="header-balance">
-                    {/* <span className="user_id">{userId }</span> */}
-                    Bal: {balanceData?.balance}
-                    <span>
-                      Exp:{""}
-                      {balanceData?.libality}
-                    </span>
-                  </li>
-                  <li className="header-user-name" id="basic-menu">
-                    <UserDetailDropDown name={userId} />
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-        <SubHeader />
-      </>
-    );
+		<>
+			<ModalComponent Elememt={modalElement[modalValue]} open={open} setOpen={setOpen} />
+			<div className="header-container">
+				<div className="header-left-col">
+					<Link to={home}>
+						<img src={logo} alt="" />
+					</Link>
+				</div>
+				<div className="header-right-col">
+					<ul>
+						{!loginCheck ? (
+							<>
+								<li
+									className="header-rule"
+									onClick={() => {
+										setModalValue(1);
+										handleOpen();
+									}}>
+									Rules
+								</li>
+								<li>
+									<MyTextField
+										hiddenLabel
+										variant="outlined"
+										size="small"
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position="start">
+													<SearchIcon />
+												</InputAdornment>
+											)
+										}}
+									/>
+								</li>
+								<li
+									onClick={() => {
+										setModalValue(0);
+										handleOpen();
+									}}
+									className="header-login">
+									login
+								</li>
+								<Link to="/sign-up">
+									<li className="header-register">Register</li>
+								</Link>
+							</>
+						) : (
+							<>
+								<Link to={deposit}>
+									<li>
+										<ButtonComponent name={'Deposit'} icon={<AccountBalanceIcon />} bg={'green'} />
+									</li>
+								</Link>
+								<Link to={withdraw}>
+									<ButtonComponent name="Withdraw" icon={<AddCardIcon />} bg={'red'} />
+								</Link>
+								<li
+									className="header-rule"
+									onClick={() => {
+										setModalValue(1);
+										handleOpen();
+									}}>
+									Rules
+								</li>
+								<li>
+									<MyTextField
+										hiddenLabel
+										variant="outlined"
+										size="small"
+										placeholder="Search Events"
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position="start">
+													<SearchIcon />
+												</InputAdornment>
+											)
+										}}
+									/>
+								</li>
+								<li className="header-balance">
+									{/* <span className="user_id">{userId }</span> */}
+									Bal: {balanceData?.balance}
+									<span>
+										Exp:{''}
+										{balanceData?.libality}
+									</span>
+								</li>
+								<li className="header-user-name" id="basic-menu">
+									<UserDetailDropDown name={userId} balanceData={balanceData} />
+								</li>
+							</>
+						)}
+					</ul>
+				</div>
+			</div>
+			<SubHeader />
+		</>
+	);
   } else {
     return (
       <>

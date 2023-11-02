@@ -20,10 +20,9 @@ import {
 import TableCell, { tableCellClasses,  } from '@mui/material/TableCell';
 import { useState } from 'react';
 import Loader from '../../component/Loader/Loader';
-const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoading }) => {
+const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoading, valueChangeHandler }) => {
 	console.log(bankDetailsLoading, "bankDetailsLoading")
 	const [radioValue, setRadioValue] = useState()
-	const [selectedField, setSelectedField] = useState(null)
 	const tableheading = ['account number', 'Account Holder Name', 'Bank Name/Address', 'IFSC Code', 'Account Type/ Currency', 'action'];
 
 	const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -48,16 +47,13 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 
 	const bankHandler = (e, event) => {
 		setRadioValue(e.target.value);
-
-		console.log(event, "evensdvc")
 		const { id } = event
 		const { accountNumber } = event;
 		const { accountType } = event;
 		const { accountHolderName } = event;
 		const { ifsc } = event
 		const { bankName } = event
-        setSelectedField(event)
-        // setWithdrawDetails({...withdrawDetail,...event})
+
 
 		setWithdrawDetails(prev => {
 			return {
@@ -71,9 +67,6 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 		})
 	}
 
-	
-
-
 		return (
 			<div>
 				<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
@@ -84,11 +77,12 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 								Account Number
 							</Typography>
 							<OutlinedInput
+								onChange={(e) => valueChangeHandler("accountNumber", e.target.value) }
 								size="small"
 								sx={{ width: '100%' }}
 								id="outlined-adornment-weight"
 								aria-describedby="outlined-weight-helper-text"
-								value={selectedField?.accountNumber}
+								value={withdrawDetail?.accountNumber}
 								inputProps={{
 									'aria-label': 'weight'
 								}}
@@ -103,9 +97,10 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 							</Typography>
 							<OutlinedInput
 								size="small"
+								onChange={(e) => valueChangeHandler("accountHolderName", e.target.value) }
 								id="outlined-adornment-weight"
 								aria-describedby="outlined-weight-helper-text"
-								value={selectedField?.accountHolderName}
+								value={withdrawDetail?.accountHolderName}
 								inputProps={{
 									'aria-label': 'weight'
 								}}
@@ -120,9 +115,10 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 							</Typography>
 							<OutlinedInput
 								size="small"
+								onChange={(e) => valueChangeHandler("bankName", e.target.value) }
 								id="outlined-adornment-weight"
 								aria-describedby="outlined-weight-helper-text"
-								value={selectedField?.bankName}
+								value={withdrawDetail?.bankName}
 								inputProps={{
 									'aria-label': 'weight'
 								}}
@@ -137,9 +133,10 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 							</Typography>
 							<OutlinedInput
 								size="small"
+								onChange={(e) => valueChangeHandler("ifsc", e.target.value) }
 								id="outlined-adornment-weight"
 								aria-describedby="outlined-weight-helper-text"
-								value={selectedField?.ifsc}
+								value={withdrawDetail?.ifsc}
 								inputProps={{
 									'aria-label': 'weight'
 								}}
@@ -160,7 +157,8 @@ const Bank = ({ bankDetails, setWithdrawDetails, withdrawDetail, bankDetailsLoad
 									}
 								}}
 								size="small"
-								value={selectedField?.accountType}
+								onChange={(e) => valueChangeHandler("accountType", e.target.value) }
+								value={withdrawDetail?.accountType}
 								displayEmpty
 								inputProps={{ 'aria-label': 'Without label' }}>
 								<MenuItem value="">

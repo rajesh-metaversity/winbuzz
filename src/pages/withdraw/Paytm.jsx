@@ -1,28 +1,10 @@
-import {
-	FormControl,
-	FormControlLabel,
-	Grid,
-	InputLabel,
-	OutlinedInput,
-	Paper,
-	Radio,
-	RadioGroup,
-	Table,
-	TableBody,
-	TableContainer,
-	TableHead,
-	TableRow,
-	Typography,
-	styled
-} from '@mui/material';
+import { FormControl, Grid, OutlinedInput, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography, styled } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
 import { useState } from 'react';
-const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
+const Paytm = ({ paytmDetails, setWithdrawDetails, withdrawDetail, valueChangeHandler }) => {
 	const tableheading = ['Account number', 'account Holder name', 'action'];
 	const [radioValue, setRadioSelectValue] = useState('a');
-
-	const [selectedAccount, setSelectedAccount] = useState(null);
 
 	const StyledTableCell = styled(TableCell)(({ theme }) => ({
 		[`&.${tableCellClasses.head}`]: {
@@ -47,32 +29,21 @@ const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
 
 	const handleRadioChange = (event, index) => {
 		setRadioSelectValue(event.target.value);
-		console.log(index, 'indexdd');
 		const { id } = index;
-		const { accountNumber } = index
-		const { accountHolderName } = index
+		const { accountNumber } = index;
+		const { accountHolderName } = index;
 		const { accountType } = index;
 
-		// const selectedPaytmDetails = index;
-		setSelectedAccount(index);
 		setWithdrawDetails(prev => {
 			return {
 				...prev,
 				accountNumber: accountNumber,
 				accountHolderName: accountHolderName,
 				accountType: accountType
-
-
-
-
-
-			}
-		})
-
-		// setWithdrawDetails({ ...withdrawDetail, ...index });
+			};
+		});
 	};
 
-	console.log(radioValue, 'dfvfdvfedv');
 	return (
 		<div>
 			<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
@@ -80,11 +51,13 @@ const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
 					<FormControl sx={{ maxWidth: { md: '200px', xs: '100%' }, my: 1, width: '100%' }} variant="outlined">
 						<Typography component="p">Mobile No</Typography>
 						<OutlinedInput
+							onChange={e => valueChangeHandler('accountNumber', e.target.value)}
 							size="small"
+							type='number'
 							sx={{ width: '100%' }}
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
-							value={selectedAccount?.accountNumber}
+							value={withdrawDetail?.accountNumber}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -97,9 +70,10 @@ const Paytm = ({ paytmDetails, setWithdrawDetails,withdrawDetail }) => {
 						<Typography component="p">Name</Typography>
 						<OutlinedInput
 							size="small"
+							onChange={e => valueChangeHandler('accountHolderName', e.target.value)}
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
-							value={selectedAccount?.accountHolderName}
+							value={withdrawDetail?.accountHolderName}
 							inputProps={{
 								'aria-label': 'weight'
 							}}

@@ -1,8 +1,7 @@
 import { FormControl, FormControlLabel, Grid, InputLabel, OutlinedInput, Paper, Radio, RadioGroup, Table, TableBody, TableContainer, TableHead, TableRow, Typography, styled } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useState } from 'react';
-const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail }) => {
-	const [selectedField, setSelectedField] = useState(null);
+const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail, valueChangeHandler }) => {
 	const [radioValue, setRadioValue] = useState();
 
 	const tableheading = ['account number', 'account name', 'action'];
@@ -33,14 +32,11 @@ const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail }) => {
 	const upiHandler = (e, event) => {
 		setRadioValue(e.target.value);
 		const { id } = event;
-		console.log(id, 'lkljkljk');
 		const { accountNumber } = event;
 		const { accountType } = event;
 		const { userId } = event;
 		const { withdrawType } = event;
 		const { accountHolderName } = event;
-		console.log(event, 'sdcs');
-		setSelectedField(event);
 
 		setWithdrawDetails(prev => {
 			return {
@@ -52,8 +48,6 @@ const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail }) => {
 			};
 		});
 	};
-
-	console.log(selectedField, 'selectedfield');
 	return (
 		<div>
 			<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
@@ -61,11 +55,12 @@ const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail }) => {
 					<FormControl sx={{ maxWidth: { md: '200px', xs: '100%' }, my: 1, width: '100%' }} variant="outlined">
 						<Typography component="p">UPI ID</Typography>
 						<OutlinedInput
+							onChange={(e) => valueChangeHandler("accountNumber", e.target.value) }
 							size="small"
 							sx={{ width: '100%' }}
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
-							value={selectedField?.accountNumber}
+							value={withdrawDetail?.accountNumber}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
@@ -78,9 +73,10 @@ const Upi = ({ upiDetails, setWithdrawDetails, withdrawDetail }) => {
 						<Typography component="p">Account Name</Typography>
 						<OutlinedInput
 							size="small"
+							onChange={(e) => valueChangeHandler("accountHolderName", e.target.value) }
 							id="outlined-adornment-weight"
 							aria-describedby="outlined-weight-helper-text"
-							value={selectedField?.accountHolderName}
+							value={withdrawDetail?.accountHolderName}
 							inputProps={{
 								'aria-label': 'weight'
 							}}
