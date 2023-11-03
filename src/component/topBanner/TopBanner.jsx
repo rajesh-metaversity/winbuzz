@@ -3,30 +3,31 @@ import "./styles.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Grid } from "@mui/material";
-import { useEffect } from "react";
-import { useBannerListDataMutation } from "../../Services/BannerList/BannerList";
+import { Box, Grid } from '@mui/material';
+import { useEffect } from 'react';
+import { useBannerListDataMutation } from '../../Services/BannerList/BannerList';
 
 var settings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  autoplay: true,
-  speed: 500,
-  cssEase: "linear",
-  arrows: false,
-  pauseOnHover: true,
+	dots: false,
+	infinite: true,
+	slidesToShow: 4,
+	slidesToScroll: 1,
+	autoplay: true,
+	speed: 500,
+	cssEase: 'linear',
+	arrows: false,
+	pauseOnHover: true
 };
 
 const TopBanner = () => {
-  const [trigger, { data }] = useBannerListDataMutation();
-  useEffect(() => {
-    trigger({
-      type: 1,
-    });
-  }, []);
-  return (
+	const [trigger, { data }] = useBannerListDataMutation();
+	console.log(data, 'imgdata');
+	useEffect(() => {
+		trigger({
+			type: 1
+		});
+	}, []);
+	return (
 		// <div className="img_cont">
 		<>
 			<Slider {...settings} className="img_cont">
@@ -53,12 +54,19 @@ const TopBanner = () => {
 			</Slider>
 			<div className="mobile-top-banner-img">
 				{data?.data?.map((sliderdata, index) => (
-					<div className="img-div" key={index + sliderdata?.path} style={{ backgroundImage: `url(${sliderdata?.path})` }} />
+					<div
+						className="img-div"
+						key={index + sliderdata?.name}
+						style={{
+							backgroundImage: `url('${sliderdata?.path}')`,
+							
+						}}
+					/>
 				))}
 			</div>
 		</>
 		// </div>
-  );
+	);
 };
 
 export default TopBanner;

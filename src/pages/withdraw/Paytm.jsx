@@ -1,6 +1,5 @@
 import { FormControl, Grid, OutlinedInput, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography, styled } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { Formik } from 'formik';
 
 import { useState } from 'react';
 const Paytm = ({ paytmDetails, setWithdrawDetails, withdrawDetail, valueChangeHandler }) => {
@@ -49,11 +48,7 @@ const Paytm = ({ paytmDetails, setWithdrawDetails, withdrawDetail, valueChangeHa
 		<div>
 			<Grid container sx={{ md: { gap: '1rem', xs: 0 } }}>
 				<Grid item xs={12} md={5.5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Formik >
-						r
-
-					</Formik>
-					<FormControl sx={{ maxWidth: { md: '200px', xs: '100%' }, my: 1, width: '100%' }} variant="outlined" >
+					<FormControl sx={{ maxWidth: { md: '200px', xs: '100%' }, my: 1, width: '100%' }} variant="outlined">
 						<Typography component="p">Mobile No</Typography>
 						<OutlinedInput
 							onChange={e => valueChangeHandler('accountNumber', e.target.value)}

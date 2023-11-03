@@ -5,6 +5,8 @@ import { useChangePasswordMutation } from '../../Services/ChangePassword/ChangeP
 import { useEffect, useState } from 'react';
 import Loader from '../../component/Loader/Loader';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import LoginForm from '../../component/loginForm/LoginForm';
 
 const ChangePassword = () => {
 	let initialValues = {
@@ -13,6 +15,7 @@ const ChangePassword = () => {
 		confirmPassword: '',
 		appUrl: window.location.hostname
 	};
+	const nav = useNavigate()
 	const [trigger, { data, isLoading, isError, status }] = useChangePasswordMutation();
 
 	const validationSchema = Yup.object().shape({
@@ -31,8 +34,8 @@ const ChangePassword = () => {
 		if (data?.status) {
 			toast.success(data?.message);
 			// initialValues(prev => {
-			// 	return {
-			// 		...prev,
+				// 	return {
+					// 		...prev,
 			// 		currentPassword: '',
 			// 		newPassword: '',
 			// 		confirmPassword: ''
@@ -44,7 +47,7 @@ const ChangePassword = () => {
 		} else {
 			toast.error(data?.message);
 		}
-	}, [data]);
+	}, [data, ]);
 	let reset;
 
 	return (

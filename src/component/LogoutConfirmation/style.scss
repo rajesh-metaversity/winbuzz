@@ -1,16 +1,34 @@
 .logout_cont {
     width: 400px;
+background-color: white;
+overflow: hidden;
 
+@media screen and (max-width: 780px) {
+    width: 100%;
+    overflow: hidden;
+    
+}
     .heading {
-        width: 100%;
+        width: calc(100% - 20px);
         background-color: #34c38f;
         padding: 10px;
+        overflow: hidden;
+    
+        @media screen and (max-width: 780px) {
+            width: calc(100% - 20px);
+            
+        }
     }
 
 
 
     .con {
         padding: 10px;
+
+        @media screen and (max-width: 780px) {
+            width: calc(100% - 20px);
+            
+        }
 
         .btn {
             display: flex;

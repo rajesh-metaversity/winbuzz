@@ -47,12 +47,18 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 		}
 	}, [data]);
 	const [logutModal, setLogutModal] = useState(false);
+
+	useEffect(() => {
+		if (logutModal || openModal) {
+			handleClose();
+		}
+	}, [logutModal, openModal]);
 	if (isLoading) {
 		return <Loader />;
 	} else {
 		return (
 			<>
-				<ModalComponent Elememt={<Logout trigger={trigger} setLogutModal={setLogutModal } />} open={logutModal} setOpen={setLogutModal} />
+				<ModalComponent  Elememt={<Logout trigger={trigger} setLogutModal={setLogutModal } />} open={logutModal} setOpen={setLogutModal} />
 				<ModalComponent Elememt={<BonusRules setOpen={setOpen} open={openModal} />} open={openModal} setOpen={setOpen} />
 				<Button
 					aria-controls={open ? 'basic-menu' : undefined}

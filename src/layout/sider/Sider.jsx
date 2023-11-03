@@ -17,11 +17,12 @@ import tennisImage from '../../assets/tennis.svg';
 import footballImage from '../../assets/football.svg';
 import horseRidingImage from '../../assets/horse.svg';
 import kabaddiImage from '../../assets/kabaddi.svg';
+import casino from '../../assets/int.svg';
 export const sportImages = {
 	Cricket: cricketImage,
 	Tennis: tennisImage,
 	Football: footballImage,
-	"Horse racing": horseRidingImage,
+	'Horse racing': horseRidingImage,
 	Kabaddi: kabaddiImage
 };
 
@@ -49,7 +50,7 @@ const SiderBar = () => {
 								onClick={() => {
 									setMatchName(item?.sportName);
 									setActiveSlide(true);
-									trigge(item.sportId);
+									trigge(item?.sportId);
 								}}>
 								<p>
 									{/* <img src={item?.sportImage} alt="cricket" /> */}
@@ -64,7 +65,19 @@ const SiderBar = () => {
 						</React.Fragment>
 					);
 				})}
+				<Link to="casino">
+					<li>
+						<p>
+							<img src={casino} alt="casino" />
+							Int Casino
+						</p>
+						<span>
+							<img src={arrow} alt="" />
+						</span>
+					</li>
+				</Link>
 			</ul>
+
 			<div className={activeSlide ? 'slide-sider-disable' : 'slide-sider-active'}>
 				<ul className="sider-container-ul">
 					<p onClick={() => setActiveSlide(false)} className="previous">
