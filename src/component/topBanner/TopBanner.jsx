@@ -27,49 +27,37 @@ const TopBanner = () => {
     });
   }, []);
   return (
-    // <div className="img_cont">
-    <>
-      <Slider {...settings} className="img_cont">
-        {data?.data?.map((sliderdata, index) => (
-          <div key={index + sliderdata?.path}>
-            <Grid container>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  padding: "0.25rem",
-                  backgroundColor: "#fff",
-                  borderRadius: "0.375rem",
-                  overflowX: "hidden",
-                  border: "1px solid #dee2e6",
-                  maxHeight: "68px",
-                  cursor: "pointer",
-                }}
-              >
-                <img
-                  src={sliderdata?.path}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                  style={{ objectFit: "cover" }}
-                />
-              </Grid>
-            </Grid>
-          </div>
-        ))}
-      </Slider>
-      <div className="mobile-top-banner-img">
-        {data?.data?.map((sliderdata, index) => (
-          <img
-            src={sliderdata?.path}
-            alt="topbanner"
-            className="img-div"
-            key={index + sliderdata?.path}
-          />
-        ))}
-      </div>
-    </>
-    // </div>
+		// <div className="img_cont">
+		<>
+			<Slider {...settings} className="img_cont">
+				{data?.data?.map((sliderdata, index) => (
+					<div key={index + sliderdata?.path}>
+						<Grid container>
+							<Grid
+								item
+								xs={12}
+								sx={{
+									padding: '0.25rem',
+									backgroundColor: '#fff',
+									borderRadius: '0.375rem',
+									overflowX: 'hidden',
+									border: '1px solid #dee2e6',
+									maxHeight: '68px',
+									cursor: 'pointer'
+								}}>
+								<img src={sliderdata?.path} alt="" width="100%" height="100%" style={{ objectFit: 'cover' }} />
+							</Grid>
+						</Grid>
+					</div>
+				))}
+			</Slider>
+			<div className="mobile-top-banner-img">
+				{data?.data?.map((sliderdata, index) => (
+					<div className="img-div" key={index + sliderdata?.path} style={{ backgroundImage: `url(${sliderdata?.path})` }} />
+				))}
+			</div>
+		</>
+		// </div>
   );
 };
 
