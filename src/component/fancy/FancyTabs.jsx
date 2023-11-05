@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 import { GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
+import Empty from "../../component/empty/Empty";
 import "./FancyTabs.scss";
 
 const FancyTabs = ({
@@ -61,7 +62,7 @@ const FancyTabs = ({
           }
         })}
       </ul>
-      {data[fancyData]?.length && (
+      {data[fancyData]?.length ? (
         <FancyBetComp
           fancyItem={data[fancyData]}
           fancyData={fancyData}
@@ -74,6 +75,8 @@ const FancyTabs = ({
           handleFavDel={handleFavDel}
           favData={favData}
         />
+      ) : (
+        <Empty />
       )}
       {/* <FancyBetComp /> */}
     </>

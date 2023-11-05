@@ -9,6 +9,7 @@ import {
   P,
   PolygonStrip,
 } from "./MatchedStyled";
+import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import Suspend from "../suspend/suspend";

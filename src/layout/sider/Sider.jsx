@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
-import cricket from "../../assets/img/cricket.svg";
-import football from "../../assets/img/football.svg";
+import React, { useState } from "react";
 import arrow from "../../assets/img/rightArrow.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Link, useNavigate } from "react-router-dom";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-
 ///styles
 import "./styles.scss";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
-import {
-  useActiveMatchMutation,
-  useInPlayQuery,
-} from "../../Services/ActiveSportList/ActiveMatch";
+import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import cricketImage from "../../assets/cricket.svg";
 import tennisImage from "../../assets/tennis.svg";

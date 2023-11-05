@@ -69,7 +69,7 @@ const MyBets = () => {
 					<div className="right">
 						<span>
 							<label>Types</label>
-							<select onChange={handleChange} value={bets?.betType}>
+							<select onChange={handleChange} value={bets?.betType} >
 								<option value={1}>All</option>
 								<option value={2}>Back</option>
 								<option value={3}>Lay</option>

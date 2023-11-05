@@ -1,25 +1,31 @@
-import React from 'react';
-
-import './styles.scss';
+import DownloadIcon from "@mui/icons-material/Download";
+import { saveAs } from "file-saver";
+import "./styles.scss";
 
 const QR = ({ selectedImage }) => {
-	return (
-		<div className="qr_cont">
-			<div className="qr_heading">QR code for payment</div>
-			<div className="qr_body">
-				<div className="walmart">Walmart</div>
-				<div className="display_name">
-					<span className='labe'>
-						<label>Display Name</label>
-						<input />
-					</span>
-					<span style={{marginTop: "50px", color: "green"}}>
-						<p style={{ width: '100%', border: '1px solid white' }}>QR Code</p>
-					</span>
-				</div>
-			</div>
-		</div>
-	);
+  const handleClick = (url) => {
+    saveAs(url, "Qr");
+  };
+  return (
+    <div className="qr_cont">
+      <div className="qr_heading">QR code for payment</div>
+      <div className="qr_body">
+        <div className="walmart">
+          <img src={selectedImage?.accountNumber} alt="" />
+        </div>
+        <div className="display_name">
+          <span>
+            <label>Display Name</label>
+            <input disabled value={selectedImage?.accountHolderName} />
+          </span>
+          <button onClick={() => handleClick(selectedImage?.accountNumber)}>
+            <DownloadIcon />
+            QR Code
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default QR;

@@ -1,5 +1,5 @@
-import { Box, Grid, Tabs, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Grid } from "@mui/material";
+import { useState } from "react";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { GridContainer, P, PolygonStrip, CustomTab } from "./fancyBetStyled";
 import StarIcon from "@mui/icons-material/Star";
@@ -11,7 +11,7 @@ import {
   LayGrid,
   MainDiv,
 } from "../matchedDetail/MatchedStyled";
-import FancyTabs from "./FancyTabs";
+import StarIcon from "@mui/icons-material/Star";
 import { setBetSlipData } from "../../App/LoginSlice";
 import { useDispatch } from "react-redux";
 import moment from "moment";
@@ -92,7 +92,6 @@ const FancyBetComp = ({
 
         <Grid item md={2}></Grid>
       </GridContainer>
-
       <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
         {fancyItem?.length > 0 &&
           fancyItem?.map((item, id) => {
@@ -113,7 +112,8 @@ const FancyBetComp = ({
                   ":last-child": {
                     borderBottom: "0px ",
                   },
-                }}>
+                }}
+              >
                 <Grid item md={6} xs={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     {
@@ -204,7 +204,8 @@ const FancyBetComp = ({
                                 item?.minBet,
                                 item?.maxBet
                               )
-                            }>
+                            }
+                          >
                             <BetTypoPara>{item?.b1}</BetTypoPara>
                             <BetTypoSpan>{item?.bs1}</BetTypoSpan>
                           </BackGrid>

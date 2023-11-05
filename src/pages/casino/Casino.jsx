@@ -13,15 +13,17 @@ const Casino = () => {
   const [gameLists, setGameLists] = useState([]);
   const [providerFilter, setProviderFilter] = useState("ALL");
 
+  const casinoToken = localStorage.getItem("casino-token");
   const [trigger, { data: gamelist }] = useQtechMutation();
-
   useEffect(() => {
-    trigger({
-      gameCategory: "LIVECASINO",
-      provider: gameCode,
-      token: localStorage.getItem("casino-token"),
-    });
-  }, [gameCode]);
+    // if (casinoToken != undefined || gameCode) {
+      trigger({
+        gameCategory: "LIVECASINO",
+        provider: gameCode,
+        token: casinoToken,
+      });
+    // }
+  }, [gameCode, casinoToken]);
 
   useEffect(() => {
     if (gamelist?.data?.items) {
@@ -43,17 +45,25 @@ const Casino = () => {
   }, [gamelist?.data]);
 
   return (
-		<div>
-			<div className="casino-page-container">
-				<Title name={'INT CASINO'} />
-				<div className="casino-center-col">
-					<p className="int_casino">Int Casino</p>
-					<CasinoList list={QtechProvider} setGameCode={setGameCode} type={1} />
-					<CasinoList list={category} type={2} setProviderFilter={setProviderFilter} />
-					<CasinoCard list={category} gameLists={gameLists} providerFilter={providerFilter} />
-				</div>
-			</div>
-		</div>
+    <div>
+      <div className="casino-page-container">
+        <Title name={"INT CASINO"} />
+        <div className="casino-center-col">
+          <p className="int_casino">Int Casino</p>
+          <CasinoList list={QtechProvider} setGameCode={setGameCode} type={1} />
+          <CasinoList
+            list={category}
+            type={2}
+            setProviderFilter={setProviderFilter}
+          />
+          <CasinoCard
+            list={category}
+            gameLists={gameLists}
+            providerFilter={providerFilter}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

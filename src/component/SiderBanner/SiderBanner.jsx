@@ -23,7 +23,9 @@ var settings = {
   verticalSwiping: true,
 };
 
-export const SiderBanner = () => {
+export const SiderBanner = ({ setOpen, open }) => {
+  const [casinoRuleModal, setCasinoRuleModal] = useState(false);
+
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const [trigger, { data, isLoading, isError }] = useBannerListDataMutation();
   const [casinoData, setCasinoData] = useState([]);
@@ -53,31 +55,49 @@ export const SiderBanner = () => {
 
   if (!isBreakPoint ) {
     return (
-		<>
-			<div className="side_banner_cont">
-				<div className="play_games">Play Games</div>
-				<Slider className="right_banner" {...settings}>
-					{data?.data?.map((sliderdata, index) => (
-						<div key={index + sliderdata?.path}>
-							<Grid container>
-								<Grid
-									item
-									// xs={12}
-									sx={{
-										backgroundColor: '#fff',
-										borderRadius: '0.375rem',
-										overflowX: 'hidden',
-										maxHeight: 'auto',
-										cursor: 'pointer',
-										width: '100%'
-									}}>
-									<img src={sliderdata?.path} alt="" width="100%" height="160px" style={{ objectFit: '' }} />
-								</Grid>
-							</Grid>
-						</div>
-					))}
-				</Slider>
-			</div>
+      <>
+        <ModalComponent
+          Elememt={
+            <CasinoRuleModalContent
+              gameId={gameId}
+              gameName={gameName}
+              handleClose={() => setCasinoRuleModal(false)}
+            />
+          }
+          open={casinoRuleModal}
+          setOpen={setCasinoRuleModal}
+        />
+        <div className="side_banner_cont">
+          <div className="play_games">Play Games</div>
+          <Slider className="right_banner" {...settings}>
+            {data?.data?.map((sliderdata, index) => (
+              <div key={index + sliderdata?.path}>
+                <Grid container>
+                  <Grid
+                    item
+                    // xs={12}
+                    sx={{
+                      backgroundColor: "#fff",
+                      borderRadius: "0.375rem",
+                      overflowX: "hidden",
+                      maxHeight: "auto",
+                      cursor: "pointer",
+                      width: "100%",
+                    }}
+                  >
+                    <img
+                      src={sliderdata?.path}
+                      alt=""
+                      width="100%"
+                      height="160px"
+                      style={{ objectFit: "" }}
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+            ))}
+          </Slider>
+        </div>
 
 			<div className="side_banner-sub_cont">
 				<div className="play_games">Play Games</div>
@@ -104,7 +124,9 @@ export const SiderBanner = () => {
         </div>
         <div className="mobile-casino-banner-conatainer">
           {data?.data?.map((sliderdata, index) => {
-            return <img src={sliderdata.path} alt="" key={index + sliderdata.path} />;
+            return (
+              <img src={sliderdata.path} alt="" key={index + sliderdata.path} />
+            );
           })}
         </div>
       </>

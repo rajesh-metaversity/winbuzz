@@ -12,6 +12,7 @@ import {
   PolygonStrip,
 } from "../matchedDetail/MatchedStyled";
 import Suspend from "../suspend/suspend";
+import StarIcon from "@mui/icons-material/Star";
 import { setBetSlipData } from "../../App/LoginSlice";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -133,7 +134,8 @@ const BookMaker = ({
                   ":last-child": {
                     borderBottom: "0px ",
                   },
-                }}>
+                }}
+              >
                 <Grid item md={5} xs={5.5}>
                   <P props={"left"}>{dataBook?.nation}</P>
                   {PnlOdds?.map((item, id) => {
@@ -150,7 +152,8 @@ const BookMaker = ({
                             oddsPnl[dataBook.sid] < 0
                               ? "text_danger"
                               : "text_success"
-                          }>
+                          }
+                        >
                           {oddsPnl[dataBook.sid] || "0.0"}
                         </span>
                       </div>
@@ -167,13 +170,15 @@ const BookMaker = ({
                           <Grid
                             container
                             gap={{ md: "1%", xs: "2%" }}
-                            sx={{ justifyContent: "center" }}>
+                            sx={{ justifyContent: "center" }}
+                          >
                             <BackGrid
                               className="back"
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </BackGrid>
@@ -182,7 +187,8 @@ const BookMaker = ({
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </BackGrid>
@@ -208,7 +214,8 @@ const BookMaker = ({
                                   data[0]?.minBet,
                                   data[0]?.maxBet
                                 )
-                              }>
+                              }
+                            >
                               <BetTypoPara>{dataBook?.b1}</BetTypoPara>
                               <BetTypoSpan>{dataBook?.bs1}</BetTypoSpan>
                             </BackGrid>
@@ -218,7 +225,8 @@ const BookMaker = ({
                           <Grid
                             container
                             gap={{ md: "1%", xs: "2%" }}
-                            sx={{ justifyContent: "center" }}>
+                            sx={{ justifyContent: "center" }}
+                          >
                             <LayGrid
                               className={
                                 (dataBook?.l1 > prevOdds[id]?.l1
@@ -241,7 +249,8 @@ const BookMaker = ({
                                   data[0]?.minBet,
                                   data[0]?.maxBet
                                 )
-                              }>
+                              }
+                            >
                               <BetTypoPara>{dataBook?.l1}</BetTypoPara>
                               <BetTypoSpan>{dataBook?.ls1}</BetTypoSpan>
                             </LayGrid>
@@ -250,7 +259,8 @@ const BookMaker = ({
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </LayGrid>
@@ -259,7 +269,8 @@ const BookMaker = ({
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </LayGrid>

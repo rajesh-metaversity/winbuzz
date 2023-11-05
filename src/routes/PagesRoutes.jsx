@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: casino,
-        element: <Casino />,
+        element: <CasinoContainer />,
       },
       {
         path: game_list,
@@ -81,7 +81,11 @@ export const router = createBrowserRouter([
       },
       {
         path: multi_market,
+<<<<<<< HEAD
         element: <MultiMarket/>,
+=======
+        element: <MultiMarket />,
+>>>>>>> 5107b3d9529e9b68923f3243f80bb7bf1e809f51
       },
     ],
   },
@@ -92,5 +96,9 @@ export const router = createBrowserRouter([
   {
     path: game,
     element: <CasinoIframe />,
+  },
+  {
+    path: Auragame,
+    element: <AuraCasino />,
   },
 ]);
