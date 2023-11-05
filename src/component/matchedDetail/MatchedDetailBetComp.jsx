@@ -10,6 +10,7 @@ import {
   PolygonStrip,
 } from "./MatchedStyled";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 import { useState } from "react";
@@ -25,6 +26,9 @@ const MatchedDetailBetComp = ({
   minMax,
   showId,
   PnlOdds,
+  handleFavSec,
+  favData,
+  handleFavDel
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -69,15 +73,39 @@ const MatchedDetailBetComp = ({
       })
     );
   };
+
+
   return (
     <>
       {data?.Odds?.map((item, index) => {
+        const createMarketID = favData?.find(
+          (pnl) => pnl?.marketId === item?.marketId
+        )?.marketId;
         return (
           <MainDiv key={index}>
             <GridContainer container>
               <Grid item xs={7} md={4}>
                 <PolygonStrip>
-                  <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
+                  {/* {
+                    createMarketID
+                    ?<StarBorderIcon onClick={()=>handleFavSec(item?.marketId)} fontSize="medium" sx={{ color: "#fff" }} />
+                    :<StarBorderIcon onClick={()=>handleFavSec(item?.marketId)} fontSize="medium" sx={{ color: "red" }} />
+                  } */}
+
+                  {createMarketID ? (
+                    <StarIcon
+                      onClick={() => handleFavDel(item?.marketId)}
+                      fontSize="medium"
+                      sx={{ color: "#ffcf03" }}
+                    />
+                  ) : (
+                    < StarBorderIcon
+                      onClick={() => handleFavSec(item?.marketId)}
+                      fontSize="medium"
+                      sx={{ color: "#fff" }}
+                    />
+                  )}
+
                   <P props={"matchodds"}>{item?.Name}</P>
                 </PolygonStrip>
               </Grid>
@@ -120,8 +148,7 @@ const MatchedDetailBetComp = ({
                       ":last-child": {
                         borderBottom: "0px ",
                       },
-                    }}
-                  >
+                    }}>
                     <Grid item md={5} xs={5.5}>
                       <P props={"left"}>{dataRunn?.name}</P>
                       {PnlOdds?.map((item, id) => {
@@ -138,8 +165,7 @@ const MatchedDetailBetComp = ({
                                 oddsPnl[dataRunn.selectionId] < 0
                                   ? "text_danger"
                                   : "text_success"
-                              }
-                            >
+                              }>
                               {oddsPnl[dataRunn.selectionId] || "0.0"}
                             </span>
                           </div>
@@ -160,8 +186,7 @@ const MatchedDetailBetComp = ({
                                 sx={{
                                   justifyContent: "center",
                                   cursor: "pointer",
-                                }}
-                              >
+                                }}>
                                 {dataRunn?.ex?.availableToBack
                                   ?.map((res, id) => {
                                     const preElmBack =
@@ -195,8 +220,7 @@ const MatchedDetailBetComp = ({
                                         }`}
                                         item
                                         md={3.9}
-                                        xs={12}
-                                      >
+                                        xs={12}>
                                         <BetTypoPara>
                                           {res?.price ? res?.price : 0}
                                         </BetTypoPara>
@@ -217,8 +241,7 @@ const MatchedDetailBetComp = ({
                                 sx={{
                                   justifyContent: "center",
                                   cursor: "pointer",
-                                }}
-                              >
+                                }}>
                                 {dataRunn?.ex?.availableToLay?.map(
                                   (res, id) => {
                                     const preElmLay =
@@ -246,15 +269,13 @@ const MatchedDetailBetComp = ({
                                             item?.maxBet
                                           )
                                         }
-                                     
                                         className={`${bg} ${
                                           id == 1 || id == 2 ? "backgrid_" : ""
                                         }`}
                                         key={id + "lay"}
                                         item
                                         md={3.9}
-                                        xs={12}
-                                      >
+                                        xs={12}>
                                         <BetTypoPara>{res?.price}</BetTypoPara>
                                         <BetTypoSpan>{res?.size}</BetTypoSpan>
                                       </LayGrid>

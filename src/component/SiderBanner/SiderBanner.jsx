@@ -3,10 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import leaf from "../../assets/img/leaf.png";
 import { useBannerListDataMutation } from "../../Services/BannerList/BannerList";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
+import CasinoRule from "../CasinoRules/CasinoRule";
 
 var settings = {
   dots: false,
@@ -26,6 +27,11 @@ export const SiderBanner = () => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const [trigger, { data, isLoading, isError }] = useBannerListDataMutation();
   const [casinoData, setCasinoData] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+  const [gameId, setGameId] = useState();
+  const [gameName, setGameName] = useState()
+
   useEffect(() => {
     trigger({
       type: 2,
@@ -36,6 +42,15 @@ export const SiderBanner = () => {
         setCasinoData(res?.data);
       });
   }, []);
+
+
+  const handelAuraCasino = (gameId, gameName)=>{
+    setGameId(gameId);
+    setGameName(gameName)
+    setOpen(true)
+    
+  }
+
   if (!isBreakPoint ) {
     return (
 		<>
@@ -71,12 +86,13 @@ export const SiderBanner = () => {
 						<span key={index + data?.imageUrl} className="image_cont">
 							<img src={data?.imageUrl} alt="" className="image" />
 							<div className="over-lay">
-								<button className="play-button">Play Now</button>
+								<button onClick={()=>handelAuraCasino(data?.gameId, data.gameName)} className="play-button">Play Now</button>
 							</div>
 						</span>
 					))}
 				</div>
 			</div>
+      <CasinoRule setOpen={setOpen} gameId={gameId}  gameName={gameName} handleClose={handleClose} open={open}/>
 		</>
 	);
   } else {

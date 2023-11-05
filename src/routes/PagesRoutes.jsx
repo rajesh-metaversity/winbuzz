@@ -16,6 +16,7 @@ import {
   deposit,
   withdraw,
   game,
+  multi_market,
 } from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
@@ -27,6 +28,7 @@ import MyBets from "../pages/MyBets/MyBets";
 import Withdraw from "../pages/withdraw/Withdraw";
 import CasinoIframe from "../pages/casinoIframe/CasinoIframe";
 import Deposit from "../pages/Deposit/Deposit";
+import MultiMarket from "../pages/MultiMarket/MultiMarket";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: withdraw,
         element: <Withdraw />,
+      },
+      {
+        path: multi_market,
+        element: <MultiMarket/>,
       },
     ],
   },

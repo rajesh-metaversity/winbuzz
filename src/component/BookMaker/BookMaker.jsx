@@ -1,5 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 import {
   MainDiv,
   BackGrid,
@@ -18,7 +19,17 @@ import moment from "moment";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 import { useState } from "react";
 
-const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
+const BookMaker = ({
+  data,
+  ip,
+  setMinMax,
+  prevOdds,
+  minMax,
+  PnlOdds,
+  handleFavSec,
+  favData,
+  handleFavDel,
+}) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -61,14 +72,26 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
     );
   };
 
+
+  const createMarketID = data && favData?.find(
+    (pnl) => pnl?.marketId ===  data[0]?.mid
+  );
+
+  console.log(createMarketID, "dcdsafasdasds")
   return (
     <>
       <MainDiv>
-
         <GridContainer container>
           <Grid item xs={7} md={4}>
             <PolygonStrip>
-              <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
+              {
+                createMarketID?<StarIcon
+                onClick={() => handleFavDel(data && data[0]?.mid)}
+                fontSize="medium"
+                sx={{ color: "#ffcf03" }}
+              />: <StarBorderIcon onClick={()=>handleFavSec(data && data[0]?.mid)} fontSize="medium" sx={{ color: "#fff" }} />
+              }
+              
               <P props={"matchodds"}>Bookmaker</P>
             </PolygonStrip>
           </Grid>
@@ -246,10 +269,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                     )}
                   </Grid>
                 </Grid>
-                {(dataBook?.sid == selectionids) && (
-                  <MobileBetPlaceModal
-                    minMax={minMax}
-                  />
+                {dataBook?.sid == selectionids && (
+                  <MobileBetPlaceModal minMax={minMax} />
                 )}
               </Grid>
             );

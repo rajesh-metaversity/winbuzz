@@ -5,7 +5,17 @@ import { GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
 import "./FancyTabs.scss";
 
-const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax, fancyPnl }) => {
+const FancyTabs = ({
+  data,
+  ip,
+  prevOdds,
+  setMinMax,
+  minMax,
+  fancyPnl,
+  handleFavSec,
+  favData,
+  handleFavDel,
+}) => {
   const [value, setValue] = useState(0);
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
@@ -27,8 +37,7 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax, fancyPnl }) => {
           onClick={() => {
             setActiveValue(0);
             setFancyData("All");
-          }}
-        >
+          }}>
           All
         </li>
         {tabsVal?.map((curElm, index) => {
@@ -44,8 +53,7 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax, fancyPnl }) => {
                   onClick={() => {
                     setActiveValue(index);
                     setFancyData(curElm);
-                  }}
-                >
+                  }}>
                   {curElm}
                 </li>
               </React.Fragment>
@@ -62,6 +70,9 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax, fancyPnl }) => {
           setMinMax={setMinMax}
           minMax={minMax}
           fancyPnl={fancyPnl}
+          handleFavSec={handleFavSec}
+          handleFavDel={handleFavDel}
+          favData={favData}
         />
       )}
       {/* <FancyBetComp /> */}

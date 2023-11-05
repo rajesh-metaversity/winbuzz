@@ -10,15 +10,54 @@ import BookMaker from "../../component/BookMaker/BookMaker";
 import FancyTabs from "../../component/fancy/FancyTabs";
 import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
 import { useFancyPnlQuery, useOddsPnlQuery } from "../../Services/Pnl/Pnl";
+import { useCreateFavMutation, useDeleteFavMutation, useUserFavMutation } from "../../Services/Favourite/Favourite";
 
 const GameDetail = () => {
   const { id } = useParams();
   const [odds, setOdds] = useState({});
   const [prevOdds, setPrevOdds] = useState({});
+  const [createFavPay, setCreateFavPay] = useState({
+    marketId: "",
+    matchId: ""
+  });
   const [minMax, setMinMax] = useState({
     minBet: "",
     maxBet: "",
   });
+
+  const [userFav, { data: fav }] = useUserFavMutation();
+
+  const [trigger, {data:createFav}] = useCreateFavMutation();
+  const [deletedData, {data:deleteFav}] = useDeleteFavMutation();
+
+
+  const handleFavSec = (marketId)=>{
+    trigger({
+      marketId: marketId,
+      matchId: id
+    })
+  }
+  const handleFavDel = (marketId)=>{
+    deletedData({
+      marketId: marketId,
+      matchId: id
+    })
+  }
+
+  useEffect(()=>{
+    userFav({
+      matchId: id
+    })
+  }, [id])
+
+  useEffect(()=>{
+    userFav({
+      matchId: id
+    })
+  }, [createFav?.data, deleteFav?.data])
+
+
+
 
   useEffect(() => {
     socket.on("OddsUpdated", (e) =>
@@ -59,7 +98,7 @@ const GameDetail = () => {
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
         <Iframes odds={odds} />
-        <MatchedDetailBetComp
+        <MatchedDetailBetComp        
           minMax={minMax}
           setMinMax={setMinMax}
           prevOdds={prevOdds}
@@ -67,6 +106,9 @@ const GameDetail = () => {
           data={odds}
           showId={1}
           PnlOdds={oddsPnl?.data}
+          handleFavSec={handleFavSec}
+          handleFavDel={handleFavDel}
+          favData={fav?.data}
         />
         <BookMaker
           minMax={minMax}
@@ -76,8 +118,12 @@ const GameDetail = () => {
           data={odds?.Bookmaker}
           showId={2}
           PnlOdds={oddsPnl?.data}
+          handleFavSec={handleFavSec}
+          handleFavDel={handleFavDel}
+          favData={fav?.data}
         />
         <FancyTabs
+         setCreateFavPay={setCreateFavPay}
           minMax={minMax}
           prevOdds={prevOdds}
           setMinMax={setMinMax}
@@ -85,6 +131,9 @@ const GameDetail = () => {
           ip={data?.ip}
           showId={3}
           fancyPnl={FancyPnl?.data}
+          handleFavSec={handleFavSec}
+          handleFavDel={handleFavDel}
+          favData={fav?.data}
         />
       </div>
       <div className="game-detail-right-col">
