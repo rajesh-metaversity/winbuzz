@@ -11,6 +11,7 @@ import {
   PolygonStrip,
 } from "../matchedDetail/MatchedStyled";
 import Suspend from "../suspend/suspend";
+import StarIcon from "@mui/icons-material/Star";
 import { setBetSlipData } from "../../App/LoginSlice";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -18,7 +19,17 @@ import moment from "moment";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 import { useState } from "react";
 
-const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
+const BookMaker = ({
+  data,
+  ip,
+  setMinMax,
+  prevOdds,
+  minMax,
+  PnlOdds,
+  favData,
+  handleFavDel,
+  handleFavSec,
+}) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -60,15 +71,28 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
       })
     );
   };
-
+  const createMarketID =
+    data && favData?.find((pnl) => pnl?.marketId === data[0]?.mid);
   return (
     <>
       <MainDiv>
-
         <GridContainer container>
           <Grid item xs={7} md={4}>
             <PolygonStrip>
-              <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
+              {createMarketID ? (
+                <StarIcon
+                  onClick={() => handleFavDel(data && data[0]?.mid)}
+                  fontSize="medium"
+                  sx={{ color: "#ffcf03" }}
+                />
+              ) : (
+                <StarBorderIcon
+                  onClick={() => handleFavSec(data && data[0]?.mid)}
+                  fontSize="medium"
+                  sx={{ color: "#fff" }}
+                />
+              )}
+
               <P props={"matchodds"}>Bookmaker</P>
             </PolygonStrip>
           </Grid>
@@ -110,7 +134,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                   ":last-child": {
                     borderBottom: "0px ",
                   },
-                }}>
+                }}
+              >
                 <Grid item md={5} xs={5.5}>
                   <P props={"left"}>{dataBook?.nation}</P>
                   {PnlOdds?.map((item, id) => {
@@ -127,7 +152,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                             oddsPnl[dataBook.sid] < 0
                               ? "text_danger"
                               : "text_success"
-                          }>
+                          }
+                        >
                           {oddsPnl[dataBook.sid] || "0.0"}
                         </span>
                       </div>
@@ -144,13 +170,15 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                           <Grid
                             container
                             gap={{ md: "1%", xs: "2%" }}
-                            sx={{ justifyContent: "center" }}>
+                            sx={{ justifyContent: "center" }}
+                          >
                             <BackGrid
                               className="back"
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </BackGrid>
@@ -159,7 +187,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </BackGrid>
@@ -185,7 +214,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                                   data[0]?.minBet,
                                   data[0]?.maxBet
                                 )
-                              }>
+                              }
+                            >
                               <BetTypoPara>{dataBook?.b1}</BetTypoPara>
                               <BetTypoSpan>{dataBook?.bs1}</BetTypoSpan>
                             </BackGrid>
@@ -195,7 +225,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                           <Grid
                             container
                             gap={{ md: "1%", xs: "2%" }}
-                            sx={{ justifyContent: "center" }}>
+                            sx={{ justifyContent: "center" }}
+                          >
                             <LayGrid
                               className={
                                 (dataBook?.l1 > prevOdds[id]?.l1
@@ -218,7 +249,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                                   data[0]?.minBet,
                                   data[0]?.maxBet
                                 )
-                              }>
+                              }
+                            >
                               <BetTypoPara>{dataBook?.l1}</BetTypoPara>
                               <BetTypoSpan>{dataBook?.ls1}</BetTypoSpan>
                             </LayGrid>
@@ -227,7 +259,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </LayGrid>
@@ -236,7 +269,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                               display={{ xs: "none", md: "block" }}
                               item
                               md={3.9}
-                              xs={0}>
+                              xs={0}
+                            >
                               <BetTypoPara></BetTypoPara>
                               <BetTypoSpan></BetTypoSpan>
                             </LayGrid>
@@ -246,10 +280,8 @@ const BookMaker = ({ data, ip, setMinMax, prevOdds, minMax, PnlOdds }) => {
                     )}
                   </Grid>
                 </Grid>
-                {(dataBook?.sid == selectionids) && (
-                  <MobileBetPlaceModal
-                    minMax={minMax}
-                  />
+                {dataBook?.sid == selectionids && (
+                  <MobileBetPlaceModal minMax={minMax} />
                 )}
               </Grid>
             );

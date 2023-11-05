@@ -20,6 +20,7 @@ const Paytm = ({
   setWithdrawDetails,
   withdrawDetail,
   valueChangeHandler,
+  checkError,
 }) => {
   const tableheading = ["Account number", "account Holder name", "action"];
   const [radioValue, setRadioSelectValue] = useState("a");
@@ -61,7 +62,6 @@ const Paytm = ({
       };
     });
   };
-
   return (
     <div>
       <Grid container sx={{ md: { gap: "1rem", xs: 0 } }}>
@@ -90,6 +90,9 @@ const Paytm = ({
                 "aria-label": "weight",
               }}
             />
+            {checkError?.accountNumber && (
+              <span style={{ color: "red" }}>{checkError?.accountNumber}</span>
+            )}
           </FormControl>
         </Grid>
 
@@ -116,6 +119,11 @@ const Paytm = ({
                 "aria-label": "weight",
               }}
             />
+            {checkError?.accountHolderName && (
+              <span style={{ color: "red" }}>
+                {checkError?.accountHolderName}
+              </span>
+            )}
           </FormControl>
         </Grid>
       </Grid>

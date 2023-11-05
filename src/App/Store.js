@@ -16,7 +16,8 @@ import { Qtech } from "../Services/Qtech/Qtech";
 import { stake } from "../Services/stake/Deposit";
 import { Withdraw } from "../Services/withdraw/Withdraw";
 import { PnlApi } from "../Services/Pnl/Pnl";
-
+import { Casino } from "../Services/auraCasino/AuraCasino";
+import { Favourite } from "../Services/Favourite/Favourite";
 
 export const store = configureStore({
   reducer: {
@@ -37,7 +38,8 @@ export const store = configureStore({
     [stake.reducerPath]: stake.reducer,
     [Withdraw.reducerPath]: Withdraw.reducer,
     [PnlApi.reducerPath]: PnlApi.reducer,
-
+    [Casino.reducerPath]: Casino.reducer,
+    [Favourite.reducerPath]: Favourite.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -59,7 +61,8 @@ export const store = configureStore({
       .concat(stake.middleware)
       .concat(Withdraw.middleware)
       .concat(PnlApi.middleware)
-
+      .concat(Casino.middleware)
+      .concat(Favourite.middleware),
 });
 
 setupListeners(store.dispatch);
