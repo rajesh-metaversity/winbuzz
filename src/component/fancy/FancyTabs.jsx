@@ -3,9 +3,20 @@ import React, { useState } from "react";
 
 import { GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import FancyBetComp from "./FancyBetComp";
+import Empty from "../../component/empty/Empty";
 import "./FancyTabs.scss";
 
-const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
+const FancyTabs = ({
+  data,
+  ip,
+  prevOdds,
+  setMinMax,
+  minMax,
+  fancyPnl,
+  handleFavSec,
+  favData,
+  handleFavDel,
+}) => {
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
   const tabsVal = data ? Object.keys(data) : [];
@@ -52,7 +63,7 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
           }
         })}
       </ul>
-      {data[fancyData]?.length && (
+      {data[fancyData]?.length ? (
         <FancyBetComp
           fancyItem={data[fancyData]}
           fancyData={fancyData}
@@ -60,7 +71,13 @@ const FancyTabs = ({ data, ip, prevOdds, setMinMax, minMax }) => {
           prevOdds={prevOdds[fancyData]}
           setMinMax={setMinMax}
           minMax={minMax}
+          fancyPnl={fancyPnl}
+          handleFavSec={handleFavSec}
+          handleFavDel={handleFavDel}
+          favData={favData}
         />
+      ) : (
+        <Empty />
       )}
       {/* <FancyBetComp /> */}
     </>

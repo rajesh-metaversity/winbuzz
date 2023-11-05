@@ -1,12 +1,13 @@
 .main-layout-container {
   width: 100%;
   height: 100vh;
+  margin-bottom: 75px;
   @media screen and (max-width: 780px) {
-  height: 100%;
+    height: 100%;
   }
   .header-layout {
     height: auto;
-    position: sticky;
+    // position: sticky;
     top: 0%;
     z-index: 100;
   }
@@ -33,13 +34,13 @@
     .sider-layout-active {
       width: 100%;
       position: fixed;
-      z-index: 103;
-      height: calc(100vh - 90px);
+      z-index: 999999;
+      height: calc(100vh - 108px);
       background-color: transparent;
       border-left: 1px solid #ddd;
       border-right: none;
       transition: width 0.4s;
-      top: 90px;
+      top: 108px;
     }
     .content {
       width: calc(60% - 20px);

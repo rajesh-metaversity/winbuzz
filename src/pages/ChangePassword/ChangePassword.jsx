@@ -3,15 +3,20 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useChangePasswordMutation } from '../../Services/ChangePassword/ChangePassword';
 import { useEffect, useState } from 'react';
+import Loader from '../../component/Loader/Loader';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import LoginForm from '../../component/loginForm/LoginForm';
 
 const ChangePassword = () => {
-	const initialValues = {
+	let initialValues = {
 		currentPassword: '',
 		newPassword: '',
 		confirmPassword: '',
 		appUrl: window.location.hostname
 	};
-	const [trigger, { data, isLoading, isError }] = useChangePasswordMutation();
+	const nav = useNavigate()
+	const [trigger, { data, isLoading, isError, status }] = useChangePasswordMutation();
 
 	const validationSchema = Yup.object().shape({
 		currentPassword: Yup.string().required('The Old Password Field is required'),
@@ -24,45 +29,53 @@ const ChangePassword = () => {
 	const handleSubmit = (values, actions) => {
 		actions.setSubmitting(false);
 		trigger(values);
-
-		if (data.status) {
-			initialValues((prev) => {
-				return {
-					...prev,
-					currentPassword: "",
-					newPassword: "",
-					confirmPassword: ""
-				}
-			})
-		}
 	};
-
-
-
-	
+	useEffect(() => {
+		if (data?.status) {
+			toast.success(data?.message);
+			// initialValues(prev => {
+				// 	return {
+					// 		...prev,
+			// 		currentPassword: '',
+			// 		newPassword: '',
+			// 		confirmPassword: ''
+			// 	};
+			// });
+			if (reset) {
+				reset();
+			}
+		} else {
+			toast.error(data?.message);
+		}
+	}, [data, ]);
+	let reset;
 
 	return (
 		<div className="change_password_cont">
+			{isLoading && <Loader />}
 			<p>Change Password</p>
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-				{() => (
-					<Form>
-						<div className="change-password-div">
-							<Field type="password" name="currentPassword" placeholder="Old Password" values={initialValues.currentPassword } />
-							<ErrorMessage name="currentPassword" component="div" className="error_message" />
+				{({ resetForm }) => {
+					reset = resetForm;
+					return (
+						<Form>
+							<div className="change-password-div">
+								<Field type="password" name="currentPassword" placeholder="Old Password" values={initialValues?.currentPassword} />
+								<ErrorMessage name="currentPassword" component="div" className="error_message" />
 
-							<Field type="password" name="newPassword" placeholder="New Password" values={initialValues.newPassword }/>
-							<ErrorMessage name="newPassword" component="div" className="error_message" />
+								<Field type="password" name="newPassword" placeholder="New Password" values={initialValues?.newPassword} />
+								<ErrorMessage name="newPassword" component="div" className="error_message" />
 
-							<Field type="password" name="confirmPassword" placeholder="Repeat Password" values={initialValues.confirmPassword }/>
-							<ErrorMessage name="confirmPassword" component="div" className="error_message" />
+								<Field type="password" name="confirmPassword" placeholder="Repeat Password" values={initialValues?.confirmPassword} />
+								<ErrorMessage name="confirmPassword" component="div" className="error_message" />
 
-							<div className="save_button">
-								<button type="submit">Save</button>
+								<div className="save_button">
+									<button type="submit">Save</button>
+								</div>
 							</div>
-						</div>
-					</Form>
-				)}
+						</Form>
+					);
+				}}
 			</Formik>
 		</div>
 	);

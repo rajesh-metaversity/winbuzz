@@ -1,16 +1,19 @@
 import logo from "../../assets/img/logo.png";
 import CloseIcon from "@mui/icons-material/Close";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 ///styles
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "../../Services/Auth/Login";
-import { useDispatch, useSelector } from "react-redux";
-import { isLoginSelector, setIslogin } from "../../App/LoginSlice";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setIslogin } from "../../App/LoginSlice";
+
+import Loader from "../Loader/Loader";
 const LoginForm = ({ setOpen }) => {
-  const nav = useNavigate();
   const dispatch = useDispatch();
-  const loginCheck = useSelector(isLoginSelector);
+
   const [trigger, { data, error: isError, isLoading }] = useLoginMutation();
 
   const [loginData, setloginData] = useState({
@@ -24,12 +27,14 @@ const LoginForm = ({ setOpen }) => {
   });
   useEffect(() => {
     if (data) {
-      if (data.status === false) {
-        //   message.error(data?.message);
+      if (data.status == false) {
+        toast.error(data?.message);
         dispatch(setIslogin(false));
       } else if (data?.token) {
-        //   nav(rules_Regulation);
         dispatch(setIslogin(true));
+        setOpen(false);
+        //   nav(rules_Regulation);
+        toast.success("Login Successful");
       }
       localStorage.setItem("userId", data.userId);
       localStorage.setItem("token", data.token);
@@ -96,56 +101,66 @@ const LoginForm = ({ setOpen }) => {
     if (isSuccess) {
       trigger(loginData);
     }
-    //
   };
-  useEffect(() => {
-    if (loginCheck) {
-      setOpen(false);
-    }
-  }, [loginCheck]);
 
-  return (
-    <div className="login_modal">
-      <div className="cross_icon" onClick={() => setOpen(false)}>
-        <CloseIcon />
-      </div>
-      <div className="login_section">
-        <div className="winbuaa_logo">
-          <img src={logo} alt="" />
+  if (isLoading) {
+    return <Loader />;
+  } else {
+    return (
+      <form>
+        <div className="login_modal">
+          <div className="cross_icon" onClick={() => setOpen(false)}>
+            <CloseIcon />
+          </div>
+          <div className="login_section">
+            <div className="winbuaa_logo">
+              <img src={logo} alt="" />
+            </div>
+            <form className="login-form">
+              <input
+                type="text"
+                placeholder="Username"
+                onChange={handleChange}
+                name="userId"
+                value={loginData.userId}
+                style={{
+                  border: error.userId
+                    ? "1px solid red"
+                    : "1px solid transparent",
+                }}
+              />
+              <input
+                placeholder="Password"
+                onChange={handleChange}
+                name="password"
+                type="password"
+                value={loginData.password}
+                style={{
+                  border: error.password
+                    ? "1px solid red"
+                    : "1px solid transparent",
+                }}
+              />
+            </form>
+            <div className="login_buttons">
+              <button
+                className="login"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onSumbit();
+                }}
+              >
+                LOGIN
+              </button>
+              <button className="login_with_demo">LOGINWITH DEMO ID</button>
+              <button className="login_with_demo">
+                <a href="#">Forgot Password?</a>
+              </button>
+            </div>
+          </div>
         </div>
-        <form className="login-form">
-          <input
-            type="text"
-            placeholder="Username"
-            onChange={handleChange}
-            name="userId"
-            value={loginData.userId}
-            style={{
-              border: error.userId ? "1px solid red" : "1px solid transparent",
-            }}
-          />
-          <input
-            placeholder="Password"
-            onChange={handleChange}
-            name="password"
-            type="password"
-            value={loginData.password}
-            style={{
-              border: error.password
-                ? "1px solid red"
-                : "1px solid transparent",
-            }}
-          />
-        </form>
-        <div className="login_buttons">
-          <button className="login" onClick={onSumbit}>
-            LOGIN
-          </button>
-          <button className="login_with_demo">LOGINWITH DEMO ID</button>
-          <a href="#">Forgot Password</a>
-        </div>
-      </div>
-    </div>
-  );
+      </form>
+    );
+  }
 };
 export default LoginForm;

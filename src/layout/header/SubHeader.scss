@@ -80,6 +80,7 @@
       white-space: nowrap;
       height: 100%;
       border-right: 1px solid #ccc;
+      cursor: pointer;
       span {
         font-size: 12px;
         a {
@@ -101,6 +102,7 @@
   align-items: center;
   a {
     width: 50%;
+    text-decoration: none;
     .mobile-subheader-deposit-left-col {
       width: 100%;
       background-color: darkgreen;

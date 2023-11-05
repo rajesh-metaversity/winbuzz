@@ -30,8 +30,12 @@
     align-items: center;
     justify-content: center;
     background-color: black;
-    img {
-      width: 50%;
+    a {
+      width: 100%;
+      text-align: center;
+      img {
+        width: 50%;
+      }
     }
   }
   .mobile-footer-left-col {

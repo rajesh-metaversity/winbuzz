@@ -25,9 +25,11 @@ export const WebHeaderComponent = ({
   balanceData,
   setSiderOpen,
   siderOpen,
+  setOpen,
+  open,
 }) => {
   const loginCheck = useSelector(isLoginSelector);
-  const [open, setOpen] = useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -144,7 +146,10 @@ export const WebHeaderComponent = ({
                     </span>
                   </li>
                   <li className="header-user-name" id="basic-menu">
-                    <UserDetailDropDown name={userId} />
+                    <UserDetailDropDown
+                      name={userId}
+                      balanceData={balanceData}
+                    />
                   </li>
                 </>
               )}

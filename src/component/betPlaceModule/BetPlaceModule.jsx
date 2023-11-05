@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { betSlipSelector, setBetSlipData } from "../../App/LoginSlice";
 import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
+import { toast } from "react-toastify";
 
 export const WebBetPlaceModule = ({ minMax }) => {
   const { data: betNumberArray } = useStakeQuery();
@@ -50,12 +51,28 @@ export const WebBetPlaceModule = ({ minMax }) => {
     trigger(betData);
   };
 
+  useEffect(() => {
+    if (data?.status) {
+      toast.success(data?.message);
+    } else {
+      toast.error(data?.message);
+    }
+  }, [data]);
+
+  const dispatch = useDispatch();
+
+  const handleBetModalOpen = () => {
+    dispatch(setBetSlipData());
+  };
   return (
     <>
       {selector?.data != null && (
         <>
           <div className="right_cont">
-            <Heading isBack={selector?.data?.isBack} />
+            <Heading
+              isBack={selector?.data?.isBack}
+              handleBetModalOpen={handleBetModalOpen}
+            />
 
             <div className="bet_details">
               <span className="team_name">
@@ -116,7 +133,9 @@ export const WebBetPlaceModule = ({ minMax }) => {
                 </p>
               </span>
               <span className="order_buttons">
-                <button>Cancel Order</button>
+                <button onClick={() => handleBetModalOpen()}>
+                  Cancel Order
+                </button>
                 <button
                   onClick={handlePlaceBet}
                   style={{
@@ -211,8 +230,12 @@ export const MobileBetPlaceModal = ({ minMax }) => {
               </Typography>
             </Box>
             <Box className="minmax">
-              <Typography component="small">Min Bet:</Typography>
-              <Typography component="small">max bet:</Typography>
+              <Typography component="small">
+                Min Bet:{minMax?.minBet}
+              </Typography>
+              <Typography component="small">
+                max bet:{minMax?.maxBet}
+              </Typography>
             </Box>
           </Box>
           <Box className="oddsstake">

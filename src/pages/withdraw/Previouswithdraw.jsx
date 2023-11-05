@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Typography } from '@mui/material';
 import { useWithdrawClientListQuery } from '../../Services/Withdraw/Withdraw';
+import Loader from '../../component/Loader/Loader';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -49,64 +50,71 @@ const Previouswithdraw = () => {
 
 	// } )
 
-	const { data: clientList } = useWithdrawClientListQuery();
+	const { data: clientList,error, isLoading:loading } = useWithdrawClientListQuery();
+	console.log(loading, "ISLOADING")
 
-	return (
-		<Box className="tableparent_">
-			<Typography className="tabletopheading">Previous Withdraw</Typography>
-			<TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-				<Table sx={{ minWidth: 700 }} aria-label="customized table">
-					<TableHead>
-						<TableRow>
-							{tableheading?.map((heading, index) => (
-								<StyledTableCell key={index + 'a' + heading} sx={{ whiteSpace: 'nowrap', textTransform: 'capitalize' }}>
-									{heading}
-								</StyledTableCell>
+	if (loading) {
+		return <Loader />
+	}
+
+	else {
+		return (
+			<Box className="tableparent_">
+				<Typography className="tabletopheading">Previous Withdraw</Typography>
+				<TableContainer component={Paper} sx={{ borderRadius: 0 }}>
+					<Table sx={{ minWidth: 700 }} aria-label="customized table">
+						<TableHead>
+							<TableRow>
+								{tableheading?.map((heading, index) => (
+									<StyledTableCell key={index + 'a' + heading} sx={{ whiteSpace: 'nowrap', textTransform: 'capitalize' }}>
+										{heading}
+									</StyledTableCell>
+								))}
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{clientList?.data?.map((rowdata, index) => (
+								<StyledTableRow key={rowdata?.accountNumber + index + rowdata?.accountHolderName}>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.accountNumber}
+									</StyledTableCell>
+
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.accountHolderName}
+									</StyledTableCell>
+
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.amount}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.bankName}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.ifsc}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.accountType}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.time}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.remark}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										{rowdata?.status}
+									</StyledTableCell>
+									<StyledTableCell StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
+										Cancel
+									</StyledTableCell>
+								</StyledTableRow>
 							))}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{clientList?.data?.map((rowdata, index) => (
-							<StyledTableRow key={rowdata?.accountNumber + index + rowdata?.accountHolderName}>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.accountNumber}
-								</StyledTableCell>
-
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.accountHolderName}
-								</StyledTableCell>
-
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.amount}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.bankName}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.ifsc}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.accountType}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.time}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.remark}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									{rowdata?.status}
-								</StyledTableCell>
-								<StyledTableCell key={index} StyledTableCell component="th" scope="row" sx={{ whiteSpace: 'nowrap' }}>
-									Cancel
-								</StyledTableCell>
-							</StyledTableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
-		</Box>
-	);
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</Box>
+		);
+	}
 };
 
 export default Previouswithdraw;
