@@ -51,8 +51,8 @@ for (let i in uniqueObject) {
   return (
     <>      {
       newArray?.map((res, id)=>{
-
-          if(data && Object.keys(data[res?.matchId])?.length == 0) return <></>
+        if (data && Object.keys(data[res?.matchId])?.length == 0) return <></>
+        console.log(res, "dscasasd")
           return (
             <>
            <MultiMarketDetails data={data && data[res?.matchId]} matchName={res?.matchName}/>
