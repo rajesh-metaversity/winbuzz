@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { home } from "../../routes/PagesUrl";
 
-const Iframes = ({ odds }) => {
+const Iframes = ({ odds, id }) => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -27,12 +27,18 @@ const Iframes = ({ odds }) => {
           <stong>{odds?.Odds?.length ? odds?.Odds[0].eventTime : "" }</stong>
           
         </p>
-        <button onClick={() => setToggle(!toggle)} className="score_btn">
+        {
+          id !== 1 && <button onClick={() => setToggle(!toggle)} className="score_btn">
           <RemoveRedEyeIcon />
           Score
         </button>
+        }
+        
       </div>
-      <div className={toggle ? "score_board2" : "score_board"}></div>
+      {
+        id !== 1 &&  <div  className={toggle ? "score_board2" : "score_board"}></div>
+      }
+      
     </>
   );
 };
