@@ -1,7 +1,7 @@
-import { Box, Grid, Tabs, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Grid } from "@mui/material";
+import { useState } from "react";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { GridContainer, P, PolygonStrip, CustomTab } from "./fancyBetStyled";
+import { GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import {
   BackGrid,
   BetTypoPara,
@@ -9,29 +9,50 @@ import {
   LayGrid,
   MainDiv,
 } from "../matchedDetail/MatchedStyled";
-import FancyTabs from "./FancyTabs";
+import StarIcon from "@mui/icons-material/Star";
 import { setBetSlipData } from "../../App/LoginSlice";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 
-const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, fancyPnl }) => {
+const FancyBetComp = ({
+  fancyItem,
+  fancyData,
+  ip,
+  prevOdds,
+  setMinMax,
+  minMax,
+  fancyPnl,
+  handleFavSec,
+  favData,
+  handleFavDel,
+}) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const { id } = useParams();
-  const [selectionIds, setSelectionIds] = useState()
+  const [selectionIds, setSelectionIds] = useState();
 
   const dispatch = useDispatch();
 
-
-  const handleBackBet = (marketId, matchName, sid, odds, priceValue, isBack, isFancy, marketName, min, max) => {
+  const handleBackBet = (
+    marketId,
+    matchName,
+    sid,
+    odds,
+    priceValue,
+    isBack,
+    isFancy,
+    marketName,
+    min,
+    max
+  ) => {
     setMinMax({
-      minBet:min,
-      maxBet:max
-    })
-    setSelectionIds(sid)
+      minBet: min,
+      maxBet: max,
+    });
+    setSelectionIds(sid);
     dispatch(
       setBetSlipData({
         userIp: ip,
@@ -47,7 +68,7 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, f
         isBack: isBack,
       })
     );
-  }
+  };
 
   return (
     <MainDiv>
@@ -67,10 +88,12 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, f
 
         <Grid item md={2}></Grid>
       </GridContainer>
-
       <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
         {fancyItem?.length > 0 &&
           fancyItem?.map((item, id) => {
+            const createMarketID = favData?.find(
+              (pnl) => pnl?.marketId === item?.sid
+            )?.marketId;
             return (
               <Grid
                 key={id}
@@ -84,13 +107,36 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, f
                   ":last-child": {
                     borderBottom: "0px ",
                   },
-                }}>
+                }}
+              >
                 <Grid item md={6} xs={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
+                    {createMarketID ? (
+                      <StarIcon
+                        onClick={() => handleFavDel(item?.sid)}
+                        fontSize="medium"
+                        sx={{ color: "#ffcf03" }}
+                      />
+                    ) : (
+                      <StarBorderIcon
+                        onClick={() => handleFavSec(item?.sid)}
+                        fontSize="medium"
+                        sx={{ color: "#ccc" }}
+                      />
+                    )}
+
                     <P props={"fancyodds"}>{item?.nation}</P>
                   </Box>
-                  <p style={{margin:"0", padding:"0px 0 0 12px", fontSize:"12px"}}>{fancyPnl?.find((pnl) =>pnl?.marketId === item?.sid)?.pnl || 0}</p>
+                  <p
+                    style={{
+                      margin: "0",
+                      padding: "0px 0 0 12px",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {fancyPnl?.find((pnl) => pnl?.marketId === item?.sid)
+                      ?.pnl || 0}
+                  </p>
                 </Grid>
                 <Grid item md={6} xs={6} sx={{ padding: "0px 4px" }}>
                   <Grid container>
@@ -99,13 +145,17 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, f
                         <Grid
                           container
                           gap={{ md: "1%", xs: "2%" }}
-                          sx={{ justifyContent: "flex-end" }}>
-                          <LayGrid item md={4} xs={12}
-                          className={
-                            ( Number(item?.l1) < Number(prevOdds[id]?.l1)
-                              ? "odds-down-color "
-                              : " hiuhiuhiu ") + "lay"
-                          }
+                          sx={{ justifyContent: "flex-end" }}
+                        >
+                          <LayGrid
+                            item
+                            md={4}
+                            xs={12}
+                            className={
+                              (Number(item?.l1) < Number(prevOdds[id]?.l1)
+                                ? "odds-down-color "
+                                : " hiuhiuhiu ") + "lay"
+                            }
                             onClick={() =>
                               handleBackBet(
                                 item?.mid,
@@ -130,13 +180,21 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, f
                         <Grid
                           container
                           gap={{ md: "1%", xs: "2%" }}
-                          sx={{ justifyContent: "space-evenly", flexWrap: 'nowrap' }}>
-                          <BackGrid item md={4} xs={12} sx={{ mx: 0.5 }}
-                          className={
-                            ( Number(item?.b1) < Number(prevOdds[id]?.b1)
-                              ? "odds-up-color "
-                              : " hiuhiuhiu ") + "back"
-                          }
+                          sx={{
+                            justifyContent: "space-evenly",
+                            flexWrap: "nowrap",
+                          }}
+                        >
+                          <BackGrid
+                            item
+                            md={4}
+                            xs={12}
+                            sx={{ mx: 0.5 }}
+                            className={
+                              (Number(item?.b1) < Number(prevOdds[id]?.b1)
+                                ? "odds-up-color "
+                                : " hiuhiuhiu ") + "back"
+                            }
                             onClick={() =>
                               handleBackBet(
                                 item?.mid,
@@ -150,30 +208,38 @@ const FancyBetComp = ({ fancyItem, fancyData, ip, prevOdds, setMinMax, minMax, f
                                 item?.minBet,
                                 item?.maxBet
                               )
-                            }>
+                            }
+                          >
                             <BetTypoPara>{item?.b1}</BetTypoPara>
                             <BetTypoSpan>{item?.bs1}</BetTypoSpan>
                           </BackGrid>
                           <Grid
-                            display={{ xs: 'none', md: 'block' }}
+                            display={{ xs: "none", md: "block" }}
                             item
                             md={8}
-                            sx={{ alignItems: "center", flexDirection: "column" }}>
-                            <BetTypoPara props={"fancyp"}>Min Bet: {item?.minBet}</BetTypoPara>
-                            <BetTypoSpan>Max Market: {item?.maxBet}</BetTypoSpan>
+                            sx={{
+                              alignItems: "center",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <BetTypoPara props={"fancyp"}>
+                              Min Bet: {item?.minBet}
+                            </BetTypoPara>
+                            <BetTypoSpan>
+                              Max Market: {item?.maxBet}
+                            </BetTypoSpan>
                           </Grid>
                         </Grid>
                       </Grid>
-
                     </>
                   </Grid>
                 </Grid>
-                {item?.sid == selectionIds && <MobileBetPlaceModal minMax={minMax} />}
+                {item?.sid == selectionIds && (
+                  <MobileBetPlaceModal minMax={minMax} />
+                )}
               </Grid>
-            )
-          })
-        }
-
+            );
+          })}
       </GridContainer>
     </MainDiv>
   );

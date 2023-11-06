@@ -12,7 +12,7 @@ import {
   useTheme,
 } from "@mui/material";
 import "./styles.scss";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   useBankAccountQuery,
@@ -141,7 +141,7 @@ const Withdraw = () => {
     noAmount: "The Amount field is required",
     invalidAmount: "The Amount field may only contain numeric characters",
   };
-
+  const [checkError, setCheckError] = useState({});
   const withdrawHandler = () => {
     const newError = {
       accountHolderName: withdrawDetails.accountHolderName
@@ -161,7 +161,7 @@ const Withdraw = () => {
             ? undefined
             : "Mobile no should be 10 digits."
           : withdrawDetails.accountNumber?.match(/^[0-9]{8,16}$/)
-          ? undefined
+          ? "undefined"
           : err.invalidAccount
         : err.noAccount,
 
@@ -190,8 +190,10 @@ const Withdraw = () => {
     var check = Object.fromEntries(
       Object.entries(newError).filter(([_, v]) => v != null)
     );
-    console.log(check, withdrawDetails, "check");
-    if (!check) {
+    console.log(check, "checkError");
+
+    setCheckError(check);
+    if (!Object.keys(check).length) {
       trigger(withdrawDetails);
     }
   };
@@ -217,7 +219,7 @@ const Withdraw = () => {
       </Box>
 
       <Grid container className="inputwithbutton">
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={5}>
           <Typography className="wc" component="p">
             Withdraw Coins
           </Typography>
@@ -236,8 +238,11 @@ const Withdraw = () => {
             className="withdrawcoins"
             placeholder="Withdraw Coins"
           />
+          <Typography className="wc" component="p">
+            <span style={{ color: "red" }}>{checkError?.amount}</span>
+          </Typography>
         </Grid>
-        <Grid item xs={12} md={9} className="rightcol">
+        <Grid item xs={12} md={7} className="rightcol">
           <Typography component="p" className="ft">
             Choose From your favourite transaction
           </Typography>
@@ -356,6 +361,7 @@ const Withdraw = () => {
             bankDetailsLoading={bankDetailsLoading}
             setWithdrawDetails={setWithdrawDetails}
             withdrawDetail={withdrawDetails}
+            checkError={checkError}
           />
         </TabPanel>
         <TabPanel value={value} index={1}>
@@ -364,6 +370,7 @@ const Withdraw = () => {
             upiDetails={userWithdrawDetails}
             setWithdrawDetails={setWithdrawDetails}
             withdrawDetail={withdrawDetails}
+            checkError={checkError}
           />
         </TabPanel>
         <TabPanel value={value} index={2}>
@@ -372,6 +379,7 @@ const Withdraw = () => {
             paytmDetails={userWithdrawDetails}
             setWithdrawDetails={setWithdrawDetails}
             withdrawDetail={withdrawDetails}
+            checkError={checkError}
           />
         </TabPanel>
 

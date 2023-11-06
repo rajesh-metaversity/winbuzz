@@ -18,6 +18,7 @@ import { BettingStyled, SelectStyles } from "./styled";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
 import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
 import Loader from "../../component/Loader/Loader";
+import Empty from "../../component/empty/Empty";
 const dateFormat = "YYYY-MM-DD";
 
 const BettingProfitLoss = () => {
@@ -95,7 +96,7 @@ const BettingProfitLoss = () => {
       };
     });
   };
-
+  console.log(data, "data");
   if (isLoading) {
     return <Loader />;
   } else {
@@ -105,7 +106,9 @@ const BettingProfitLoss = () => {
           <p>betting profit loss</p>
           <div className="dates_cont">
             <div className="input_field">
-            <label htmlFor="form" style={{fontSize: "12px"}}>Select Sport</label>
+              <label htmlFor="form" style={{ fontSize: "12px" }}>
+                Select Sport
+              </label>
               <SelectStyles
                 onChange={(e) => getMatchDetail(e.target.value)}
                 value={bettingPnl.sportId}
@@ -119,7 +122,9 @@ const BettingProfitLoss = () => {
             </div>
 
             <div className="input_field">
-            <label htmlFor="form" style={{fontSize: "12px"}}>Select Match</label>
+              <label htmlFor="form" style={{ fontSize: "12px" }}>
+                Select Match
+              </label>
               <SelectStyles
                 onChange={(e) => matchHandler(e.target.value)}
                 value={bettingPnl?.matchId}
@@ -182,21 +187,37 @@ const BettingProfitLoss = () => {
                   <TableCell>Amount</TableCell>
                 </TableRow>
               </TableHead>
-              {/* <TableBody className="bet_table-body">
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.age}</TableCell>
-                  <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.age}</TableCell>
-                  <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
+              {data?.data ? (
+                <TableBody className="bet_table-body">
+                  {data?.data?.map((row) => (
+                    <TableRow key={row.id + row.name}>
+                      <TableCell>{row.id}</TableCell>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.age}</TableCell>
+                      <TableCell>{row.address}</TableCell>
+                      <TableCell>{row.amount}</TableCell>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.age}</TableCell>
+                      <TableCell>{row.address}</TableCell>
+                      <TableCell>{row.amount}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              ) : (
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  {/* <TableCell> */}
+                  <Empty />
+                  {/* </TableCell> */}
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
-              ))}
-            </TableBody> */}
+              )}
             </Table>
           </TableContainer>
         </div>

@@ -13,8 +13,8 @@ const Casino = () => {
   const [gameLists, setGameLists] = useState([]);
   const [providerFilter, setProviderFilter] = useState("ALL");
 
-  const [trigger, { data: gamelist }] = useQtechMutation();
   const casinoToken = localStorage.getItem("casino-token");
+  const [trigger, { data: gamelist }] = useQtechMutation();
   useEffect(() => {
     // if (casinoToken != undefined || gameCode) {
       trigger({

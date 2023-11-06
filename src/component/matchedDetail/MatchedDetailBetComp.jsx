@@ -9,6 +9,7 @@ import {
   P,
   PolygonStrip,
 } from "./MatchedStyled";
+import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
@@ -25,6 +26,9 @@ const MatchedDetailBetComp = ({
   minMax,
   showId,
   PnlOdds,
+  favData,
+  handleFavDel,
+  handleFavSec,
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -72,12 +76,34 @@ const MatchedDetailBetComp = ({
   return (
     <>
       {data?.Odds?.map((item, index) => {
+        const createMarketID = favData?.find(
+          (pnl) => pnl?.marketId === item?.marketId
+        )?.marketId;
         return (
           <MainDiv key={index}>
             <GridContainer container>
               <Grid item xs={7} md={4}>
                 <PolygonStrip>
-                  <StarBorderIcon fontSize="medium" sx={{ color: "#fff" }} />
+                  {/* {
+                    createMarketID
+                    ?<StarBorderIcon onClick={()=>handleFavSec(item?.marketId)} fontSize="medium" sx={{ color: "#fff" }} />
+                    :<StarBorderIcon onClick={()=>handleFavSec(item?.marketId)} fontSize="medium" sx={{ color: "red" }} />
+                  } */}
+
+                  {createMarketID ? (
+                    <StarIcon
+                      onClick={() => handleFavDel(item?.marketId)}
+                      fontSize="medium"
+                      sx={{ color: "#ffcf03" }}
+                    />
+                  ) : (
+                    <StarBorderIcon
+                      onClick={() => handleFavSec(item?.marketId)}
+                      fontSize="medium"
+                      sx={{ color: "#fff" }}
+                    />
+                  )}
+
                   <P props={"matchodds"}>{item?.Name}</P>
                 </PolygonStrip>
               </Grid>
@@ -246,7 +272,6 @@ const MatchedDetailBetComp = ({
                                             item?.maxBet
                                           )
                                         }
-                                     
                                         className={`${bg} ${
                                           id == 1 || id == 2 ? "backgrid_" : ""
                                         }`}

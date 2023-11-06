@@ -18,6 +18,7 @@ import Loader from "../component/Loader/Loader";
 const MainLayout = () => {
   const [siderOpen, setSiderOpen] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (siderOpen) {
       document.body.style.overflow = "hidden";
@@ -33,20 +34,17 @@ const MainLayout = () => {
       trigger();
     }
   }, [loginCheck]);
-
   if (isLoading) {
-    return <Loader />
-
-  }
-  else {
-
-  
+    return <Loader />;
+  } else {
     return (
       <div>
         <div className="main-layout-container">
           <div className="header-layout">
             <HeaderMessage />
             <WebHeaderComponent
+              setOpen={setOpen}
+              open={open}
               setSiderOpen={setSiderOpen}
               siderOpen={siderOpen}
               balanceData={data?.data}
@@ -67,7 +65,7 @@ const MainLayout = () => {
             </div>
             {!isBreakPoint ? (
               <div className="banner-sider">
-                <SiderBanner />
+                <SiderBanner setOpen={setOpen} open={open} />
               </div>
             ) : (
               ""
@@ -76,7 +74,7 @@ const MainLayout = () => {
         </div>
         <MobileFooter />
       </div>
-    )
+    );
   }
 };
 
