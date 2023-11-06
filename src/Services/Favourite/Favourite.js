@@ -25,9 +25,7 @@ export const Favourite = createApi({
         body
     })
     }),
-    favList: builder.mutation({
-        query: (id) => "/betfair_api/fancy/multi" + id,
-      })
+   
   }),
 });
-export const {useUserFavMutation, useCreateFavMutation, useDeleteFavMutation, useFavListMutation} = Favourite;
+export const {useUserFavMutation, useCreateFavMutation, useDeleteFavMutation} = Favourite;

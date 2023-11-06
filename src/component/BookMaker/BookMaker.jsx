@@ -196,11 +196,11 @@ const BookMaker = ({
                               item
                               md={3.9}
                               xs={12}
-                              className={
-                                (dataBook?.b1 > prevOdds[id]?.b1
-                                  ? "odds-up-color "
-                                  : "") + "back"
-                              }
+                              // className={
+                              //   (dataBook && dataBook?.b1 > prevOdds[id]?.b1
+                              //     ? "odds-up-color "
+                              //     : "") + "back"
+                              // }
                               onClick={() =>
                                 handleBackBet(
                                   dataBook?.mid,
@@ -228,11 +228,11 @@ const BookMaker = ({
                             sx={{ justifyContent: "center" }}
                           >
                             <LayGrid
-                              className={
-                                (dataBook?.l1 > prevOdds[id]?.l1
-                                  ? "odds-down-color"
-                                  : "") + "lay"
-                              }
+                              // className={
+                              //   (dataBook?.l1 > prevOdds[id]?.l1
+                              //     ? "odds-down-color"
+                              //     : "") + "lay"
+                              // }
                               item
                               md={3.9}
                               xs={12}
