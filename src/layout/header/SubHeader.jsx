@@ -42,9 +42,11 @@ const SubHeader = () => {
               </React.Fragment>
             );
           })}
-          <li>
-            <Link to={casino}>Int Casino</Link>
-          </li>
+          {isLogin && (
+            <li>
+              <Link to={casino}>Int Casino</Link>
+            </li>
+          )}
         </ul>
       </div>
     );
@@ -66,7 +68,7 @@ const SubHeader = () => {
                 <Link to={home}>In play</Link>
               </span>
             </li>
-            
+
             {data?.data.map((items, index) => {
               return (
                 <React.Fragment key={items.sportId + items.sportName + index}>
@@ -83,17 +85,19 @@ const SubHeader = () => {
                     <span>{items.sportName}</span>
                   </li>
                 </React.Fragment>
-              )
+              );
             })}
-            <li
-              onClick={() => setActiveTabs(data?.data.length)}
-              className={activeTabs == data?.data.length ? "active-tabs" : ""}
-            >
-              <img src={play} alt="" />
-              <span>
-                <Link to={casino}>Int Casino</Link>
-              </span>
-            </li>
+            {isLogin && (
+              <li
+                onClick={() => setActiveTabs(data?.data.length)}
+                className={activeTabs == data?.data.length ? "active-tabs" : ""}
+              >
+                <img src={play} alt="" />
+                <span>
+                  <Link to={casino}>Int Casino</Link>
+                </span>
+              </li>
+            )}
           </ul>
         </div>
         {isLogin && (

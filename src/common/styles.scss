@@ -26,7 +26,7 @@
         z-index: 103;
         width: 0%;
         transition: width 0.4s;
-        top: 90px;
+        top: 64px;
         background-color: transparent;
         border-right: none;
       }
@@ -35,12 +35,12 @@
       width: 100%;
       position: fixed;
       z-index: 999999;
-      height: calc(100vh - 108px);
+      height: calc(100vh - 64px);
       background-color: transparent;
       border-left: 1px solid #ddd;
       border-right: none;
       transition: width 0.4s;
-      top: 108px;
+      top: 64px;
     }
     .content {
       width: calc(60% - 20px);
