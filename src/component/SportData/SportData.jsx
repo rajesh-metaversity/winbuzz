@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import InplayCollapse from "../inPlay/InplayCollapse";
 import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
 import { useLocation, useParams } from "react-router-dom";

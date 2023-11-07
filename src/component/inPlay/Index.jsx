@@ -12,7 +12,6 @@ const Inplay = () => {
   console.log(data, "data")
 
   
-
   return (
     <>
       <InPlayHeading headName={"IN PLAY"} />

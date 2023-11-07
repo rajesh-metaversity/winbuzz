@@ -50,7 +50,6 @@ export const store = configureStore({
       .concat(accountStatement.middleware)
       .concat(Login.middleware)
       .concat(ActiveSport.middleware)
-      .concat(activeMatch.middleware)
       .concat(MyBets.middleware)
       .concat(Logout.middleware)
       .concat(ChangePassword.middleware)
