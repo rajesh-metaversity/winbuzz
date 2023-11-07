@@ -12,9 +12,18 @@ export const Login = createApi({
 				body
 			})
 
-        })
+        }),
+        loginDemoId: builder.mutation({
+            query: body => ({
+				url: 'login/demo-user-creation-login',
+				method: 'POST',
+				body
+			})
+
+        }),
+
 
     })
 })
 
-export const {useLoginMutation} = Login
+export const {useLoginMutation, useLoginDemoIdMutation} = Login

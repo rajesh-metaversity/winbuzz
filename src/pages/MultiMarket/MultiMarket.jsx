@@ -12,7 +12,6 @@ const MultiMarket = () => {
     minBet: "",
     maxBet: "",
   });
-
   const [urlString, setUrlString] = useState("");
  
 
@@ -21,7 +20,6 @@ const MultiMarket = () => {
   useEffect(() => {
     userFav({});
   }, []);
-
   useEffect(() => {
     if (fav?.data?.length) {
       let str = "";
@@ -32,14 +30,11 @@ const MultiMarket = () => {
       setUrlString(str);
     }
   }, [fav?.data]);
-
   useEffect(() => {
     if (urlString) trigger(urlString);
   }, [urlString]);
-
   let newArray = [];
   let uniqueObject = {};
-
   for (let i in fav?.data) {
     const objTitle = fav?.data[i]["matchId"];
     uniqueObject[objTitle] = fav?.data[i];

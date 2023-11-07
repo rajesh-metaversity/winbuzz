@@ -46,13 +46,11 @@ const MultiMarketDetails = ({
       matchId: id,
     });
   }, [id]);
-
   useEffect(() => {
     userFav({
       matchId: id,
     });
   }, [createFav?.data, deleteFav?.data]);
-
   useEffect(() => {
     if (data) {
       const newData = { ...data };
@@ -65,7 +63,6 @@ const MultiMarketDetails = ({
             []
           )
         : [];
-
       if (JSON.stringify(odds) !== JSON.stringify(newData)) {
         if (Object.keys(odds)?.length) {
           const newOdds = { ...odds };

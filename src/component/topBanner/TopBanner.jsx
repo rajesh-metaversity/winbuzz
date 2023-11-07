@@ -21,7 +21,6 @@ var settings = {
 
 const TopBanner = () => {
 	const [trigger, { data }] = useBannerListDataMutation();
-	console.log(data, 'imgdata');
 	useEffect(() => {
 		trigger({
 			type: 1

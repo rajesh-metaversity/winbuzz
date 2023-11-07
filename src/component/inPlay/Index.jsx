@@ -9,6 +9,8 @@ import "./styles.scss";
 const Inplay = () => {
   const { data } = useInPlayQuery();
 
+  console.log(data, "data")
+
   
   return (
     <>

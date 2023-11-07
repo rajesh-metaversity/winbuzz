@@ -41,7 +41,7 @@ export const store = configureStore({
     [PnlApi.reducerPath]: PnlApi.reducer,
     [Casino.reducerPath]: Casino.reducer,
     [Favourite.reducerPath]: Favourite.reducer,
-    [FavList.reducerPath]: FavList.reducer
+    [FavList.reducerPath]: FavList.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
