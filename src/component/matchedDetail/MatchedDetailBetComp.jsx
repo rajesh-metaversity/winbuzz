@@ -31,7 +31,7 @@ const MatchedDetailBetComp = ({
   handleFavSec,
   matchName,
   matId,
-  setmatchId
+  setmatchId,
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -40,8 +40,6 @@ const MatchedDetailBetComp = ({
 
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  console.log(data, "dsasdsad")
 
   const handleBackBet = (
     marketName,
@@ -205,25 +203,22 @@ const MatchedDetailBetComp = ({
                                         : "") + "back";
                                     return (
                                       <BackGrid
-                                        onClick={() =>
-                                          {
-                                            setmatchId(item?.matchId)
-                                            handleBackBet(
-                                              item?.Name,
-                                              item?.marketId,
-                                              dataRunn?.name,
-                                              dataRunn?.selectionId,
-                                              res?.price,
-                                              res?.size,
-                                              true,
-                                              false,
-                                              item?.matchName,
-                                              item?.minBet,
-                                              item?.maxBet
-                                            )
-                                          }
-                                         
-                                        }
+                                        onClick={() => {
+                                          setmatchId(item?.matchId);
+                                          handleBackBet(
+                                            item?.Name,
+                                            item?.marketId,
+                                            dataRunn?.name,
+                                            dataRunn?.selectionId,
+                                            res?.price,
+                                            res?.size,
+                                            true,
+                                            false,
+                                            item?.matchName,
+                                            item?.minBet,
+                                            item?.maxBet
+                                          );
+                                        }}
                                         key={id + "back"}
                                         className={`${bg} ${
                                           id == 1 || id == 2 ? "backgrid_" : ""
@@ -266,24 +261,22 @@ const MatchedDetailBetComp = ({
                                         : "") + "lay";
                                     return (
                                       <LayGrid
-                                        onClick={() =>
-                                          {
-                                            setmatchId(item?.matchId)
-                                            handleBackBet(
-                                              item?.Name,
-                                              item?.marketId,
-                                              dataRunn?.name,
-                                              dataRunn?.selectionId,
-                                              res?.price,
-                                              res?.size,
-                                              false,
-                                              false,
-                                              item?.matchName,
-                                              item?.minBet,
-                                              item?.maxBet
-                                            )
-                                          }
-                                        }
+                                        onClick={() => {
+                                          setmatchId(item?.matchId);
+                                          handleBackBet(
+                                            item?.Name,
+                                            item?.marketId,
+                                            dataRunn?.name,
+                                            dataRunn?.selectionId,
+                                            res?.price,
+                                            res?.size,
+                                            false,
+                                            false,
+                                            item?.matchName,
+                                            item?.minBet,
+                                            item?.maxBet
+                                          );
+                                        }}
                                         className={`${bg} ${
                                           id == 1 || id == 2 ? "backgrid_" : ""
                                         }`}
