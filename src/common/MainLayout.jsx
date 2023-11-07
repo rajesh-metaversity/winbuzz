@@ -17,6 +17,7 @@ import Loader from "../component/Loader/Loader";
 
 const MainLayout = () => {
   const [siderOpen, setSiderOpen] = useState(false);
+  const [modalValue, setModalValue] = useState(0);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -48,6 +49,8 @@ const MainLayout = () => {
               setSiderOpen={setSiderOpen}
               siderOpen={siderOpen}
               balanceData={data?.data}
+              setModalValue={setModalValue}
+              modalValue={modalValue}
             />
           </div>
           <div className="content-container">
@@ -65,7 +68,11 @@ const MainLayout = () => {
             </div>
             {!isBreakPoint ? (
               <div className="banner-sider">
-                <SiderBanner setOpen={setOpen} open={open} />
+                <SiderBanner
+                  setOpen={setOpen}
+                  open={open}
+                  setModalValue={setModalValue}
+                />
               </div>
             ) : (
               ""

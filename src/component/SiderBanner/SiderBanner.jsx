@@ -26,7 +26,7 @@ var settings = {
   verticalSwiping: true,
 };
 
-export const SiderBanner = ({ setOpen, open }) => {
+export const SiderBanner = ({ setOpen, open, setModalValue }) => {
   const [casinoRuleModal, setCasinoRuleModal] = useState(false);
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
@@ -109,6 +109,7 @@ export const SiderBanner = ({ setOpen, open }) => {
                         setCasinoRuleModal(true);
                         handelAuraCasino(data?.gameId, data.gameName);
                       } else {
+                        setModalValue(0);
                         setOpen(true);
                       }
                     }}

@@ -3,11 +3,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import "./styles.scss";
 import { useBetListByMatchQuery } from "../../Services/BettingProfitLoss/BettingProfitLoss";
 import { useParams } from "react-router-dom";
-const MyBetsModule = () => {
+const MyBetsModule = ({matId,matchid}) => {
   const { id } = useParams()
 
-  const { data: betlistbymatch } = useBetListByMatchQuery({ matchId: id })
-
+  const { data: betlistbymatch } = useBetListByMatchQuery({ matchId: id || matId })
+console.log(matchid,"matchId")
   return (
     <>
       <div className="my_bets-cont betslip">

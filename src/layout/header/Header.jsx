@@ -27,6 +27,8 @@ export const WebHeaderComponent = ({
   siderOpen,
   setOpen,
   open,
+  setModalValue,
+  modalValue,
 }) => {
   const loginCheck = useSelector(isLoginSelector);
 
@@ -34,7 +36,7 @@ export const WebHeaderComponent = ({
     setOpen(true);
   };
   const userId = localStorage.getItem("userId");
-  const [modalValue, setModalValue] = useState(0);
+
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
     1: <RulesModal setOpen={setOpen} />,
