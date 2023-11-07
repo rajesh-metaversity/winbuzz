@@ -74,7 +74,6 @@ const MultiMarketDetails = ({
       setOdds(newData);
     }
   }, [data]);
-  console.log("inner", data);
   return (
     <>
       <Iframes odds={data} id={1} />
@@ -109,22 +108,21 @@ const MultiMarketDetails = ({
           setmatchId={setmatchId}
         />
       )}
-      {data && Object.keys(data).map((item) => data[item].length) ? (
-        <FancyTabs
-          minMax={minMax}
-          prevOdds={prevOdds}
-          setMinMax={setMinMax}
-          data={odds}
-          ip={ipData?.ip}
-          showId={3}
-          fancyPnl={FancyPnl?.data}
-          favData={fav?.data}
-          handleFavDel={handleFavDel}
-          handleFavSec={handleFavSec}
-          matId={id}
-          setmatchId={setmatchId}
-        />
-      ):""}
+
+      <FancyTabs
+        minMax={minMax}
+        prevOdds={prevOdds}
+        setMinMax={setMinMax}
+        data={odds}
+        ip={ipData?.ip}
+        showId={3}
+        fancyPnl={FancyPnl?.data}
+        favData={fav?.data}
+        handleFavDel={handleFavDel}
+        handleFavSec={handleFavSec}
+        matId={id}
+        setmatchId={setmatchId}
+      />
     </>
   );
 };
