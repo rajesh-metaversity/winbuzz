@@ -43,7 +43,7 @@ export const WebHeaderComponent = ({
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-  const userType = JSON.parse(localStorage.getItem('session')).userTypeInfo;
+  const userType =localStorage.getItem("userTypeInfo")
 
   if (!isBreakPoint) {
 		return (
