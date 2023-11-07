@@ -33,71 +33,79 @@ import CasinoContainer from "../pages/casino/CasinoContainer";
 import AuraCasino from "../pages/auraCasino/AuraCasino.jsx";
 import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      {
-        path: "/",
-        element: <DashBoard />,
-      },
-      {
-        path: casino,
-        element: <CasinoContainer />,
-      },
-      {
-        path: game_list,
-        element: <SportData />,
-      },
-    ],
-  },
-  {
-    path: "/",
-    element: <Sublayout />,
-    children: [
-      { path: account_statement, element: <AccountStatement /> },
-      {
-        path: bets_profit_loss,
-        element: <BettingProfitLoss />,
-      },
+const userType = JSON.parse(localStorage.getItem('session')).userTypeInfo;
 
-      {
-        path: mybets,
-        element: <MyBets />,
-      },
-      {
-        path: passwordChange,
-        element: <ChangePassword />,
-      },
-      {
-        path: game_detail,
-        element: <GameDetail />,
-      },
-      {
-        path: deposit,
-        element: <Deposit />,
-      },
-      {
-        path: withdraw,
-        element: <Withdraw />,
-      },
-      {
-        path: multi_market,
-        element: <MultiMarket />,
-      },
-    ],
-  },
-  {
-    path: signUp,
-    element: <SignUp />,
-  },
-  {
-    path: game,
-    element: <CasinoIframe />,
-  },
-  {
-    path: Auragame,
-    element: <AuraCasino />,
-  },
+export const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <MainLayout />,
+		children: [
+			{
+				path: '/',
+				element: <DashBoard />
+			},
+			{
+				path: casino,
+				element: <CasinoContainer />
+			},
+			{
+				path: game_list,
+				element: <SportData />
+			}
+		]
+	},
+	{
+		path: '/',
+		element: <Sublayout />,
+		children: [
+			{ path: account_statement, element: <AccountStatement /> },
+			{
+				path: bets_profit_loss,
+				element: <BettingProfitLoss />
+			},
+
+			{
+				path: mybets,
+				element: <MyBets />
+			},
+			{
+				path: passwordChange,
+				element: <ChangePassword />
+			},
+			{
+				path: game_detail,
+				element: <GameDetail />
+			},
+
+			{
+				path: userType != 2 ? deposit : '',
+				element: <Deposit />
+			},
+			{
+				path: userType != 2 ? withdraw : "",
+				element: <Withdraw />
+			},
+
+			{
+				path: multi_market,
+				element: <MultiMarket />
+			}
+		]
+	},
+	{
+		path: signUp,
+		element: <SignUp />
+	},
+	{
+		path: game,
+		element: <CasinoIframe />
+	},
+	{
+		path: Auragame,
+		element: <AuraCasino />
+	},
+	{
+		path: '*',
+		element: 'not found'
+	}
 ]);

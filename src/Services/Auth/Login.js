@@ -15,7 +15,7 @@ export const Login = createApi({
         }),
         loginDemoId: builder.mutation({
             query: body => ({
-				url: 'demo-user-creation-login',
+				url: 'login/demo-user-creation-login',
 				method: 'POST',
 				body
 			})
@@ -26,4 +26,4 @@ export const Login = createApi({
     })
 })
 
-export const {useLoginMutation} = Login
+export const {useLoginMutation, useLoginDemoIdMutation} = Login

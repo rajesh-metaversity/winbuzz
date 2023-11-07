@@ -1,77 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import MatchedDetailBetComp from '../../component/matchedDetail/MatchedDetailBetComp';
-import BookMaker from '../../component/BookMaker/BookMaker';
-import Iframes from '../../component/Iframes/Iframes';
-import { WebBetPlaceModule } from '../../component/betPlaceModule/BetPlaceModule';
-import MyBetsModule from '../../component/myBetsModule/MyBetsModule';
-import { useMyIpQuery } from '../../Services/ActiveSportList/ActiveMatch';
-import { useCreateFavMutation, useDeleteFavMutation, useUserFavMutation } from '../../Services/Favourite/Favourite';
-
-const MultiMarketDetails = ({ matchName, data }) => {
-	const [minMax, setMinMax] = useState({
-		minBet: '',
-		maxBet: ''
-	});
-	const { data: ipData } = useMyIpQuery();
-	const [userFav, { data: fav }] = useUserFavMutation();
-
-	const [trigger, { data: createFav }] = useCreateFavMutation();
-	const [deletedData, { data: deleteFav }] = useDeleteFavMutation();
-
-	const handleFavSec = marketId => {
-		trigger({
-			marketId: marketId,
-			matchId: id
-		});
-	};
-	const handleFavDel = marketId => {
-		deletedData({
-			marketId: marketId,
-			matchId: id
-		});
-	};
-
-	return (
-		<>
-			<div className="game_detail-cont">
-				<div className="game-detail-left-col">
-					<Iframes odds={data} id={1} />
-					<MatchedDetailBetComp
-						matchName={matchName}
-						minMax={minMax}
-						setMinMax={setMinMax}
-						// prevOdds={prevOdds}
-						ip={ipData?.ip}
-						data={data}
-						showId={1}
-						// PnlOdds={oddsPnl?.data}
-						handleFavSec={handleFavSec}
-						handleFavDel={handleFavDel}
-						favData={fav?.data}
-          />
-          
-					<BookMaker
-						minMax={minMax}
-						//   prevOdds={prevOdds?.Bookmaker}
-						setMinMax={setMinMax}
-						ip={ipData?.ip}
-						data={data?.Bookmaker}
-						showId={2}
-						//   PnlOdds={oddsPnl?.data}
-						favData={fav?.data}
-						handleFavDel={handleFavDel}
-						handleFavSec={handleFavSec}
-					/>
-				</div>
-				<div className="game-detail-right-col">
-					<WebBetPlaceModule minMax={minMax} />
-					<MyBetsModule />
-				</div>
-			</div>
-		</>
-	);
-=======
 import React, { useEffect, useState } from "react";
 import MatchedDetailBetComp from "../../component/matchedDetail/MatchedDetailBetComp";
 import BookMaker from "../../component/BookMaker/BookMaker";
@@ -86,7 +12,14 @@ import {
 import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
 import FancyTabs from "../../component/fancy/FancyTabs";
 import { useFancyPnlQuery, useOddsPnlQuery } from "../../Services/Pnl/Pnl";
-const MultiMarketDetails = ({ matchName, data, id, minMax,  setMinMax,setmatchId}) => {
+const MultiMarketDetails = ({
+  matchName,
+  data,
+  id,
+  minMax,
+  setMinMax,
+  setmatchId,
+}) => {
   const [userFav, { data: fav }] = useUserFavMutation();
   const [trigger, { data: createFav }] = useCreateFavMutation();
   const [deletedData, { data: deleteFav }] = useDeleteFavMutation();
@@ -113,13 +46,11 @@ const MultiMarketDetails = ({ matchName, data, id, minMax,  setMinMax,setmatchId
       matchId: id,
     });
   }, [id]);
-
   useEffect(() => {
     userFav({
       matchId: id,
     });
   }, [createFav?.data, deleteFav?.data]);
-
   useEffect(() => {
     if (data) {
       const newData = { ...data };
@@ -132,7 +63,6 @@ const MultiMarketDetails = ({ matchName, data, id, minMax,  setMinMax,setmatchId
             []
           )
         : [];
-
       if (JSON.stringify(odds) !== JSON.stringify(newData)) {
         if (Object.keys(odds)?.length) {
           const newOdds = { ...odds };
@@ -144,58 +74,58 @@ const MultiMarketDetails = ({ matchName, data, id, minMax,  setMinMax,setmatchId
       setOdds(newData);
     }
   }, [data]);
+  console.log("inner", data);
   return (
     <>
-          <Iframes odds={data} id={1} />
-          <MatchedDetailBetComp
-            matchName={matchName}
-            minMax={minMax}
-            setMinMax={setMinMax}
-            prevOdds={prevOdds}
-            ip={ipData?.ip}
-            data={odds}
-            showId={1}
-            PnlOdds={oddsPnl?.data}
-            handleFavSec={handleFavSec}
-            handleFavDel={handleFavDel}
-            favData={fav?.data}
-            matId={id}
-            setmatchId={setmatchId}
-          />
-          {data?.Bookmaker?.length != 0 && (
-            <BookMaker
-              minMax={minMax}
-              prevOdds={prevOdds?.Bookmaker}
-              setMinMax={setMinMax}
-              ip={ipData?.ip}
-              data={data?.Bookmaker}
-              showId={2}
-              PnlOdds={oddsPnl?.data}
-              favData={fav?.data}
-              handleFavDel={handleFavDel}
-              handleFavSec={handleFavSec}
-              matId={id}
-              setmatchId={setmatchId}
-            />
-          )}
-         
-            <FancyTabs
-              minMax={minMax}
-              prevOdds={prevOdds}
-              setMinMax={setMinMax}
-              data={odds}
-              ip={ipData?.ip}
-              showId={3}
-              fancyPnl={FancyPnl?.data}
-              favData={fav?.data}
-              handleFavDel={handleFavDel}
-              handleFavSec={handleFavSec}
-              matId={id}
-              setmatchId={setmatchId}
-            />
-        
+      <Iframes odds={data} id={1} />
+      <MatchedDetailBetComp
+        matchName={matchName}
+        minMax={minMax}
+        setMinMax={setMinMax}
+        prevOdds={prevOdds}
+        ip={ipData?.ip}
+        data={odds}
+        showId={1}
+        PnlOdds={oddsPnl?.data}
+        handleFavSec={handleFavSec}
+        handleFavDel={handleFavDel}
+        favData={fav?.data}
+        matId={id}
+        setmatchId={setmatchId}
+      />
+      {data?.Bookmaker?.length != 0 && (
+        <BookMaker
+          minMax={minMax}
+          prevOdds={prevOdds?.Bookmaker}
+          setMinMax={setMinMax}
+          ip={ipData?.ip}
+          data={data?.Bookmaker}
+          showId={2}
+          PnlOdds={oddsPnl?.data}
+          favData={fav?.data}
+          handleFavDel={handleFavDel}
+          handleFavSec={handleFavSec}
+          matId={id}
+          setmatchId={setmatchId}
+        />
+      )}
+      {data && Object.keys(data).map((item) => data[item].length) ? (
+        <FancyTabs
+          minMax={minMax}
+          prevOdds={prevOdds}
+          setMinMax={setMinMax}
+          data={odds}
+          ip={ipData?.ip}
+          showId={3}
+          fancyPnl={FancyPnl?.data}
+          favData={fav?.data}
+          handleFavDel={handleFavDel}
+          handleFavSec={handleFavSec}
+          matId={id}
+          setmatchId={setmatchId}
+        />
+      ):""}
     </>
   );
->>>>>>> f8b0c6c8a3b7efa1c5d8496076c612153f64acfa
 };
 export default MultiMarketDetails;
