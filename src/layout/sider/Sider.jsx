@@ -15,6 +15,8 @@ import horseRidingImage from "../../assets/horse.svg";
 import kabaddiImage from "../../assets/kabaddi.svg";
 import casino from "../../assets/int.svg";
 import { multi_market } from "../../routes/PagesUrl";
+import { isLoginSelector } from "../../App/LoginSlice";
+import { useSelector } from "react-redux";
 export const sportImages = {
   Cricket: cricketImage,
   Tennis: tennisImage,
@@ -37,6 +39,7 @@ const SiderBar = () => {
   const handleGameDetailsPage = (id) => {
     nav(`/game_detail/${id}`);
   };
+  const isLogin = useSelector(isLoginSelector);
 
   return (
     <div
@@ -44,15 +47,18 @@ const SiderBar = () => {
       onClick={(e) => e.stopPropagation()}
     >
       <ul className="sider-container-ul">
-        <li onClick={() => nav(multi_market)}>
-          <p>
-            <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
-            Favourite
-          </p>
-          <span>
-            <img src={arrow} alt="" />
-          </span>
-        </li>
+        {isLogin && (
+          <li onClick={() => nav(multi_market)}>
+            <p>
+              <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
+              Favourite
+            </p>
+            <span>
+              <img src={arrow} alt="" />
+            </span>
+          </li>
+        )}
+
         {data?.data.map((item) => {
           return (
             <React.Fragment
@@ -78,17 +84,19 @@ const SiderBar = () => {
             </React.Fragment>
           );
         })}
-        <Link to="casino">
-          <li>
-            <p>
-              <img src={casino} alt="casino" />
-              Int Casino
-            </p>
-            <span>
-              <img src={arrow} alt="" />
-            </span>
-          </li>
-        </Link>
+        {isLogin && (
+          <Link to="casino">
+            <li>
+              <p>
+                <img src={casino} alt="casino" />
+                Int Casino
+              </p>
+              <span>
+                <img src={arrow} alt="" />
+              </span>
+            </li>
+          </Link>
+        )}
       </ul>
 
       <div
