@@ -43,6 +43,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 		if (data?.status) {
 			dispatch(setIslogin(false));
 			toast.success(data.message);
+			localStorage.clear();
 			nav('/');
 		}
 	}, [data]);
