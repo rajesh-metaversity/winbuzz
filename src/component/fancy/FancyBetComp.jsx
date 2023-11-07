@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { GridContainer, P, PolygonStrip } from "./fancyBetStyled";
 import {
@@ -27,12 +27,15 @@ const FancyBetComp = ({
   handleFavSec,
   favData,
   handleFavDel,
+  matId,
+  setmatchId
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const { id } = useParams();
   const [selectionIds, setSelectionIds] = useState();
+  const [fancyArray, setFancyArray] = useState();
 
   const dispatch = useDispatch();
 
@@ -63,12 +66,24 @@ const FancyBetComp = ({
         priceValue: priceValue,
         placeTime: pTime,
         marketId: sid,
-        matchId: id,
+        matchId: id || matId,
         isFancy: isFancy,
         isBack: isBack,
       })
     );
   };
+
+  useEffect(() => {
+    if(fancyItem?.length){
+      const arr = [];
+      for(const x of fancyItem){
+        if(favData?.find((pnl) => pnl?.marketId === x?.sid)){
+          arr.unshift(x);
+        } else arr.push(x);
+      }
+      setFancyArray(arr);
+    }
+  },[fancyItem]);
 
   return (
     <MainDiv>
@@ -89,8 +104,8 @@ const FancyBetComp = ({
         <Grid item md={2}></Grid>
       </GridContainer>
       <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
-        {fancyItem?.length > 0 &&
-          fancyItem?.map((item, id) => {
+        {fancyArray?.length > 0 &&
+          fancyArray?.map((item, id) => {
             const createMarketID = favData?.find(
               (pnl) => pnl?.marketId === item?.sid
             )?.marketId;
@@ -157,18 +172,21 @@ const FancyBetComp = ({
                                 : " hiuhiuhiu ") + "lay"
                             }
                             onClick={() =>
-                              handleBackBet(
-                                item?.mid,
-                                item?.nation,
-                                item?.sid,
-                                item?.l1,
-                                item?.ls1,
-                                false,
-                                true,
-                                fancyData,
-                                item?.minBet,
-                                item?.maxBet
-                              )
+                              {
+                                setmatchId(item.matchId)
+                                handleBackBet(
+                                  item?.mid,
+                                  item?.nation,
+                                  item?.sid,
+                                  item?.l1,
+                                  item?.ls1,
+                                  false,
+                                  true,
+                                  fancyData,
+                                  item?.minBet,
+                                  item?.maxBet
+                                )
+                              }
                             }
                           >
                             <BetTypoPara>{item?.l1}</BetTypoPara>
@@ -195,7 +213,8 @@ const FancyBetComp = ({
                                 ? "odds-up-color "
                                 : " hiuhiuhiu ") + "back"
                             }
-                            onClick={() =>
+                            onClick={() =>{
+                              setmatchId(item.matchId)
                               handleBackBet(
                                 item?.mid,
                                 item?.nation,
@@ -208,6 +227,7 @@ const FancyBetComp = ({
                                 item?.minBet,
                                 item?.maxBet
                               )
+                            }
                             }
                           >
                             <BetTypoPara>{item?.b1}</BetTypoPara>

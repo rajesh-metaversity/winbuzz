@@ -1,4 +1,3 @@
-import React from "react";
 import { useQtechAuthQuery } from "../../Services/Qtech/Qtech";
 import Casino from "./Casino";
 
