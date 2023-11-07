@@ -47,15 +47,18 @@ const SiderBar = () => {
       onClick={(e) => e.stopPropagation()}
     >
       <ul className="sider-container-ul">
-        <li onClick={() => nav(multi_market)}>
-          <p>
-            <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
-            Favourite
-          </p>
-          <span>
-            <img src={arrow} alt="" />
-          </span>
-        </li>
+        {isLogin && (
+          <li onClick={() => nav(multi_market)}>
+            <p>
+              <StarBorderIcon fontSize="medium" sx={{ color: "#ccc" }} />
+              Favourite
+            </p>
+            <span>
+              <img src={arrow} alt="" />
+            </span>
+          </li>
+        )}
+
         {data?.data.map((item) => {
           return (
             <React.Fragment
