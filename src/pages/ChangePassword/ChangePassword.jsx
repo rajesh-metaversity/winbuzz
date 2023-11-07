@@ -7,6 +7,8 @@ import Loader from '../../component/Loader/Loader';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from '../../component/loginForm/LoginForm';
+import { useDispatch } from 'react-redux';
+import { setIslogin } from '../../App/LoginSlice';
 
 const ChangePassword = () => {
 	let initialValues = {
@@ -17,6 +19,8 @@ const ChangePassword = () => {
 	};
 	const nav = useNavigate()
 	const [trigger, { data, isLoading, isError, status }] = useChangePasswordMutation();
+
+	const dispatch = useDispatch()
 
 	const validationSchema = Yup.object().shape({
 		currentPassword: Yup.string().required('The Old Password Field is required'),
@@ -33,6 +37,9 @@ const ChangePassword = () => {
 	useEffect(() => {
 		if (data?.status) {
 			toast.success(data?.message);
+			dispatch(setIslogin(false));
+			localStorage.clear();
+			nav('/');
 			// initialValues(prev => {
 				// 	return {
 					// 		...prev,

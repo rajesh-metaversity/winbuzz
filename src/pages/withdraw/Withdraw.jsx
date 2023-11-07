@@ -293,7 +293,7 @@ const Withdraw = () => {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem value="" disabled>
-            <em>Choose Withdraw Type</em>
+            <span>Choose Withdraw Type</span>
           </MenuItem>
 
           <MenuItem value={"NORMAL"}>NORMAL</MenuItem>

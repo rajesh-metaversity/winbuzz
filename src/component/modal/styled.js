@@ -2,7 +2,11 @@
 import styled from "@mui/material/styles/styled";
 import { Dialog } from "@mui/material";
 
-export const StyledDialouge = styled(Dialog)(({ theme }) => ({
+export const StyledDialouge = styled(Dialog)(({ props, theme }) => ({
+
+	'& .css-2rbg70-MuiPaper-root-MuiDialog-paper': {
+		width: props
+	},
 	[theme.breakpoints.down(780)]: {
 		'& .MuiDialog-container': {
 			alignItems: 'start'

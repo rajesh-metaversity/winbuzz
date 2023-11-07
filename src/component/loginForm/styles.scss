@@ -1,6 +1,6 @@
 .login_modal {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 70px);
   background-image: url(../../assets/img/loginbanner.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -8,12 +8,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+@media screen and (max-width: 780px) {
+    height: 100vh;
+
+  }
 }
 
 .login_section {
   margin: auto;
   // width: 90%;
-  width: 70%;
+  width: 60%;
   display: block;
 }
 
@@ -23,7 +27,7 @@
 }
 
 .winbuaa_logo img {
-  width: 80%;
+  width: 60%;
 }
 
 .login-form {
@@ -34,11 +38,11 @@
     width: calc(100% - 20px);
     background-color: #fff;
     color: grey;
-    padding: 11px 10px;
-    margin-top: 8px;
+    padding: 7px 10px;
+      margin-top: 5px;
     border: unset;
     outline: none;
-    border-radius: 4px;
+    border-radius: 3px;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.5px;
@@ -54,7 +58,7 @@
 
 .login {
   background: #b88831;
-  padding: 12px 10px;
+  padding: 10px 10px;
   text-align: center;
   color: #fff;
   border: unset;
@@ -66,7 +70,7 @@
 
 .login_with_demo {
   background: #b88831;
-  padding: 12px 10px;
+  padding: 10px 10px;
   text-align: center;
   color: #fff;
   margin-top: 10px;
