@@ -3,7 +3,7 @@ import { WebBetPlaceModule } from "../../component/betPlaceModule/BetPlaceModule
 import { useUserFavMutation } from "../../Services/Favourite/Favourite";
 import { useFavListMutation } from "../../Services/FavList/FavList";
 import MultiMarketDetails from "./MultiMarketDetails";
-import MyBetsModule from "../../component/myBetsModule/MyBetsModule";
+
 
 const MultiMarket = () => {
   const [trigger, { data }] = useFavListMutation();
@@ -14,9 +14,9 @@ const MultiMarket = () => {
   });
 
   const [urlString, setUrlString] = useState("");
-  const [matchId, setMatchId] = useState();
+ 
 
-  console.log(fav?.data, "fav");
+
 
   useEffect(() => {
     userFav({});
@@ -28,7 +28,7 @@ const MultiMarket = () => {
       for (const x of fav.data) {
         str += `${x.matchId}::${x.marketId},`;
       }
-      console.log("strr", str);
+
       setUrlString(str);
     }
   }, [fav?.data]);
@@ -47,7 +47,6 @@ const MultiMarket = () => {
   for (let i in uniqueObject) {
     newArray.push(uniqueObject[i]);
   }
-
 const [matchid, setmatchId] = useState(0)
   return (
     <>

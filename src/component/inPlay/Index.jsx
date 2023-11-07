@@ -10,7 +10,6 @@ const Inplay = () => {
   const { data } = useInPlayQuery();
 
   
-
   return (
     <>
       <InPlayHeading headName={"IN PLAY"} />

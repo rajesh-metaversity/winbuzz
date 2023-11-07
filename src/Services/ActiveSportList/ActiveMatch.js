@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 export const activeMatch = createApi({
-  reducerPath: "activeMatch",
+  reducerPath: "activeMatchApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://oddsapi.247idhub.com/",
   }),
@@ -9,12 +9,11 @@ export const activeMatch = createApi({
       query: (id) => "betfair_api/active_match/" + id,
     }),
     inPlay: builder.query({
-      query: () => "betfair_api/active_match/",
+      query: () => "/betfair_api/active_match/",
     }),
     myIp: builder.query({
       query: () => "/betfair_api/my-ip",
     }),
-   
   }),
 });
 export const { useActiveMatchMutation, useInPlayQuery, useMyIpQuery } =

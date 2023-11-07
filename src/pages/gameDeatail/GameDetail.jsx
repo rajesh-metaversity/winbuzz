@@ -36,6 +36,7 @@ const GameDetail = () => {
       matchId: id,
     });
   };
+  
   const handleFavDel = (marketId) => {
     deletedData({
       marketId: marketId,
@@ -43,17 +44,13 @@ const GameDetail = () => {
     });
   };
 
-  useEffect(() => {
-    userFav({
-      matchId: id,
-    });
-  }, [id]);
 
   useEffect(() => {
     userFav({
       matchId: id,
     });
-  }, [createFav?.data, deleteFav?.data]);
+  }, [createFav?.data,deleteFav?.data, id]);
+
 
   useEffect(() => {
     socket.on("OddsUpdated", (e) =>
@@ -86,7 +83,6 @@ const GameDetail = () => {
       eventId: id,
     });
   }, [id]);
-
 
   const { data } = useMyIpQuery();
   const { data: oddsPnl } = useOddsPnlQuery({ matchId: id });
