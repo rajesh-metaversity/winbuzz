@@ -29,6 +29,7 @@ const BookMaker = ({
   favData,
   handleFavDel,
   handleFavSec,
+  setmatchId
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -201,7 +202,8 @@ const BookMaker = ({
                               //     ? "odds-up-color "
                               //     : "") + "back"
                               // }
-                              onClick={() =>
+                              onClick={() =>{
+                                setmatchId(dataBook.matchId)
                                 handleBackBet(
                                   dataBook?.mid,
                                   dataBook?.nation,
@@ -214,6 +216,7 @@ const BookMaker = ({
                                   data[0]?.minBet,
                                   data[0]?.maxBet
                                 )
+                              }
                               }
                             >
                               <BetTypoPara>{dataBook?.b1}</BetTypoPara>
@@ -237,18 +240,21 @@ const BookMaker = ({
                               md={3.9}
                               xs={12}
                               onClick={() =>
-                                handleBackBet(
-                                  dataBook?.mid,
-                                  dataBook?.nation,
-                                  dataBook?.sid,
-                                  dataBook?.l1,
-                                  dataBook?.ls1,
-                                  false,
-                                  false,
-                                  dataBook?.matchName,
-                                  data[0]?.minBet,
-                                  data[0]?.maxBet
-                                )
+                                {
+                                  setmatchId(dataBook.matchId)
+                                  handleBackBet(
+                                    dataBook?.mid,
+                                    dataBook?.nation,
+                                    dataBook?.sid,
+                                    dataBook?.l1,
+                                    dataBook?.ls1,
+                                    false,
+                                    false,
+                                    dataBook?.matchName,
+                                    data[0]?.minBet,
+                                    data[0]?.maxBet
+                                  )
+                                }
                               }
                             >
                               <BetTypoPara>{dataBook?.l1}</BetTypoPara>

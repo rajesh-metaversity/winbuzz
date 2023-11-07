@@ -16,10 +16,14 @@ const FancyTabs = ({
   handleFavSec,
   favData,
   handleFavDel,
+  matId,
+  setmatchId
 }) => {
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
   const tabsVal = data ? Object.keys(data) : [];
+
+  console.log(data,"dfsdfsdf")
 
   return (
     <>
@@ -63,8 +67,9 @@ const FancyTabs = ({
           }
         })}
       </ul>
-      {data[fancyData]?.length ? (
+      {data && data[fancyData]?.length ? (
         <FancyBetComp
+        setmatchId={setmatchId}
           fancyItem={data[fancyData]}
           fancyData={fancyData}
           ip={ip}
@@ -75,6 +80,7 @@ const FancyTabs = ({
           handleFavSec={handleFavSec}
           handleFavDel={handleFavDel}
           favData={favData}
+          matId={matId}
         />
       ) : (
         <Empty />
