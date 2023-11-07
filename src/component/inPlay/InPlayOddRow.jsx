@@ -10,6 +10,8 @@ const InPlayOddRow = ({ live, index }) => {
     lay: "#f8d0ce",
     disable: "#dedddd",
   };
+  
+
 
   return (
     <div className={`odds-row-container  ${index == 1 && "live"}`}>

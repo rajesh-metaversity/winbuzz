@@ -48,7 +48,7 @@ export const WebHeaderComponent = ({
   if (!isBreakPoint) {
 		return (
 			<>
-				<ModalComponent Elememt={modalElement[modalValue]} open={open} setOpen={setOpen} />
+				<ModalComponent Elememt={modalElement[modalValue]} open={open} setOpen={setOpen} loginWidth={modalValue == 0 ? '480px' : ''} />
 				<div className="header-container">
 					<div className="header-left-col">
 						<Link to={home}>
@@ -95,20 +95,20 @@ export const WebHeaderComponent = ({
 								</>
 							) : (
 								<>
-
-                    {userType != 2 ?
-                      <>
-                      
-									<Link to={deposit}>
-										<li>
-											<ButtonComponent name={'Deposit'} icon={<AccountBalanceIcon />} bg={'green'} />
-										</li>
-									</Link>
-									<Link to={withdraw}>
-										<ButtonComponent name="Withdraw" icon={<AddCardIcon />} bg={'red'} />
-                        </Link>
-                        </>: ""
- }
+									{userType != 2 ? (
+										<>
+											<Link to={deposit}>
+												<li>
+													<ButtonComponent name={'Deposit'} icon={<AccountBalanceIcon />} bg={'green'} />
+												</li>
+											</Link>
+											<Link to={withdraw}>
+												<ButtonComponent name="Withdraw" icon={<AddCardIcon />} bg={'red'} />
+											</Link>
+										</>
+									) : (
+										''
+									)}
 									<li
 										className="header-rule"
 										onClick={() => {
