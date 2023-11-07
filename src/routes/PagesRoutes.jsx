@@ -33,7 +33,7 @@ import CasinoContainer from "../pages/casino/CasinoContainer";
 import AuraCasino from "../pages/auraCasino/AuraCasino.jsx";
 import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
 
-const userType = JSON.parse(localStorage.getItem('session')).userTypeInfo;
+const userType = localStorage.getItem('userTypeInfo');
 
 export const router = createBrowserRouter([
 	{
