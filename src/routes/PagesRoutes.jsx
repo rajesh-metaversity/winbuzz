@@ -5,20 +5,22 @@ import SignUp from "../pages/signUp/SignUp";
 import AccountStatement from "../pages/AccountStatement/AccountStatement";
 
 import {
-  account_statement,
-  mybets,
-  casino,
-  game_detail,
-  passwordChange,
-  bets_profit_loss,
-  signUp,
-  game_list,
-  deposit,
-  withdraw,
-  game,
-  Auragame,
-  multi_market,
-} from "./PagesUrl";
+	account_statement,
+	mybets,
+	casino,
+	game_detail,
+	passwordChange,
+	bets_profit_loss,
+	signUp,
+	game_list,
+	deposit,
+	withdraw,
+	game,
+	Auragame,
+	multi_market,
+	InPlay,
+	setting
+} from './PagesUrl';
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
 import GameDetail from "../pages/gameDeatail/GameDetail.jsx";
@@ -32,6 +34,9 @@ import Deposit from "../pages/Deposit/Deposit";
 import CasinoContainer from "../pages/casino/CasinoContainer";
 import AuraCasino from "../pages/auraCasino/AuraCasino.jsx";
 import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
+import InPlayy from '../pages/InPlayy/InPlay';
+import Setting from "../pages/Setting/Setting";
+
 
 const userType = localStorage.getItem('userTypeInfo');
 
@@ -51,14 +56,26 @@ export const router = createBrowserRouter([
 			{
 				path: game_list,
 				element: <SportData />
-			}
+			},
+			{
+				path: InPlay,
+				element: <InPlayy />
+			},
+			
+			
 		]
 	},
+
 	{
 		path: '/',
 		element: <Sublayout />,
 		children: [
 			{ path: account_statement, element: <AccountStatement /> },
+			{
+				path: setting,
+				element: <Setting />
+			},
+
 			{
 				path: bets_profit_loss,
 				element: <BettingProfitLoss />
@@ -82,7 +99,7 @@ export const router = createBrowserRouter([
 				element: <Deposit />
 			},
 			{
-				path: userType != 2 ? withdraw : "",
+				path: userType != 2 ? withdraw : '',
 				element: <Withdraw />
 			},
 
@@ -92,6 +109,7 @@ export const router = createBrowserRouter([
 			}
 		]
 	},
+
 	{
 		path: signUp,
 		element: <SignUp />
@@ -104,6 +122,7 @@ export const router = createBrowserRouter([
 		path: Auragame,
 		element: <AuraCasino />
 	},
+
 	{
 		path: '*',
 		element: 'not found'

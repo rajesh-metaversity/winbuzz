@@ -28,7 +28,6 @@ const FancyBetComp = ({
   favData,
   handleFavDel,
   matId,
-  setmatchId
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -173,7 +172,6 @@ const FancyBetComp = ({
                             }
                             onClick={() =>
                               {
-                                setmatchId(item.matchId)
                                 handleBackBet(
                                   item?.mid,
                                   item?.nation,
@@ -214,7 +212,6 @@ const FancyBetComp = ({
                                 : " hiuhiuhiu ") + "back"
                             }
                             onClick={() =>{
-                              setmatchId(item.matchId)
                               handleBackBet(
                                 item?.mid,
                                 item?.nation,

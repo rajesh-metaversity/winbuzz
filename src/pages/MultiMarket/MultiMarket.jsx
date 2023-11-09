@@ -42,7 +42,6 @@ const MultiMarket = () => {
   for (let i in uniqueObject) {
     newArray.push(uniqueObject[i]);
   }
-const [matchid, setmatchId] = useState(0)
   return (
     <>
       <div className="game_detail-cont">
@@ -53,7 +52,6 @@ const [matchid, setmatchId] = useState(0)
               <>
                 <MultiMarketDetails
                   id={res?.matchId}
-                  setmatchId={setmatchId}
                   data={data && data[res?.matchId]}
                   matchName={res?.matchName}
                   setMinMax={setMinMax}

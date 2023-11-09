@@ -191,6 +191,7 @@
           margin-bottom: 0px;
           margin-left: 10px;
           clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 5% 100%) !important;
+         
           // background: blue;
         }
         span {
@@ -202,7 +203,15 @@
           font-size: 0.8rem;
           font-weight: 400;
           padding-left: 0 !important;
+
+          @media screen and (max-width: 780px) {
+            color: #000;
+            font-weight: bold;
+            
+          }
         }
+
+
         p {
           font-size: 0.8rem;
           line-height: 1.1;
@@ -210,7 +219,11 @@
           margin: 0%;
           @media screen and (max-width: 780px) {
             white-space: nowrap;
+            color: #000;
+            text-transform: uppercase;
+            font-weight: bold;
           }
+
         }
       }
       .odds-row-middle-col {

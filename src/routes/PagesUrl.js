@@ -12,3 +12,5 @@ export const deposit = "/deposit";
 export const withdraw = "/withdraw";
 export const game = "/game/:id/:matchId";
 export const Auragame = "/aura/:id/:gameId";
+export const InPlay = 'in-play'
+export const setting = 'setting'

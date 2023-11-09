@@ -29,7 +29,6 @@ const BookMaker = ({
   favData,
   handleFavDel,
   handleFavSec,
-  setmatchId
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -203,7 +202,6 @@ const BookMaker = ({
                               //     : "") + "back"
                               // }
                               onClick={() =>{
-                                setmatchId(dataBook.matchId)
                                 handleBackBet(
                                   dataBook?.mid,
                                   dataBook?.nation,
@@ -241,7 +239,6 @@ const BookMaker = ({
                               xs={12}
                               onClick={() =>
                                 {
-                                  setmatchId(dataBook.matchId)
                                   handleBackBet(
                                     dataBook?.mid,
                                     dataBook?.nation,

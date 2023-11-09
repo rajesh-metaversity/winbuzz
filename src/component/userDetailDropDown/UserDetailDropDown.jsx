@@ -11,6 +11,7 @@ import {
   bets_profit_loss,
   mybets,
   passwordChange,
+  setting,
 } from "../../routes/PagesUrl";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../Services/Auth/Logout';
@@ -20,7 +21,9 @@ import { StyledMenu } from './styled';
 import Loader from '../Loader/Loader';
 import { toast } from 'react-toastify';
 import Logout from "../LogoutConfirmation/Logout";
+import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 const UserDetailDropDown = ({ name, balanceData }) => {
+	const isBreakPoint = useMediaQuery("(max-width: 780px)");
 	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
@@ -91,6 +94,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 					// className="drop-menu"
 				>
 					<ul className="ul-drop-user">
+						
 						<li>
 							<List name="Wallet Amount" bot="(Inclusive bonus)" value={balanceData?.balance} />
 						</li>
@@ -106,17 +110,20 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 
 						<li className="refer_earn">Refer and Earn </li>
 						<li className="bonus">Awaiting Bonus 1290</li>
+						{!isBreakPoint && 
 						<Link to={mybets} className="link">
 							<li
 								className="list-bottom-border"
 								style={{
 									borderTop: '1px solid #b88831',
-									textDecoration: 'none'
+									textDecoration: 'none',
+									
 								}}
 								onClick={() => handleClose()}>
 								My Bets
 							</li>
 						</Link>
+						}
 						<Link to={bets_profit_loss} className="link">
 							<li className="list-bottom-border" onClick={() => handleClose()}>
 								{' '}
@@ -128,9 +135,14 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 								Account Statement
 							</li>
 						</Link>
+						{isBreakPoint && <Link to={setting}> <li className="list-bottom-border">Settings</li> </Link>}
+						{isBreakPoint && <li className="list-bottom-border">Open Bets</li>}
+						{isBreakPoint && <li className="list-bottom-border">Unsettled Bets</li>}
+						{!isBreakPoint &&
 						<Link className="link">
 							<li className="list-bottom-border">Market Analysis</li>
 						</Link>
+						}
 						<Link to={passwordChange} className="link" onClick={() => handleClose()}>
 							<li className="list-bottom-border">Change Password</li>
 						</Link>

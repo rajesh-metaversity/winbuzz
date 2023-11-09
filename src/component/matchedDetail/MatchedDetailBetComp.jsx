@@ -31,7 +31,6 @@ const MatchedDetailBetComp = ({
   handleFavSec,
   matchName,
   matId,
-  setmatchId
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -207,7 +206,6 @@ const MatchedDetailBetComp = ({
                                       <BackGrid
                                         onClick={() =>
                                           {
-                                            setmatchId(item?.matchId)
                                             handleBackBet(
                                               item?.Name,
                                               item?.marketId,
@@ -268,7 +266,6 @@ const MatchedDetailBetComp = ({
                                       <LayGrid
                                         onClick={() =>
                                           {
-                                            setmatchId(item?.matchId)
                                             handleBackBet(
                                               item?.Name,
                                               item?.marketId,

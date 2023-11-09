@@ -58,7 +58,6 @@ const TopBanner = () => {
 						key={index + sliderdata?.name}
 						style={{
 							backgroundImage: `url('${sliderdata?.path}')`,
-							
 						}}
 					/>
 				))}

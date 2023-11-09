@@ -102,4 +102,19 @@
         padding: 0px;
         
     }
+                .casino_card_container {
+                    width: 100%;
+                    gap: 2px;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                    // flex-wrap: wrap;
+        
+                    @media screen and (max-width: 780px) {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        width: 100%;
+                        row-gap: 5px;
+        
+                    }
+                }
 }
