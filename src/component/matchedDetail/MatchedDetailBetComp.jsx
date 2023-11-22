@@ -40,8 +40,6 @@ const MatchedDetailBetComp = ({
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  console.log(data, "dsasdsad")
-
   const handleBackBet = (
     marketName,
     marketId,

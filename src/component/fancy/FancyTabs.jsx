@@ -22,7 +22,6 @@ const FancyTabs = ({
   const [activeValue, setActiveValue] = useState(0);
   const tabsVal = data ? Object.keys(data) : [];
 
-  console.log(data,"dfsdfsdf")
 
   return (
     <>
