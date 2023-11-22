@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import InPlayOddRow from "./InPlayOddRow";
-import Title from "./Title";
+import { useNavigate, useParams } from 'react-router-dom';
+import InPlayOddRow from './InPlayOddRow';
+import Title from './Title';
 import Empty from '../empty/Empty';
-const InplayCollapse = ({ data, name }) => {
+const InplayCollapse = ({ data, name, sportid }) => {
 	const nav = useNavigate();
+	const { id: sportId } = useParams();
 
-	const handleGameDetailsPage = id => {
-		nav(`/game_detail/${id}`);
+	const handleGameDetailsPage = (id, sportid) => {
+		nav(`/game_detail/${id}/${sportid}`);
 	};
 
 	return (
@@ -16,8 +17,9 @@ const InplayCollapse = ({ data, name }) => {
 				<div className="odd-container">
 					{data?.length ? (
 						data?.map((res, index) => {
+							console.log(res, 'menn');
 							return (
-								<div onClick={() => handleGameDetailsPage(res?.matchId)} key={res?.openDate + res?.matchName + index}>
+								<div onClick={() => handleGameDetailsPage(res?.matchId, sportid)} key={res?.openDate + res?.matchName + index}>
 									<InPlayOddRow live={res} index={index} />
 								</div>
 							);

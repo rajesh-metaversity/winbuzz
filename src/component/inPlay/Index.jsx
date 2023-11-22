@@ -18,10 +18,10 @@ const Inplay = () => {
       {data?.data?.map((res) => {
         if (res?.matchList?.length == 0) return <></>;
         return (
-          <React.Fragment key={res?.matchList + res?.name}>
-            <InplayCollapse name={res?.name} data={res?.matchList} />
-          </React.Fragment>
-        );
+			<React.Fragment key={res?.matchList + res?.name}>
+				<InplayCollapse name={res?.name} data={res?.matchList} sportid={res.sportid} />
+			</React.Fragment>
+		);
       })}
     </>
   );

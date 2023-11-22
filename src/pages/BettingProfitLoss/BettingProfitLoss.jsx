@@ -165,7 +165,6 @@ if (isLoading) {
 								<TableCell>uplineAmount</TableCell>
 								<TableCell>Date</TableCell>
 								{/* <TableCell>Action</TableCell> */}
-							
 							</TableRow>
 						</TableHead>
 						{data?.data?.market?.length ? (
@@ -181,17 +180,15 @@ if (isLoading) {
 								))}
 							</TableBody>
 						) : (
-							<TableRow>
-								<TableCell></TableCell>
-								<TableCell></TableCell>
-								<TableCell></TableCell>
-								<TableCell></TableCell>
-								<Empty />
-								<TableCell></TableCell>
-								<TableCell></TableCell>
-								<TableCell></TableCell>
-								<TableCell></TableCell>
-							</TableRow>
+							<TableBody className="bet_table-body">
+								<TableRow>
+									<TableCell></TableCell>
+									<TableCell>
+										<Empty />
+									</TableCell>
+									<TableCell></TableCell>
+								</TableRow>
+							</TableBody>
 						)}
 					</Table>
 				</TableContainer>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import arrow from "../../assets/img/rightArrow.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 ///styles
 import "./styles.scss";
@@ -29,7 +29,7 @@ const SiderBar = () => {
   const { data, isLoading, isError } = useActiveSportQuery();
   const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
     useActiveMatchMutation();
-
+  const {id:sportId}=useParams()
   const [matchName, setMatchName] = useState("second");
   const [activeSlide, setActiveSlide] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
@@ -37,7 +37,7 @@ const SiderBar = () => {
   const nav = useNavigate();
 
   const handleGameDetailsPage = (id) => {
-    nav(`/game_detail/${id}`);
+    nav(`/game_detail/${id}/${sportId}`,);
   };
   const isLogin = useSelector(isLoginSelector);
 
@@ -108,6 +108,7 @@ const SiderBar = () => {
           </p>
           <p className="matchName">{matchName}</p>
           {activeMatch?.data.map((item) => {
+            console.log(item, "ooioin")
             if (item.matchName) {
               return (
                 <>

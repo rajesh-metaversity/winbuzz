@@ -21,8 +21,7 @@ export const WebBetPlaceModule = ({ minMax }) => {
   const [trigger, { data, error, isLoading }] = usePlaceBetsMutation();
 
   const buttonColors = ["#ffce00", "#75b7ff", "#a5ff93", "#fffc9f"];
-  const [inputValue, setInputValue] = useState("");
-
+  const [inputValue, setInputValue] = useState('');
   const handleNumberClick = (number) => {
     setInputValue(number.toString());
     const newObj = {

@@ -111,101 +111,108 @@ const Withdraw = () => {
     { data: withdrawBalance, status, error, isError, isLoading },
   ] = useWithdrawBalanceMutation();
 
+  console.log(withdrawBalance, 'withdrawBalance');
+
   useEffect(() => {
-    try {
-      if (withdrawBalance) {
-        toast.success(withdrawBalance?.message);
-      } else {
-        toast.error(error?.data?.message);
-      }
-    } catch (error) {
-      toast.error(error?.data?.message);
-    }
+		try {
+			if (withdrawBalance) {
+				toast.success(withdrawBalance?.message);
+			} else {
+				toast.error(error?.data?.message);
+			}
+		} catch (error) {
+			toast.error(error?.data?.message);
+		}
   }, [withdrawBalance, error]);
 
   const regexByType = {
-    bank: /^[0-9]*$/,
-    paytm: /^[0-9]*$/,
-    upi: /^[a-zA-Z0-9@._-]*$/,
+		bank: /^[0-9]*$/,
+		paytm: /^[0-9]*$/,
+		upi: /^[a-zA-Z0-9@._-]*$/
   };
   const err = {
-    invalidName:
-      "The Account Holder Name field may only contain alphabetic characters as well as spaces",
-    noName: "The Account Holder Name field is required",
-    noBank: "The Bank Name field is required",
-    noIfsc: "The IFSC field is required",
-    invalidIfsc: "The IFSC field format is invalid",
-    noAccount: "The Account Number field is required",
-    invalidAccount: "The Account Number field may only contain 8 to 16 digits",
-    invalidUpi: "The UPI field format is invalid",
-    noAmount: "The Amount field is required",
-    invalidAmount: "The Amount field may only contain numeric characters",
+		invalidName: 'The Account Holder Name field may only contain alphabetic characters as well as spaces',
+		noName: 'The Account Holder Name field is required',
+		noBank: 'The Bank Name field is required',
+		noIfsc: 'The IFSC field is required',
+		invalidIfsc: 'The IFSC field format is invalid',
+		noAccount: 'The Account Number field is required',
+		invalidAccount: 'The Account Number field may only contain 8 to 16 digits',
+		invalidUpi: 'The UPI field format is invalid',
+		noAmount: 'The Amount field is required',
+		invalidAmount: 'The Amount field may only contain numeric characters'
   };
   const [checkError, setCheckError] = useState({});
   const withdrawHandler = () => {
-    const newError = {
-      accountHolderName: withdrawDetails.accountHolderName
-        ? withdrawDetails.accountHolderName?.match(/^[a-zA-Z ]*$/)
-          ? undefined
-          : err.invalidName
-        : err.noName,
-      accountNumber: withdrawDetails.accountNumber
-        ? withdrawType.toLowerCase() === "upi"
-          ? withdrawDetails.accountNumber?.match(
-              /^[a-zA-Z0-9.-]{2,256}@[a-zA-Z][a-zA-Z]{2,64}$/
-            )
-            ? undefined
-            : err.invalidUpi
-          : withdrawType.toLowerCase() === "paytm"
-          ? withdrawDetails.accountNumber?.match(/^[0-9]{10}$/)
-            ? undefined
-            : "Mobile no should be 10 digits."
-          : withdrawDetails.accountNumber?.match(/^[0-9]{8,16}$/)
-          ? "undefined"
-          : err.invalidAccount
-        : err.noAccount,
+		const newError = {
+			accountHolderName: withdrawDetails.accountHolderName ? (withdrawDetails.accountHolderName?.match(/^[a-zA-Z ]*$/) ? undefined : err.invalidName) : err.noName,
+			accountNumber: withdrawDetails.accountNumber
+				? withdrawType.toLowerCase() === 'upi'
+					? withdrawDetails.accountNumber?.match(/^[a-zA-Z0-9.-]{2,256}@[a-zA-Z][a-zA-Z]{2,64}$/)
+						? undefined
+						: err.invalidUpi
+					: withdrawType.toLowerCase() === 'paytm'
+					? withdrawDetails.accountNumber?.match(/^[0-9]{10}$/)
+						? undefined
+						: 'Mobile no should be 10 digits.'
+					: withdrawDetails.accountNumber?.match(/^[0-9]{8,16}$/)
+					? 'undefined'
+					: err.invalidAccount
+				: err.noAccount,
 
-      amount: withdrawDetails.amount
-        ? withdrawDetails.amount.toString()?.match(/^[0-9]*$/)
-          ? undefined
-          : err.invalidAmount
-        : err.noAmount,
-      bankName:
-        withdrawType.toLowerCase() !== "bank"
-          ? undefined
-          : withdrawDetails.bankName
-          ? withdrawDetails.bankName.match(/^(?=.*[a-zA-Z])[a-zA-Z\d ]*$/)
-            ? undefined
-            : "Bank name should contain atleast one alphabet."
-          : err.noBank,
-      ifsc:
-        withdrawDetails.ifsc || withdrawType.toLowerCase() !== "bank"
-          ? withdrawDetails.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
-            withdrawType.toLowerCase() !== "bank"
-            ? undefined
-            : err.invalidIfsc
-          : err.noIfsc,
-    };
+			amount: withdrawDetails.amount ? (withdrawDetails.amount.toString()?.match(/^[0-9]*$/) ? undefined : err.invalidAmount) : err.noAmount,
+			bankName:
+				withdrawType.toLowerCase() !== 'bank'
+					? undefined
+					: withdrawDetails.bankName
+					? withdrawDetails.bankName.match(/^(?=.*[a-zA-Z])[a-zA-Z\d ]*$/)
+						? undefined
+						: 'Bank name should contain atleast one alphabet.'
+					: err.noBank,
+			ifsc:
+				withdrawDetails.ifsc || withdrawType.toLowerCase() !== 'bank'
+					? withdrawDetails.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) || withdrawType.toLowerCase() !== 'bank'
+						? undefined
+						: err.invalidIfsc
+					: err.noIfsc
+		};
 
-    var check = Object.fromEntries(
-      Object.entries(newError).filter(([_, v]) => v != null)
-    );
-    console.log(check, "checkError");
+		var check = Object.fromEntries(Object.entries(newError).filter(([_, v]) => v != null));
+		console.log(check, 'checkError');
 
-    setCheckError(check);
-    if (!Object.keys(check).length) {
-      trigger(withdrawDetails);
-    }
-  }
+		setCheckError(check);
+		if (!Object.keys(check).length) {
+			trigger(withdrawDetails);
+		}
+  };
 
   const valueChangeHandler = (name, value) => {
-    setWithdrawDetails((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+		setCheckError(false);
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				[name]: value
+			};
+		});
   };
+
+  useEffect(() => {
+		console.log(withdrawDetails, 'klklklkl');
+		if (withdrawBalance?.status)
+			setWithdrawDetails(prev => {
+				return {
+					...prev,
+					accountHolderName: '',
+					bankName: '',
+					accountType: '',
+					amount: '',
+					ifsc: '',
+					accountNumber: '',
+					withdrawType: '',
+					withdrawMode: ''
+				};
+			});
+  }, [withdrawBalance]);
 
   // console.log(isLoading, "isLOADING")
   // debugger

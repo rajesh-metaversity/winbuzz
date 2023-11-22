@@ -4,6 +4,7 @@ import { useUserFavMutation } from "../../Services/Favourite/Favourite";
 import { useFavListMutation } from "../../Services/FavList/FavList";
 import MultiMarketDetails from "./MultiMarketDetails";
 import MyBetsModule from '../../component/myBetsModule/MyBetsModule';
+import Empty from '../../component/empty/Empty';
 
 const MultiMarket = () => {
 	const [trigger, { data }] = useFavListMutation();
@@ -54,7 +55,7 @@ const MultiMarket = () => {
 			<div className="game_detail-cont">
 				<div className="game-detail-left-col">
 					{newArray?.map((res, id) => {
-						if (data && Object.keys(data[res?.matchId])?.length == 0)return <></>;
+						if (data && Object.keys(data[res?.matchId])?.length == 0) return <></>;
 						return (
 							<>
 								<MultiMarketDetails
