@@ -14,4 +14,5 @@ export const accountStatement = createApi({
 		})
 	})
 });
+
 export const { useAccountStatementMutation } = accountStatement;

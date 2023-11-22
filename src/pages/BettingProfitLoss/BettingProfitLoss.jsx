@@ -96,7 +96,7 @@ const BettingProfitLoss = () => {
       };
     });
   };
-  console.log(data, "data");
+
   if (isLoading) {
     return <Loader />;
   } else {
