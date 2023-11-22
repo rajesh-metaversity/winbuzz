@@ -196,7 +196,7 @@ const Withdraw = () => {
     if (!Object.keys(check).length) {
       trigger(withdrawDetails);
     }
-  };
+  }
 
   const valueChangeHandler = (name, value) => {
     setWithdrawDetails((prev) => {

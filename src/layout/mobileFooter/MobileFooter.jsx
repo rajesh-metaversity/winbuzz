@@ -8,6 +8,7 @@ import megaphone from "../../assets/img/megaphone.png";
 ///styles
 import "./styles.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { InPlay } from "../../routes/PagesUrl";
 const MobileFooter = () => {
   const nav = useNavigate();
 
@@ -26,7 +27,7 @@ const MobileFooter = () => {
           </li>
           <li>
             <img src={inPlay} alt="" />
-            <Link to="/" className="link">
+            <Link to={InPlay} className="link">
               <span>In Play</span>
             </Link>
           </li>

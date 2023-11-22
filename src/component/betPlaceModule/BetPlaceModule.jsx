@@ -64,6 +64,7 @@ export const WebBetPlaceModule = ({ minMax }) => {
   const handleBetModalOpen = () => {
     dispatch(setBetSlipData());
   };
+  
   return (
     <>
       {selector?.data != null && (

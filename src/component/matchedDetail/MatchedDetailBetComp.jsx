@@ -36,10 +36,8 @@ const MatchedDetailBetComp = ({
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [slectionIds, setSlectionIds] = useState(false);
-
   const { id } = useParams();
   const dispatch = useDispatch();
-
   const handleBackBet = (
     marketName,
     marketId,
@@ -91,12 +89,11 @@ const MatchedDetailBetComp = ({
                     ?<StarBorderIcon onClick={()=>handleFavSec(item?.marketId)} fontSize="medium" sx={{ color: "#fff" }} />
                     :<StarBorderIcon onClick={()=>handleFavSec(item?.marketId)} fontSize="medium" sx={{ color: "red" }} />
                   } */}
-
                   {createMarketID ? (
                     <StarIcon
                       onClick={() => handleFavDel(item?.marketId)}
                       fontSize="medium"
-                      sx={{ color: "#ffcf03" }}
+                      sx={{ color: "#FFCF03" }}
                     />
                   ) : (
                     <StarBorderIcon
@@ -105,7 +102,6 @@ const MatchedDetailBetComp = ({
                       sx={{ color: "#fff" }}
                     />
                   )}
-
                   <P props={"matchodds"}>{item?.Name}</P>
                 </PolygonStrip>
               </Grid>
@@ -130,7 +126,6 @@ const MatchedDetailBetComp = ({
                 <P props={"lay"}>lay</P>
               </Grid>
             </Grid>
-
             <GridContainer container props={"betgrid"} gap={0}>
               {item?.runners?.map((dataRunn, id) => {
                 const prevOddRunners = prevOdds?.Odds[index]?.runners[id];
@@ -237,7 +232,6 @@ const MatchedDetailBetComp = ({
                                   .reverse()}
                               </Grid>
                             </Grid>
-
                             <Grid item xs={6}>
                               <Grid
                                 container
@@ -307,5 +301,4 @@ const MatchedDetailBetComp = ({
     </>
   );
 };
-
 export default MatchedDetailBetComp;

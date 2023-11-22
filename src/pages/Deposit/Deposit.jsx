@@ -22,113 +22,135 @@ import { toast } from "react-toastify";
 import Loader from "../../component/Loader/Loader";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 const Deposit = () => {
-  const [files, setFiles] = useState(null);
-  const [amount, setAmount] = useState(0);
-  const [bank, setBank] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+	const [files, setFiles] = useState(null);
+	const [amount, setAmount] = useState(0);
+	const [selectedImage, setSelectedImage] = useState(null);
+	const [url, setUrl] = useState('');
+	const [amountError, setAmountError] = useState(false);
 
-  const {
-    data: depositData,
-    isLoading: load,
-    isError: error,
-  } = useStakeQuery();
-  const { data, isLoading, isError } = useDepositBankQuery();
-  const {
-    data: balance,
-    isLoading: balanceLoading,
-    isError: Error,
-  } = useDepositbalanceQuery();
-  const [
-    trigger,
-    {
-      data: submitBalance,
-      status,
-      error: badError,
-      isError: eror,
-      isLoading: loading,
-    },
-  ] = useDepositbalanceSubmitMutation();
+	const { data: depositData, isLoading: load, isError: error } = useStakeQuery();
+	const { data, isLoading, isError } = useDepositBankQuery();
 
-  const bankHandler = () => {
-    setBank(data);
-  };
+	const { data: balance, isLoading: balanceLoading, isError: Error } = useDepositbalanceQuery();
+	const [trigger, { data: submitBalance, status, error: badError, isError: eror, isLoading: loading }] = useDepositbalanceSubmitMutation();
 
-  const [depositKey, setDepositKey] = useState(0);
-  const handleClickImage = (imageData, key) => {
-    setSelectedImage(imageData);
-    setDepositKey(key);
-  };
+	const [depositKey, setDepositKey] = useState(0);
+	const handleClickImage = (imageData, key) => {
+		setSelectedImage(imageData);
+		setDepositKey(key);
+	};
 
-  const bankDetailObj = {
-    0: <Bank selectedImage={selectedImage || data?.data[0]} />,
-    1: <UPI selectedImage={selectedImage} />,
-    2: <QR selectedImage={selectedImage} />,
-  };
+	const bankDetailObj = {
+		0: <Bank selectedImage={selectedImage || data?.data[0]} />,
+		1: <UPI selectedImage={selectedImage} />,
+		2: <QR selectedImage={selectedImage} />
+	};
 
-  const key = {
-    BANK: 0,
-    UPI: 1,
-    QR: 2,
-  };
+	const key = {
+		BANK: 0,
+		UPI: 1,
+		QR: 2
+	};
 
-  useEffect(() => {
-    try {
-      if (submitBalance) {
-        toast.success(submitBalance?.message);
-      } else {
-        toast.error(submitBalance?.message);
-      }
-    } catch (error) {
-      toast.error(error?.submitBalance?.message);
-    }
-  }, [submitBalance]);
+	useEffect(() => {
+		try {
+			if (submitBalance) {
+				toast.success(submitBalance?.message);
+			} else {
+				toast.error(submitBalance?.message);
+			}
+		} catch (error) {
+			toast.error(error?.submitBalance?.message);
+		}
+	}, [submitBalance]);
 
-  const depositSubmitHandler = () => {
-    const submitData = new FormData();
-    submitData.append("amount", amount);
-    submitData.append("image", files || "");
-    trigger(submitData);
-  };
-  const [url, setUrl] = useState("");
+	const depositSubmitHandler = () => {
+		if (amount) {
+			setAmountError(false);
+			const submitData = new FormData();
+			submitData.append('amount', amount);
+			submitData.append('image', files);
+			trigger(submitData);
+		} else {
+			setAmountError(true);
+		}
+	};
 
-  const handleFiles = (files) => {
-    setFiles(files?.fileList);
-    setUrl(files.base64);
-};
+	const handleFiles = files => {
+		console.log(files, 'files');
+		setFiles(files?.fileList[0]);
+		setUrl(files.base64);
+	};
 
+	const handleAmountChange = e => {
+		setAmount(e.target.value);
+		if (e.target.value) {
+			setAmountError(false);
+		} else {
+			setAmountError(true);
+		}
+	};
+	console.log(amountError, 'error');
+	// const imageChangeHandler = event => {
+	// 	const files = event.target?.files;
+	// 	if (files && files.length) {
+	// 		setFiles(event.target.files[0]);
+	// 	}
+	// };
+	
+	const plusHandleChange = () => {
+		setAmount(Number(amount) + 10);
+		setAmountError(false);
+	};
+	const minusHandleChange = () => {
+		amount > 0 && (setAmount(Number(amount) - 10), setAmountError(false));
+	};
 
-  return (
+	const keyAmount = (event) => {
+		setAmount(amount + event.value)
+		setAmountError(false)
+
+	}
+	return (
 		<div className="deposit_cont">
 			<div className="dep-heading">Deposit</div>
 			<div className="deposit_amount">
 				<div className="left">
 					<p>Enter Amount</p>
 					<span className="left_span">
-						<button onClick={() => amount > 0 && setAmount(amount - 10)} style={{ cursor: 'pointer' }}>
+						<button onClick={() => minusHandleChange()} style={{ cursor: 'pointer' }}>
 							-
 						</button>
-						<input value={amount} onChange={e => setAmount(e.target.value)} />
-						<button onClick={() => setAmount(amount + 10)} style={{ cursor: 'pointer' }}>
+						<input
+							value={amount}
+							onChange={handleAmountChange}
+							placeholder="Enter Amount"
+							// onChange={e => {
+							// 	setAmount(e.target.value);
+
+							// }}
+							style={{ borderColor: amountError ? 'red' : 'initial' }}
+						/>
+						<button onClick={() => plusHandleChange()} style={{ cursor: 'pointer' }}>
 							+
 						</button>
 					</span>
+					{amountError && <p className="error-class">Amount Field Required</p>}
 				</div>
 				<div className="right">
 					{depositData?.data?.map((item, index) => {
 						return (
 							<button
 								key={index}
-								onClick={() => {
-									setAmount(amount + item.value);
-									bankHandler();
-								}}>
+								onClick={() => keyAmount(item)
+							
+								}>
 								{item?.key}
 							</button>
 						);
 					})}
 				</div>
 			</div>
-
 			<div className="middle_cont">
 				<span className="pay">
 					<p>Pay {amount}</p>
@@ -136,7 +158,8 @@ const Deposit = () => {
 					{Number(amount) > 0 && (
 						<>
 							<p className="image_cont">
-								{bank?.data?.map((el, index) => {
+								{data?.data?.map((el, index) => {
+									console.log(el, 'el');
 									return (
 										<>
 											<div key={index} className="image_sub-cont">
@@ -231,7 +254,7 @@ const Deposit = () => {
 				</div>
 			</div>
 		</div>
-  );
+	);
 };
 
 export default Deposit;

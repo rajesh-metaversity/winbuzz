@@ -17,6 +17,8 @@
     display: flex;
     gap: 50px;
     padding-left: 50px;
+    justify-content: space-between;
+    position: relative;
 
     @media screen and (max-width: 780px) {
       display: flex;
@@ -26,7 +28,15 @@
     }
 
     .left {
-      p {
+
+      .error-class {
+        position: absolute;
+        left: 8%; 
+        top: 55px;
+        color: red
+
+      }
+            p {
         margin: 0;
         margin-top: 20px;
         font-size: 16px;
