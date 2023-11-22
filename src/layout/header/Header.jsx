@@ -41,9 +41,9 @@ export const WebHeaderComponent = ({
     0: <LoginForm setOpen={setOpen} />,
     1: <RulesModal setOpen={setOpen} />,
   };
-  const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  const isBreakPoint = useMediaQuery('(max-width: 780px)');
 
-  const userType =localStorage.getItem("userTypeInfo")
+  const userType = localStorage.getItem('userTypeInfo');
 
   if (!isBreakPoint) {
 		return (
@@ -183,7 +183,7 @@ export const WebHeaderComponent = ({
 									</li>
 								</div>
 								<span className="user">
-									<UserDetailDropDown name={<PersonIcon />} />
+									<UserDetailDropDown name={<PersonIcon />} balanceData={balanceData} />
 								</span>
 							</>
 						) : (

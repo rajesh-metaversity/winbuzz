@@ -193,7 +193,8 @@
           clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 5% 100%) !important;
          
           // background: blue;
-        }
+          }
+         
         span {
           color: #a1a1a1;
           width: 100%;
@@ -207,7 +208,7 @@
           @media screen and (max-width: 780px) {
             color: #000;
             font-weight: bold;
-            
+            margin-left: 20px;
           }
         }
 
@@ -217,11 +218,17 @@
           line-height: 1.1;
           color: #333;
           margin: 0%;
+          white-space: nowrap;
+          text-wrap: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           @media screen and (max-width: 780px) {
             white-space: nowrap;
             color: #000;
             text-transform: uppercase;
             font-weight: bold;
+            width: 100%;
+         
           }
 
         }

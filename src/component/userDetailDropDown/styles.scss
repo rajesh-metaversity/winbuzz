@@ -1,10 +1,11 @@
 .user-drop-down-amount {
-  width: 170px;
+  width: 180px;
   // width: 150px;
   display: flex;
   align-items: center;
   // padding: 0px 10px;
   padding: 0 5px;
+  
   .user-drop-down-amount-left-col {
     width: 70%;
     font-size: 14px;
@@ -16,9 +17,12 @@
     }
   }
 }
-.user-drop-down-amount-left-col {
+.user-drop-down-amount-right-col {
   font-size: 13px;
+  width: 20%;
+    white-space: nowrap;
   font-weight: 700;
+  margin-right: 25px;
 }
 .ul-drop-user {
   margin: 0%;

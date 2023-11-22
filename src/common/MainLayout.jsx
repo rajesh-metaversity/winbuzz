@@ -15,74 +15,66 @@ import TopBanner from "../component/topBanner/TopBanner";
 import Loader from "../component/Loader/Loader";
 // import MyBets from "../component/MyBets/MyBets";
 
-const MainLayout = () => {
-  const [siderOpen, setSiderOpen] = useState(false);
-  const [modalValue, setModalValue] = useState(0);
-  const isBreakPoint = useMediaQuery("(max-width: 780px)");
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (siderOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "visible";
-    }
-  }, [siderOpen]);
+const MainLayout = ({ setGame, gameName }) => {
+	const [siderOpen, setSiderOpen] = useState(false);
+	const [modalValue, setModalValue] = useState(0);
+	const isBreakPoint = useMediaQuery('(max-width: 780px)');
+	const [open, setOpen] = useState(false);
+	useEffect(() => {
+		if (siderOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'visible';
+		}
+	}, [siderOpen]);
 
-  const [trigger, { data, isLoading, isError }] = useBalanceApiMutation();
-  const loginCheck = useSelector(isLoginSelector);
-  useEffect(() => {
-    if (loginCheck) {
-      trigger();
-    }
-  }, [loginCheck]);
-  if (isLoading) {
-    return <Loader />;
-  } else {
-    return (
-      <div>
-        <div className="main-layout-container">
-          <div className="header-layout">
-            <HeaderMessage />
-            <WebHeaderComponent
-              setOpen={setOpen}
-              open={open}
-              setSiderOpen={setSiderOpen}
-              siderOpen={siderOpen}
-              balanceData={data?.data}
-              setModalValue={setModalValue}
-              modalValue={modalValue}
-            />
-          </div>
-          <div className="content-container">
-            <div
-              className={
-                siderOpen ? "sider-layout-active" : "sider-layout-container"
-              }
-              onClick={() => setSiderOpen(!siderOpen)}
-            >
-              <SiderBar />
-            </div>
-            <div className="content">
-              <TopBanner />
-              <Outlet />
-            </div>
-            {!isBreakPoint ? (
-              <div className="banner-sider">
-                <SiderBanner
-                  setOpen={setOpen}
-                  open={open}
-                  setModalValue={setModalValue}
-                />
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-        <MobileFooter />
-      </div>
-    );
-  }
+	const [trigger, { data, isLoading, isError }] = useBalanceApiMutation();
+	const loginCheck = useSelector(isLoginSelector);
+
+	useEffect(() => {
+		if (loginCheck) {
+			trigger();
+		}
+	}, [loginCheck]);
+	if (isLoading) {
+		return <Loader />;
+	} else {
+		return (
+			<div>
+				<div className="main-layout-container">
+					<div className="header-layout">
+						<HeaderMessage />
+						<WebHeaderComponent
+							setOpen={setOpen}
+							open={open}
+							setSiderOpen={setSiderOpen}
+							siderOpen={siderOpen}
+							balanceData={data?.data}
+							setModalValue={setModalValue}
+							modalValue={modalValue}
+						/>
+					</div>
+					<div className="content-container">
+						<div className={siderOpen ? 'sider-layout-active' : 'sider-layout-container'} onClick={() => setSiderOpen(!siderOpen)}>
+							<SiderBar />
+						</div>
+						<div className="content">
+							<TopBanner />
+							<Outlet context={[setGame, gameName]} />
+						</div>
+						{!isBreakPoint ? (
+							<div className="banner-sider">
+								<SiderBanner setOpen={setOpen} open={open} setModalValue={setModalValue} />
+							</div>
+						) : (
+							''
+						)}
+					</div>
+				</div>
+				<MobileFooter setOpen={setOpen} />
+			</div>
+		);
+	}
 };
 
 export default MainLayout;

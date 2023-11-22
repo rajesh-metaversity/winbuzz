@@ -23,9 +23,15 @@ import Loader from "../../component/Loader/Loader";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 const Deposit = () => {
 	const [files, setFiles] = useState(null);
-	const [amount, setAmount] = useState(0);
 	const [selectedImage, setSelectedImage] = useState(null);
-	const [url, setUrl] = useState('');
+	const [payloadData, setPayloadData] = useState({
+		amount: '',
+		url: ''
+	});
+	const [error1, setError] = useState({
+		amount: false,
+		url: false
+	});
 	const [amountError, setAmountError] = useState(false);
 
 	const { data: depositData, isLoading: load, isError: error } = useStakeQuery();
@@ -65,25 +71,55 @@ const Deposit = () => {
 	}, [submitBalance]);
 
 	const depositSubmitHandler = () => {
-		if (amount) {
-			setAmountError(false);
+		let isSuccess = false;
+		for (const key of Object.keys(payloadData)) {
+			setError(prev => {
+				return { ...prev, [key]: Boolean(!payloadData[key]) };
+			});
+		}
+		for (const key of Object.keys(payloadData)) {
+			const value = Boolean(payloadData[key]);
+			if (!value) {
+				isSuccess = false;
+				break;
+			} else {
+				isSuccess = true;
+			}
+		}
+		if (isSuccess) {
 			const submitData = new FormData();
-			submitData.append('amount', amount);
+			submitData.append('amount', payloadData.amount);
 			submitData.append('image', files);
 			trigger(submitData);
-		} else {
-			setAmountError(true);
 		}
 	};
 
 	const handleFiles = files => {
 		console.log(files, 'files');
 		setFiles(files?.fileList[0]);
-		setUrl(files.base64);
+		setError(prev => {
+			return {
+				...prev,
+				url: false
+			};
+		});
+		setPayloadData(prev => {
+			return {
+				...prev,
+				url: files.base64
+			};
+		});
 	};
 
 	const handleAmountChange = e => {
-		setAmount(e.target.value);
+		// setPayloadData.amount(e.target.value);
+		setPayloadData((prev) => {
+			return {
+				...prev,
+				amount: e.target.value
+
+			}
+		})
 		if (e.target.value) {
 			setAmountError(false);
 		} else {
@@ -97,20 +133,63 @@ const Deposit = () => {
 	// 		setFiles(event.target.files[0]);
 	// 	}
 	// };
-	
+
 	const plusHandleChange = () => {
-		setAmount(Number(amount) + 10);
+		setError(prev => {
+			return {
+				...prev,
+				amount: false
+			};
+		});
+		if (payloadData.amount)
+			setPayloadData(prev => {
+				return {
+					...prev,
+					amount: Number(payloadData.amount) + 10
+				};
+			});
+		else {
+			setPayloadData(prev => {
+				return {
+					...prev,
+					amount: Number(payloadData.amount) + 100
+				};
+			});
+		}
 		setAmountError(false);
 	};
+	// const minusHandleChange = () => {
+	// 	payloadData.amount > 100 &&
+	// 		(setPayloadData(prev => {
+	// 			return {
+	// 				...prev,
+	// 				amount: Number(payloadData.amount) - 10
+	// 			};
+	// 		}),
+	// 		setAmountError(false));
+	// };
 	const minusHandleChange = () => {
-		amount > 0 && (setAmount(Number(amount) - 10), setAmountError(false));
+		setPayloadData(prev => {
+			const newAmount = Math.max(Number(prev.amount) - 10, 100);
+			return {
+				...prev,
+				amount: newAmount
+			};
+		});
+		setAmountError(false);
 	};
 
-	const keyAmount = (event) => {
-		setAmount(amount + event.value)
-		setAmountError(false)
+	const keyAmount = event => {
+		setPayloadData((prev) => {
+			return {
+				...prev,
+				amount: payloadData.amount + event.value
 
-	}
+			}
+		})
+		// setPayloadData.amount(payloadData.amount + event.value);
+		setAmountError(false);
+	};
 	return (
 		<div className="deposit_cont">
 			<div className="dep-heading">Deposit</div>
@@ -122,29 +201,25 @@ const Deposit = () => {
 							-
 						</button>
 						<input
-							value={amount}
+							value={payloadData.amount}
 							onChange={handleAmountChange}
 							placeholder="Enter Amount"
 							// onChange={e => {
 							// 	setAmount(e.target.value);
 
 							// }}
-							style={{ borderColor: amountError ? 'red' : 'initial' }}
+							style={{ borderColor: error1.amount ? 'red' : 'initial' }}
 						/>
 						<button onClick={() => plusHandleChange()} style={{ cursor: 'pointer' }}>
 							+
 						</button>
 					</span>
-					{amountError && <p className="error-class">Amount Field Required</p>}
+					{error1?.amount && <p className="error-class">Amount Field Required</p>}
 				</div>
 				<div className="right">
 					{depositData?.data?.map((item, index) => {
 						return (
-							<button
-								key={index}
-								onClick={() => keyAmount(item)
-							
-								}>
+							<button key={index} onClick={() => keyAmount(item)}>
 								{item?.key}
 							</button>
 						);
@@ -153,9 +228,9 @@ const Deposit = () => {
 			</div>
 			<div className="middle_cont">
 				<span className="pay">
-					<p>Pay {amount}</p>
+					<p>Pay {payloadData.amount}</p>
 					<p>Pay manually</p>
-					{Number(amount) > 0 && (
+					{Number(payloadData.amount) > 0 && (
 						<>
 							<p className="image_cont">
 								{data?.data?.map((el, index) => {
@@ -182,10 +257,10 @@ const Deposit = () => {
 					)}
 				</span>
 
-				{amount > 0 && (
-					<div className="lebel">
-						{url && <img src={url} alt="" />}
-						{!url && (
+				{payloadData.amount > 0 && (
+					<div className="lebel" style={{ border: error1.url ? '2px solid red' : '2px solid rgb(253, 207, 19)' }}>
+						{payloadData.url && <img src={payloadData.url} alt="" />}
+						{!payloadData.url && (
 							<>
 								<p style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
 									<AddCircleIcon /> Click here to upload payment screenshot
