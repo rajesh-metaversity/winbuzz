@@ -18,7 +18,6 @@ const MultiMarketDetails = ({
   id,
   minMax,
   setMinMax,
-  setmatchId,
 }) => {
   const [userFav, { data: fav }] = useUserFavMutation();
   const [trigger, { data: createFav }] = useCreateFavMutation();
@@ -89,7 +88,6 @@ const MultiMarketDetails = ({
         handleFavDel={handleFavDel}
         favData={fav?.data}
         matId={id}
-        setmatchId={setmatchId}
       />
       {data?.Bookmaker?.length != 0 && (
         <BookMaker
@@ -104,7 +102,6 @@ const MultiMarketDetails = ({
           handleFavDel={handleFavDel}
           handleFavSec={handleFavSec}
           matId={id}
-          setmatchId={setmatchId}
         />
       )}
 
@@ -120,7 +117,6 @@ const MultiMarketDetails = ({
         handleFavDel={handleFavDel}
         handleFavSec={handleFavSec}
         matId={id}
-        setmatchId={setmatchId}
       />
     </>
   );

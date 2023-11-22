@@ -17,7 +17,6 @@ const FancyTabs = ({
   favData,
   handleFavDel,
   matId,
-  setmatchId
 }) => {
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
@@ -68,7 +67,6 @@ const FancyTabs = ({
       </ul>
       {data && data[fancyData]?.length ? (
         <FancyBetComp
-        setmatchId={setmatchId}
           fancyItem={data[fancyData]}
           fancyData={fancyData}
           ip={ip}
