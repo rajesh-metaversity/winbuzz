@@ -29,6 +29,7 @@ const BookMaker = ({
   favData,
   handleFavDel,
   handleFavSec,
+  
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
