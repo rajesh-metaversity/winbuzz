@@ -1,0 +1,16 @@
+.noofrecordselect {
+    padding: 6px 0;
+    margin: 2px 8px;
+    width: 70px;
+
+
+    @media screen and (max-width:780px) {
+        height: 30px;
+        // max-height: 35px;
+        width: 60px;
+
+        option {
+            padding: 10px;
+        }
+    }
+}

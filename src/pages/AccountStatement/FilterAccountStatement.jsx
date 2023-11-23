@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 
-const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody, submit }) => {
+const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody, submit, searchHandler }) => {
 	const handleChange = (name, e) => {
 		const value = e;
 		if (name == 'toDate') {
@@ -73,18 +73,18 @@ const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody,
 					</div>
 
 					<div className="search">
-						<button className="search_btn">Search</button>
+						<button className="search_btn" onClick={() => searchHandler()}>Search</button>
 					</div>
 				</form>
 			</div>
-			<div className="pdf">
+			{/* <div className="pdf">
 				<span className="pdf-icon">
 					<PictureAsPdfIcon />
 				</span>
 				<span className="excel-icon">
 					<FileOpenIcon />
 				</span>
-			</div>
+			</div> */}
 		</div>
 	);
 };

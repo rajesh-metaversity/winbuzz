@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import FilterAccountStatement from "./FilterAccountStatement";
 import Loader from "../../component/Loader/Loader";
 import Empty from "../../component/empty/Empty";
+import NoOfRecords from "../../component/noOfRecords/NoOfRecords";
 const dateFormat = "YYYY-MM-DD";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -37,12 +38,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AccountStatement = () => {
   const [accountStatementBody, setAccountStatementBody] = useState({
-    noOfRecords: 1,
+    noOfRecords: 25,
     index: 0,
     fromDate: dayjs().subtract(7, "day"),
     toDate: dayjs(),
     type: 1,
     totalPages: 1,
+    userId: ""
   });
   const [trigger, { data, isLoading, isError }] = useAccountStatementMutation();
 
@@ -64,86 +66,122 @@ const AccountStatement = () => {
     trigger(accountStatementBody2);
   };
 
-  if (isLoading) {
-    return <Loader />;
-  } else {
+  const rowsHandler = (e) => {
+    setAccountStatementBody((prev) => {
+      return {
+        ...prev,
+        noOfRecords: +e.target.value
+      }
+    })
+}
+
+const searchHandler = () => {
+    trigger(accountStatementBody)
+}
+  
+const nameSearchHandler = (e) => {
+  setAccountStatementBody((prev) => {
+    return {
+      ...prev,
+      userId: e.target.value
+    }
+  })
+}
+
+const loadHandler = () => {
+  trigger(accountStatementBody)
+}
+
+
     return (
       <div className="account_statement_section">
         <FilterAccountStatement
           setAccountStatementBody={setAccountStatementBody}
           accountStatementBody={accountStatementBody}
           submit={submit}
+          searchHandler={searchHandler}
         />
-        <div className="account-statement-table">
-          <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead sx={{ borderRadius: 0 }}>
-                <TableRow
-                  sx={{
-                    "& .MuiTableCell-root": {
-                      padding: "4px",
-                    },
-                  }}
-                >
-                  <StyledTableCell>Sr No</StyledTableCell>
-                  <StyledTableCell align="left">Date</StyledTableCell>
-                  <StyledTableCell align="left">Credit&nbsp;</StyledTableCell>
-                  <StyledTableCell align="left">Debit&nbsp;</StyledTableCell>
-                  <StyledTableCell align="left">Balance&nbsp;</StyledTableCell>
-                  <StyledTableCell align="left">Remark</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              {data?.data?.dataList?.length ? (
-                <TableBody>
-                  {data?.data?.dataList.map((res) => {
-                    return (
-                      <StyledTableRow key={res.name}>
-                        <StyledTableCell component="th" scope="row">
-                          {res?.sno}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {res?.date}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          align="left"
-                          sx={{ color: res?.credit >= 0 ? "green" : "red" }}
-                        >
-                          {res?.credit}
-                        </StyledTableCell>
-                        <StyledTableCell
-                          align="left"
-                          sx={{ color: res?.debit >= 0 ? "green" : "red" }}
-                        >
-                          {res?.debit}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {res?.pts}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">
-                          {res?.remark}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    );
-                  })}
-                </TableBody>
-              ) : (
-                <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                  {/* <TableCell> */}
-                  <Empty />
-                  {/* </TableCell> */}
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              )}
-            </Table>
-          </TableContainer>
-        </div>
+       <div className='record-search'>
+					<NoOfRecords handlerselectchange={rowsHandler} />
+					<span>
+						<input placeholder='Search' onChange={ nameSearchHandler} value={accountStatementBody?.userId} />
+						<button onClick={() => loadHandler()}>Load</button>
+						</span>
+
+					</div>
+        {isLoading ? <Loader /> :
+          <div className="account-statement-table">
+            <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead sx={{ borderRadius: 0 }}>
+                  <TableRow
+                    sx={{
+                      "& .MuiTableCell-root": {
+                        padding: "4px",
+                      },
+                    }}
+                  >
+                    <StyledTableCell>Sr No</StyledTableCell>
+                    <StyledTableCell align="left">Date</StyledTableCell>
+                    <StyledTableCell align="left">Credit&nbsp;</StyledTableCell>
+                    <StyledTableCell align="left">Debit&nbsp;</StyledTableCell>
+                    <StyledTableCell align="left">Balance&nbsp;</StyledTableCell>
+                    <StyledTableCell align="left">Remark</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                {data?.data?.dataList?.length ? (
+                  <TableBody className="bet_table-body">
+                    {data?.data?.dataList.map((res) => {
+                      return (
+                        <StyledTableRow key={res.name}>
+                          <StyledTableCell>
+                            {res?.sno}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {res?.date}
+                          </StyledTableCell>
+                          <StyledTableCell
+                            align="left"
+                            sx={{  }}
+                          >
+                            <span style={{color: res?.credit >= 0 ? "green" : "red"}}>{res?.credit}</span>
+                            
+                          </StyledTableCell>
+                          <StyledTableCell
+                            align="left"
+                          >
+                            <span style={{ color: res?.debit >= 0 ? "green" : "red" }}>{res?.debit}</span>
+                            
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {res?.pts}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            {res?.remark}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })}
+                  </TableBody>
+                ) : (
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    {/* <TableCell> */}
+                    <Empty />
+                    {/* </TableCell> */}
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                )}
+              </Table>
+            </TableContainer>
+          </div>
+        }
       </div>
     );
   }
-};
+
 
 export default AccountStatement;

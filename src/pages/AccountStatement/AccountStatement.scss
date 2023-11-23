@@ -8,11 +8,68 @@
     
   }
 
+  .record-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      border: 1px solid rgb(206, 212, 218);
+      padding: 0.4rem 0.5rem;
+      border-radius: 3px;
+    }
+
+
+  }
+
   .account-statement-table {
     
     @media screen and (max-width: 780px) {
       padding: 10px;
       padding-top: 5px;
+      background: none;
+        white-space: nowrap;
+      }
+      
+      .MuiTableRow-root {
+      
+        @media screen and (max-width: 780px) {
+          background-color: black;
+      
+        }
+      
+      
+      }
+      
+      th {
+        border: 1px solid rgba(120, 130, 140, .13) !important;
+      
+        @media screen and (max-width: 780px) {
+          padding: 5px;
+      
+        }
+      
+      
+      }
+      
+      .bet_table-body {
+      
+        @media screen and (max-width: 780px) {
+          background: #202020;
+      
+          td {
+            border: 1px solid rgba(120, 130, 140, .13) !important;
+            // color: white;
+      
+            @media screen and (max-width: 780px) {
+              padding: 5px;
+              color: white;
+      
+      
+            }
+      
+          }
+        }
     }
 
 
