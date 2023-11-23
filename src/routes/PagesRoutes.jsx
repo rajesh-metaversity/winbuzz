@@ -19,7 +19,8 @@ import {
 	Auragame,
 	multi_market,
 	InPlay,
-	setting
+	setting,
+	unsettled
 } from './PagesUrl';
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
@@ -36,6 +37,7 @@ import AuraCasino from "../pages/auraCasino/AuraCasino.jsx";
 import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
 import InPlayy from '../pages/InPlayy/InPlay';
 import Setting from "../pages/Setting/Setting";
+import UnsettledBets from "../pages/UnsettledBets/UnsettledBets";
 
 
 const userType = localStorage.getItem('userTypeInfo');
@@ -74,6 +76,11 @@ export const router = () => {
 					path: setting,
 					element: <Setting />
 				},
+				{
+					path: unsettled,
+					element: <UnsettledBets  />
+				},
+
 
 				{
 					path: bets_profit_loss,

@@ -1,16 +1,14 @@
-// import { Table } from '@mui/material/Table'
 import { useEffect, useState } from 'react';
-import { useMyBetsMutation } from '../../Services/MyBets/MyBets';
-import './MyBets.scss';
+import './styles.scss'
 import {RadioStyled} from './styled'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, FormControl, RadioGroup, FormControlLabel, Radio, Tooltip, IconButton } from '@mui/material';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import Loader from '../../component/Loader/Loader';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-
-const MyBets = () => {
-	const [bets, setBets] = useState({
+import { useUnsettledBetsMutation } from '../../Services/UnsettledBets/UnsettledBets';
+const UnsettledBets = () => {
+    const [bets, setBets] = useState({
 		noOfRecords: 1,
 		index: 0,
 		sportType: 1,
@@ -19,7 +17,7 @@ const MyBets = () => {
 		totalPages: 1
 	});
 
-	const [trigger, { data, isLoading, isError }] = useMyBetsMutation();
+	const [trigger, { data, isLoading, isError }] = useUnsettledBetsMutation();
 
 	useEffect(() => {
 		trigger(bets);
@@ -44,16 +42,8 @@ const MyBets = () => {
 			};
 		});
 	};
-
-	// if (isLoading) {
-	// 	return <Loader />
-	// }
-	// else {
-
-	
-
-		return (
-			<div className="bets_cont">
+    return (
+        <div className="bets_cont">
 				<div className="combo">
 					<div className="left">
 						<p>My Bets</p>
@@ -113,7 +103,7 @@ const MyBets = () => {
 										<TableRow key={row.id}>
 											{/* <TableCell>{row.id}</TableCell> */}
 											<TableCell>{row.eventType}</TableCell>
-											<TableCell>{row.eventNamem}</TableCell>
+											<TableCell>{row.eventName}</TableCell>
 											<TableCell>{row.username}</TableCell>
 											<TableCell>{row.marketname}</TableCell>
 											<TableCell>{row.nation}</TableCell>
@@ -136,7 +126,7 @@ const MyBets = () => {
 					</div>
 				)}
 			</div>
-		);
-	}
+    )
+};
 
-export default MyBets
+export default UnsettledBets;

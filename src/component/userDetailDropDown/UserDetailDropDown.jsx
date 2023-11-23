@@ -12,6 +12,7 @@ import {
   mybets,
   passwordChange,
   setting,
+  unsettled,
 } from "../../routes/PagesUrl";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../Services/Auth/Logout';
@@ -135,9 +136,9 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 								Account Statement
 							</li>
 						</Link>
-						{isBreakPoint && <Link to={setting}> <li className="list-bottom-border">Settings</li> </Link>}
+						{isBreakPoint && <Link className="link" to={setting}> <li className="list-bottom-border">Settings</li> </Link>}
 						{isBreakPoint && <li className="list-bottom-border">Open Bets</li>}
-						{isBreakPoint && <li className="list-bottom-border">Unsettled Bets</li>}
+						{isBreakPoint && <Link  className="link" to={unsettled}> <li className="list-bottom-border">Unsettled Bets</li></Link>}
 						{!isBreakPoint &&
 						<Link className="link">
 							<li className="list-bottom-border">Market Analysis</li>
