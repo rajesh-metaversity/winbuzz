@@ -8,6 +8,8 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import Loader from '../../component/Loader/Loader';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import NoOfRecords from '../../component/noOfRecords/NoOfRecords';
+import Empty from '../../component/empty/Empty';
 
 const MyBets = () => {
 	const [bets, setBets] = useState({
@@ -16,14 +18,15 @@ const MyBets = () => {
 		sportType: 1,
 		isDeleted: false,
 		betType: 1,
-		totalPages: 1
+		totalPages: 1,
+		userId: ""
 	});
 
 	const [trigger, { data, isLoading, isError }] = useMyBetsMutation();
 
 	useEffect(() => {
 		trigger(bets);
-	}, [bets.betType, bets.isDeleted]);
+	}, [bets.betType, bets.isDeleted, bets.noOfRecords]);
 
 	
 
@@ -45,12 +48,32 @@ const MyBets = () => {
 		});
 	};
 
-	// if (isLoading) {
-	// 	return <Loader />
-	// }
-	// else {
-
+	const rowsHandler = (e) => {
+		setBets((prev) => {
+		  return {
+			...prev,
+			noOfRecords: +e.target.value
+		  }
+		})
+	}
 	
+	const searchHandler = () => {
+        trigger(bets)
+    }
+
+	const nameSearchHandler = (e) => {
+		setBets((prev) => {
+			return {
+				...prev,
+				userId: e.target.value
+			}
+		})
+	}
+
+	const loadHandler = () => {
+		trigger(bets)
+	}
+
 
 		return (
 			<div className="bets_cont">
@@ -77,17 +100,25 @@ const MyBets = () => {
 							</select>
 						</span>
 
-						<button>Search</button>
+						<button  onClick={() => searchHandler()}>Search</button>
 					</div>
-					<div className="pdf-excel">
+					{/* <div className="pdf-excel">
 						<span className="pdf">
 							<PictureAsPdfIcon />
 						</span>
 						<span className="excel">
 							<FileOpenIcon />
 						</span>
-					</div>
+					</div> */}
 				</div>
+				<div className='record-search'>
+					<NoOfRecords handlerselectchange={rowsHandler} />
+					<span>
+						<input placeholder='Search' onChange={ nameSearchHandler} value={bets?.userId} />
+						<button onClick={() => loadHandler()}>Load</button>
+						</span>
+
+					</div>
 
 				{isLoading ? (
 					<Loader />
@@ -107,7 +138,8 @@ const MyBets = () => {
 										<TableCell>Place Date</TableCell>
 										<TableCell>Detail</TableCell>
 									</TableRow>
-								</TableHead>
+									</TableHead>
+									{data?.data?.dataList?.length ? 
 								<TableBody className="bet_table-body">
 									{data?.data?.dataList.map(row => (
 										<TableRow key={row.id}>
@@ -130,7 +162,21 @@ const MyBets = () => {
 											</TableCell>
 										</TableRow>
 									))}
-								</TableBody>
+									</TableBody>
+									:  <TableRow>
+									<TableCell></TableCell>
+									<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+									
+									{/* <TableCell> */}
+									<Empty />
+									{/* </TableCell> */}
+									<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+								  </TableRow> }
 							</Table>
 						</TableContainer>
 					</div>

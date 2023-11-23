@@ -19,6 +19,7 @@ import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportL
 import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMatch";
 import Loader from "../../component/Loader/Loader";
 import Empty from "../../component/empty/Empty";
+import NoOfRecords from "../../component/noOfRecords/NoOfRecords";
 const dateFormat = "YYYY-MM-DD";
 
 const BettingProfitLoss = () => {
@@ -96,10 +97,28 @@ const BettingProfitLoss = () => {
       };
     });
   };
-console.log(data?.data, 'data?.data');
-if (isLoading) {
-	return <Loader />;
-} else {
+  const rowsHandler = (e) => {
+    setBettingPnl((prev) => {
+      return {
+        ...prev,
+        noOfRecords: +e.target.value
+      }
+    })
+  }
+  
+  const nameSearchHandler = (e) => {
+    setBettingPnl((prev) => {
+      return {
+        ...prev,
+        userId: e.target.value
+      }
+    })
+  }
+  
+  const loadHandler = () => {
+    trigger(bettingPnl)
+  }
+  
 	return (
 		<div className="betting_profit-loss_cont">
 			<div className="right">
@@ -153,49 +172,58 @@ if (isLoading) {
 						Search
 					</button>
 				</div>
-			</div>
+      </div>
+      <div className='record-search'>
+        <NoOfRecords
+          handlerselectchange={rowsHandler} />
+					<span>
+						<input placeholder='Search' onChange={ nameSearchHandler} value={bettingPnl?.userId} />
+						<button onClick={() => loadHandler()}>Load</button>
+						</span>
 
-			<div className="mybets_table">
-				<TableContainer component={Paper}>
-					<Table>
-						<TableHead>
-							<TableRow>
-								<TableCell>Match Name</TableCell>
-								<TableCell>pnl</TableCell>
-								<TableCell>uplineAmount</TableCell>
-								<TableCell>Date</TableCell>
-								{/* <TableCell>Action</TableCell> */}
-							</TableRow>
-						</TableHead>
-						{data?.data?.market?.length ? (
-							<TableBody className="bet_table-body">
-								{data?.data?.market.map(row => (
-									<TableRow key={row?.id + row?.name}>
-										<TableCell>{row?.matchName}</TableCell>
-										<TableCell>{row?.pnl}</TableCell>
-										<TableCell>{row?.uplineAmount}</TableCell>
-										<TableCell>{row?.createdon}</TableCell>
-										{/* <TableCell>{row?.action}</TableCell> */}
-									</TableRow>
-								))}
-							</TableBody>
-						) : (
-							<TableBody className="bet_table-body">
-								<TableRow>
-									<TableCell></TableCell>
-									<TableCell>
-										<Empty />
-									</TableCell>
-									<TableCell></TableCell>
-								</TableRow>
-							</TableBody>
-						)}
-					</Table>
-				</TableContainer>
-			</div>
+					</div>
+      {isLoading ? <Loader /> :
+        <div className="mybets_table">
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Match Name</TableCell>
+                  <TableCell>pnl</TableCell>
+                  <TableCell>uplineAmount</TableCell>
+                  <TableCell>Date</TableCell>
+                  {/* <TableCell>Action</TableCell> */}
+                </TableRow>
+              </TableHead>
+              {data?.data?.market?.length ? (
+                <TableBody className="bet_table-body">
+                  {data?.data?.market.map(row => (
+                    <TableRow key={row?.id + row?.name}>
+                      <TableCell>{row?.matchName}</TableCell>
+                      <TableCell>{row?.pnl}</TableCell>
+                      <TableCell>{row?.uplineAmount}</TableCell>
+                      <TableCell>{row?.createdon}</TableCell>
+                      {/* <TableCell>{row?.action}</TableCell> */}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              ) : (
+                <TableBody className="bet_table-body">
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell>
+                      <Empty />
+                    </TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableBody>
+              )}
+            </Table>
+          </TableContainer>
+        </div>
+      }
 		</div>
 	);
 }
-};
 
 export default BettingProfitLoss;

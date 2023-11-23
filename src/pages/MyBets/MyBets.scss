@@ -1,7 +1,7 @@
 .bets_cont {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  // gap: 50px;
   
 
   @media screen and (max-width: 780px) {
@@ -12,8 +12,6 @@
     // flex-wrap: nowrap;
 
   }
-
- 
 
   .combo {
     display: flex;
@@ -195,6 +193,20 @@
       }
 
     }
+  }
+
+  .record-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      border: 1px solid rgb(206, 212, 218);
+      padding: 0.4rem 0.5rem;
+      border-radius: 3px;
+    }
+
+
   }
 
   .mybets_table {
