@@ -144,7 +144,7 @@
     display: flex;
     justify-content: space-between;
     height: 100%;
-    width: 100%;
+    width: 40%;
 
     @media screen and (max-width: 780px) {
       display: flex;
@@ -191,10 +191,10 @@
           margin-bottom: 0px;
           margin-left: 10px;
           clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 5% 100%) !important;
-         
+
           // background: blue;
-          }
-         
+        }
+
         span {
           color: #a1a1a1;
           width: 100%;
@@ -212,7 +212,6 @@
           }
         }
 
-
         p {
           font-size: 0.8rem;
           line-height: 1.1;
@@ -228,9 +227,7 @@
             text-transform: uppercase;
             font-weight: bold;
             width: 100%;
-         
           }
-
         }
       }
       .odds-row-middle-col {
