@@ -10,6 +10,7 @@ import Loader from '../../component/Loader/Loader';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import NoOfRecords from '../../component/noOfRecords/NoOfRecords';
 import Empty from '../../component/empty/Empty';
+import Pagination from '../../component/Pagination/Pagination';
 
 const MyBets = () => {
 	const [bets, setBets] = useState({
@@ -75,7 +76,8 @@ const MyBets = () => {
 	}
 
 
-		return (
+	return (
+		<>
 			<div className="bets_cont">
 				<div className="combo">
 					<div className="left">
@@ -115,7 +117,7 @@ const MyBets = () => {
 					<NoOfRecords handlerselectchange={rowsHandler} />
 					<span>
 						<input placeholder='Search' onChange={ nameSearchHandler} value={bets?.userId} />
-						<button onClick={() => loadHandler()}>Load</button>
+						{/* <button onClick={() => loadHandler()}>Load</button> */}
 						</span>
 
 					</div>
@@ -182,6 +184,9 @@ const MyBets = () => {
 					</div>
 				)}
 			</div>
+			
+			<Pagination setPaginationData={setBets} paginationData={bets} />
+			</>
 		);
 	}
 

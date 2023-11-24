@@ -16,7 +16,7 @@ import {
   styled,
 } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Upi = ({
   upiDetails,
   setWithdrawDetails,
@@ -70,6 +70,21 @@ const Upi = ({
       };
     });
   };
+  useEffect(() => {
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				accountHolderName: '',
+				bankName: '',
+				accountType: '',
+				amount: '',
+				ifsc: '',
+				accountNumber: '',
+				withdrawType: '',
+				withdrawMode: ''
+			};
+		});
+  }, []);
   return (
     <div>
       <Grid container sx={{ md: { gap: "1rem", xs: 0 } }}>

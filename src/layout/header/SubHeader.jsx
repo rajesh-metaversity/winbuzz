@@ -4,7 +4,7 @@ import { useActiveSportQuery } from '../../Services/ActiveSportList/ActiveSportL
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from '../../useMediaQuery/UseMediaQuery';
 import play from '../../assets/img/in-play.png';
-import { casino, deposit, home, withdraw } from '../../routes/PagesUrl';
+import { InPlay, casino, deposit, home, withdraw } from '../../routes/PagesUrl';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AddCardIcon from '@mui/icons-material/AddCard';
 
@@ -51,9 +51,9 @@ const SubHeader = () => {
 					<ul>
 						<li
 							onClick={() => {
-								nav('/game_list/');
+								nav(InPlay);
 							}}
-							className={!id && 'active-tabs'}>
+							className={pathName == '/in-play' ? 'active-tabs' : ''}>
 							<img src={play} alt="" />
 
 							<span>

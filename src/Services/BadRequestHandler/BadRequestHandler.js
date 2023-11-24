@@ -1,4 +1,4 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 // import { message } from "antd";
 import { toast } from 'react-toastify';
 export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
@@ -15,7 +15,8 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 		if (status === 401) {
 			localStorage.clear();
 			window.location.replace('/');
-		} else {
+		}
+		else {
 			toast.error(responseMessage);
 		}
 	}

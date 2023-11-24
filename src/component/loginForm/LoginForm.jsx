@@ -150,10 +150,12 @@ if (isLoading) {
 					</form>
 					<div className="login_buttons">
 						<button
+							// disabled
 							className="login"
 							onClick={event => {
 								event.preventDefault();
 								onSumbit();
+								
 							}}>
 							LOGIN
 						</button>
@@ -163,7 +165,7 @@ if (isLoading) {
 								setDemoChecker(true);
 								demoIdLogin(e);
 							}}>
-							LOGINWITH DEMO ID
+							LOGIN WITH DEMO ID
 						</button>
 						<button className="login_with_demo">
 							<a href="#">Forgot Password?</a>
