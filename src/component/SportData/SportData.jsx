@@ -22,7 +22,7 @@ const SportData = () => {
 	} else {
 		return (
 			<>
-				<InPlayHeading headName={state || 'EXCHANGE GAMES'} />
+        <InPlayHeading headName={state || 'EXCHANGE GAMES'} />
 				<InplayCollapse data={data?.data} name={state} />
 			</>
 		);

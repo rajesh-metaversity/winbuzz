@@ -6,6 +6,8 @@ const InplayCollapse = ({ data, name, sportid }) => {
 	const nav = useNavigate();
 	const { id: sportId } = useParams();
 
+	const idSport = sportid || sportId
+
 	const handleGameDetailsPage = (id, sportid) => {
 		nav(`/game_detail/${id}/${sportid}`);
 	};
@@ -19,7 +21,7 @@ const InplayCollapse = ({ data, name, sportid }) => {
 						data?.map((res, index) => {
 							console.log(res, 'menn');
 							return (
-								<div onClick={() => handleGameDetailsPage(res?.matchId, sportid)} key={res?.openDate + res?.matchName + index}>
+								<div onClick={() => handleGameDetailsPage(res?.matchId, idSport)} key={res?.openDate + res?.matchName + index}>
 									<InPlayOddRow live={res} index={index} />
 								</div>
 							);
