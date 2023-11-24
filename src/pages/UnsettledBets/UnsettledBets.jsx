@@ -8,6 +8,7 @@ import Loader from '../../component/Loader/Loader';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { useUnsettledBetsMutation } from '../../Services/UnsettledBets/UnsettledBets';
 import NoOfRecords from '../../component/noOfRecords/NoOfRecords';
+import Pagination from '../../component/Pagination/Pagination';
 const UnsettledBets = () => {
     const [bets, setBets] = useState({
 		noOfRecords: 1,
@@ -57,6 +58,7 @@ const UnsettledBets = () => {
 
     }
     return (
+        <>
 		<div className="bets_cont">
 			<div className="combo">
 				<div className="left">
@@ -140,7 +142,10 @@ const UnsettledBets = () => {
 					</TableContainer>
 				</div>
 			)}
-		</div>
+        </div>
+            <Pagination setPaginationData={setBets} paginationData={bets} />
+            </>
+
 	);
 };
 

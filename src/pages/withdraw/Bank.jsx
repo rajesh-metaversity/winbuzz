@@ -18,7 +18,7 @@ import {
   styled,
 } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import Loader from "../../component/Loader/Loader";
 const Bank = ({
   bankDetails,
@@ -79,7 +79,21 @@ const Bank = ({
       };
     });
   };
-
+  useEffect(() => {
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				accountHolderName: '',
+				bankName: '',
+				accountType: '',
+				amount: '',
+				ifsc: '',
+				accountNumber: '',
+				withdrawType: '',
+				withdrawMode: ''
+			};
+		});
+  }, []);
   return (
     <div>
       <Grid container sx={{ md: { gap: "1rem", xs: 0 } }}>

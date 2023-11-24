@@ -32,46 +32,35 @@ const MatchedDetailBetComp = ({
   matchName,
   matId,
 }) => {
+  console.log(prevOdds, 'prevOddssss');
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
-  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
+  const pTime = moment(curr).format('YYYY-MM-DD HH:mm:ss.SSS');
   const [slectionIds, setSlectionIds] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const handleBackBet = (
-    marketName,
-    marketId,
-    matchName,
-    sid,
-    odds,
-    priceValue,
-    isBack,
-    isFancy,
-    fullmatchName,
-    min,
-    max
-  ) => {
-    setMinMax({
-      minBet: min,
-      maxBet: max,
-    });
-    setSlectionIds(sid);
-    dispatch(
-      setBetSlipData({
-        userIp: ip,
-        isFancy: isFancy,
-        isBack: isBack,
-        odds: odds,
-        name: matchName,
-        marketName: marketName,
-        selectionId: sid,
-        priceValue: priceValue,
-        placeTime: pTime,
-        marketId: marketId,
-        matchId: id || matId,
-        matchName: fullmatchName,
-      })
-    );
+  const handleBackBet = (marketName, marketId, matchName, sid, odds, priceValue, isBack, isFancy, fullmatchName, min, max) => {
+		setMinMax({
+			minBet: min,
+			maxBet: max
+		});
+		setSlectionIds(sid);
+		dispatch(
+			setBetSlipData({
+				userIp: ip,
+				isFancy: isFancy,
+				isBack: isBack,
+				odds: odds,
+				name: matchName,
+				marketName: marketName,
+				selectionId: sid,
+				priceValue: odds,
+				placeTime: pTime,
+				marketId: marketId,
+				matchId: id || matId,
+				matchName: fullmatchName
+			})
+		);
   };
   return (
     <>

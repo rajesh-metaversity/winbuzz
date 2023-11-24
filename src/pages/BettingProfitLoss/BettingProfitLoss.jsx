@@ -20,6 +20,7 @@ import { useActiveMatchMutation } from "../../Services/ActiveSportList/ActiveMat
 import Loader from "../../component/Loader/Loader";
 import Empty from "../../component/empty/Empty";
 import NoOfRecords from "../../component/noOfRecords/NoOfRecords";
+import Pagination from "../../component/Pagination/Pagination";
 const dateFormat = "YYYY-MM-DD";
 
 const BettingProfitLoss = () => {
@@ -119,7 +120,8 @@ const BettingProfitLoss = () => {
     trigger(bettingPnl)
   }
   
-	return (
+  return (
+    <>
 		<div className="betting_profit-loss_cont">
 			<div className="right">
 				<p>betting profit loss</p>
@@ -178,7 +180,7 @@ const BettingProfitLoss = () => {
           handlerselectchange={rowsHandler} />
 					<span>
 						<input placeholder='Search' onChange={ nameSearchHandler} value={bettingPnl?.userId} />
-						<button onClick={() => loadHandler()}>Load</button>
+						{/* <button onClick={() => loadHandler()}>Load</button> */}
 						</span>
 
 					</div>
@@ -222,7 +224,9 @@ const BettingProfitLoss = () => {
           </TableContainer>
         </div>
       }
-		</div>
+    </div>
+      <Pagination setPaginationData={setBettingPnl} paginationData={bettingPnl} />
+      </>
 	);
 }
 

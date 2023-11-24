@@ -137,7 +137,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
 							</li>
 						</Link>
 						{isBreakPoint && <Link className="link" to={setting}> <li className="list-bottom-border">Settings</li> </Link>}
-						{isBreakPoint && <li className="list-bottom-border">Open Bets</li>}
+						{isBreakPoint && <Link to={mybets}  className="link"> <li className="list-bottom-border">Open Bets</li></Link>}
 						{isBreakPoint && <Link  className="link" to={unsettled}> <li className="list-bottom-border">Unsettled Bets</li></Link>}
 						{!isBreakPoint &&
 						<Link className="link">

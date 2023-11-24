@@ -14,7 +14,7 @@ import {
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { Formik } from "formik";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Paytm = ({
   paytmDetails,
   setWithdrawDetails,
@@ -62,6 +62,21 @@ const Paytm = ({
       };
     });
   };
+  useEffect(() => {
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				accountHolderName: '',
+				bankName: '',
+				accountType: '',
+				amount: '',
+				ifsc: '',
+				accountNumber: '',
+				withdrawType: '',
+				withdrawMode: ''
+			};
+		});
+  }, []);
   return (
     <div>
       <Grid container sx={{ md: { gap: "1rem", xs: 0 } }}>

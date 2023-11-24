@@ -183,7 +183,7 @@ const Deposit = () => {
 		setPayloadData((prev) => {
 			return {
 				...prev,
-				amount: payloadData.amount + event.value
+				amount: Number(payloadData.amount) + Number(event.value)
 
 			}
 		})

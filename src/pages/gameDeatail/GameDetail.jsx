@@ -21,7 +21,7 @@ import { useDispatch } from 'react-redux';
 const GameDetail = () => {
 	const { id } = useParams();
 	const [odds, setOdds] = useState({});
-	const [prevOdds, setPrevOdds] = useState({});
+  const [prevOdds, setPrevOdds] = useState({});
 	const [minMax, setMinMax] = useState({
 		minBet: '',
 		maxBet: ''

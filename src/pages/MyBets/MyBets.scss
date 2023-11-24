@@ -199,6 +199,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 10px;
+
+    @media screen and (max-width: 780px) {
+      color: white;
+      
+    }
 
     input {
       border: 1px solid rgb(206, 212, 218);

@@ -156,7 +156,7 @@ const Withdraw = () => {
 						? undefined
 						: 'Mobile no should be 10 digits.'
 					: withdrawDetails.accountNumber?.match(/^[0-9]{8,16}$/)
-					? 'undefined'
+					? undefined
 					: err.invalidAccount
 				: err.noAccount,
 
@@ -213,6 +213,8 @@ const Withdraw = () => {
 				};
 			});
   }, [withdrawBalance]);
+
+  
 
   // console.log(isLoading, "isLOADING")
   // debugger
