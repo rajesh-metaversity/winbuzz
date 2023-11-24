@@ -126,7 +126,7 @@ const Deposit = () => {
 			setAmountError(true);
 		}
 	};
-	console.log(amountError, 'error');
+	
 	// const imageChangeHandler = event => {
 	// 	const files = event.target?.files;
 	// 	if (files && files.length) {
@@ -183,7 +183,7 @@ const Deposit = () => {
 		setPayloadData((prev) => {
 			return {
 				...prev,
-				amount: payloadData.amount + event.value
+				amount: Number(payloadData.amount) + Number(event.value)
 
 			}
 		})
@@ -217,6 +217,7 @@ const Deposit = () => {
 					{error1?.amount && <p className="error-class">Amount Field Required</p>}
 				</div>
 				<div className="right">
+			
 					{depositData?.data?.map((item, index) => {
 						return (
 							<button key={index} onClick={() => keyAmount(item)}>
