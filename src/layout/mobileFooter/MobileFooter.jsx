@@ -33,28 +33,28 @@ const MobileFooter = ({ setOpen }) => {
 		<div className="mobile-footer-container">
 			<div className="mobile-footer-left-col">
 				<ul>
+						<Link className="link" to="game_list/4">
 					<li onClick={() => CricketPage()} className="link">
 						<img src={football} alt="" />
-						<Link className="link">
 							<span>Sports</span>
-						</Link>
 					</li>
+						</Link>
+						<Link to={InPlay} className="link">
 					<li>
 						<img src={inPlay} alt="" />
-						<Link to={InPlay} className="link">
 							<span>In Play</span>
-						</Link>
 					</li>
+						</Link>
 				</ul>
 			</div>
 			<div className="mobile-footer-right-col">
 				<ul>
-					{/* <Link to="/casino"> */}
+					<Link to="/casino">
 					<li>
 						<img src={casino} alt="" />
 						<span onClick={() => casinoHandler()}>Casino</span>
 					</li>
-					{/* </Link> */}
+					</Link>
 
 					<li>
 						<img src={megaphone} alt="" />

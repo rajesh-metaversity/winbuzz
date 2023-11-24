@@ -53,17 +53,15 @@ export const WebBetPlaceModule = ({ minMax }) => {
 	};
 
 	useEffect(() => {
-		console.log(error);
 		if (data?.status) {
 			toast.success(data?.message);
 		} else {
 			toast.error(data?.message);
 		}
-		console.log(data, 'sdvcdfvref');
 	}, [data]);
 
 	const dispatch = useDispatch();
-	console.log({ placeBetData: data });
+
 
 	const handleBetModalOpen = () => {
 		dispatch(setBetSlipData());
@@ -194,6 +192,13 @@ export const MobileBetPlaceModal = ({ minMax }) => {
     }
   };
   let dispatch = useDispatch();
+  useEffect(() => {
+		if (data?.status) {
+			toast.success(data?.message);
+		} else {
+			toast.error(data?.message);
+		}
+  }, [data]);
   return (
     <>
       {isBreakPoint && selector?.data?.name && (

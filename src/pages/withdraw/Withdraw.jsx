@@ -59,7 +59,7 @@ const Withdraw = () => {
     ifsc: "",
     accountNumber: "",
     withdrawType: "",
-    withdrawMode: "",
+    withdrawMode: "NORMAL",
   });
 
   const [userWithdrawDetails, setUserWithdrawDetails] = useState([]);
@@ -215,7 +215,6 @@ const Withdraw = () => {
   }, [withdrawBalance]);
 
   
-
   // console.log(isLoading, "isLOADING")
   // debugger
 
@@ -301,9 +300,9 @@ const Withdraw = () => {
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
         >
-          <MenuItem value="" disabled>
+          {/* <MenuItem value="" disabled>
             <span>Choose Withdraw Type</span>
-          </MenuItem>
+          </MenuItem> */}
 
           <MenuItem value={"NORMAL"}>NORMAL</MenuItem>
           <MenuItem value={"INSTANT"}>INSTANT</MenuItem>

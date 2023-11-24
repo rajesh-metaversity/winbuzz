@@ -69,11 +69,11 @@ const Paytm = ({
 				accountHolderName: '',
 				bankName: '',
 				accountType: '',
-				amount: '',
+				// amount: '',
 				ifsc: '',
 				accountNumber: '',
-				withdrawType: '',
-				withdrawMode: ''
+				// withdrawType: '',
+				// withdrawMode: ''
 			};
 		});
   }, []);

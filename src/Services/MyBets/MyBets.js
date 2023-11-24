@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { dynamicBaseQuery } from "../BadRequestHandler/BadRequestHandler";
 import { createApi } from '@reduxjs/toolkit/query/react';
 
@@ -18,22 +17,7 @@ export const MyBets = createApi({
 				url: '/enduser/place-bets',
 				method: 'POST',
 				body
-			}),
-			transformResponse: res => {
-				console.log("wrwefewf", res);
-
-				if (res.status) {
-					toast.success(res.message)	
-				}
-				else {
-					toast.error(res.message)
-				}
-
-
-
-
-				return res;
-			}
+			})
 		})
 	})
 });

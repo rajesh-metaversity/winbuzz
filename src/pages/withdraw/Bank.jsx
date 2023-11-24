@@ -86,11 +86,11 @@ const Bank = ({
 				accountHolderName: '',
 				bankName: '',
 				accountType: '',
-				amount: '',
+				// amount: '',
 				ifsc: '',
 				accountNumber: '',
-				withdrawType: '',
-				withdrawMode: ''
+				// withdrawType: '',
+				// withdrawMode: ''
 			};
 		});
   }, []);

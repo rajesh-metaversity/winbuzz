@@ -16,7 +16,7 @@
     display: flex;
     height: calc(100% - 64px);
     .sider-layout-container {
-      width: 15%;
+      width: 12%;
       height: 100%;
       background-color: white;
       border-left: 1px solid #ddd;
@@ -43,7 +43,7 @@
       top: 64px;
     }
     .content {
-      width: calc(60% - 20px);
+      width: calc(65% - 20px);
       height: 100%;
       padding: 10px;
       background-color: white;
@@ -67,7 +67,7 @@
       }
     }
     .banner-sider {
-      width: 25%;
+      width: 23%;
       margin-top: 10px;
     }
   }

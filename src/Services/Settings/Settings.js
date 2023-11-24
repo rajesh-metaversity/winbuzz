@@ -7,7 +7,7 @@ export const accountStatement = createApi({
 	endpoints: builder => ({
 		getStake: builder.mutation({
 			query: body => ({
-				url: 'enduser/set-stake-button',
+				url: 'enduser/get-stake-button',
 				method: 'POST',
 				body
 			})

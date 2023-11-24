@@ -180,11 +180,12 @@
       }
 
       .odds-row-left-col {
-        width: fit-content;
+        // width: fit-content;
+        width: 65%;
         padding-block: 5px;
         height: 100%;
         padding-left: 10px;
-        white-space: nowrap;
+        // white-space: nowrap;
         @media screen and (max-width: 780px) {
           display: flex;
           flex-direction: column-reverse;
