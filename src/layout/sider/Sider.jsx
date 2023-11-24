@@ -29,17 +29,18 @@ const SiderBar = () => {
   const { data, isLoading, isError } = useActiveSportQuery();
   const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
     useActiveMatchMutation();
-  const {id:sportId}=useParams()
   const [matchName, setMatchName] = useState("second");
   const [activeSlide, setActiveSlide] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
   const nav = useNavigate();
 
-  const handleGameDetailsPage = (id) => {
+  const handleGameDetailsPage = (id, sportId) => {
     nav(`/game_detail/${id}/${sportId}`,);
   };
   const isLogin = useSelector(isLoginSelector);
+
+  const [idSport, setIdSport] = useState(0)
 
   return (
     <div
@@ -67,6 +68,7 @@ const SiderBar = () => {
               <li
                 onClick={() => {
                   setMatchName(item?.sportName);
+                  setIdSport(item?.sportId)
                   setActiveSlide(true);
                   trigge(item?.sportId);
                 }}
@@ -113,7 +115,7 @@ const SiderBar = () => {
               return (
                 <>
                   <li onClick={() => setActiveSlide(true)}>
-                    <p onClick={() => handleGameDetailsPage(item?.matchId)}>
+                    <p onClick={() => handleGameDetailsPage(item?.matchId, idSport)}>
                       {item.matchName}
                     </p>
                     <span>
