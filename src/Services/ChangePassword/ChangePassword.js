@@ -11,8 +11,15 @@ export const ChangePassword = createApi({
 				method: 'POST',
 				body
 			})
+		}),
+		ChangePasswordCP: builder.mutation({
+			query: body => ({
+				url: '/user/first-login-cp',
+				method: 'POST',
+				body
+			})
 		})
 	})
 });
 
-export const {useChangePasswordMutation} = ChangePassword
+export const {useChangePasswordMutation, useChangePasswordCPMutation} = ChangePassword

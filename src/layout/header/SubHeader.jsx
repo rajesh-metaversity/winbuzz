@@ -23,6 +23,10 @@ const SubHeader = () => {
 	const pathName = window.location.pathname;
 	const isLogin = useSelector(isLoginSelector);
 	const isBreakPoint = useMediaQuery('(max-width: 780px)');
+
+	const userType = localStorage.getItem('userTypeInfo');
+
+	console.log(isLogin, "dfvefrv")
 	if (!isBreakPoint) {
 		return (
 			<div className="sub_header_cont">
@@ -61,7 +65,7 @@ const SubHeader = () => {
 							</span>
 						</li>
 
-						{data?.data.map((items, index) => {
+						{data?.data?.map((items, index) => {
 							return (
 								<React.Fragment key={items.sportId + items.sportName + index}>
 									<li
@@ -87,7 +91,7 @@ const SubHeader = () => {
 						)}
 					</ul>
 				</div>
-				{isLogin && (
+				{isLogin || userType == 2 && (
 					<div className="mobile-subheader-deposit">
 						<Link to={deposit}>
 							<div className="mobile-subheader-deposit-left-col">

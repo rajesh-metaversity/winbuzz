@@ -15,3 +15,4 @@ export const Auragame = "/aura/:id/:gameId";
 export const InPlay = 'in-play'
 export const setting = 'setting'
 export const unsettled = 'unsettled-bets'
+export const changePass = '/change-pass'
