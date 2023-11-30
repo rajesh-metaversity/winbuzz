@@ -11,48 +11,76 @@ import { useDispatch } from 'react-redux';
 import { setIslogin } from '../../App/LoginSlice';
 
 import Loader from '../Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import { changePass, passwordChange } from '../../routes/PagesUrl';
 const LoginForm = ({ setOpen }) => {
+	const nav = useNavigate();
 	const dispatch = useDispatch();
-const [demoChecker, setDemoChecker] = useState(false);
-const [trigger, { data, error: isError, isLoading }] = useLoginMutation();
-const [trigge, { data: demoIdData, error: demoIdError, isLoading: demoLoading }] = useLoginDemoIdMutation();
+	const [demoChecker, setDemoChecker] = useState(false);
+	const [trigger, { data, error: isError, isLoading }] = useLoginMutation();
+	const [trigge, { data: demoIdData, error: demoIdError, isLoading: demoLoading }] = useLoginDemoIdMutation();
 
-const [loginData, setloginData] = useState({
-	userId: '',
-	password: '',
-	appUrl: 'localhost'
-});
+	const [loginData, setloginData] = useState({
+		userId: '',
+		password: '',
+		appUrl: window.location.hostname
+	});
+
 const [error, setError] = useState({
 	userId: false,
 	password: false
 });
+
 const check = data || demoIdData;
 useEffect(() => {
 	if (check) {
-		if (check?.status == false) {
-			toast.error(check?.message);
-			dispatch(setIslogin(false));
-		} else if (check?.token) {
-			dispatch(setIslogin(true));
-			setOpen(false);
-			//   nav(rules_Regulation);
-			toast.success('Login Successful');
-		}
-		localStorage.setItem('userId', check.userId);
-		localStorage.setItem('token', check.token);
-		if (demoChecker) {
-			localStorage.setItem('userTypeInfo', check.userTypeInfo);
-		}
+
 		if (check.passwordtype == 'old') {
-			// if (isBreakPoint) {
-			//   console.log("mobile-chan");
-			// } else {
-			//   console.log("web-change");
-			// }
-			//   nav(changePassword_Web_Screen);
-		} else if (check.passwordtype !== 'old') {
+			localStorage.setItem('token', check.token);
+			localStorage.setItem('userId', check.userId);
+			nav(changePass)
+			if (check.userTypeInfo == 2) {
+				// console.log("checking")
+				localStorage.setItem('session', JSON.stringify(check));
+				setOpen(false)
+				dispatch(setIslogin(true));
+				nav('/');
+
+			} else if (check.passwordtype != "old") {
+				
+				nav("/");
+			}
+
 			// setloginCheck(false);
-			localStorage.setItem('session', JSON.stringify(check));
+		} else {
+			if (check?.status == false) {
+
+				toast.error(check?.message);
+				dispatch(setIslogin(false));
+			} else if (check?.token) {
+				localStorage.setItem('token', check.token);
+				localStorage.setItem('userId', check.userId);
+				dispatch(setIslogin(true));
+				setOpen(false);
+				//   nav(rules_Regulation);
+				toast.success('Login Successful');
+			}
+			
+			localStorage.setItem('token', check.token);
+
+			if (demoChecker) {
+				localStorage.setItem('userTypeInfo', check.userTypeInfo);
+			}
+			// if (check.passwordtype == 'old') {
+			// 	nav(passwordChange);
+
+				// if (isBreakPoint) {
+				//   console.log("mobile-chan");
+				// } else {
+				//   console.log("web-change");
+				// }
+				//   nav(changePassword_Web_Screen);
+			// }
 		}
 	}
 }, [check]);
@@ -110,7 +138,7 @@ const onSumbit = () => {
 
 const demoIdLogin = e => {
 	e.preventDefault();
-	trigge({ appUrl: 'localhost' });
+	trigge({ appUrl: window.location.hostname });
 };
 
 if (isLoading) {

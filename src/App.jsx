@@ -6,8 +6,10 @@ import { isLoginSelector, setIslogin } from "./App/LoginSlice";
 import { useQtechAuthQuery } from "./Services/Qtech/Qtech";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useValidateJWTMutation } from "./Services/ValidateJWT/Validate";
 
 function App() {
+	const [trigger, { data, isLoading, isError }] = useValidateJWTMutation();
 	const dispatch = useDispatch();
 
 	const isLogin = useSelector(isLoginSelector);
@@ -18,7 +20,12 @@ function App() {
 		}
 	}, []);
 
-	// useEffect(() => {}, [st]);
+	useEffect(() => {
+		const validateJWT = setInterval(() => {
+			dispatch(trigger({}))
+		}, 5000)
+		return () => clearInterval(validateJWT)
+	}, [])
 
 	return (
 		<>

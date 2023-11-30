@@ -35,7 +35,9 @@ export const WebHeaderComponent = ({
   const handleOpen = () => {
     setOpen(true);
   };
-  const userId = localStorage.getItem("userId");
+	const userId = localStorage.getItem("userId");
+	
+	console.log(userId, "USERDID")
 
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,

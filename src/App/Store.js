@@ -20,54 +20,57 @@ import { Casino } from "../Services/auraCasino/AuraCasino";
 import { Favourite } from "../Services/Favourite/Favourite";
 import { FavList } from "../Services/FavList/FavList";
 import { UnsettledBets } from "../Services/UnsettledBets/UnsettledBets";
+import { ValidateJWT } from '../Services/ValidateJWT/Validate';
 
 export const store = configureStore({
-  reducer: {
-    isLogin: isLoginSlice.reducer,
-    betSlip: betModuleDataSlice.reducer,
-    [accountStatement.reducerPath]: accountStatement.reducer,
-    [Login.reducerPath]: Login.reducer,
-    [Logout.reducerPath]: Logout.reducer,
-    [ActiveSport.reducerPath]: ActiveSport.reducer,
-    [activeMatch.reducerPath]: activeMatch.reducer,
-    [MyBets.reducerPath]: MyBets.reducer,
-    [ChangePassword.reducerPath]: ChangePassword.reducer,
-    [BettingProfitLoss.reducerPath]: BettingProfitLoss.reducer,
-    [bannerList.reducerPath]: bannerList.reducer,
-    [BalanceApi.reducerPath]: BalanceApi.reducer,
-    [Message.reducerPath]: Message.reducer,
-    [Qtech.reducerPath]: Qtech.reducer,
-    [stake.reducerPath]: stake.reducer,
-    [Withdraw.reducerPath]: Withdraw.reducer,
-    [PnlApi.reducerPath]: PnlApi.reducer,
-    [Casino.reducerPath]: Casino.reducer,
-    [Favourite.reducerPath]: Favourite.reducer,
-    [FavList.reducerPath]: FavList.reducer,
-    [UnsettledBets.reducerPath]: UnsettledBets.reducer
-  },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(accountStatement.middleware)
-      .concat(Login.middleware)
-      .concat(ActiveSport.middleware)
-      .concat(MyBets.middleware)
-      .concat(Logout.middleware)
-      .concat(ChangePassword.middleware)
-      .concat(BettingProfitLoss.middleware)
-      .concat(activeMatch.middleware)
-      .concat(bannerList.middleware)
-      .concat(BalanceApi.middleware)
-      .concat(Message.middleware)
-      .concat(Qtech.middleware)
-      .concat(stake.middleware)
-      .concat(Withdraw.middleware)
-      .concat(PnlApi.middleware)
-      .concat(Casino.middleware)
-      .concat(Favourite.middleware)
-      .concat(FavList.middleware)
-      .concat(UnsettledBets.middleware)
+	reducer: {
+		isLogin: isLoginSlice.reducer,
+		betSlip: betModuleDataSlice.reducer,
+		[accountStatement.reducerPath]: accountStatement.reducer,
+		[Login.reducerPath]: Login.reducer,
+		[Logout.reducerPath]: Logout.reducer,
+		[ActiveSport.reducerPath]: ActiveSport.reducer,
+		[activeMatch.reducerPath]: activeMatch.reducer,
+		[MyBets.reducerPath]: MyBets.reducer,
+		[ChangePassword.reducerPath]: ChangePassword.reducer,
+		[BettingProfitLoss.reducerPath]: BettingProfitLoss.reducer,
+		[bannerList.reducerPath]: bannerList.reducer,
+		[BalanceApi.reducerPath]: BalanceApi.reducer,
+		[Message.reducerPath]: Message.reducer,
+		[Qtech.reducerPath]: Qtech.reducer,
+		[stake.reducerPath]: stake.reducer,
+		[Withdraw.reducerPath]: Withdraw.reducer,
+		[PnlApi.reducerPath]: PnlApi.reducer,
+		[Casino.reducerPath]: Casino.reducer,
+		[Favourite.reducerPath]: Favourite.reducer,
+		[FavList.reducerPath]: FavList.reducer,
+		[UnsettledBets.reducerPath]: UnsettledBets.reducer,
+		[ValidateJWT.reducerPath]: ValidateJWT.reducer
+	},
+	// Adding the api middleware enables caching, invalidation, polling,
+	// and other useful features of `rtk-query`.
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware()
+			.concat(accountStatement.middleware)
+			.concat(Login.middleware)
+			.concat(ActiveSport.middleware)
+			.concat(MyBets.middleware)
+			.concat(Logout.middleware)
+			.concat(ChangePassword.middleware)
+			.concat(BettingProfitLoss.middleware)
+			.concat(activeMatch.middleware)
+			.concat(bannerList.middleware)
+			.concat(BalanceApi.middleware)
+			.concat(Message.middleware)
+			.concat(Qtech.middleware)
+			.concat(stake.middleware)
+			.concat(Withdraw.middleware)
+			.concat(PnlApi.middleware)
+			.concat(Casino.middleware)
+			.concat(Favourite.middleware)
+			.concat(FavList.middleware)
+			.concat(UnsettledBets.middleware)
+			.concat(ValidateJWT.middleware)
 });
 
 setupListeners(store.dispatch);
