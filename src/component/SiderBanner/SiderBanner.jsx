@@ -124,7 +124,7 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
 						<div className="play_games">Play Games</div>
 						<div className="bottom_images">
 							{/* <Casino /> */}
-							<CasinoCard list={category} gameLists={gameLists} providerFilter={providerFilter} />
+{/* 							<CasinoCard list={category} gameLists={gameLists} providerFilter={providerFilter} /> */}
 							{casinoData?.map((data, index) => (
 						<span key={index + data?.imageUrl} className="image_cont">
 							<img src={data?.imageUrl} alt="" className="image" />
