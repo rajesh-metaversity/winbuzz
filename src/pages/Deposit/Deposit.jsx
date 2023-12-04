@@ -10,6 +10,7 @@ import "./styles.scss";
 import ReactFileReader from "react-file-reader";
 import {
   useDepositBankQuery,
+  useDepositStakeQuery,
   useDepositbalanceQuery,
   useDepositbalanceSubmitMutation,
   useStakeQuery,
@@ -38,7 +39,7 @@ const Deposit = () => {
     data: depositData,
     isLoading: load,
     isError: error,
-  } = useStakeQuery();
+  } = useDepositStakeQuery();
   const { data, isLoading, isError } = useDepositBankQuery();
 
   const {
@@ -112,7 +113,6 @@ const Deposit = () => {
   };
 
   const handleFiles = (files) => {
-    console.log(files, "files");
     setFiles(files?.fileList[0]);
     setError((prev) => {
       return {

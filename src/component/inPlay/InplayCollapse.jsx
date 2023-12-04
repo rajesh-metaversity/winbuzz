@@ -19,7 +19,6 @@ const InplayCollapse = ({ data, name, sportid }) => {
 				<div className="odd-container">
 					{data?.length ? (
 						data?.map((res, index) => {
-							console.log(res, 'menn');
 							return (
 								<div onClick={() => handleGameDetailsPage(res?.matchId, idSport)} key={res?.openDate + res?.matchName + index}>
 									<InPlayOddRow live={res} index={index} />

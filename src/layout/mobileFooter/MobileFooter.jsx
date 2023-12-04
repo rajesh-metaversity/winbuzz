@@ -49,7 +49,7 @@ const MobileFooter = ({ setOpen }) => {
 			</div>
 			<div className="mobile-footer-right-col">
 				<ul>
-					<Link to="/casino">
+					<Link to="/casino/Lottery">
 					<li>
 						<img src={casino} alt="" />
 						<span onClick={() => casinoHandler()}>Casino</span>

@@ -17,7 +17,7 @@ import { sportImages } from "../sider/Sider";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
 
-const SubHeader = () => {
+const SubHeader = ({ setModalValue, handleOpen }) => {
   const { data } = useActiveSportQuery();
   const nav = useNavigate();
 
@@ -30,8 +30,7 @@ const SubHeader = () => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
   const userType = localStorage.getItem("userTypeInfo");
-
-  console.log(isLogin, "dfvefrv");
+  const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
   if (!isBreakPoint) {
     return (
       <div className="sub_header_cont">
@@ -51,13 +50,33 @@ const SubHeader = () => {
               </React.Fragment>
             );
           })}
-          {isLogin && (
-            <li>
-              <Link to={casino} style={{ color: "#fffa00" }}>
-                Int Casino
-              </Link>
-            </li>
-          )}
+          {isLogin
+            ? casinoList.map((item, index) => {
+                let removeSpace = item.split(" ").join("");
+                return (
+                  <li key={item + index}>
+                    <Link
+                      to={`casino/${removeSpace}`}
+                      style={{ color: "#fffa00" }}
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                );
+              })
+            : casinoList.map((item, index) => {
+                return (
+                  <li
+                    key={item + index}
+                    style={{ color: "#fffa00" }}
+                    onClick={() => {
+                      setModalValue(0), handleOpen();
+                    }}
+                  >
+                    {item}
+                  </li>
+                );
+              })}
         </ul>
       </div>
     );
@@ -96,17 +115,31 @@ const SubHeader = () => {
                 </React.Fragment>
               );
             })}
-            {isLogin && (
+            {isLogin ? (
+              casinoList.map((item, index) => {
+                let removeSpace = item.split(" ").join("");
+                return (
+                  <li
+                    onClick={() => nav("/casino/" + removeSpace)}
+                    key={item + index}
+                    className={pathName == "/casino" ? "active-tabs" : ""}
+                  >
+                    <img src={play} alt="" />
+                    <span>
+                      <Link to={`/casino/${removeSpace}`}>{item}</Link>
+                    </span>
+                  </li>
+                );
+              })
+            ) : (
               <li
-                onClick={() => nav("/casino")}
                 className={pathName == "/casino" ? "active-tabs" : ""}
+                onClick={() => {
+                  setModalValue(0), handleOpen();
+                }}
               >
                 <img src={play} alt="" />
-                <span>
-                  <Link to={casino} style={{ color: "#fffa00" }}>
-                    Int Casino
-                  </Link>
-                </span>
+                <span>Int Casino</span>
               </li>
             )}
           </ul>

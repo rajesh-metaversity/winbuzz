@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal, Typography, useMediaQuery } from "@mui/material";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -6,18 +6,29 @@ import casinoImd from "../../assets/img/casinoImg.png";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-const CasinoRuleModalContent = ({ handleClose, gameId, gameName }) => {
+import { qtechCaino } from "../../routes/PagesUrl";
+const CasinoRuleModalContent = ({ handleClose, gameId, id, gameName }) => {
+  const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const style = {
-    width: 400,
+    width: isBreakPoint ? "100%" : 400,
     background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
     boxShadow: 24,
-    p: 2,
+    p: isBreakPoint ? 0 : 2,
+    pb: isBreakPoint ? 2 : 2,
   };
 
   const [trigger, { data, isLoading, isError }] = useCasinoRulesMutation();
   useEffect(() => {
     trigger();
   }, []);
+
+  const points = {
+    LiveCasino: data?.data?.qtech,
+    FantasyGame: data?.data?.fantasyGames,
+    Slot: data?.data?.qtech,
+    Lottery: data?.data?.qtech,
+    aura: data?.data?.aura,
+  };
 
   return (
     <>
@@ -32,7 +43,7 @@ const CasinoRuleModalContent = ({ handleClose, gameId, gameName }) => {
           </div>
           <div className="casino_message">
             <p className="please_note">Please Note</p>
-            <p className="points">(1 Points = ₹{data?.data?.aura})</p>
+            <p className="points">(1 Points = ₹{points[id || "aura"]})</p>
 
             <div className="casino_dis">
               <p>
@@ -48,14 +59,18 @@ const CasinoRuleModalContent = ({ handleClose, gameId, gameName }) => {
           </div>
         </Typography>
         <div className="agree_btn">
-          <Link to={`/aura/${gameName}/${gameId}`}>
-            <button>Ok I Agree</button>
-          </Link>
+          {id ? (
+            <Link to={`/qtech/${gameName}`}>
+              <button>Ok I Agree</button>
+            </Link>
+          ) : (
+            <Link to={`/aura/${gameName}/${gameId}`}>
+              <button>Ok I Agree</button>
+            </Link>
+          )}
           <button onClick={handleClose}>No, I Don't Agree</button>
         </div>
       </Box>
-
-  
     </>
   );
 };

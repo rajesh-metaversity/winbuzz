@@ -32,7 +32,6 @@ const MatchedDetailBetComp = ({
   matchName,
   matId,
 }) => {
-  console.log(prevOdds, "prevOddssss");
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -121,7 +120,7 @@ const MatchedDetailBetComp = ({
               </Grid>
             </GridContainer>
             <Grid container>
-              <Grid item xs={7}></Grid>
+              <Grid item xs={5}></Grid>
               <Grid item display={{ xs: "block", md: "none" }} xs={2}>
                 <P props={"back"}>back</P>
               </Grid>

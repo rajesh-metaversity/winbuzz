@@ -17,6 +17,8 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("session")) {
       dispatch(setIslogin(true));
+    } else if (localStorage.getItem("token")) {
+      dispatch(setIslogin(true));
     }
   }, []);
 
