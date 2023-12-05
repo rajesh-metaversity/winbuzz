@@ -7,7 +7,6 @@ const MyBetsModule = ({matId,matchid}) => {
   const { id } = useParams()
 
   const { data: betlistbymatch } = useBetListByMatchQuery({ matchId: id || matId })
-console.log(matchid,"matchId")
   return (
     <>
       <div className="my_bets-cont betslip">

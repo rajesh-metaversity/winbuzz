@@ -11,7 +11,6 @@ import ModalComponent from "../modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
-import CasinoCard from '../casinoCard/CasinoCard';
 import { useQtechMutation } from '../../Services/Qtech/Qtech';
 
 var settings = {
@@ -55,7 +54,6 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
 	const [gameCode, setGameCode] = useState('');
 	const [category, setCategory] = useState([]);
 	const [gameLists, setGameLists] = useState([]);
-	const [providerFilter, setProviderFilter] = useState('ALL');
 
 	const casinoToken = localStorage.getItem('casino-token');
 	const [trigge, { data: gamelist }] = useQtechMutation();
@@ -119,7 +117,7 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
 						))}
 					</Slider>
 				</div>
-				{loginCheck && (
+				{/* {loginCheck && ( */}
 					<div className="side_banner-sub_cont">
 						<div className="play_games">Play Games</div>
 						<div className="bottom_images">
@@ -147,7 +145,7 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
 					))}
 						</div>
 					</div>
-				)}
+				{/* )} */}
 			</>
 		);
 	} else {

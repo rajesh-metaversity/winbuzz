@@ -14,6 +14,11 @@ import footballImage from "../../assets/football.svg";
 import horseRidingImage from "../../assets/horse.svg";
 import kabaddiImage from "../../assets/kabaddi.svg";
 import casino from "../../assets/int.svg";
+import leaf from "../../assets/img/99999.svg";
+import lottery from "../../assets/img/lottery.png";
+import slots from "../../assets/img/slots.png";
+import fantasygame from "../../assets/img/fantasy-game.png";
+
 import { multi_market } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
@@ -25,7 +30,7 @@ export const sportImages = {
   Kabaddi: kabaddiImage,
 };
 
-const SiderBar = () => {
+const SiderBar = ({ handleOpen }) => {
   const { data, isLoading, isError } = useActiveSportQuery();
   const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
     useActiveMatchMutation();
@@ -36,12 +41,20 @@ const SiderBar = () => {
   const nav = useNavigate();
 
   const handleGameDetailsPage = (id, sportId) => {
-    nav(`/game_detail/${id}/${sportId}`,);
+    nav(`/game_detail/${id}/${sportId}`);
   };
   const isLogin = useSelector(isLoginSelector);
 
-  const [idSport, setIdSport] = useState(0)
-
+  const [idSport, setIdSport] = useState(0);
+  const casinoList = [
+    {
+      name: "Lottery",
+      img: lottery,
+    },
+    { name: "Live Casino", img: casino },
+    { name: "Slot", img: slots },
+    { name: "Fantasy Game", img: fantasygame },
+  ];
   return (
     <div
       className={isBreakPoint ? "sider-active" : "sider-container"}
@@ -68,7 +81,7 @@ const SiderBar = () => {
               <li
                 onClick={() => {
                   setMatchName(item?.sportName);
-                  setIdSport(item?.sportId)
+                  setIdSport(item?.sportId);
                   setActiveSlide(true);
                   trigge(item?.sportId);
                 }}
@@ -86,19 +99,37 @@ const SiderBar = () => {
             </React.Fragment>
           );
         })}
-        {isLogin && (
-          <Link to="casino">
-            <li>
-              <p>
-                <img src={casino} alt="casino" />
-                Int Casino
-              </p>
-              <span>
-                <img src={arrow} alt="" />
-              </span>
-            </li>
-          </Link>
-        )}
+        {isLogin
+          ? casinoList.map((item, index) => {
+              let removeSpace = item.name.split(" ").join("");
+
+              return (
+                <Link to={`casino/${removeSpace}`} key={item + index}>
+                  <li>
+                    <p>
+                      <img src={item.img} alt="casino" />
+                      {item?.name}
+                    </p>
+                    <span>
+                      <img src={arrow} alt="" />
+                    </span>
+                  </li>
+                </Link>
+              );
+            })
+          : casinoList.map((item, index) => {
+              return (
+                <li key={item + index}>
+                  <p onClick={() => handleOpen()}>
+                    <img src={item.img} alt="casino" />
+                    {item.name}
+                  </p>
+                  <span>
+                    <img src={arrow} alt="" />
+                  </span>
+                </li>
+              );
+            })}
       </ul>
 
       <div
@@ -110,12 +141,16 @@ const SiderBar = () => {
           </p>
           <p className="matchName">{matchName}</p>
           {activeMatch?.data.map((item) => {
-            console.log(item, "ooioin")
+            console.log(item, "ooioin");
             if (item.matchName) {
               return (
                 <>
                   <li onClick={() => setActiveSlide(true)}>
-                    <p onClick={() => handleGameDetailsPage(item?.matchId, idSport)}>
+                    <p
+                      onClick={() =>
+                        handleGameDetailsPage(item?.matchId, idSport)
+                      }
+                    >
                       {item.matchName}
                     </p>
                     <span>

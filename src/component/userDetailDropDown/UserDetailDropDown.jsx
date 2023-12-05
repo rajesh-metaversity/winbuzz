@@ -114,17 +114,17 @@ const UserDetailDropDown = ({ name, balanceData }) => {
             <li>
               <List name="Net Exposure" bot="" value={balanceData?.libality} />
             </li>
-            <li>
+            {/* <li>
               <List name="Bonus" bot="" value="0" />
-            </li>
-            <li
+            </li> */}
+            {/* <li
               style={{ borderBottom: "1px solid #b88831", marginBottom: "5px" }}
             >
               <List name="Available Withdrawal" bot="" value="0" />
-            </li>
-
+            </li> */}
+            {/* 
             <li className="refer_earn">Refer and Earn </li>
-            <li className="bonus">Awaiting Bonus 1290</li>
+            <li className="bonus">Awaiting Bonus 1290</li> */}
             {!isBreakPoint && (
               <Link to={mybets} className="link">
                 <li
@@ -153,14 +153,23 @@ const UserDetailDropDown = ({ name, balanceData }) => {
             {isBreakPoint && (
               <Link className="link" to={setting}>
                 {" "}
-                <li className="list-bottom-border">Settings</li>{" "}
+                <li
+                  className="list-bottom-border"
+                  onClick={() => handleClose()}
+                >
+                  Settings
+                </li>{" "}
               </Link>
             )}
             {isBreakPoint && <li className="list-bottom-border">Open Bets</li>}
             {isBreakPoint && (
               <Link className="link" to={unsettled}>
-                {" "}
-                <li className="list-bottom-border">Unsettled Bets</li>
+                <li
+                  className="list-bottom-border"
+                  onClick={() => handleClose()}
+                >
+                  Unsettled Bets
+                </li>
               </Link>
             )}
             {!isBreakPoint && (
@@ -175,9 +184,9 @@ const UserDetailDropDown = ({ name, balanceData }) => {
             >
               <li className="list-bottom-border">Change Password</li>
             </Link>
-            <li className="list-bottom-border" onClick={() => handleOpen()}>
+            {/* <li className="list-bottom-border" onClick={() => handleOpen()}>
               Bonus Rules
-            </li>
+            </li> */}
             <li className="logout-li" onClick={() => setLogutModal(true)}>
               Logout
               <ExitToAppIcon />

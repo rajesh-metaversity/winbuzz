@@ -32,35 +32,46 @@ const MatchedDetailBetComp = ({
   matchName,
   matId,
 }) => {
-  console.log(prevOdds, 'prevOddssss');
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
-  const pTime = moment(curr).format('YYYY-MM-DD HH:mm:ss.SSS');
+  const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
   const [slectionIds, setSlectionIds] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const handleBackBet = (marketName, marketId, matchName, sid, odds, priceValue, isBack, isFancy, fullmatchName, min, max) => {
-		setMinMax({
-			minBet: min,
-			maxBet: max
-		});
-		setSlectionIds(sid);
-		dispatch(
-			setBetSlipData({
-				userIp: ip,
-				isFancy: isFancy,
-				isBack: isBack,
-				odds: odds,
-				name: matchName,
-				marketName: marketName,
-				selectionId: sid,
-				priceValue: odds,
-				placeTime: pTime,
-				marketId: marketId,
-				matchId: id || matId,
-				matchName: fullmatchName
-			})
-		);
+  const handleBackBet = (
+    marketName,
+    marketId,
+    matchName,
+    sid,
+    odds,
+    priceValue,
+    isBack,
+    isFancy,
+    fullmatchName,
+    min,
+    max
+  ) => {
+    setMinMax({
+      minBet: min,
+      maxBet: max,
+    });
+    setSlectionIds(sid);
+    dispatch(
+      setBetSlipData({
+        userIp: ip,
+        isFancy: isFancy,
+        isBack: isBack,
+        odds: odds,
+        name: matchName,
+        marketName: marketName,
+        selectionId: sid,
+        priceValue: odds,
+        placeTime: pTime,
+        marketId: marketId,
+        matchId: id || matId,
+        matchName: fullmatchName,
+      })
+    );
   };
   return (
     <>
@@ -91,7 +102,9 @@ const MatchedDetailBetComp = ({
                       sx={{ color: "#fff" }}
                     />
                   )}
-                  <P props={"matchodds"}>{item?.Name}</P>
+                  <P props={"matchodds"} sx={{ textAlign: "left" }}>
+                    {item?.Name}
+                  </P>
                 </PolygonStrip>
               </Grid>
               <Grid item md={2} xs={5}>
@@ -107,7 +120,7 @@ const MatchedDetailBetComp = ({
               </Grid>
             </GridContainer>
             <Grid container>
-              <Grid item xs={7}></Grid>
+              <Grid item xs={5}></Grid>
               <Grid item display={{ xs: "block", md: "none" }} xs={2}>
                 <P props={"back"}>back</P>
               </Grid>

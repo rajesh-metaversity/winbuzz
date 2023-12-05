@@ -5,148 +5,152 @@ import SignUp from "../pages/signUp/SignUp";
 import AccountStatement from "../pages/AccountStatement/AccountStatement";
 
 import {
-	account_statement,
-	mybets,
-	casino,
-	game_detail,
-	passwordChange,
-	bets_profit_loss,
-	signUp,
-	game_list,
-	deposit,
-	withdraw,
-	game,
-	Auragame,
-	multi_market,
-	InPlay,
-	setting,
-	unsettled,
-	changePass
-} from './PagesUrl';
-import Sublayout from '../common/SubLayout';
-import Casino from '../pages/casino/Casino';
-import GameDetail from '../pages/gameDeatail/GameDetail.jsx';
-import SportData from '../component/SportData/SportData';
-import BettingProfitLoss from '../pages/BettingProfitLoss/BettingProfitLoss';
-import ChangePassword from '../pages/ChangePassword/ChangePassword';
-import MyBets from '../pages/MyBets/MyBets';
-import Withdraw from '../pages/withdraw/Withdraw';
-import CasinoIframe from '../pages/casinoIframe/CasinoIframe';
-import Deposit from '../pages/Deposit/Deposit';
-import CasinoContainer from '../pages/casino/CasinoContainer';
-import AuraCasino from '../pages/auraCasino/AuraCasino.jsx';
-import MultiMarket from '../pages/MultiMarket/MultiMarket.jsx';
-import InPlayy from '../pages/InPlayy/InPlay';
-import Setting from '../pages/Setting/Setting';
-import UnsettledBets from '../pages/UnsettledBets/UnsettledBets';
-import PassChange from '../pages/PassChange/PassChange';
+  account_statement,
+  mybets,
+  casino,
+  game_detail,
+  passwordChange,
+  bets_profit_loss,
+  signUp,
+  game_list,
+  deposit,
+  withdraw,
+  game,
+  Auragame,
+  multi_market,
+  InPlay,
+  setting,
+  unsettled,
+  changePass,
+  qtechCaino,
+} from "./PagesUrl";
+import Sublayout from "../common/SubLayout";
+import Casino from "../pages/casino/Casino";
+import GameDetail from "../pages/gameDeatail/GameDetail.jsx";
+import SportData from "../component/SportData/SportData";
+import BettingProfitLoss from "../pages/BettingProfitLoss/BettingProfitLoss";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import MyBets from "../pages/MyBets/MyBets";
+import Withdraw from "../pages/withdraw/Withdraw";
+import CasinoIframe from "../pages/casinoIframe/CasinoIframe";
+import Deposit from "../pages/Deposit/Deposit";
+import CasinoContainer from "../pages/casino/CasinoContainer";
+import AuraCasino from "../pages/allCasino/AuraCasino.jsx";
+import QtechCasino from "../pages/allCasino/QtechCasino.jsx";
 
-const userType = localStorage.getItem('userTypeInfo');
-const passType = localStorage.getItem('passwordtype');
-console.log(userType, 'DSFvdvfv');
-console.log(userType != 2 ?  changePass : "home", "homrdcds")
+import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
+import InPlayy from "../pages/InPlayy/InPlay";
+import Setting from "../pages/Setting/Setting";
+import UnsettledBets from "../pages/UnsettledBets/UnsettledBets";
+import PassChange from "../pages/PassChange/PassChange";
+
+const userType = localStorage.getItem("userTypeInfo");
 
 export const router = () => {
-	return createBrowserRouter([
-		{
-			path: '/',
-			element: <MainLayout />,
-			children: [
-				{
-					path: '/',
-					element: <DashBoard />
-				},
-				{
-					path: casino,
-					element: <CasinoContainer />
-				},
-				{
-					path: game_list,
-					element: <SportData />
-				},
-				{
-					path: InPlay,
-					element: <InPlayy />
-				}
-			]
-		},
+  return createBrowserRouter([
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        {
+          path: "/",
+          element: <DashBoard />,
+        },
+        {
+          path: casino,
+          element: <CasinoContainer />,
+        },
+        {
+          path: game_list,
+          element: <SportData />,
+        },
+        {
+          path: InPlay,
+          element: <InPlayy />,
+        },
+      ],
+    },
 
-		{
-			path: '/',
-			element: <Sublayout />,
-			children: [
-				{ path: account_statement, element: <AccountStatement /> },
+    {
+      path: "/",
+      element: <Sublayout />,
+      children: [
+        { path: account_statement, element: <AccountStatement /> },
 
-				{
-					path: setting,
-					element: <Setting />
-				},
+        {
+          path: setting,
+          element: <Setting />,
+        },
 
-				{
-					path: unsettled,
-					element: <UnsettledBets />
-				},
+        {
+          path: unsettled,
+          element: <UnsettledBets />,
+        },
 
-				{
-					path: bets_profit_loss,
-					element: <BettingProfitLoss />
-				},
+        {
+          path: bets_profit_loss,
+          element: <BettingProfitLoss />,
+        },
 
-				{
-					path: mybets,
-					element: <MyBets />
-				},
+        {
+          path: mybets,
+          element: <MyBets />,
+        },
 
-				{
-					path: passwordChange,
-					element: <ChangePassword />
-				},
+        {
+          path: passwordChange,
+          element: <ChangePassword />,
+        },
 
-				{
-					path: game_detail,
-					element: <GameDetail />
-				},
+        {
+          path: game_detail,
+          element: <GameDetail />,
+        },
 
-				{
-					path: userType != 2 ? deposit : '',
-					element: <Deposit />
-				},
+        {
+          path: userType != 2 ? deposit : "",
+          element: <Deposit />,
+        },
 
-				{
-					path: userType != 2 ? withdraw : '',
-					element: <Withdraw />
-				},
+        {
+          path: userType != 2 ? withdraw : "",
+          element: <Withdraw />,
+        },
 
-				{
-					path: multi_market,
-					element: <MultiMarket />
-				}
-			]
-		},
+        {
+          path: multi_market,
+          element: <MultiMarket />,
+        },
+      ],
+    },
 
-		{
-			path: signUp,
-			element: <SignUp />
-		},
+    {
+      path: signUp,
+      element: <SignUp />,
+    },
 
-		{
-			path: game,
-			element: <CasinoIframe />
-		},
+    {
+      path: game,
+      element: <CasinoIframe />,
+    },
 
-		{
-			path: Auragame,
-			element: <AuraCasino />
-		},
-		
-		{
-			path:  changePass,
-			element: <PassChange />
-		},
+    {
+      path: Auragame,
+      element: <AuraCasino />,
+    },
+    {
+      path: qtechCaino,
+      element: <QtechCasino />,
+    },
 
-		{
-			path: '*',
-			element: 'not found'
-		}
-	]);
+    {
+      path: changePass,
+      element: <PassChange />,
+    },
+
+    {
+      path: "*",
+      element: "not found",
+    },
+  ]);
 };
