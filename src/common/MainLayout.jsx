@@ -45,7 +45,9 @@ const MainLayout = ({ setGame, gameName }) => {
   };
 
   const handleOpen = () => {
-    setOpen(true);
+    setOpen(!open);
+    // setSiderOpen(!siderOpen)
+    console.log(open, "Scvsdc")
   };
 
   if (isLoading) {
@@ -81,7 +83,7 @@ const MainLayout = ({ setGame, gameName }) => {
               }
               onClick={() => setSiderOpen(!siderOpen)}
             >
-              <SiderBar handleOpen={handleOpen} />
+              <SiderBar handleOpen={handleOpen} setSiderOpen={setSiderOpen } />
             </div>
             <div className="content">
               <TopBanner />

@@ -93,8 +93,10 @@ const UnsettledBets = () => {
 						<FileOpenIcon />
 					</span>
 				</div> */}
-            </div>
-            <NoOfRecords handlerselectchange={rowsHandler} />
+				</div>
+				<div style={{padding: "0 10px"}} className='records_class'>
+					<NoOfRecords handlerselectchange={rowsHandler} />
+					</div>
 
 			{isLoading ? (
 				<Loader />

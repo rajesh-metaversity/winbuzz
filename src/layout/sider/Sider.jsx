@@ -30,7 +30,7 @@ export const sportImages = {
   Kabaddi: kabaddiImage,
 };
 
-const SiderBar = ({ handleOpen }) => {
+const SiderBar = ({ handleOpen, setSiderOpen }) => {
   const { data, isLoading, isError } = useActiveSportQuery();
   const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
     useActiveMatchMutation();
@@ -145,7 +145,11 @@ const SiderBar = ({ handleOpen }) => {
             if (item.matchName) {
               return (
                 <>
-                  <li onClick={() => setActiveSlide(true)}>
+                  <li onClick={() => {
+                    setSiderOpen(false)
+                    setActiveSlide(!activeSlide)
+
+                  }}>
                     <p
                       onClick={() =>
                         handleGameDetailsPage(item?.matchId, idSport)
