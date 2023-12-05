@@ -56,17 +56,18 @@ const CasinoRuleModalContent = ({ handleClose, gameId, id, gameName, isSupernowa
           </div>
         </Typography>
         <div className="agree_btn">
-          {isSupernowa ?
-            <button onClick={handleSuperNowaClick}>Ok I Agree</button>
-            : id ? (
-              <Link to={`/qtech/${gameName}`}>
-                <button>Ok I Agree</button>
-              </Link>
-            ) : (
-              <Link to={`/aura/${gameName}/${gameId}`}>
-                <button>Ok I Agree</button>
-              </Link>
-            )}
+          {
+            isSupernowa ?
+              <button onClick={handleSuperNowaClick}>Ok I Agree</button>
+              : id ? (
+                <Link to={`/qtech/${gameName}`}>
+                  <button>Ok I Agree</button>
+                </Link>
+              ) : (
+                <Link to={`/aura/${gameName}/${gameId}`}>
+                  <button>Ok I Agree</button>
+                </Link>
+              )}
           <button onClick={handleClose}>No, I Don't Agree</button>
         </div>
       </Box>

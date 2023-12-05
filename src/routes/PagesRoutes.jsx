@@ -24,7 +24,7 @@ import {
   changePass,
   qtechCaino,
   supernowaCasino,
-  auraCasino,
+  auraCasinoGame,
 } from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
@@ -46,7 +46,7 @@ import Setting from "../pages/Setting/Setting";
 import UnsettledBets from "../pages/UnsettledBets/UnsettledBets";
 import PassChange from "../pages/PassChange/PassChange";
 import SupernowaCasino from "../pages/supernowa/SupernowaCasino.jsx";
-
+import AuraCasinoGamePage from "../pages/aura/AuraCasinoGamePage.jsx"
 const userType = localStorage.getItem("userTypeInfo");
 
 export const router = () => {
@@ -146,8 +146,8 @@ export const router = () => {
       element: <QtechCasino />,
     },
     {
-      path: auraCasino,
-      element: <AuraCasino />
+      path: auraCasinoGame,
+      element: <AuraCasinoGamePage />
     },
     {
       path: supernowaCasino,
