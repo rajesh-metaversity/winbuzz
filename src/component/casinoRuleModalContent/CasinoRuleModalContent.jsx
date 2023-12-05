@@ -4,7 +4,7 @@ import casinoImd from "../../assets/img/casinoImg.png";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-const CasinoRuleModalContent = ({ handleClose, gameId, id, gameName }) => {
+const CasinoRuleModalContent = ({ handleClose, gameId, id, gameName, isSupernowa, handleSuperNowaClick }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const style = {
     width: isBreakPoint ? "100%" : 400,
@@ -56,15 +56,17 @@ const CasinoRuleModalContent = ({ handleClose, gameId, id, gameName }) => {
           </div>
         </Typography>
         <div className="agree_btn">
-          {id ? (
-            <Link to={`/qtech/${gameName}`}>
-              <button>Ok I Agree</button>
-            </Link>
-          ) : (
-            <Link to={`/aura/${gameName}/${gameId}`}>
-              <button>Ok I Agree</button>
-            </Link>
-          )}
+          {isSupernowa ?
+            <button onClick={handleSuperNowaClick}>Ok I Agree</button>
+            : id ? (
+              <Link to={`/qtech/${gameName}`}>
+                <button>Ok I Agree</button>
+              </Link>
+            ) : (
+              <Link to={`/aura/${gameName}/${gameId}`}>
+                <button>Ok I Agree</button>
+              </Link>
+            )}
           <button onClick={handleClose}>No, I Don't Agree</button>
         </div>
       </Box>
