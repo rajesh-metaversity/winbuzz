@@ -12,14 +12,15 @@ import { AllCasinoProviderName } from "./superNowaProvider";
 const AllProviderName = () => {
   const [casinoRuleModal, setCasinoRuleModal] = useState(false);
   const [modalValue, setModalValue] = useState(0);
+  const [gameName, setGameName] = useState()
 
   let navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [allDatta, setAllDatta] = useState();
 
   const [open, setOpen] = useState(false);
-  const handleGamePageroute = (vl, val, key) => {
-    console.log("valuw", val, key);
+  const handleGamePageroute = (vl, val, key, gameCode) => {
+    setGameName(gameCode)
     if (key === "Internation Casino") {
       // setAllDatta(val);
       setModalValue(1);
@@ -59,7 +60,7 @@ const AllProviderName = () => {
   };
   const modalElement = {
     0: <LoginForm setOpen={setOpen} handleClose={handleClose} />,
-    1: <CasinoRuleModalContent handleClose={handleClose} />,
+    1: <CasinoRuleModalContent handleClose={handleClose} id={2} gameName={gameName } />,
   };
   return (
     <div className="Main_header_for_game_provide_Incasino">
@@ -69,16 +70,18 @@ const AllProviderName = () => {
           <div className="main_wrap_live-casion">
             {AllCasinoProviderName &&
               AllCasinoProviderName[key].map((item, index) => (
+                
                 <div
                   className="MainBtn_warp"
                   style={{ border: "0.5px solid" }}
-                  onClick={() => handleGamePageroute(item?.PageUrl, item, key)}
+                  onClick={() => handleGamePageroute(item?.PageUrl, item, key, item?.gameCode)}
                   key={item.PageUrl + key}
                 >
                   <img className="complany-logo-warp" src={item?.logo} alt="" />
                   <span className="complany-name-wrap">{item?.name}</span>
                 </div>
-              ))}
+              )
+              )}
           </div>
         </div>
       ))}
