@@ -8,6 +8,7 @@ const CasinoCard = ({
   setCasinoName,
 }) => {
   const nav = useNavigate();
+  
 
   return (
     <>

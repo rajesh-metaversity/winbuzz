@@ -39,9 +39,11 @@ const Casino = () => {
     });
     // }
   }, [gameCode, QtechAutch.isSuccess, id]);
+
   useEffect(() => {
     if (gamelist) {
       const { items } = gamelist.data;
+      // console.log("inner",items)
       let categories = items.map((el) => {
         const itemAr = el?.category.split("/");
         const lastelm = itemAr[itemAr.length - 1];
@@ -54,9 +56,12 @@ const Casino = () => {
       // newAr.push("OTHER");
       setCategory(newAr);
       // }
+
       setGameLists(items);
+      //
     }
-  }, [gameCode, id, gamelist]);
+  }, [gameCode, providerFilter, id, gamelist]);
+
   const casinoObj = {
     Lottery: Lottry,
     LiveCasino: LiveCasino,
@@ -77,6 +82,10 @@ const Casino = () => {
   const [casinoRuleModal, setCasinoRuleModal] = useState(false);
   const [gameId, setGameId] = useState();
   const [casinoName, setCasinoName] = useState("");
+  useEffect(() => {
+    setProviderFilter("ALL");
+  }, [id]);
+
   return (
     <div>
       <ModalComponent

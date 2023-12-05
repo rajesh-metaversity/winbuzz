@@ -11,7 +11,9 @@ const CasinoList = ({
 }) => {
   const [active, setActive] = useState(0);
   useEffect(() => {
-    setGameCode("");
+    if (type != 2) {
+      setGameCode("");
+    }
     setActive(0);
   }, [id]);
 
@@ -43,7 +45,9 @@ const CasinoList = ({
                     <li
                       className={index === active && "active"}
                       onClick={() => {
+                        // setGameCode(item);
                         setProviderFilter(item);
+                        // setFantasyGame(item);
                         setActive(index);
                       }}
                     >

@@ -1,12 +1,9 @@
-import { Box, Modal, Typography, useMediaQuery } from "@mui/material";
-import { isLoginSelector } from "../../App/LoginSlice";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { Box, Typography, useMediaQuery } from "@mui/material";
+import { useEffect } from "react";
 import casinoImd from "../../assets/img/casinoImg.png";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import { qtechCaino } from "../../routes/PagesUrl";
 const CasinoRuleModalContent = ({ handleClose, gameId, id, gameName }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const style = {

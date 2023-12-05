@@ -2,7 +2,6 @@ import {
   Link,
   useNavigate,
   useParams,
-  useOutletContext,
 } from "react-router-dom";
 import "./SubHeader.scss";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";

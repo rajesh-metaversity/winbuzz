@@ -58,7 +58,7 @@ const Sublayout = ({ setGame, gameName }) => {
             <SiderBar />
           </div>
           <div className="sub-content">
-            <Outlet context={[setGame, gameName]} />
+            <Outlet context={[setGame, gameName,]} />
           </div>
           {/* <div className="banner-sider">
           <SiderBanner />
