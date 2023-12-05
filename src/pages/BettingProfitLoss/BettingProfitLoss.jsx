@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { LocalizationProvider, } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BettingStyled, SelectStyles } from "./styled";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
@@ -115,10 +115,11 @@ const BettingProfitLoss = () => {
       }
     })
   }
-  
-  const loadHandler = () => {
-    trigger(bettingPnl)
-  }
+
+  const fromDatePickerMaxDate = bettingPnl.toDate
+  ? dayjs(bettingPnl.toDate).add(2, 'months').toDate()
+  : null;
+
   
   return (
     <>
@@ -155,7 +156,7 @@ const BettingProfitLoss = () => {
 					<div className="right_date">
 						<label htmlFor="form">Form</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} />
+							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)}maxDate={fromDatePickerMaxDate} />
 						</LocalizationProvider>
 					</div>
 					<div className="right_date">

@@ -33,7 +33,8 @@ const Sublayout = ({ setGame, gameName }) => {
   };
 
   const handleOpen = () => {
-    setOpen(true);
+    setOpen(!open);
+    console.log(open, "Scvsdc")
   };
   return (
     <div>
@@ -55,7 +56,7 @@ const Sublayout = ({ setGame, gameName }) => {
             }
             onClick={() => setSiderOpen(!siderOpen)}
           >
-            <SiderBar />
+            <SiderBar handleOpen={handleOpen}/>
           </div>
           <div className="sub-content">
             <Outlet context={[setGame, gameName,]} />
