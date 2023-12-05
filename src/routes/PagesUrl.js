@@ -18,4 +18,4 @@ export const unsettled = "unsettled-bets";
 export const changePass = "/change-pass";
 export const qtechCaino = "/qtech/:id";
 export const supernowaCasino = '/SuperNowa_casion'
-export const auraCasino = '/casino-list'
+export const auraCasinoGame = '/casino-list'
