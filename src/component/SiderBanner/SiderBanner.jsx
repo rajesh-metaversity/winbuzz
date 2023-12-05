@@ -97,7 +97,12 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
 					<div className="play_games">Play Games</div>
 					<Slider className="right_banner" {...settings}>
 						{data?.data?.map((sliderdata, index) => (
-							<div key={index + sliderdata?.path}>
+							<div key={index + sliderdata?.path} onClick={() => {
+								if (!loginCheck) {
+									setModalValue(0);
+											setOpen(true);
+								}
+							}}>
 								<Grid container>
 									<Grid
 										item
