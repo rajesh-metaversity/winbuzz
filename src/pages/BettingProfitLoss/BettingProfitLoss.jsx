@@ -65,10 +65,12 @@ const BettingProfitLoss = () => {
     const value = e;
     if (name == "toDate") {
       setBettingPnl((prev) => {
+      
         return {
           ...prev,
           toDate: value,
-        };
+        }
+       
       });
     } else if (name == "fromDate") {
       setBettingPnl((prev) => {
@@ -115,12 +117,7 @@ const BettingProfitLoss = () => {
       }
     })
   }
-
-  const fromDatePickerMaxDate = bettingPnl.toDate
-  ? dayjs(bettingPnl.toDate).add(2, 'months').toDate()
-  : null;
-
-  
+  const today = new Date();
   return (
     <>
 		<div className="betting_profit-loss_cont">
@@ -156,13 +153,13 @@ const BettingProfitLoss = () => {
 					<div className="right_date">
 						<label htmlFor="form">Form</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)}maxDate={fromDatePickerMaxDate} />
+							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} minDate={dayjs().subtract(2, "month")}/>
 						</LocalizationProvider>
 					</div>
 					<div className="right_date">
 						<label htmlFor="form">To Date</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
+							<BettingStyled defaultValue={bettingPnl?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)}  disableFuture={true}/>
 						</LocalizationProvider>
 					</div>
 

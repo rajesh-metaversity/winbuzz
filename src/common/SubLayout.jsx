@@ -37,37 +37,26 @@ const Sublayout = ({ setGame, gameName }) => {
     console.log(open, "Scvsdc")
   };
   return (
-    <div>
-      <div className="main-layout-container">
-        <div className="header-layout">
-          <HeaderMessage />
-          <WebHeaderComponent
-            setSiderOpen={setSiderOpen}
-            siderOpen={siderOpen}
-            balanceData={data?.data}
-            handleOpen={handleOpen}
-            modalElement={modalElement}
-          />
-        </div>
-        <div className="content-container">
-          <div
-            className={
-              siderOpen ? "sider-layout-active" : "sider-layout-container"
-            }
-            onClick={() => setSiderOpen(!siderOpen)}
-          >
-            <SiderBar handleOpen={handleOpen}/>
-          </div>
-          <div className="sub-content">
-            <Outlet context={[setGame, gameName,]} />
-          </div>
-          {/* <div className="banner-sider">
+		<div>
+			<div className="main-layout-container">
+				<div className="header-layout">
+					<HeaderMessage />
+					<WebHeaderComponent setSiderOpen={setSiderOpen} siderOpen={siderOpen} balanceData={data?.data} handleOpen={handleOpen} modalElement={modalElement} />
+				</div>
+				<div className="content-container">
+					<div className={siderOpen ? 'sider-layout-active' : 'sider-layout-container'} onClick={() => setSiderOpen(!siderOpen)}>
+						<SiderBar handleOpen={handleOpen} setSiderOpen={setSiderOpen} siderOpen={siderOpen} />
+					</div>
+					<div className="sub-content">
+						<Outlet context={[setGame, gameName]} />
+					</div>
+					{/* <div className="banner-sider">
           <SiderBanner />
         </div> */}
-        </div>
-      </div>
-      <MobileFooter />
-    </div>
+				</div>
+			</div>
+			<MobileFooter />
+		</div>
   );
 };
 
