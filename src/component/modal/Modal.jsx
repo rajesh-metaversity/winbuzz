@@ -2,7 +2,7 @@ import { Dialog } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { StyledDialouge } from "./styled";
 
-const ModalComponent = ({ Elememt, open, setOpen, loginWidth }) => {
+const ModalComponent = ({ Elememt, open, setOpen, loginWidth}) => {
   const handleClose = () => {
     setOpen(false);
     console.log("hui");

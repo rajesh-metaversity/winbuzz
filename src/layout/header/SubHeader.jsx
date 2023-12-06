@@ -1,8 +1,4 @@
-import {
-  Link,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SubHeader.scss";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
 import React, { useEffect, useState } from "react";
@@ -114,33 +110,36 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                 </React.Fragment>
               );
             })}
-            {isLogin ? (
-              casinoList.map((item, index) => {
-                let removeSpace = item.split(" ").join("");
-                return (
-                  <li
-                    onClick={() => nav("/casino/" + removeSpace)}
-                    key={item + index}
-                    className={pathName == "/casino" ? "active-tabs" : ""}
-                  >
-                    <img src={play} alt="" />
-                    <span>
-                      <Link to={`/casino/${removeSpace}`}>{item}</Link>
-                    </span>
-                  </li>
-                );
-              })
-            ) : (
-              <li
-                className={pathName == "/casino" ? "active-tabs" : ""}
-                onClick={() => {
-                  setModalValue(0), handleOpen();
-                }}
-              >
-                <img src={play} alt="" />
-                <span>Int Casino</span>
-              </li>
-            )}
+            {isLogin
+              ? casinoList.map((item, index) => {
+                  let removeSpace = item.split(" ").join("");
+                  return (
+                    <li
+                      onClick={() => nav("/casino/" + removeSpace)}
+                      key={item + index}
+                      className={pathName == "/casino" ? "active-tabs" : ""}
+                    >
+                      <img src={play} alt="" />
+                      <span>
+                        <Link to={`/casino/${removeSpace}`}>{item}</Link>
+                      </span>
+                    </li>
+                  );
+                })
+              : casinoList.map((item, index) => {
+                  return (
+                    <li
+                      className={pathName == "/casino" ? "active-tabs" : ""}
+                      onClick={() => {
+                        setModalValue(0), handleOpen();
+                      }}
+                      key={item+index}
+                    >
+                      <img src={play} alt="" />
+                      <span>{item}</span>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
         {isLogin ||

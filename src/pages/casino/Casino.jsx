@@ -36,6 +36,7 @@ const Casino = () => {
       gameCategory: id.toUpperCase(),
       provider: gameCode,
       token: casinoToken,
+      // currency: "IN5",
     });
     // }
   }, [gameCode, QtechAutch.isSuccess, id]);

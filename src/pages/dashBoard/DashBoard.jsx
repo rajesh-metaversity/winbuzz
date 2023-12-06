@@ -1,5 +1,4 @@
 // import React from "react";
-import { useOutletContext } from "react-router-dom";
 import SportData from "../../component/SportData/SportData";
 import AllProviderName from "../../component/allCasino";
 import Inplay from "../../component/inPlay/Index";

@@ -11,7 +11,6 @@ const InPlayOddRow = ({ live, index }) => {
     disable: "#dedddd",
   };
 
-  
   return (
     <div className={`odds-row-container  ${index == 1 && "live"}`}>
       <div className="betmobileparent">

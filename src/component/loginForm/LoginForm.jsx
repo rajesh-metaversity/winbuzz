@@ -16,7 +16,7 @@ import { setIslogin } from "../../App/LoginSlice";
 import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { changePass, passwordChange } from "../../routes/PagesUrl";
-const LoginForm = ({ setOpen, handleClose }) => {
+const LoginForm = ({ setOpen, handleClose, }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const [demoChecker, setDemoChecker] = useState(false);
@@ -153,8 +153,9 @@ const LoginForm = ({ setOpen, handleClose }) => {
           <div
             className="cross_icon"
             onClick={() => {
-              handleClose();
+           
               setOpen(false);
+              handleClose()
             }}
           >
             <CloseIcon />
