@@ -37,7 +37,10 @@ export const WebHeaderComponent = ({
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-  const userType = localStorage.getItem("userTypeInfo");
+	const userType = localStorage.getItem("userTypeInfo");
+	
+	console.log(siderOpen, "dscdscv")
+
 
   if (!isBreakPoint) {
     return (
@@ -175,7 +178,7 @@ export const WebHeaderComponent = ({
             {siderOpen ? (
               <CloseIcon onClick={() => setSiderOpen(!siderOpen)} />
             ) : (
-              <MenuIcon onClick={() => setSiderOpen(!siderOpen)} />
+              <MenuIcon onClick={() => setSiderOpen(true)} />
             )}
 
             <Link to={home}>

@@ -55,6 +55,8 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
     { name: "Slot", img: slots },
     { name: "Fantasy Game", img: fantasygame },
   ];
+
+  console.log(setSiderOpen, "SDvdsfvc")
   return (
     <div
       className={isBreakPoint ? "sider-active" : "sider-container"}
@@ -148,13 +150,14 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                   <li onClick={() => {
                     setSiderOpen(false)
                     setActiveSlide(!activeSlide)
-
                   }}>
                     <p
-                      onClick={() =>
+                      onClick={() => {
                         handleGameDetailsPage(item?.matchId, idSport)
                       }
+                      }
                     >
+                      {/* Matches */}
                       {item.matchName}
                     </p>
                     <span>
