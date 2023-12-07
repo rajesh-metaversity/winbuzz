@@ -5,7 +5,6 @@ import { StyledDialouge } from "./styled";
 const ModalComponent = ({ Elememt, open, setOpen, loginWidth}) => {
   const handleClose = () => {
     setOpen(false);
-    console.log("hui");
   };
   return (
     <>

@@ -44,7 +44,6 @@ const Casino = () => {
   useEffect(() => {
     if (gamelist) {
       const { items } = gamelist.data;
-      // console.log("inner",items)
       let categories = items.map((el) => {
         const itemAr = el?.category.split("/");
         const lastelm = itemAr[itemAr.length - 1];

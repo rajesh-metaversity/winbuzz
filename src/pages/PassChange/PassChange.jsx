@@ -14,7 +14,6 @@ import { setIslogin } from '../../App/LoginSlice';
 const PassChange = () => {
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userId")
-    // console.log(token,userid, "token")
     let initialValues = {
                 userid,
 				oldPassword: "",

@@ -21,7 +21,6 @@ const MultiMarketDetails = ({ matchName, data, id, minMax,  setMinMax,setmatchId
   const [odds, setOdds] = useState({});
   const [prevOdds, setPrevOdds] = useState({});
   const { data: ipData } = useMyIpQuery();
-  console.log(ipData, "dsfsdfsdfs");
   const handleFavSec = (marketId) => {
     trigger({
       marketId: marketId,

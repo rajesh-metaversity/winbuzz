@@ -133,7 +133,7 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                       onClick={() => {
                         setModalValue(0), handleOpen();
                       }}
-                      key={item+index}
+                      key={item + index}
                     >
                       <img src={play} alt="" />
                       <span>{item}</span>
@@ -142,23 +142,25 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                 })}
           </ul>
         </div>
-        {isLogin ||
-          (userType == 2 && (
-            <div className="mobile-subheader-deposit">
-              <Link to={deposit}>
-                <div className="mobile-subheader-deposit-left-col">
-                  <AccountBalanceIcon />
-                  Deposit
-                </div>
-              </Link>
-              <Link to={withdraw}>
-                <div className="mobile-subheader-deposit-right-col">
-                  <AddCardIcon />
-                  Withdraw
-                </div>
-              </Link>
-            </div>
-          ))}
+        {userType != 2
+          ? isLogin && (
+              <div className="mobile-subheader-deposit">
+                <Link to={deposit}>
+                  <div className="mobile-subheader-deposit-left-col">
+                    <AccountBalanceIcon />
+                    Deposit
+                  </div>
+                </Link>
+                <Link to={withdraw}>
+                  <div className="mobile-subheader-deposit-right-col">
+                    <AddCardIcon />
+                    Withdraw
+                  </div>
+                </Link>
+              </div>
+            )
+          : ""}
+        {}
       </>
     );
   }

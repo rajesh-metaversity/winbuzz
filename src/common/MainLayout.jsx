@@ -42,7 +42,6 @@ const MainLayout = ({ setGame, gameName }) => {
   const handleOpen = () => {
     setOpen(!open);
     // setSiderOpen(!siderOpen)
-    // console.log(open, "Scvsdc")
   };
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,

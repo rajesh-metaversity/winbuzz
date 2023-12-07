@@ -28,7 +28,6 @@ const Bank = ({
   valueChangeHandler,
   checkError,
 }) => {
-  console.log(bankDetailsLoading, "bankDetailsLoading");
   const [radioValue, setRadioValue] = useState();
   const tableheading = [
     "account number",

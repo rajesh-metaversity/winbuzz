@@ -46,7 +46,6 @@ const LoginForm = ({ setOpen, handleClose, }) => {
         localStorage.setItem("userId", check.userId);
         nav(changePass);
         if (check.userTypeInfo == 2) {
-          // console.log("checking")
           localStorage.setItem("session", JSON.stringify(check));
           setOpen(false);
           dispatch(setIslogin(true));
@@ -74,16 +73,7 @@ const LoginForm = ({ setOpen, handleClose, }) => {
         if (demoChecker) {
           localStorage.setItem("userTypeInfo", check.userTypeInfo);
         }
-        // if (check.passwordtype == 'old') {
-        // 	nav(passwordChange);
-
-        // if (isBreakPoint) {
-        //   console.log("mobile-chan");
-        // } else {
-        //   console.log("web-change");
-        // }
-        //   nav(changePassword_Web_Screen);
-        // }
+      
       }
     }
   }, [check]);

@@ -35,7 +35,6 @@ function App() {
   }, [isLogin]);
 	
 	useEffect(() => {
-		console.log(data, "Scdscs")
 
 		if (data?.status == false) {
 			localStorage.clear()

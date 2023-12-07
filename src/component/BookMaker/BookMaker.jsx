@@ -31,7 +31,6 @@ const BookMaker = ({
   handleFavDel,
   handleFavSec,
 }) => {
-  // console.log(PnlOdds, 'alskdjfhkajsaaaa');
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -157,7 +156,7 @@ const BookMaker = ({
                               : "text_success"
                           }`}
                         >
-                          {oddsPnl[dataBook.sid] || "0.0"}
+                          {oddsPnl[dataBook?.sid] || "0.0"}
                         </span>
                       </div>
                     );

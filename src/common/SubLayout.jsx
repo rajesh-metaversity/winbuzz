@@ -34,7 +34,6 @@ const Sublayout = ({ setGame, gameName }) => {
 
   const handleOpen = () => {
     setOpen(!open);
-    console.log(open, "Scvsdc")
   };
   return (
 		<div>

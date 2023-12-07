@@ -39,7 +39,6 @@ export const WebHeaderComponent = ({
 
 	const userType = localStorage.getItem("userTypeInfo");
 	
-	console.log(siderOpen, "dscdscv")
 
 
   if (!isBreakPoint) {

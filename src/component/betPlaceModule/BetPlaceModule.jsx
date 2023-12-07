@@ -20,7 +20,6 @@ export const WebBetPlaceModule = ({ minMax }) => {
 
   const [trigger, { data: data, error, isLoading }] = usePlaceBetsMutation();
   const myRes = usePlaceBetsMutation();
-  console.log({ myRes });
 
   const buttonColors = ["#ffce00", "#75b7ff", "#a5ff93", "#fffc9f"];
 

@@ -5,6 +5,8 @@ import "./styles.scss";
 import { useCasinoIframeMutation } from "../../Services/Qtech/Qtech";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { isBrowser } from "react-device-detect";
+
 const CasinoIframe = () => {
   const { id, matchId } = useParams();
   const casinoData = {
@@ -16,7 +18,7 @@ const CasinoIframe = () => {
     birthDate: "1986-01-01",
     lang: "en_IN",
     mode: "real",
-    device: window.innerWidth > 1024 ? "desktop" : "mobile",
+    device: isBrowser ? "desktop" : "mobile",
     returnUrl: "/casino",
     token: localStorage.getItem("casino-token"),
     walletSessionId: localStorage.getItem("token"),

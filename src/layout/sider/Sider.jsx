@@ -56,7 +56,6 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
     { name: "Fantasy Game", img: fantasygame },
   ];
 
-  console.log(setSiderOpen, "SDvdsfvc")
   return (
     <div
       className={isBreakPoint ? "sider-active" : "sider-container"}
@@ -143,7 +142,6 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
           </p>
           <p className="matchName">{matchName}</p>
           {activeMatch?.data.map((item) => {
-            console.log(item, "ooioin");
             if (item.matchName) {
               return (
                 <>
