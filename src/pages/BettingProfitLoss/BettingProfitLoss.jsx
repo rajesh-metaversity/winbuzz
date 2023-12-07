@@ -117,7 +117,6 @@ const BettingProfitLoss = () => {
       }
     })
   }
-  const today = new Date();
   return (
     <>
 		<div className="betting_profit-loss_cont">
@@ -153,7 +152,7 @@ const BettingProfitLoss = () => {
 					<div className="right_date">
 						<label htmlFor="form">Form</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} minDate={dayjs().subtract(2, "month")}/>
+							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} minDate={dayjs().subtract(2, "month")} disableFuture={true}/>
 						</LocalizationProvider>
 					</div>
 					<div className="right_date">

@@ -27,7 +27,9 @@ const Casino = () => {
   const [providerFilter, setProviderFilter] = useState("ALL");
   const QtechAutch = useQtechAuthQuery();
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
+
   const { id } = useParams();
+  console.log(id, "SDcdsc")
   useEffect(() => {
     const casinoToken = localStorage.getItem("casino-token");
     // if (casinoToken != undefined || gameCode) {
@@ -101,10 +103,12 @@ const Casino = () => {
         open={casinoRuleModal}
         setOpen={setCasinoRuleModal}
       />
+
       <div className="casino-page-container">
         <Title name={"INT CASINO"} />
         <div className="casino-center-col">
-          <p className="int_casino">Int Casino</p>
+          {/* <p className="int_casino">Int Casino</p> */}
+          <p className="int_casino">{ id}</p>
 
           <CasinoList
             list={casinoObj[id]}

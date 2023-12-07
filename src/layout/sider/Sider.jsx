@@ -107,7 +107,7 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
 
               return (
                 <Link to={`casino/${removeSpace}`} key={item + index}>
-                  <li>
+                  <li onClick={() => setSiderOpen(false)}>
                     <p>
                       <img src={item.img} alt="casino" />
                       {item?.name}

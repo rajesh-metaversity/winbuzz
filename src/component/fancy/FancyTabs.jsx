@@ -21,8 +21,7 @@ const FancyTabs = ({
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
   const tabsVal = data ? Object.keys(data) : [];
-
-
+  
   return (
     <>
       <GridContainer container props={"fancy"}>
