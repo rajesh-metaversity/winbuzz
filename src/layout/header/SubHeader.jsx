@@ -105,6 +105,7 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                   >
                     {/* <img src={play} alt="" /> */}
                     <img src={sportImages[items.sportName]} />
+                    {/* sports Name */}
                     <span>{items.sportName}</span>
                   </li>
                 </React.Fragment>
@@ -120,6 +121,7 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                       className={pathName == "/casino" ? "active-tabs" : ""}
                     >
                       <img src={play} alt="" />
+                      {/* CASINO NAMES */}
                       <span>
                         <Link to={`/casino/${removeSpace}`}>{item}</Link>
                       </span>

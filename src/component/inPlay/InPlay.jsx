@@ -1,5 +1,4 @@
 import inplayico from "../../assets/img/inplayico.png";
-
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 const InPlayHeading = ({ headName }) => {
