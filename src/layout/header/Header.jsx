@@ -37,9 +37,7 @@ export const WebHeaderComponent = ({
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-	const userType = localStorage.getItem("userTypeInfo");
-	
-
+  const userType = localStorage.getItem("userTypeInfo");
 
   if (!isBreakPoint) {
     return (
@@ -198,7 +196,13 @@ export const WebHeaderComponent = ({
                     flexDirection: "column",
                   }}
                 >
-                  <span style={{ color: "white", fontSize: "13px" }}>
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: "13px",
+                      fontWeight: "bolder",
+                    }}
+                  >
                     {userId}
                   </span>
                   <li className="header-balance">
