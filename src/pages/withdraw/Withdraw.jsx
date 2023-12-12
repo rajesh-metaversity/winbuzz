@@ -402,7 +402,7 @@ const Withdraw = () => {
           name={isLoading ? <Loader /> : "withdraw coins"}
           // disable={isLoading}
         />
-        {withdrawDetails.withdrawType && <Previouswithdraw />}
+         <Previouswithdraw />
       </Box>
     </Container>
   );
