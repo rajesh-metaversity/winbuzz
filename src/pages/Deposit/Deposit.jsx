@@ -109,6 +109,14 @@ const Deposit = () => {
       submitData.append("amount", payloadData.amount);
       submitData.append("image", files);
       trigger(submitData);
+
+      setPayloadData({
+        amount: "",
+        url: "",
+      });
+      // setFiles(null);
+    
+
     }
   };
 
