@@ -13,8 +13,8 @@ import tennisImage from "../../assets/tennis.svg";
 import footballImage from "../../assets/football.svg";
 import horseRidingImage from "../../assets/horse.svg";
 import kabaddiImage from "../../assets/kabaddi.svg";
-import casino from "../../assets/int.svg";
 import leaf from "../../assets/img/99999.svg";
+import casino from "../../assets/int.svg";
 import lottery from "../../assets/img/lottery.png";
 import slots from "../../assets/img/slots.png";
 import fantasygame from "../../assets/img/fantasy-game.png";
@@ -108,7 +108,7 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                 <Link to={`casino/${removeSpace}`} key={item + index}>
                   <li onClick={() => setSiderOpen(false)}>
                     <p>
-                      <img src={item.img} alt="casino" />
+                      <img src={item?.img} alt="casino" />
                       {item?.name}
                     </p>
                     <span>
@@ -122,7 +122,7 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
               return (
                 <li key={item + index}>
                   <p onClick={() => handleOpen()}>
-                    <img src={item.img} alt="casino" />
+                    <img src={item?.img} alt="casino" />
                     {item.name}
                   </p>
                   <span>

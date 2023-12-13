@@ -51,7 +51,8 @@
            font-size: 12px;
            
            @media screen and (max-width: 780px) {
-             color: #939393;
+            //  color: #939393;
+            color: white;
              
             }
         }
@@ -108,7 +109,8 @@
             position: absolute;
             top: 10px;
             background: #202020;
-            color: #939393;
+            // color: #939393;
+            color: white;
             z-index: 999;
             top: -7px;
             left: 20px;
@@ -134,7 +136,9 @@
 
     }
     .search_button {
-      background: #198754;
+      // background: #198754;
+      background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+
       border: none;
       border-radius: 5px;
       padding: 10px;

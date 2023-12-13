@@ -16,10 +16,18 @@ export const RadioStyled = sytled(FormControl)(({ theme }) => ({
         
 
 		'& .MuiFormControlLabel-label': {
-            fontSize: '12px',
-            color: '#666',
+            fontSize: '13px',
+            // color: '#666',
+			color: "white"
             
-        }
+		}, 
+		'& .MuiButtonBase-root': {
+            fontSize: '12px',
+            // color: '#666',
+			color: "white"
+            
+		}, 
+		
       
 	}
 }));
