@@ -11,6 +11,10 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import { sportImages } from "../sider/Sider";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
+import casinos from "../../assets/int.svg";
+import lottery from "../../assets/img/lottery.png";
+import slots from "../../assets/img/slots.png";
+import fantasygame from "../../assets/img/fantasy-game.png";
 
 const SubHeader = ({ setModalValue, handleOpen }) => {
   const { data } = useActiveSportQuery();
@@ -25,7 +29,17 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
   const userType = localStorage.getItem("userTypeInfo");
-  const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
+  // const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
+  const casinoList = [
+    {
+      name: "Lottery",
+      img: lottery,
+    },
+    { name: "Live Casino", img: casinos },
+    { name: "Slot", img: slots },
+    { name: "Fantasy Game", img: fantasygame },
+  ];
+
   if (!isBreakPoint) {
     return (
       <div className="sub_header_cont">
@@ -47,19 +61,20 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
           })}
           {isLogin
             ? casinoList.map((item, index) => {
-                let removeSpace = item.split(" ").join("");
+                let removeSpace = item.name.split(" ").join("");
                 return (
                   <li key={item + index}>
                     <Link
                       to={`casino/${removeSpace}`}
                       style={{ color: "#fffa00" }}
                     >
-                      {item}
+                      {item.name}
                     </Link>
                   </li>
                 );
               })
             : casinoList.map((item, index) => {
+              console.log(item, "Dcdscd")
                 return (
                   <li
                     key={item + index}
@@ -68,7 +83,7 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                       setModalValue(0), handleOpen();
                     }}
                   >
-                    {item}
+                    {item?.name}
                   </li>
                 );
               })}
@@ -113,17 +128,17 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
             })}
             {isLogin
               ? casinoList.map((item, index) => {
-                  let removeSpace = item.split(" ").join("");
+                  let removeSpace = item.name.split(" ").join("");
                   return (
                     <li
                       onClick={() => nav("/casino/" + removeSpace)}
                       key={item + index}
                       className={pathName == "/casino" ? "active-tabs" : ""}
                     >
-                      <img src={play} alt="" />
+                      <img src={item?.img} alt="" />
                       {/* CASINO NAMES */}
                       <span>
-                        <Link to={`/casino/${removeSpace}`}>{item}</Link>
+                        <Link to={`/casino/${removeSpace}`}>{item?.name}</Link>
                       </span>
                     </li>
                   );
@@ -137,8 +152,8 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                       }}
                       key={item + index}
                     >
-                      <img src={play} alt="" />
-                      <span>{item}</span>
+                      <img src={item?.img} alt="" />
+                      <span>{item?.name}</span>
                     </li>
                   );
                 })}

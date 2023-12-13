@@ -114,8 +114,7 @@ const Deposit = () => {
         amount: "",
         url: "",
       });
-      // setFiles(null);
-    
+      setFiles("");
 
     }
   };
