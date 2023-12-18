@@ -16,6 +16,7 @@ import { Formik } from "formik";
 
 import { useEffect, useState } from "react";
 const Paytm = ({
+  withdrawType,
   paytmDetails,
   setWithdrawDetails,
   withdrawDetail,
@@ -69,9 +70,9 @@ const Paytm = ({
 				accountHolderName: '',
 				bankName: '',
 				accountType: '',
-				// amount: '',
 				ifsc: '',
 				accountNumber: '',
+				// amount: '',
 				// withdrawType: '',
 				// withdrawMode: ''
 			};
@@ -142,55 +143,56 @@ const Paytm = ({
           </FormControl>
         </Grid>
       </Grid>
+      {withdrawType &&
+        <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                {tableheading?.map((heading, index) => (
+                  <StyledTableCell
+                    key={index + heading}
+                    sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                  >
+                    {heading}
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {paytmDetails?.map((row, index) => (
+                <StyledTableRow key={row?.accountNumber + index}>
+                  <StyledTableCell
+                    StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                  >
+                    {row?.accountNumber}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                  >
+                    {row?.accountHolderName}
+                  </StyledTableCell>
 
-      <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              {tableheading?.map((heading, index) => (
-                <StyledTableCell
-                  key={index + heading}
-                  sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                >
-                  {heading}
-                </StyledTableCell>
+                  <StyledTableCell>
+                    <input
+                      type="radio"
+                      name="paytmRadio"
+                      value={row.id}
+                      checked={radioValue === row.id}
+                      onChange={(event) => handleRadioChange(event, row)}
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
               ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paytmDetails?.map((row, index) => (
-              <StyledTableRow key={row?.accountNumber + index}>
-                <StyledTableCell
-                  StyledTableCell
-                  component="th"
-                  scope="row"
-                  sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                >
-                  {row?.accountNumber}
-                </StyledTableCell>
-                <StyledTableCell
-                  StyledTableCell
-                  component="th"
-                  scope="row"
-                  sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                >
-                  {row?.accountHolderName}
-                </StyledTableCell>
-
-                <StyledTableCell>
-                  <input
-                    type="radio"
-                    name="paytmRadio"
-                    value={row.id}
-                    checked={radioValue === row.id}
-                    onChange={(event) => handleRadioChange(event, row)}
-                  />
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      }
     </div>
   );
 };
