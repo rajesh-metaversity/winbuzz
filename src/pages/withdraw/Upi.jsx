@@ -18,6 +18,7 @@ import {
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useEffect, useState } from "react";
 const Upi = ({
+  withdrawType,
   upiDetails,
   setWithdrawDetails,
   withdrawDetail,
@@ -149,58 +150,59 @@ const Upi = ({
           </FormControl>
         </Grid>
       </Grid>
+      {withdrawType &&
+        <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                {tableheading?.map((heading, index) => (
+                  <StyledTableCell
+                    key={index + heading}
+                    sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                  >
+                    {heading}
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {upiDetails?.map((row, ind) => (
+                <StyledTableRow key={row?.id}>
+                  <StyledTableCell
+                    StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                  >
+                    {row?.accountNumber}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                  >
+                    {row?.accountHolderName}
+                  </StyledTableCell>
 
-      <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              {tableheading?.map((heading, index) => (
-                <StyledTableCell
-                  key={index + heading}
-                  sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                >
-                  {heading}
-                </StyledTableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {upiDetails?.map((row, ind) => (
-              <StyledTableRow key={row?.id}>
-                <StyledTableCell
-                  StyledTableCell
-                  component="th"
-                  scope="row"
-                  sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                >
-                  {row?.accountNumber}
-                </StyledTableCell>
-                <StyledTableCell
-                  StyledTableCell
-                  component="th"
-                  scope="row"
-                  sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                >
-                  {row?.accountHolderName}
-                </StyledTableCell>
-
-                <StyledTableCell>
-                  <input
-                    type="radio"
-                    name="upiRadio"
-                    value={row.id}
-                    checked={radioValue === row.id}
-                    onChange={(event) => upiHandler(event, row)}
-                  />
-                  {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Matched" name="radio-buttons-group" onChange={""}>
+                  <StyledTableCell>
+                    <input
+                      type="radio"
+                      name="upiRadio"
+                      value={row.id}
+                      checked={radioValue === row.id}
+                      onChange={(event) => upiHandler(event, row)}
+                    />
+                    {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Matched" name="radio-buttons-group" onChange={""}>
                                 <FormControlLabel value={true } control={<Radio />}  />
 							</RadioGroup> */}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      }
     </div>
   );
 };

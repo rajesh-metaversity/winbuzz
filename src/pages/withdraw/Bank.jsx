@@ -21,6 +21,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useEffect, useState } from "react";
 import Loader from "../../component/Loader/Loader";
 const Bank = ({
+  withdrawType,
   bankDetails,
   setWithdrawDetails,
   withdrawDetail,
@@ -289,81 +290,83 @@ const Bank = ({
 
             <Grid item xs={0.5}></Grid>
           </Grid>
-          <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  {tableheading?.map((heading, index) => (
-                    <StyledTableCell
-                      key={index + heading}
-                      sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                    >
-                      {heading}
-                    </StyledTableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {bankDetails?.map((bankData, index) => (
-                  <StyledTableRow key={bankData?.accountNumber + index}>
-                    <StyledTableCell
-                      StyledTableCell
-                      component="th"
-                      scope="row"
-                      sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                    >
-                      {bankData?.accountNumber}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      StyledTableCell
-                      component="th"
-                      scope="row"
-                      sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                    >
-                      {bankData?.accountHolderName}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      StyledTableCell
-                      component="th"
-                      scope="row"
-                      sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                    >
-                      {bankData?.bankName}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      StyledTableCell
-                      component="th"
-                      scope="row"
-                      sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                    >
-                      {bankData?.ifsc}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      StyledTableCell
-                      component="th"
-                      scope="row"
-                      sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
-                    >
-                      {bankData?.accountType}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <input
-                        type="radio"
-                        name="upiRadio"
-                        value={bankData.id}
-                        checked={radioValue === bankData.id}
-                        onChange={(event) => bankHandler(event, bankData)}
-                      />
+          {withdrawType &&
+            <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    {tableheading?.map((heading, index) => (
+                      <StyledTableCell
+                        key={index + heading}
+                        sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                      >
+                        {heading}
+                      </StyledTableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {bankDetails?.map((bankData, index) => (
+                    <StyledTableRow key={bankData?.accountNumber + index}>
+                      <StyledTableCell
+                        StyledTableCell
+                        component="th"
+                        scope="row"
+                        sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                      >
+                        {bankData?.accountNumber}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        StyledTableCell
+                        component="th"
+                        scope="row"
+                        sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                      >
+                        {bankData?.accountHolderName}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        StyledTableCell
+                        component="th"
+                        scope="row"
+                        sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                      >
+                        {bankData?.bankName}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        StyledTableCell
+                        component="th"
+                        scope="row"
+                        sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                      >
+                        {bankData?.ifsc}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        StyledTableCell
+                        component="th"
+                        scope="row"
+                        sx={{ whiteSpace: "nowrap", textTransform: "uppercase" }}
+                      >
+                        {bankData?.accountType}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <input
+                          type="radio"
+                          name="upiRadio"
+                          value={bankData.id}
+                          checked={radioValue === bankData.id}
+                          onChange={(event) => bankHandler(event, bankData)}
+                        />
 
-                      {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  name="radio-buttons-group" onChange={bankSelectHandler}>
+                        {/* <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  name="radio-buttons-group" onChange={bankSelectHandler}>
                            <FormControlLabel value={true } control={<Radio />}  />
          </RadioGroup> */}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          }
         </>
       )}
     </div>

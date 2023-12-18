@@ -1,3 +1,60 @@
+.save-details-modal {
+
+  display: flex;
+  flex-direction: column;
+  //  gap: 10px; 
+   padding-top: 0px;
+   width: 400px;
+   height: 170px;
+   margin: 0px !important;
+
+  .save-details-heading {
+    display: flex;
+    justify-content: space-between;
+    background: black;
+    color: white;
+    padding: 5px 10px;
+    align-items: center;
+
+  }
+
+  .modal_body {
+    height: 100%;
+    // width: 100%;
+    background-color: rgb(35, 41, 45);
+
+    margin: 0;
+    text-align: center;
+
+    .confirmation {
+      font-size: 18px;
+      padding: 10px;
+      color: white;
+      width: calc(100% - 20px);
+      margin: 0;
+      margin-bottom: 50px;
+
+    }
+
+    .save {
+      width: 100%;
+      margin: 0;
+      
+      span {
+        color: black;
+        text-align: center;
+        cursor: pointer;
+        margin: 0;
+        background: rgb(253, 207, 19);
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+    }
+  }
+
+}
+
 .container {
   padding: 0 !important;
 }

@@ -50,8 +50,7 @@ const Previouswithdraw = () => {
 
 	// } )
 
-	const { data: clientList,error, isLoading:loading } = useWithdrawClientListQuery();
-	console.log(loading, "ISLOADING")
+	const { data: clientList, error, isLoading:loading } = useWithdrawClientListQuery();
 
 	if (loading) {
 		return <Loader />
