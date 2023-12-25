@@ -8,8 +8,10 @@ const FantasyGameCard = ({ gameLists, setCasinoRuleModal, setCasinoName }) => {
           <div
             className="casino-card-t"
             key={res.image}
-            onClick={() => {setCasinoRuleModal(true)
-              setCasinoName(res?.id)}}
+            onClick={() => {
+              setCasinoRuleModal(true);
+              setCasinoName(res?.id);
+            }}
           >
             <div
               className="casino_card"

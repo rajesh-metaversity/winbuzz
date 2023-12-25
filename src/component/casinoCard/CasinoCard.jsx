@@ -7,12 +7,11 @@ const CasinoCard = ({
   setCasinoRuleModal,
   setCasinoName,
 }) => {
-  const nav = useNavigate();
-  
 
   return (
     <>
       {gameLists?.map((res) => {
+
         if (res?.category?.includes(providerFilter) || providerFilter === "ALL")
           return (
             <>

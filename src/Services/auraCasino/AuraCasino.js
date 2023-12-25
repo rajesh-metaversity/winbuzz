@@ -9,7 +9,7 @@ export const Casino = createApi({
         url: '/api/getOneUserBetResult',
         method: 'POST',
         body:{
-            appUr:window.location.hostname
+            appUrl:window.location.hostname
         }
     })
     }),

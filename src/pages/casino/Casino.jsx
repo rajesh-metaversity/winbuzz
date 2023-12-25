@@ -15,10 +15,11 @@ import {
   useQtechAuthQuery,
   useQtechMutation,
 } from "../../Services/Qtech/Qtech";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FantasyGameCard from "../../component/casinoCard/FantasyCard";
 import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
+import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 
 const Casino = () => {
   const [gameCode, setGameCode] = useState("");
@@ -29,7 +30,6 @@ const Casino = () => {
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
 
   const { id } = useParams();
-  console.log(id, "SDcdsc");
   useEffect(() => {
     const casinoToken = localStorage.getItem("casino-token");
     // if (casinoToken != undefined || gameCode) {
@@ -45,7 +45,6 @@ const Casino = () => {
 
   useEffect(() => {
     if (gamelist) {
-      console.log(gamelist, "list");
       const { items } = gamelist.data;
       let categories = items.map((el) => {
         const itemAr = el?.category.split("/");
@@ -59,7 +58,6 @@ const Casino = () => {
       // newAr.push("OTHER");
       setCategory(newAr);
       // }
-
       setGameLists(items);
       //
     }
@@ -88,22 +86,39 @@ const Casino = () => {
   useEffect(() => {
     setProviderFilter("ALL");
   }, [id]);
-
+  const [trigge, { data, isLoading: isLoad, isError }] =
+    useCasinoRulesMutation();
+  useEffect(() => {
+    trigge();
+  }, []);
+  const points = {
+    LiveCasino: data?.data?.qtech,
+    FantasyGame: data?.data?.fantasyGames,
+    Slot: data?.data?.qtech,
+    Lottery: data?.data?.qtech,
+    aura: data?.data?.aura,
+  };
+  const nav = useNavigate();
   return (
     <div>
-      <ModalComponent
-        Elememt={
-          <CasinoRuleModalContent
-            gameId={gameId}
-            id={id}
-            gameName={casinoName}
-            handleClose={() => setCasinoRuleModal(false)}
-          />
-        }
-        open={casinoRuleModal}
-        setOpen={setCasinoRuleModal}
-      />
-
+      {casinoRuleModal && points[id] == 1 ? (
+        nav(`/qtech/${casinoName}`)
+      ) : (
+        <ModalComponent
+          Elememt={
+            <CasinoRuleModalContent
+              gameId={gameId}
+              id={id}
+              points={points}
+              gameName={casinoName}
+              data={data}
+              handleClose={() => setCasinoRuleModal(false)}
+            />
+          }
+          open={casinoRuleModal}
+          setOpen={setCasinoRuleModal}
+        />
+      )}
       <div className="casino-page-container">
         <Title name={"INT CASINO"} />
         <div className="casino-center-col">

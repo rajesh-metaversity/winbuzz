@@ -59,15 +59,15 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
   const casinoToken = localStorage.getItem("casino-token");
   const [trigge, { data: gamelist }] = useQtechMutation();
   const { id } = useParams();
-  useEffect(() => {
-    // if (casinoToken != undefined || gameCode) {
-    trigge({
-      gameCategory: id?.toUpperCase(),
-      provider: gameCode,
-      token: casinoToken,
-    });
-    // }
-  }, [gameCode, casinoToken]);
+  // useEffect(() => {
+  //   // if (casinoToken != undefined || gameCode) {
+  //   trigge({
+  //     gameCategory: id?.toUpperCase(),
+  //     provider: gameCode,
+  //     token: casinoToken,
+  //   });
+  //   // }
+  // }, [gameCode, casinoToken]);
 
   useEffect(() => {
     if (gamelist?.data?.items) {
@@ -86,7 +86,6 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
       setGameLists(items);
     }
   }, [gamelist?.data]);
-
   if (!isBreakPoint) {
     return (
       <>
