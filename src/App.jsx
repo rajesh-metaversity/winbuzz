@@ -7,7 +7,6 @@ import { useQtechAuthQuery } from "./Services/Qtech/Qtech";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useValidateJWTMutation } from "./Services/ValidateJWT/Validate";
-import { useNavigate } from "react-router-dom";
 
 function App() {
   const [trigger, { data, isLoading, isError }] = useValidateJWTMutation();

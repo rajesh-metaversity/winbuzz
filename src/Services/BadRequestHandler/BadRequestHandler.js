@@ -9,6 +9,7 @@ export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
 		}
 	});
 	const result = await rawBaseQuery(args, WebApi, extraOptions);
+	
 	if (result?.error) {
 		const responseMessage = result?.error?.data?.message;
 		const status = result?.error?.status;

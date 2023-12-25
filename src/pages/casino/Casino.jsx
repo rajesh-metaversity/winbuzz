@@ -29,7 +29,7 @@ const Casino = () => {
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
 
   const { id } = useParams();
-  console.log(id, "SDcdsc")
+  console.log(id, "SDcdsc");
   useEffect(() => {
     const casinoToken = localStorage.getItem("casino-token");
     // if (casinoToken != undefined || gameCode) {
@@ -45,6 +45,7 @@ const Casino = () => {
 
   useEffect(() => {
     if (gamelist) {
+      console.log(gamelist, "list");
       const { items } = gamelist.data;
       let categories = items.map((el) => {
         const itemAr = el?.category.split("/");
@@ -107,7 +108,7 @@ const Casino = () => {
         <Title name={"INT CASINO"} />
         <div className="casino-center-col">
           {/* <p className="int_casino">Int Casino</p> */}
-          <p className="int_casino">{ id}</p>
+          <p className="int_casino">{id}</p>
 
           <CasinoList
             list={casinoObj[id]}
