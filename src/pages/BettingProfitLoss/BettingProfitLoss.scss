@@ -1,0 +1,255 @@
+.betting_profit-loss_cont {
+  display: flex;
+  flex-direction: column;
+  // gap: 50px;
+
+  @media screen and (max-width: 780px) {
+    background: #202020;
+    gap: 10px;
+  }
+
+  .right {
+    display: flex;
+    width: 100%;
+    align-items: end;
+
+    @media screen and (max-width: 780px) {
+      display: flex;
+      flex-direction: column;
+      
+    }
+
+    p {
+      width: 35%;
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+      text-transform: capitalize;
+      color: #333;
+
+      @media screen and (max-width: 780px) {
+        width: 100%;
+        background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+        color: white;
+        
+      }
+    }
+
+    .dates_cont {
+      display: flex; 
+      align-items: end; 
+       padding: 0px; 
+       flex: 1;
+       gap: 20px;
+
+       .input_field {
+
+         
+         
+         
+         label {
+           font-size: 12px;
+           
+           @media screen and (max-width: 780px) {
+            //  color: #939393;
+            color: white;
+             
+            }
+        }
+       }
+
+       @media screen and (max-width: 780px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 0px;
+        row-gap: 10px;
+        column-gap: 10px;
+        margin-top: 10px;
+        width: calc(100% - 20px);
+        padding-inline: 10px;
+        
+       }
+
+       select {
+
+
+        @media screen and (max-width: 780px) {
+          background: transparent;
+          color: white;
+          padding: 5px;
+          
+        }
+
+      }
+
+    .right_date {
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      justify-content: flex-start;
+      // width: 60%;
+      // gap: 10px;
+
+      @media screen and (max-width: 780px) {
+        position: relative; 
+        
+      }
+
+     
+
+
+        label {
+          margin-bottom: 5px;
+          font-size: 12px;
+          
+        
+          text-transform: capitalize;
+          @media screen and (max-width:780px) {
+            position: absolute;
+            top: 10px;
+            background: #202020;
+            // color: #939393;
+            color: white;
+            z-index: 999;
+            top: -7px;
+            left: 20px;
+            font-size: 12px;
+          }
+        }
+
+        input {
+          // padding: 10px 20px;
+          // background: #f3f3f3;
+          border: none;
+          // border: 1px solid #d1d1d1 !important;
+          border-radius: 5px;
+
+          @media screen and (max-width: 780px) {
+            background: transparent;
+            color: #939393;
+            font-size: 12px;
+            padding: 10px;
+
+          }
+        }
+
+    }
+    .search_button {
+      // background: #198754;
+      background: transparent linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      color: white;
+      margin-top: 20px;
+      cursor: pointer;
+      &:hover {
+        background-color: #157347;
+      }
+
+      @media screen and (max-width: 780px) {
+        grid-column: 2;
+        margin-top: 0;
+        
+        
+      }
+    }
+  }
+  }
+
+  .record-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+
+    @media screen and (max-width: 780px) {
+      color: white;
+      font-size: 12px;
+      
+    }
+
+    input {
+      border: 1px solid rgb(206, 212, 218);
+      padding: 0.4rem 0.5rem;
+      border-radius: 3px;
+    
+
+      @media screen and (max-width: 780px) {
+        width: 100px;
+        
+      }
+    }
+
+  }
+
+  .mybets_table {
+
+    @media screen and (max-width: 780px) {
+      padding: 10px;
+      padding-top: 5px;
+      background: none;
+      white-space: nowrap;
+
+    }
+
+    .css-rqglhn-MuiTable-root {
+      // background-color: none;
+
+      @media screen and (max-width: 780px) {
+        background-color: black;
+
+      }
+
+
+    }
+
+    th {
+      border: 1px solid rgba(120, 130, 140, .13) !important;
+
+      @media screen and (max-width: 780px) {
+        padding: 5px;
+        
+      }
+     
+
+    }
+
+    .bet_table-body {
+
+      @media screen and (max-width: 780px) {
+        background: #202020;
+
+        td {
+          border: 1px solid rgba(120, 130, 140, .13) !important;
+          color: white;
+
+          @media screen and (max-width: 780px) {
+            padding: 5px;
+            color: white;
+
+            
+          }
+
+        }
+      }
+
+
+
+    }
+
+
+  }
+  table {
+    th {
+      color: #fff;
+      font-weight: 700;
+      background-color: #333;
+      border-right: 1px solid white;
+      border-left: 1px solid white;
+      padding: 5px;
+    }
+  }
+}

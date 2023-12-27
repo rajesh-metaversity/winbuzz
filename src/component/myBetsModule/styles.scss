@@ -1,0 +1,21 @@
+.betslip {
+  box-shadow: 0 0 5px 0 #989898;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.my-bets-module-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+
+.gridcontainer {
+  background-color: #ffffffd7;
+  padding: 4px;
+
+  .text {
+    text-transform: capitalize;
+  }
+}

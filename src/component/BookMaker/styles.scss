@@ -1,0 +1,16 @@
+.text_danger {
+    color: #f00000;
+}
+
+.text_success {
+    color: #07bc0c;
+}
+
+.font_normal {
+    font-size: 14px;
+
+
+    @media screen and (max-width:780px) {
+        font-size: 12px
+    }
+}

@@ -1,0 +1,207 @@
+.signup_section {
+  width: 100%;
+  background-image: url(../../assets/img/registerbanner.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .signup_content {
+    width: 30%;
+    padding: 10px;
+    background-color: aqua;
+    margin: auto;
+    background-color: #0f2326;
+    border-radius: 10px;
+    border: 2px solid #fff;
+    display: block;
+    @media screen and (max-width: 780px) {
+      width: 78%;
+    }
+    .signup_logo {
+      width: 100%;
+      text-align: center;
+    }
+
+    .signup_logo img {
+      width: 60%;
+    }
+
+    .sign_up_form_input {
+      width: 100%;
+      display: block;
+      //   margin-top: 14px;
+
+      input {
+        width: calc(100% - 10px);
+        background: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        border-right: 0px;
+        padding: 5px 5px 5px 5px;
+        color: #fff;
+        margin: 8px 0;
+      }
+
+      ::placeholder {
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .check_section {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .check {
+        width: auto;
+      }
+
+      .lebel {
+        color: #fff;
+        margin-left: 10px;
+      }
+    }
+
+    p {
+      color: white;
+    }
+
+    .get_otp {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .otp_btn {
+      background-color: #1e5058;
+      padding: 14px 16px;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 10px;
+      border: unset;
+      cursor: pointer;
+    }
+
+    .or {
+      position: relative;
+      width: 100%;
+      margin-top: 20px;
+      color: #fff;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 45%;
+        height: 2px;
+        background-color: #1e5058;
+        top: 50%;
+        left: 0%;
+        transform: translate(-0px, -50%);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 45%;
+        height: 2px;
+        background-color: #1e5058;
+        top: 50%;
+        right: 0%;
+        transform: translate(-0px, -50%);
+      }
+    }
+
+    .get_id_from_whatsapp_section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      padding: 10px 0;
+    }
+
+    .whatsapp_now {
+      text-align: center;
+      display: flex;
+      background: #f4ca5b;
+      border-radius: 5px;
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 5px 24px;
+      margin-top: 6px;
+      font-size: 18px;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      border: unset;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .whatsapp_now span svg {
+      font-size: 40px;
+    }
+
+    .allready_have_account_section {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    .deposite_section {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .deposite_card {
+      width: 31%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      border-radius: 4px;
+      gap: 2px;
+      padding: 10px 0;
+      background: transparent
+        linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+
+      p {
+        padding: 0;
+        margin: 0;
+        color: #000;
+        font-weight: bold;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+
+      span {
+        width: calc(70% - 10px);
+        padding: 6px 5px;
+        white-space: nowrap;
+        color: #fff;
+        background-color: #000;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        font-size: 8px;
+      }
+    }
+  }
+}
