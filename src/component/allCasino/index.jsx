@@ -40,6 +40,7 @@ const AllProviderName = () => {
       setCasinoRuleModal(true);
     } else {
       if (localStorage.getItem("token")) {
+        console.log(vl, val, "gameCode");
         navigate(vl, {
           state: {
             item1: { gameCode: val?.gameCode },
@@ -85,12 +86,13 @@ const AllProviderName = () => {
   };
 
   useEffect(() => {
-    trigge();
+    if (localStorage.getItem("token")) {
+      trigge();
+    }
   }, []);
   const nav = useNavigate();
   const token = localStorage.getItem("token");
 
-  console.log(id, data?.data?.aura, "AllCasinoProviderName");
   return (
     <div className="Main_header_for_game_provide_Incasino">
       {Object.keys(AllCasinoProviderName).map((key, item) => {

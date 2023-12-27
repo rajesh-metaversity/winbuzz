@@ -44,6 +44,16 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
     return (
       <div className="sub_header_cont">
         <ul className="sub_header_ul">
+          <li
+            onClick={() => {
+              nav(InPlay);
+            }}
+            className={pathName == "/in-play" ? "active-tabs" : ""}
+          >
+            <div>
+              <Link to={home}>In play</Link>
+            </div>
+          </li>
           {data?.data.map((items, index) => {
             return (
               <React.Fragment key={items?.sportId + items.sportName + index}>
@@ -59,6 +69,16 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
               </React.Fragment>
             );
           })}
+          <li>
+            <Link
+              // onClick={() =>
+              //   handleSportDetailsPage(items?.sportId, items.sportName)
+              // }
+              to={"casino/Indian-Casino"}
+            >
+              Int Casino
+            </Link>
+          </li>
           {isLogin
             ? casinoList.map((item, index) => {
                 let removeSpace = item.name.split(" ").join("");
@@ -74,7 +94,6 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                 );
               })
             : casinoList.map((item, index) => {
-              console.log(item, "Dcdscd")
                 return (
                   <li
                     key={item + index}
@@ -126,6 +145,16 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                 </React.Fragment>
               );
             })}
+            <li
+              onClick={() => {
+                nav("casino/Indian-Casino");
+              }}
+              className={pathName == "/in-play" ? "active-tabs" : ""}
+            >
+              <img src={play} alt="" />
+
+              <span>Int Casino</span>
+            </li>
             {isLogin
               ? casinoList.map((item, index) => {
                   let removeSpace = item.name.split(" ").join("");

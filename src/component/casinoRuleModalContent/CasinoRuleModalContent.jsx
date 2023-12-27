@@ -58,7 +58,7 @@ const CasinoRuleModalContent = ({
         </Typography>
         <div className="agree_btn">
           {isSupernowa ? (
-            <button onClick={handleSuperNowaClick}>Ok I Agree</button>
+            <button onClick={handleSuperNowaClick} className="agree">Ok I Agree</button>
           ) : id ? (
             <Link to={`/qtech/${gameName}`}>
               <button>Ok I Agree</button>
