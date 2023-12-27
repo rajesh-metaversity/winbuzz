@@ -105,7 +105,6 @@ const Casino = () => {
   };
 
   const nav = useNavigate();
-  console.log(AllCasinoProviderName, "AllCasinoProviderName");
 
   const indianCasinoCat = {
     Aura: { name: "Aura", gameCode: "AURA", PageUrl: "/casino-list" },
@@ -117,7 +116,7 @@ const Casino = () => {
   };
 
   const handleGamePageroute = (val) => {
-    console.log(val,"val")
+    console.log(val, "val");
     nav(val?.PageUrl, {
       state: {
         item1: { gameCode: val?.gameCode },
@@ -154,7 +153,6 @@ const Casino = () => {
           {id == "Indian-Casino" ? (
             <div className="main_wrap_live-casion">
               {AllCasinoProviderName[indianCasino[id]].map((item) => {
-                console.log(item, "iem");
                 return (
                   <div
                     className="MainBtn_warp"

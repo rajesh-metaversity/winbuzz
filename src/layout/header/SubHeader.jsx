@@ -1,13 +1,13 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SubHeader.scss";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import play from "../../assets/img/in-play.png";
-import { InPlay, casino, deposit, home, withdraw } from "../../routes/PagesUrl";
+import { InPlay, deposit, home, withdraw } from "../../routes/PagesUrl";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
-
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 import { sportImages } from "../sider/Sider";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
@@ -30,6 +30,14 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
 
   const userType = localStorage.getItem("userTypeInfo");
   // const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
+  const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
+  useEffect(() => {
+    if (isLogin) {
+      trigger();
+    }
+  }, []);
+
+  console.log(allotedCasino, "allotedCasino");
   const casinoList = [
     {
       name: "Lottery",
@@ -69,15 +77,16 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
               </React.Fragment>
             );
           })}
-          <li>
-            <Link
-              // onClick={() =>
-              //   handleSportDetailsPage(items?.sportId, items.sportName)
-              // }
-              to={"casino/Indian-Casino"}
-            >
-              Int Casino
-            </Link>
+          <li
+            onClick={() => {
+              if (isLogin) {
+                nav("casino/Indian-Casino");
+              } else {
+                setModalValue(0), handleOpen();
+              }
+            }}
+          >
+            Int Casino
           </li>
           {isLogin
             ? casinoList.map((item, index) => {
@@ -147,7 +156,11 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
             })}
             <li
               onClick={() => {
-                nav("casino/Indian-Casino");
+                if (isLogin) {
+                  nav("casino/Indian-Casino");
+                } else {
+                  setModalValue(0), handleOpen();
+                }
               }}
               className={pathName == "/in-play" ? "active-tabs" : ""}
             >
