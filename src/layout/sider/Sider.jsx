@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import arrow from "../../assets/img/rightArrow.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -22,6 +22,7 @@ import fantasygame from "../../assets/img/fantasy-game.png";
 import { multi_market } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 export const sportImages = {
   Cricket: cricketImage,
   Tennis: tennisImage,
@@ -38,6 +39,8 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
   const [activeSlide, setActiveSlide] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
+  const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
+
   const nav = useNavigate();
 
   const handleGameDetailsPage = (id, sportId) => {
@@ -46,6 +49,13 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
   const isLogin = useSelector(isLoginSelector);
 
   const [idSport, setIdSport] = useState(0);
+
+  useEffect(() => {
+    if (isLogin) {
+      trigger()
+    }
+  }, [])
+
   const casinoList = [
     {
       name: "Lottery",
@@ -55,6 +65,11 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
     { name: "Slot", img: slots },
     { name: "Fantasy Game", img: fantasygame },
   ];
+
+  const filteredCasino = allotedCasino?.data?.filter(item => item?.name === "QTech" && item?.active)
+
+  console.log(filteredCasino, "FILTERED")
+
 
   return (
     <div
@@ -100,7 +115,11 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
             </React.Fragment>
           );
         })}
-        {isLogin
+
+        {/*  */}
+
+
+        {/* {isLogin
           ? casinoList.map((item, index) => {
               let removeSpace = item.name.split(" ").join("");
 
@@ -130,7 +149,39 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                   </span>
                 </li>
               );
-            })}
+            })} */}
+        
+        {filteredCasino?.length && casinoList.map((item, index) => {
+              let removeSpace = item.name.split(" ").join("");
+
+              return (
+                <Link to={`casino/${removeSpace}`} key={item + index}>
+                  <li onClick={() => setSiderOpen(false)}>
+                    <p>
+                      <img src={item?.img} alt="casino" />
+                      {item?.name}
+                    </p>
+                    <span>
+                      <img src={arrow} alt="" />
+                    </span>
+                  </li>
+                </Link>
+              );
+        })}
+        
+        {/* {!isLogin && casinoList?.map((item, index) => {
+              return (
+                <li key={item + index}>
+                  <p onClick={() => handleOpen()}>
+                    <img src={item?.img} alt="casino" />
+                    {item?.name}
+                  </p>
+                  <span>
+                    <img src={arrow} alt="" />
+                  </span>
+                </li>
+              );
+            }) } */}
       </ul>
 
       <div

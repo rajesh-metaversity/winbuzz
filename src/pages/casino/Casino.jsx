@@ -21,6 +21,7 @@ import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import { AllCasinoProviderName } from "../../component/allCasino/superNowaProvider";
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 
 const Casino = () => {
   const [gameCode, setGameCode] = useState("");
@@ -29,6 +30,15 @@ const Casino = () => {
   const [providerFilter, setProviderFilter] = useState("ALL");
   const QtechAutch = useQtechAuthQuery();
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
+
+  const [triger, { data: allotedCasino }] = useAllotedCasinoMutation();
+
+  useEffect(() => {
+    triger()
+
+  }, [])
+
+  console.log(allotedCasino?.data, "allotedCasino")
 
   const { id } = useParams();
   useEffect(() => {
@@ -125,6 +135,8 @@ const Casino = () => {
     });
   };
 
+  console.log(indianCasino, "indianCasino")
+
   return (
     <div>
       {casinoRuleModal && points[id] == 1 ? (
@@ -152,6 +164,8 @@ const Casino = () => {
           <p className="int_casino">{id}</p>
           {id == "Indian-Casino" ? (
             <div className="main_wrap_live-casion">
+
+
               {AllCasinoProviderName[indianCasino[id]].map((item) => {
                 return (
                   <div
@@ -167,7 +181,7 @@ const Casino = () => {
                       src={item?.logo}
                       alt=""
                     />
-                    <span className="complany-name-wrap">{item.name}</span>
+                    <span className="complany-name-wrap">{item?.name}</span>
                   </div>
                 );
               })}

@@ -36,59 +36,53 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
       trigger();
     }
   }, []);
-
-  console.log(allotedCasino, "allotedCasino");
+  
   const casinoList = [
-    {
-      name: "Lottery",
-      img: lottery,
-    },
-    { name: "Live Casino", img: casinos },
-    { name: "Slot", img: slots },
-    { name: "Fantasy Game", img: fantasygame },
+		{
+			name: 'Lottery',
+			img: lottery
+		},
+		{ name: 'Live Casino', img: casinos },
+		{ name: 'Slot', img: slots },
+		{ name: 'Fantasy Game', img: fantasygame }
   ];
+  
+  const filteredCasino = allotedCasino?.data?.filter(item => item?.name === 'QTech' && item?.active);
 
+  console.log(filteredCasino, 'filteredCaisno');
   if (!isBreakPoint) {
     return (
-      <div className="sub_header_cont">
-        <ul className="sub_header_ul">
-          <li
-            onClick={() => {
-              nav(InPlay);
-            }}
-            className={pathName == "/in-play" ? "active-tabs" : ""}
-          >
-            <div>
-              <Link to={home}>In play</Link>
-            </div>
-          </li>
-          {data?.data.map((items, index) => {
-            return (
-              <React.Fragment key={items?.sportId + items.sportName + index}>
-                <li>
-                  <div
-                    onClick={() =>
-                      handleSportDetailsPage(items?.sportId, items.sportName)
-                    }
-                  >
-                    {items.sportName}
-                  </div>
-                </li>
-              </React.Fragment>
-            );
-          })}
-          <li
-            onClick={() => {
-              if (isLogin) {
-                nav("casino/Indian-Casino");
-              } else {
-                setModalValue(0), handleOpen();
-              }
-            }}
-          >
-            Int Casino
-          </li>
-          {isLogin
+		<div className="sub_header_cont">
+			<ul className="sub_header_ul">
+				<li
+					onClick={() => {
+						nav(InPlay);
+					}}
+					className={pathName == '/in-play' ? 'active-tabs' : ''}>
+					<div>
+						<Link to={home}>In play</Link>
+					</div>
+				</li>
+				{data?.data.map((items, index) => {
+					return (
+						<React.Fragment key={items?.sportId + items.sportName + index}>
+							<li>
+								<div onClick={() => handleSportDetailsPage(items?.sportId, items.sportName)}>{items.sportName}</div>
+							</li>
+						</React.Fragment>
+					);
+				})}
+				<li
+					onClick={() => {
+						if (isLogin) {
+							nav('casino/Indian-Casino');
+						} else {
+							setModalValue(0), handleOpen();
+						}
+					}}>
+					Int Casino
+				</li>
+				{/* {isLogin 
             ? casinoList.map((item, index) => {
                 let removeSpace = item.name.split(" ").join("");
                 return (
@@ -114,10 +108,48 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                     {item?.name}
                   </li>
                 );
-              })}
-        </ul>
-      </div>
-    );
+              })} */}
+				{filteredCasino?.length &&
+					casinoList.map((item, index) => {
+						let removeSpace = item.name.split(' ').join('');
+						return (
+							<>
+								{isLogin ? (
+									<li key={item + index}>
+										<Link to={`casino/${removeSpace}`} style={{ color: '#fffa00' }}>
+											{item?.name}
+										</Link>
+									</li>
+								) : (
+									<li
+										key={item + index}
+										style={{ color: '#fffa00' }}
+										onClick={() => {
+											setModalValue(0), handleOpen();
+										}}>
+										{item?.name}
+									</li>
+								)}
+							</>
+						);
+					})}
+
+				{/* {!isLogin &&
+					casinoList?.map((item, index) => {
+						return (
+							<li
+								key={item + index}
+								style={{ color: '#fffa00' }}
+								onClick={() => {
+									setModalValue(0), handleOpen();
+								}}>
+								{item?.name}
+							</li>
+						);
+					})} */}
+			</ul>
+		</div>
+	);
   } else {
     return (
       <>
