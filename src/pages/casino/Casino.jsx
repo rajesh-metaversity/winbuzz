@@ -31,6 +31,15 @@ const Casino = () => {
   const QtechAutch = useQtechAuthQuery();
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
 
+  const [triger, { data: allotedCasino }] = useAllotedCasinoMutation();
+
+  useEffect(() => {
+    triger()
+
+  }, [])
+
+  console.log(allotedCasino?.data, "allotedCasino")
+
   const { id } = useParams();
   useEffect(() => {
     const casinoToken = localStorage.getItem("casino-token");
