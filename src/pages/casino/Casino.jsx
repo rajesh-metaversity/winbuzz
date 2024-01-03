@@ -10,7 +10,7 @@ import {
   fantsyGameList,
   slotProviderList,
 } from "./QtechProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   useQtechAuthQuery,
   useQtechMutation,
@@ -21,6 +21,7 @@ import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import { AllCasinoProviderName } from "../../component/allCasino/superNowaProvider";
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 
 const Casino = () => {
   const [gameCode, setGameCode] = useState("");
@@ -116,7 +117,6 @@ const Casino = () => {
   };
 
   const handleGamePageroute = (val) => {
-    console.log(val, "val");
     nav(val?.PageUrl, {
       state: {
         item1: { gameCode: val?.gameCode },
@@ -124,7 +124,29 @@ const Casino = () => {
       },
     });
   };
-
+  const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
+  useEffect(() => {
+    trigg();
+  }, []);
+  const allowCasino = useMemo(
+    () =>
+      AllCasinoProviderName[indianCasino[id]]?.map((item) => {
+        if (item?.name == "Aura") {
+          return {
+            ...item,
+            active: allotedCasino?.data?.find((item) => item.casinoId == 1)
+              .active,
+          };
+        } else {
+          return {
+            ...item,
+            active: allotedCasino?.data?.find((item) => item.casinoId == 2)
+              .active,
+          };
+        }
+      }),
+    [allotedCasino, indianCasino]
+  );
   return (
     <div>
       {casinoRuleModal && points[id] == 1 ? (
@@ -152,25 +174,30 @@ const Casino = () => {
           <p className="int_casino">{id}</p>
           {id == "Indian-Casino" ? (
             <div className="main_wrap_live-casion">
-              {AllCasinoProviderName[indianCasino[id]].map((item) => {
-                return (
-                  <div
-                    className="MainBtn_warp"
-                    style={{ border: "0.5px solid" }}
-                    key={item?.name + item?.logo}
-                    onClick={() =>
-                      handleGamePageroute(indianCasinoCat[item?.name])
-                    }
-                  >
-                    <img
-                      className="complany-logo-warp"
-                      src={item?.logo}
-                      alt=""
-                    />
-                    <span className="complany-name-wrap">{item.name}</span>
-                  </div>
-                );
-              })}
+              {allowCasino &&
+                allowCasino?.map((item) => {
+                  if (item?.active) {
+                    return (
+                      <div
+                        className="MainBtn_warp"
+                        style={{ border: "0.5px solid" }}
+                        key={item?.name + item?.logo}
+                        onClick={() =>
+                          handleGamePageroute(indianCasinoCat[item?.name])
+                        }
+                      >
+                        <img
+                          className="complany-logo-warp"
+                          src={item?.logo}
+                          alt=""
+                        />
+                        <span className="complany-name-wrap">{item.name}</span>
+                      </div>
+                    );
+                  } else {
+                    return;
+                  }
+                })}
             </div>
           ) : (
             //

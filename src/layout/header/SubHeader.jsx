@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SubHeader.scss";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import play from "../../assets/img/in-play.png";
 import { InPlay, deposit, home, withdraw } from "../../routes/PagesUrl";
@@ -37,16 +37,31 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
     }
   }, []);
 
-  console.log(allotedCasino, "allotedCasino");
-  const casinoList = [
-    {
-      name: "Lottery",
-      img: lottery,
-    },
-    { name: "Live Casino", img: casinos },
-    { name: "Slot", img: slots },
-    { name: "Fantasy Game", img: fantasygame },
-  ];
+  const casinoList = useMemo(
+    () => [
+      {
+        name: "Lottery",
+        img: lottery,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+      {
+        name: "Live Casino",
+        img: casinos,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+      {
+        name: "Slot",
+        img: slots,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+      {
+        name: "Fantasy Game",
+        img: fantasygame,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+    ],
+    [allotedCasino]
+  );
 
   if (!isBreakPoint) {
     return (
@@ -62,7 +77,7 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
               <Link to={home}>In play</Link>
             </div>
           </li>
-          {data?.data.map((items, index) => {
+          {data?.data?.map((items, index) => {
             return (
               <React.Fragment key={items?.sportId + items.sportName + index}>
                 <li>
@@ -89,20 +104,24 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
             Int Casino
           </li>
           {isLogin
-            ? casinoList.map((item, index) => {
+            ? casinoList?.map((item, index) => {
                 let removeSpace = item.name.split(" ").join("");
-                return (
-                  <li key={item + index}>
-                    <Link
-                      to={`casino/${removeSpace}`}
-                      style={{ color: "#fffa00" }}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                );
+                if (item?.active) {
+                  return (
+                    <li key={item + index}>
+                      <Link
+                        to={`casino/${removeSpace}`}
+                        style={{ color: "#fffa00" }}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                } else {
+                  return;
+                }
               })
-            : casinoList.map((item, index) => {
+            : casinoList?.map((item, index) => {
                 return (
                   <li
                     key={item + index}
