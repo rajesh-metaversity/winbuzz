@@ -213,7 +213,7 @@ const Casino = () => {
             //
             <>
               <CasinoList
-                list={providerdata}
+                list={providerdata?.data || casinoObj[id]}
                 setGameCode={setGameCode}
                 type={1}
                 id={id}

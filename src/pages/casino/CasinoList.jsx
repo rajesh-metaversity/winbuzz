@@ -16,25 +16,25 @@ const CasinoList = ({
     }
     setActive(0);
   }, [id]);
-
+  console.log(list, "list");
   return (
     <>
       <div className="int_casoini_list_all">
         <ul>
           {type == 1
-            ? list?.data?.map((item, index) => {
+            ? list?.map((item, index) => {
                 return (
                   <React.Fragment key={item.gameCode}>
                     <li
                       className={index === active && "active"}
                       onClick={() => {
-                        setGameCode(item?.providerId);
+                        setGameCode(item?.providerId || item?.filterType);
                         setActive(index);
                         // setProviderFilter("item?.filter");
-                        setFantasyGame(item.providerId);
+                        setFantasyGame(item.providerId || item?.filterType);
                       }}
                     >
-                      {item?.providerName}
+                      {item?.providerName || item?.name}
                     </li>
                   </React.Fragment>
                 );
