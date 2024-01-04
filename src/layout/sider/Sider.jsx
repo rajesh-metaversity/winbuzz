@@ -52,9 +52,9 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
 
   useEffect(() => {
     if (isLogin) {
-      trigger()
+      trigger();
     }
-  }, [])
+  }, []);
 
   const casinoList = [
     {
@@ -66,10 +66,9 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
     { name: "Fantasy Game", img: fantasygame },
   ];
 
-  const filteredCasino = allotedCasino?.data?.filter(item => item?.name === "QTech" && item?.active)
-
-  console.log(filteredCasino, "FILTERED")
-
+  const filteredCasino = allotedCasino?.data?.filter(
+    (item) => item?.name === "QTech" && item?.active
+  );
 
   return (
     <div
@@ -118,7 +117,6 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
 
         {/*  */}
 
-
         {/* {isLogin
           ? casinoList.map((item, index) => {
               let removeSpace = item.name.split(" ").join("");
@@ -150,25 +148,26 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                 </li>
               );
             })} */}
-        
-        {filteredCasino?.length && casinoList.map((item, index) => {
-              let removeSpace = item.name.split(" ").join("");
 
-              return (
-                <Link to={`casino/${removeSpace}`} key={item + index}>
-                  <li onClick={() => setSiderOpen(false)}>
-                    <p>
-                      <img src={item?.img} alt="casino" />
-                      {item?.name}
-                    </p>
-                    <span>
-                      <img src={arrow} alt="" />
-                    </span>
-                  </li>
-                </Link>
-              );
-        })}
-        
+        {filteredCasino?.length &&
+          casinoList.map((item, index) => {
+            let removeSpace = item.name.split(" ").join("");
+
+            return (
+              <Link to={`casino/${removeSpace}`} key={item + index}>
+                <li onClick={() => setSiderOpen(false)}>
+                  <p>
+                    <img src={item?.img} alt="casino" />
+                    {item?.name}
+                  </p>
+                  <span>
+                    <img src={arrow} alt="" />
+                  </span>
+                </li>
+              </Link>
+            );
+          })}
+
         {/* {!isLogin && casinoList?.map((item, index) => {
               return (
                 <li key={item + index}>
@@ -196,15 +195,16 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
             if (item.matchName) {
               return (
                 <>
-                  <li onClick={() => {
-                    setSiderOpen(false)
-                    setActiveSlide(!activeSlide)
-                  }}>
+                  <li
+                    onClick={() => {
+                      setSiderOpen(false);
+                      setActiveSlide(!activeSlide);
+                    }}
+                  >
                     <p
                       onClick={() => {
-                        handleGameDetailsPage(item?.matchId, idSport)
-                      }
-                      }
+                        handleGameDetailsPage(item?.matchId, idSport);
+                      }}
                     >
                       {/* Matches */}
                       {item.matchName}

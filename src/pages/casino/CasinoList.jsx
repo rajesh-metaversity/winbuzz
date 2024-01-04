@@ -22,19 +22,19 @@ const CasinoList = ({
       <div className="int_casoini_list_all">
         <ul>
           {type == 1
-            ? list?.map((item, index) => {
+            ? list?.data?.map((item, index) => {
                 return (
                   <React.Fragment key={item.gameCode}>
                     <li
                       className={index === active && "active"}
                       onClick={() => {
-                        setGameCode(item?.filterType);
+                        setGameCode(item?.providerId);
                         setActive(index);
                         // setProviderFilter("item?.filter");
-                        setFantasyGame(item.filterType);
+                        setFantasyGame(item.providerId);
                       }}
                     >
-                      {item.name}
+                      {item?.providerName}
                     </li>
                   </React.Fragment>
                 );

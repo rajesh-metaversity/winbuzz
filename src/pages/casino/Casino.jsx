@@ -12,6 +12,7 @@ import {
 } from "./QtechProvider";
 import { useEffect, useMemo, useState } from "react";
 import {
+  useProviderMutation,
   useQtechAuthQuery,
   useQtechMutation,
 } from "../../Services/Qtech/Qtech";
@@ -28,19 +29,19 @@ const Casino = () => {
   const [category, setCategory] = useState([]);
   const [gameLists, setGameLists] = useState([]);
   const [providerFilter, setProviderFilter] = useState("ALL");
+  const { id } = useParams();
   const QtechAutch = useQtechAuthQuery();
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
-
+  const [providerTrigger, { data: providerdata }] = useProviderMutation();
   const [triger, { data: allotedCasino }] = useAllotedCasinoMutation();
 
   useEffect(() => {
-    triger()
+    triger();
+  }, []);
+  useEffect(() => {
+    providerTrigger({ gameType: id });
+  }, [id]);
 
-  }, [])
-
-  console.log(allotedCasino?.data, "allotedCasino")
-
-  const { id } = useParams();
   useEffect(() => {
     const casinoToken = localStorage.getItem("casino-token");
     // if (casinoToken != undefined || gameCode) {
@@ -90,7 +91,7 @@ const Casino = () => {
       );
       setfantasyGame(fantasygamelist);
     }
-  }, [id, fantasyGame]);
+  }, [id]);
   const [casinoRuleModal, setCasinoRuleModal] = useState(false);
   const [gameId, setGameId] = useState();
   const [casinoName, setCasinoName] = useState("");
@@ -115,7 +116,6 @@ const Casino = () => {
   };
 
   const nav = useNavigate();
-
   const indianCasinoCat = {
     Aura: { name: "Aura", gameCode: "AURA", PageUrl: "/casino-list" },
     "Super nowa": {
@@ -133,10 +133,11 @@ const Casino = () => {
       },
     });
   };
-  const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
+  const [trigg, { data: allotedCasin }] = useAllotedCasinoMutation();
   useEffect(() => {
     trigg();
   }, []);
+  // console.log(category, "category");
   const allowCasino = useMemo(
     () =>
       AllCasinoProviderName[indianCasino[id]]?.map((item) => {
@@ -212,7 +213,7 @@ const Casino = () => {
             //
             <>
               <CasinoList
-                list={casinoObj[id]}
+                list={providerdata}
                 setGameCode={setGameCode}
                 type={1}
                 id={id}

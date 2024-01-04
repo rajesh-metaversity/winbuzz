@@ -63,7 +63,6 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
     [allotedCasino]
   );
 
-  console.log(filteredCasino, 'filteredCaisno');
   if (!isBreakPoint) {
     return (
       <div className="sub_header_cont">
@@ -134,48 +133,10 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                     {item?.name}
                   </li>
                 );
-              })} */}
-				{filteredCasino?.length &&
-					casinoList.map((item, index) => {
-						let removeSpace = item.name.split(' ').join('');
-						return (
-							<>
-								{isLogin ? (
-									<li key={item + index}>
-										<Link to={`casino/${removeSpace}`} style={{ color: '#fffa00' }}>
-											{item?.name}
-										</Link>
-									</li>
-								) : (
-									<li
-										key={item + index}
-										style={{ color: '#fffa00' }}
-										onClick={() => {
-											setModalValue(0), handleOpen();
-										}}>
-										{item?.name}
-									</li>
-								)}
-							</>
-						);
-					})}
-
-				{/* {!isLogin &&
-					casinoList?.map((item, index) => {
-						return (
-							<li
-								key={item + index}
-								style={{ color: '#fffa00' }}
-								onClick={() => {
-									setModalValue(0), handleOpen();
-								}}>
-								{item?.name}
-							</li>
-						);
-					})} */}
-			</ul>
-		</div>
-	);
+              })}
+        </ul>
+      </div>
+    );
   } else {
     return (
       <>
