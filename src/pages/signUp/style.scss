@@ -45,7 +45,10 @@
         color: #fff;
         margin: 8px 0;
       }
-
+      // input:-webkit-autofill {
+      //   -webkit-box-shadow: 0 0 0px 1000px #0f2326 inset;
+      //   // color: white;
+      // }
       ::placeholder {
         color: #fff;
         font-size: 16px;
@@ -84,6 +87,7 @@
       border-radius: 10px;
       border: unset;
       cursor: pointer;
+      width: 90%;
     }
 
     .or {

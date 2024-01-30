@@ -23,6 +23,7 @@ import { multi_market } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import { setLoginFormHandlerRef } from "../../common/MainLayout";
 export const sportImages = {
   Cricket: cricketImage,
   Tennis: tennisImage,
@@ -99,6 +100,7 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                   setIdSport(item?.sportId);
                   setActiveSlide(true);
                   trigge(item?.sportId);
+                  // }
                 }}
               >
                 <p>
@@ -198,12 +200,18 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                   <li
                     onClick={() => {
                       setSiderOpen(false);
-                      setActiveSlide(!activeSlide);
+                      if (isLogin) {
+                        setActiveSlide(!activeSlide);
+                      }
                     }}
                   >
                     <p
                       onClick={() => {
-                        handleGameDetailsPage(item?.matchId, idSport);
+                        if (!isLogin) {
+                          setLoginFormHandlerRef();
+                        } else {
+                          handleGameDetailsPage(item?.matchId, idSport);
+                        }
                       }}
                     >
                       {/* Matches */}

@@ -23,6 +23,8 @@ import { UnsettledBets } from "../Services/UnsettledBets/UnsettledBets";
 import { ValidateJWT } from "../Services/ValidateJWT/Validate";
 import { supernowaApi } from "../Services/supernowa/SupernowaCasino";
 import { allotedCasino } from "../Services/allotedCasino/AllotedCasino";
+import { register } from "../Services/selfRegister/SelfRegister";
+import { IsSelf } from "../Services/isSelf/IsSelf";
 
 export const store = configureStore({
   reducer: {
@@ -50,6 +52,8 @@ export const store = configureStore({
     [ValidateJWT.reducerPath]: ValidateJWT.reducer,
     [supernowaApi.reducerPath]: supernowaApi.reducer,
     [allotedCasino.reducerPath]: allotedCasino.reducer,
+    [register.reducerPath]: register.reducer,
+    [IsSelf.reducerPath]: IsSelf.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -76,7 +80,9 @@ export const store = configureStore({
       .concat(UnsettledBets.middleware)
       .concat(ValidateJWT.middleware)
       .concat(supernowaApi.middleware)
-      .concat(allotedCasino.middleware),
+      .concat(allotedCasino.middleware)
+      .concat(register.middleware)
+      .concat(IsSelf.middleware),
 });
 
 setupListeners(store.dispatch);

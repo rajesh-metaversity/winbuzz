@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useInPlayQuery } from "../../Services/ActiveSportList/ActiveMatch";
 import InPlayHeading from "./InPlay";
 import InplayCollapse from "./InplayCollapse";

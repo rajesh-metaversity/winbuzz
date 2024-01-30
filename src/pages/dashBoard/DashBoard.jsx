@@ -1,4 +1,5 @@
 // import React from "react";
+import { useOutletContext } from "react-router-dom";
 import SportData from "../../component/SportData/SportData";
 import AllProviderName from "../../component/allCasino";
 import Inplay from "../../component/inPlay/Index";
@@ -6,7 +7,7 @@ import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 
 const DashBoard = () => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
-
+ 
   return (
     <div>
       {/* {!isBreakPoint && <TopBanner />} */}
@@ -16,7 +17,7 @@ const DashBoard = () => {
         <>
           {/* <SiderBanner /> */}
           <AllProviderName />
-          <SportData />
+          <SportData  />
         </>
       )}
     </div>

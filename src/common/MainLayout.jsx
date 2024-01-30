@@ -16,8 +16,8 @@ import Loader from "../component/Loader/Loader";
 import LoginForm from "../component/loginForm/LoginForm";
 import ModalComponent from "../component/modal/Modal";
 // import MyBets from "../component/MyBets/MyBets";
-
-const MainLayout = ({ setGame, gameName }) => {
+export let setLoginFormHandlerRef;
+const MainLayout = () => {
   const [siderOpen, setSiderOpen] = useState(false);
   const [modalValue, setModalValue] = useState(0);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
@@ -48,6 +48,11 @@ const MainLayout = ({ setGame, gameName }) => {
     // 1: <RulesModal setOpen={setOpen} />,
   };
 
+  const setLoginFormHandler = () => {
+    setModalValue(0);
+    setOpen(true);
+  };
+  setLoginFormHandlerRef = setLoginFormHandler;
   if (isLoading) {
     return <Loader />;
   } else {
@@ -85,7 +90,7 @@ const MainLayout = ({ setGame, gameName }) => {
             </div>
             <div className="content">
               <TopBanner />
-              <Outlet context={[setGame, gameName]} />
+              <Outlet />
             </div>
             {!isBreakPoint ? (
               <div className="banner-sider">
