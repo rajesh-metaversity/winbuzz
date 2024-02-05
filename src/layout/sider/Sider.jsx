@@ -103,7 +103,7 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                   // }
                 }}
               >
-                <p>
+                <p className="match-list">
                   {/* <img src={item?.sportImage} alt="cricket" /> */}
                   <img src={sportImages[item.sportName]} alt="" />
 
@@ -158,9 +158,9 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
             return (
               <Link to={`casino/${removeSpace}`} key={item + index}>
                 <li onClick={() => setSiderOpen(false)}>
-                  <p>
+                  <p className="match-list">
                     <img src={item?.img} alt="casino" />
-                    {item?.name}
+                    {item?.name}df
                   </p>
                   <span>
                     <img src={arrow} alt="" />
@@ -204,6 +204,7 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
                         setActiveSlide(!activeSlide);
                       }
                     }}
+                    className="nested-list"
                   >
                     <p
                       onClick={() => {

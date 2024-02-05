@@ -66,7 +66,7 @@ const MainLayout = () => {
         />
         <div className="main-layout-container">
           <div className="header-layout">
-            <HeaderMessage />
+            {!isBreakPoint && <HeaderMessage />}
             <WebHeaderComponent
               setOpen={setOpen}
               open={open}

@@ -16,7 +16,7 @@ const AuraCasinoGamePage = () => {
   const [casinoRuleModal, setCasinoRuleModal] = useState(false);
   const { id } = useParams();
   const url =
-    "https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json";
+    "https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/wolf.json";
   const [cards, setCards] = useState([]);
   const [trigger, { data, isLoading }] = useCasinoRulesMutation();
   const token = localStorage.getItem("token");

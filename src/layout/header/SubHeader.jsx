@@ -31,6 +31,8 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
   const userType = localStorage.getItem("userTypeInfo");
   // const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
   const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
+  let splitPathName = pathName.split("/");
+
   useEffect(() => {
     if (isLogin) {
       trigger();
@@ -221,22 +223,24 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
           </ul>
         </div>
         {userType != 2
-          ? isLogin && (
-              <div className="mobile-subheader-deposit">
-                <Link to={deposit}>
-                  <div className="mobile-subheader-deposit-left-col">
-                    <AccountBalanceIcon />
-                    Deposit
-                  </div>
-                </Link>
-                <Link to={withdraw}>
-                  <div className="mobile-subheader-deposit-right-col">
-                    <AddCardIcon />
-                    Withdraw
-                  </div>
-                </Link>
-              </div>
-            )
+          ? splitPathName[1] != "game_detail"
+            ? isLogin && (
+                <div className="mobile-subheader-deposit">
+                  <Link to={deposit}>
+                    <div className="mobile-subheader-deposit-left-col">
+                      <AccountBalanceIcon />
+                      Deposit
+                    </div>
+                  </Link>
+                  <Link to={withdraw}>
+                    <div className="mobile-subheader-deposit-right-col">
+                      <AddCardIcon />
+                      Withdraw
+                    </div>
+                  </Link>
+                </div>
+              )
+            : ""
           : ""}
         {}
       </>

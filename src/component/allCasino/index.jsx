@@ -3,11 +3,13 @@ import "./styles.css";
 
 import { useNavigate } from "react-router";
 import ModalComponent from "../modal/Modal";
-import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
+
 import LoginForm from "../loginForm/LoginForm";
 import { AllCasinoProviderName } from "./superNowaProvider";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import { useEffect } from "react";
+import CasinoRuleModal2 from "../casinoRuleModalContent/CasinoRuleModal2";
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 // import Modal from "react-bootstrap/Modal";
 // import CasinoModals from "../../Livecasino/CasinoModals";
 
@@ -24,13 +26,16 @@ const AllProviderName = () => {
   const [trigge, { data, isLoading: isLoad, isError }] =
     useCasinoRulesMutation();
   const [open, setOpen] = useState(false);
+  const [point, setPoint] = useState("");
+
   const points = {
-    LiveCasino: data?.data?.qtech,
-    FantasyGame: data?.data?.fantasyGames,
-    Slot: data?.data?.qtech,
-    Lottery: data?.data?.qtech,
-    aura: data?.data?.aura,
+    livecasino: data?.data?.qtech,
+    fantasygame: data?.data?.fantasyGames,
+    slot: data?.data?.qtech,
+    lottery: data?.data?.qtech,
+    AURA: data?.data?.aura,
     "Internation Casino": data?.data?.aura,
+    "SP-NOWA": data?.data?.supernowa,
   };
   const handleGamePageroute = (vl, val, key, gameCode) => {
     setGameName(gameCode);
@@ -40,7 +45,6 @@ const AllProviderName = () => {
       setCasinoRuleModal(true);
     } else {
       if (localStorage.getItem("token")) {
-        console.log(vl, val, "gameCode");
         navigate(vl, {
           state: {
             item1: { gameCode: val?.gameCode },
@@ -72,14 +76,21 @@ const AllProviderName = () => {
   const handleClose = () => {
     setCasinoRuleModal(false);
   };
+  const [link, setLink] = useState("");
+  const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
+  useEffect(() => {
+    trigg();
+  }, []);
   const modalElement = {
     0: <LoginForm setOpen={setOpen} handleClose={handleClose} />,
     1: (
-      <CasinoRuleModalContent
+      <CasinoRuleModal2
         handleClose={handleClose}
         id={id}
-        points={points}
+        points={point}
         // points={points[id]}
+        data={data}
+        link={link}
         gameName={gameName}
       />
     ),
@@ -92,7 +103,7 @@ const AllProviderName = () => {
   }, []);
   const nav = useNavigate();
   const token = localStorage.getItem("token");
-
+  // console.log(AllCasinoProviderName, "AllCasinoProviderName");
   return (
     <div className="Main_header_for_game_provide_Incasino">
       {Object.keys(AllCasinoProviderName).map((key, item) => {
@@ -110,6 +121,14 @@ const AllProviderName = () => {
                     style={{ border: "0.5px solid" }}
                     onClick={() => {
                       setId(key);
+                      setPoint(points[item?.gameCode] || data?.data?.qtech);
+                      setLink(
+                        key == "Indian Casino"
+                          ? item?.gameCode == "AURA"
+                            ? `/casino-list`
+                            : `/supernowaCasino`
+                          : `/qtech/${item?.gameCode}`
+                      );
                       if (token) {
                         handleGamePageroute(
                           item?.PageUrl,

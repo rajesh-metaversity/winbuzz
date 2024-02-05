@@ -5,9 +5,9 @@
   gap: 20px;
 
   .game-detail-left-col {
-    width: 70%;
-    @media screen and (max-width:780px){
-      width:100%;
+    width: 67%;
+    @media screen and (max-width: 780px) {
+      width: 100%;
     }
   }
 
@@ -15,13 +15,14 @@
     flex: 1;
     border-top: 0px;
     border-radius: 10px;
-    @media screen and (max-width:780px){
+    width: 33%;
+    @media screen and (max-width: 780px) {
       display: none;
     }
   }
 }
 
-.backgrid_{
+.backgrid_ {
   display: block;
   @media screen and (max-width: 800px) {
     display: none;

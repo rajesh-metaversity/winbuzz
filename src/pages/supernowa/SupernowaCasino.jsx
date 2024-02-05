@@ -5,7 +5,7 @@ import {
 } from "../../Services/supernowa/SupernowaCasino";
 import "./style.scss";
 import Loader from "../../component/Loader/Loader";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,11 +17,16 @@ const SupernowaCasino = () => {
   const [casinoRuleModal, setCasinoRuleModal] = useState(false);
   const [trigger, { data, isLoading: laoding }] = useCasinoRulesMutation();
   const { data: gameListData, isLoading } = useSupernowaCasinoGameListQuery({});
-  const [authenticationTrigger, { data: authenticationdata }] =
-    useSupernowaAuthenticationMutation();
+  const [gameCodev, setGameCode] = useState("");
+  const [gameIdv, setGameId] = useState("");
+
   const nav = useNavigate();
-  const handleSuperNowaClick = () => {
+  const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  const handleSuperNowaClick = (gameCode, gameId) => {
+    const gameIDv = gameId || gameIdv;
+    const gameCodef = gameCode || gameCodev;
     setIsSuperNowa(false);
+    nav(`/super-nowa/${gameCodef}/${gameIDv}`);
   };
 
   const handleClose = () => {
@@ -30,17 +35,8 @@ const SupernowaCasino = () => {
 
   const handlerClick = (gameCode, providerCode, gameN) => {
     setGameName(gameN);
-    authenticationTrigger({
-      game: {
-        gameCode,
-        providerCode,
-      },
-      timestamp: Date.now(),
-      user: {
-        backUrl: window.location.hostname,
-        currency: "INR",
-      },
-    });
+    setGameCode(gameCode);
+    setGameId(providerCode);
     setCasinoRuleModal(true);
   };
 
@@ -63,6 +59,7 @@ const SupernowaCasino = () => {
   useEffect(() => {
     trigger();
   }, []);
+
   return (
     <>
       {isLoading ? (
@@ -76,7 +73,7 @@ const SupernowaCasino = () => {
             gap: "2px",
           }}
         >
-          <CloseIcon
+          {/* <CloseIcon
             sx={{
               padding: "10px 0",
               backgroundColor: "#B88831",
@@ -86,7 +83,7 @@ const SupernowaCasino = () => {
               width: "100%",
             }}
             onClick={handlerNavigate}
-          />
+          /> */}
           {gameListData?.data?.games.map((games, index) => (
             <Grid
               key={index}
@@ -94,9 +91,12 @@ const SupernowaCasino = () => {
               md={2.9}
               item
               sx={{ cursor: "pointer", overflow: "hidden" }}
-              onClick={() =>
-                handlerClick(games?.code, games?.providerCode, games?.name)
-              }
+              onClick={() => {
+                handlerClick(games?.code, games?.providerCode, games?.name);
+                if (data?.data?.supernowa == 1) {
+                  handleSuperNowaClick(games?.code, games?.providerCode);
+                }
+              }}
             >
               <img
                 src={games?.thumb}
@@ -110,34 +110,16 @@ const SupernowaCasino = () => {
 
       <ModalComponent
         Elememt={
-          isSupernowa ? (
+          isSupernowa && (
             <CasinoRuleModalContent
               handleClose={handleClose}
               gameName={gameName}
               isSupernowa={isSupernowa}
               points={points}
               data={data}
+              id={""}
               handleSuperNowaClick={handleSuperNowaClick}
             />
-          ) : (
-            <>
-              <CloseIcon
-                sx={{
-                  padding: "10px 0",
-                  backgroundColor: "#B88831",
-                  color: "#ffffff",
-                  fontSize: 16,
-                  cursor: "pointer",
-                  width: "100%",
-                }}
-                onClick={handlerGoBack}
-              />
-              <iframe
-                className="_iframe"
-                src={authenticationdata?.data?.launchURL}
-                frameborder="0"
-              />
-            </>
           )
         }
         open={casinoRuleModal}

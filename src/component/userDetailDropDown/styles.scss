@@ -5,7 +5,7 @@
   align-items: center;
   // padding: 0px 10px;
   padding: 0 5px;
-  
+
   .user-drop-down-amount-left-col {
     width: 70%;
     font-size: 12px;
@@ -20,7 +20,7 @@
 .user-drop-down-amount-right-col {
   font-size: 13px;
   width: 20%;
-    white-space: nowrap;
+  white-space: nowrap;
   font-weight: 700;
   margin-right: 25px;
 }
@@ -32,7 +32,8 @@
     list-style: none;
     padding-block: 3px;
     padding: 5px;
-      padding-left: 0px;
+    padding-left: 0px;
+    //
   }
   .list-bottom-border {
     padding-left: 10px;
@@ -41,18 +42,28 @@
     cursor: pointer;
     font-size: 14px;
     padding: 10px 5px;
-    font-weight:400
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    padding: 6px 20px;
+    svg {
+      font-size: 12px;
+    }
   }
   .logout-li {
     padding-inline: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    font-weight:400;
+    justify-content: start;
+    gap: 10px;
+    font-weight: 400;
     cursor: pointer;
     font-size: 14px;
+    padding: 6px 20px;
     svg {
-      font-size: 18px;
+      font-size: 12px;
     }
   }
 
@@ -72,7 +83,7 @@
     border-radius: 100px;
     text-align: center;
     margin: 5px;
-      padding: 3px;
+    padding: 3px;
   }
 
   .link {

@@ -90,7 +90,7 @@ export const BackGrid = styled(Grid)(({ theme }) => ({
   },
 
   // backgroundColor: '#A5D9FE',
-  padding: " 4px 0px",
+  padding: "4px 0px",
   minHeight: "35px",
   borderRadius: "2px",
   ".backgrid_": {

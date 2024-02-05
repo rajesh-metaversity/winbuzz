@@ -13,6 +13,7 @@
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
+  z-index: 9999999;
   @media screen and (min-width: 780px) {
     display: none;
   }

@@ -10,6 +10,11 @@ import { changePass } from "../../routes/PagesUrl.js";
 import { setIslogin } from "../../App/LoginSlice.js";
 import { toast } from "react-toastify";
 import { useIsSelfMutation } from "../../Services/isSelf/IsSelf.js";
+import {
+  showErrorToast,
+  showSuccessToast,
+} from "../../component/toast/Toast.js";
+import Loader from "../../component/Loader/Loader.jsx";
 
 const SignUp = () => {
   const [trigg, { data: isSlefDat }] = useIsSelfMutation();
@@ -154,7 +159,7 @@ const SignUp = () => {
         // setloginCheck(false);
       } else {
         if (check?.status == false) {
-          toast.error(check?.message);
+          showErrorToast(check?.message);
           dispatch(setIslogin(false));
         } else if (check?.token) {
           localStorage.setItem("token", check.token);
@@ -162,7 +167,7 @@ const SignUp = () => {
           dispatch(setIslogin(true));
           // setOpen(false);
           nav("/");
-          toast.success("Login Successful");
+          showSuccessToast("Login Successful");
         }
 
         localStorage.setItem("token", check.token);
@@ -173,99 +178,103 @@ const SignUp = () => {
       }
     }
   }, [check]);
+  if (demoLoading) {
+    return <Loader />;
+  } else {
+    return (
+      <div className="signup_section">
+        <div className="signup_content">
+          <div className="signup_logo">
+            <img src={logo} alt="" />
+          </div>
+          <form className="sign_up_form_input">
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              style={{
+                borderBottom: error?.username
+                  ? "1px solid red"
+                  : "1px solid #fff",
+              }}
+              onChange={(e) => formHandleChange(e)}
+              value={formData?.username}
+            />
+            <input
+              type="number"
+              placeholder="Phone Number"
+              name="mobile"
+              onChange={(e) => formHandleChange(e)}
+              value={formData?.mobile}
+              style={{
+                borderBottom: error?.mobile
+                  ? "1px solid red"
+                  : "1px solid #fff",
+              }}
+            />
+            <input
+              type="password"
+              placeholder="New Password"
+              name="password"
+              onChange={(e) => formHandleChange(e)}
+              value={formData?.password}
+              style={{
+                borderBottom: error?.password
+                  ? "1px solid red"
+                  : "1px solid #fff",
+              }}
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              onChange={(e) => formHandleChange(e)}
+              value={formData?.confirmPassword}
+              style={{
+                borderBottom: formData?.confirmPassword
+                  ? formData?.confirmPassword == formData?.password
+                    ? "1px solid #fff"
+                    : "1px solid red"
+                  : "1px solid #fff",
+              }}
+            />
 
-  return (
-    <div className="signup_section">
-      <div className="signup_content">
-        <div className="signup_logo">
-          <img src={logo} alt="" />
-        </div>
-        <form className="sign_up_form_input">
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            style={{
-              borderBottom: error?.username
-                ? "1px solid red"
-                : "1px solid #fff",
-            }}
-            onChange={(e) => formHandleChange(e)}
-            value={formData?.username}
-          />
-          <input
-            type="number"
-            placeholder="Phone Number"
-            name="mobile"
-            onChange={(e) => formHandleChange(e)}
-            value={formData?.mobile}
-            style={{
-              borderBottom: error?.mobile ? "1px solid red" : "1px solid #fff",
-            }}
-          />
-          <input
-            type="password"
-            placeholder="New Password"
-            name="password"
-            onChange={(e) => formHandleChange(e)}
-            value={formData?.password}
-            style={{
-              borderBottom: error?.password
-                ? "1px solid red"
-                : "1px solid #fff",
-            }}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="confirmPassword"
-            onChange={(e) => formHandleChange(e)}
-            value={formData?.confirmPassword}
-            style={{
-              borderBottom: formData?.confirmPassword
-                ? formData?.confirmPassword == formData?.password
-                  ? "1px solid #fff"
-                  : "1px solid red"
-                : "1px solid #fff",
-            }}
-          />
-
-          <div className="check_main">
-            <div className="check_section">
-              <input className="check" type="checkbox" />
-              <label className="lebel" htmlFor="age">
-                I have over 18 years old
-              </label>
-              <div>
+            <div className="check_main">
+              <div className="check_section">
                 <input className="check" type="checkbox" />
                 <label className="lebel" htmlFor="age">
-                  I agree to the Terms&Conditions
+                  I have over 18 years old
                 </label>
+                <div>
+                  <input className="check" type="checkbox" />
+                  <label className="lebel" htmlFor="age">
+                    I agree to the Terms&Conditions
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-        {/* <p>
+          </form>
+          {/* <p>
           By continuing you will receive a one-time verification code to your
           phone number by SMS
         </p> */}
-        <div className="get_otp">
-          <button className="otp_btn" onClick={() => onSumbit()}>
-            Submit
-          </button>
-          <div className="or">
-            <span>OR</span>
+          <div className="get_otp">
+            <button className="otp_btn" onClick={() => onSumbit()}>
+              Submit
+            </button>
+            <div className="or">
+              <span>OR</span>
+            </div>
           </div>
-        </div>
-        <div className="get_otp">
-          <button className="otp_btn" onClick={() => demoIdLogin()}>
-            Log in with demo id
-          </button>
-          {/* <div className="or">
+          <div className="get_otp">
+            <button className="otp_btn" onClick={() => demoIdLogin()}>
+              Log in with demo id
+            </button>
+            {/* <div className="or">
             <span>OR</span>
           </div> */}
-        </div>
-        {/* <div className="get_id_from_whatsapp_section">
+          </div>
+          {/* <div className="get_id_from_whatsapp_section">
           <p>Get Your Ready-Made ID From Whatsapp</p>
           <button className="whatsapp_now">
             <span>
@@ -274,18 +283,19 @@ const SignUp = () => {
             WHATSAPP NOW
           </button>
         </div> */}
-        {/* <div className="allready_have_account_section">
+          {/* <div className="allready_have_account_section">
           <a href="#">Already have account</a>
           <a href="#">Log In</a>
         </div> */}
-        {/* <div className="deposite_section">
+          {/* <div className="deposite_section">
           <DepositCard name="400% BONUS" bonus="1ST DEPOSIT" />
           <DepositCard name="50% BONUS" bonus="2ND DEPOSIT" />
           <DepositCard name="10% BONUS" bonus="3RD DEPOSIT" />
         </div> */}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default SignUp;

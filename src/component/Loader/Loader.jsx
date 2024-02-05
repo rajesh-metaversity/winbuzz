@@ -10,10 +10,13 @@ function Loader() {
         justifyContent: "center",
         height: "100%",
         alignItems: "center",
+        // position: "absolute",
+        // top: "0",
+        // left: "0",
+        backgroundColor: "transparent !important",
       }}
     >
       <CircularProgress />
-      {/* <h1 >LOADING</h1> */}
     </Box>
   );
 }

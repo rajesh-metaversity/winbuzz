@@ -80,7 +80,7 @@ const MatchedDetailBetComp = ({
   useEffect(() => {
     //  if()
     data?.Odds?.map((item) => {
-      if (item?.Name.includes("Winner")) {
+      if (item?.Name?.includes("Winner")) {
         setPnlCheckWinner(1);
         setMarketId(item?.marketId);
       } else {
@@ -92,11 +92,11 @@ const MatchedDetailBetComp = ({
   useEffect(() => {
     let resultObject = {};
     winnerOddaPnl?.data?.forEach((item) => {
-      resultObject[item.selctionId] = item.liability;
+      resultObject[item?.selctionId] = item?.liability;
     });
     setOddsObject(resultObject);
   }, [winnerOddaPnl]);
-  console.log(winnerOddaPnl, "winner");
+  // console.log(winnerOddaPnl, "winner");
   return (
     <>
       {data?.Odds?.map((item, index) => {
@@ -126,7 +126,10 @@ const MatchedDetailBetComp = ({
                       sx={{ color: "#fff" }}
                     />
                   )}
-                  <P props={"matchodds"} sx={{ textAlign: "left" }}>
+                  <P
+                    props={"matchodds"}
+                    sx={{ textAlign: "left", color: "black" }}
+                  >
                     {item?.Name}
                   </P>
                 </PolygonStrip>
@@ -145,7 +148,7 @@ const MatchedDetailBetComp = ({
             </GridContainer>
             <Grid container>
               <Grid item xs={5}></Grid>
-              <Grid item display={{ xs: "block", md: "none" }} xs={2}>
+              <Grid item display={{ xs: "block", md: "none" }} xs={2.5}>
                 <P props={"back"}>back</P>
               </Grid>
               <Grid item display={{ xs: "block", md: "none" }} xs={3}>
@@ -164,8 +167,16 @@ const MatchedDetailBetComp = ({
                       borderRadius: 0,
                       alignItems: "center",
                       justifyContent: "space-between",
-                      padding: "4px 0px",
-                      borderBottom: "1px solid #ccc",
+                      padding: {
+                        md: "4px 0px",
+                        xs: "0.5px 0px",
+                        lg: "4px 0px",
+                      },
+                      // borderBottom: "1px solid #ccc",
+                      borderBottom: {
+                        md: "1px solid rgb(128 128 128 / 14%)",
+                        xs: "none",
+                      },
                       ":last-child": {
                         borderBottom: "0px ",
                       },
@@ -184,15 +195,19 @@ const MatchedDetailBetComp = ({
                           };
 
                           return (
-                            <div className="sub_title" key={id}>
+                            <div
+                              className="sub_title"
+                              key={id}
+                              style={{ paddingLeft: "10px" }}
+                            >
                               <span
                                 className={
-                                  oddsPnl[dataRunn.selectionId] < 0
+                                  oddsPnl[dataRunn?.selectionId] < 0
                                     ? "text_danger"
                                     : "text_success"
                                 }
                               >
-                                {oddsPnl[dataRunn.selectionId] || "0.0"}
+                                {oddsPnl[dataRunn?.selectionId] || "0.0"}
                               </span>
                             </div>
                           );
@@ -201,23 +216,42 @@ const MatchedDetailBetComp = ({
                         <div className="sub_title" key={id}>
                           <span
                             className={
-                              oddsObject[dataRunn.selectionId] < 0
+                              oddsObject[dataRunn?.selectionId] < 0
                                 ? "text_danger"
                                 : "text_success"
                             }
                           >
-                            {oddsObject[dataRunn.selectionId] || "0.0"}
+                            {oddsObject[dataRunn?.selectionId] || "0.0"}
                           </span>
                         </div>
                       )}
                     </Grid>
-                    <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
+                    <Grid
+                      item
+                      md={6}
+                      xs={5.5}
+                      sx={{
+                        padding: {
+                          xs: "0px 0px",
+                          md: "0px 4px",
+                          lg: "0px 4px",
+                        },
+                        justifyContent: "space-between",
+                      }}
+                    >
                       <Grid container>
                         {dataRunn === 1 ? (
                           <Suspend />
                         ) : (
                           <>
-                            <Grid item xs={6}>
+                            <Grid
+                              item
+                              xs={6}
+                              sx={{
+                                justifyContent: "space-between",
+                                // maxWidth: "49%",
+                              }}
+                            >
                               <Grid
                                 className="odds-up-color "
                                 container
@@ -261,8 +295,39 @@ const MatchedDetailBetComp = ({
                                         item
                                         md={3.9}
                                         xs={12}
+                                        sx={{
+                                          borderRadius: {
+                                            md: "5px",
+                                            xs: 0,
+                                          },
+                                          minHeight: {
+                                            md: "36px",
+                                            xs: "46px",
+                                          },
+
+                                          padding: "1px",
+                                          paddingTop: {
+                                            md: "5px",
+                                            xs: "5px",
+                                          },
+                                          marginBottom: {
+                                            md: "1px",
+                                            xs: "1px",
+                                          },
+                                        }}
                                       >
-                                        <BetTypoPara>
+                                        <BetTypoPara
+                                          sx={{
+                                            fontWeight: {
+                                              md: "800",
+                                              xs: "800",
+                                            },
+                                            fontSize: {
+                                              md: "13px",
+                                              xs: "13px",
+                                            },
+                                          }}
+                                        >
                                           {res?.price ? res?.price : 0}
                                         </BetTypoPara>
                                         <BetTypoSpan>
@@ -316,9 +381,46 @@ const MatchedDetailBetComp = ({
                                         key={id + "lay"}
                                         item
                                         md={3.9}
-                                        xs={12}
+                                        xs={11.5}
+                                        sx={{
+                                          // display: "flex",
+                                          // alignItems: "center",
+                                          // justifyContent: "center",
+                                          // flexDirection: "column",
+                                          borderRadius: {
+                                            md: "5px",
+                                            xs: 0,
+                                          },
+                                          minHeight: {
+                                            md: "36px",
+                                            xs: "46px",
+                                          },
+
+                                          padding: "1px",
+                                          paddingTop: {
+                                            md: "5px",
+                                            xs: "5px",
+                                          },
+                                          marginBottom: {
+                                            md: "1px",
+                                            xs: "1px",
+                                          },
+                                        }}
                                       >
-                                        <BetTypoPara>{res?.price}</BetTypoPara>
+                                        <BetTypoPara
+                                          sx={{
+                                            fontWeight: {
+                                              md: "800",
+                                              xs: "800",
+                                            },
+                                            fontSize: {
+                                              md: "13px",
+                                              xs: "13px",
+                                            },
+                                          }}
+                                        >
+                                          {res?.price}
+                                        </BetTypoPara>
                                         <BetTypoSpan>{res?.size}</BetTypoSpan>
                                       </LayGrid>
                                     );

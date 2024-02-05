@@ -3,7 +3,10 @@
   margin-bottom: 20px;
   // border-left:  1px solid black;
   // border-right:  1px solid black;
-
+  .slick-slider {
+    height: 380px;
+    overflow: hidden;
+  }
   .play_games {
     background: transparent
       linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
@@ -89,8 +92,6 @@
       }
     }
   }
-
-
 }
 
 .right_banner {

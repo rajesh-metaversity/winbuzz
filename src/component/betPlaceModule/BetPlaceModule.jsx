@@ -5,12 +5,13 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import Heading from "./Heading";
 import "./styles.scss";
-import CloseIcon from "@mui/icons-material/Close";
+
 import { useDispatch, useSelector } from "react-redux";
 import { betSlipSelector, setBetSlipData } from "../../App/LoginSlice";
 import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
 import { toast } from "react-toastify";
+import { showErrorToast, showSuccessToast } from "../toast/Toast";
 
 export const WebBetPlaceModule = ({ minMax }) => {
   const { data: betNumberArray } = useStakeQuery();
@@ -25,7 +26,7 @@ export const WebBetPlaceModule = ({ minMax }) => {
 
   const [inputValue, setInputValue] = useState("");
   const handleNumberClick = (number) => {
-    setInputValue(number.toString());
+    setInputValue(Number(number) + Number(inputValue));
     const newObj = {
       ...selector.data,
       stake: number,
@@ -54,9 +55,9 @@ export const WebBetPlaceModule = ({ minMax }) => {
 
   useEffect(() => {
     if (data?.status) {
-      toast.success(data?.message);
+      showSuccessToast(data?.message);
     } else {
-      toast.error(data?.message);
+      showErrorToast(data?.message);
     }
   }, [data]);
 
@@ -75,40 +76,56 @@ export const WebBetPlaceModule = ({ minMax }) => {
               isBack={selector?.data?.isBack}
               handleBetModalOpen={handleBetModalOpen}
             />
-
-            <div className="bet_details">
+            <div
+              className="bet_details"
+              style={{
+                border: selector?.data?.isBack
+                  ? "2px solid #a5d9fe"
+                  : " 2px solid #f8d0ce",
+              }}
+            >
               <span className="team_name">
                 <p>{selector?.data?.matchName}</p>
                 <p>{selector?.data?.name}</p>
               </span>
               <div className="bet_number">
-                <span className="odds">
-                  <label>Odds</label>
-                </span>
                 <span className="bet_inputs">
-                  <input type="number" value={selector?.data?.odds} />
+                  <div className="bet-input-number-1">
+                    <span className="odds">
+                      <label>Odds</label>
+                    </span>
+                    <div className="bet-input-minus">+</div>
+                    <input type="number" value={selector?.data?.odds} />
+                    <div className="bet-input-plus">-</div>
+                  </div>
+
                   <input
                     placeholder="Stakes"
                     type="number"
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
+                    onChange={(e) => {
+                      handleNumberClick(e.target.value);
+                      setInputValue(e.target.value);
+                    }}
+                    className="bet-input-number-2"
                   />
                 </span>
               </div>
               <span className="numbers">
-                {Object.keys(betNumberArray?.data).map((el, id) => {
-                  return (
-                    <p
-                      key={id}
-                      className="bets"
-                      onClick={() =>
-                        handleNumberClick(betNumberArray?.data[el])
-                      }
-                    >
-                      {betNumberArray?.data[el]}
-                    </p>
-                  );
-                })}
+                {betNumberArray?.data &&
+                  Object?.keys(betNumberArray?.data)?.map((el, id) => {
+                    return (
+                      <p
+                        key={id}
+                        className="bets"
+                        onClick={() =>
+                          handleNumberClick(betNumberArray?.data[el])
+                        }
+                      >
+                        {betNumberArray?.data[el]}
+                      </p>
+                    );
+                  })}
               </span>
               <span className="min_max">
                 <p
@@ -152,6 +169,11 @@ export const WebBetPlaceModule = ({ minMax }) => {
                 </button>
               </span>
             </div>
+            {isLoading && (
+              <div className="right_cont_loader_overlay">
+                <span className="loader"></span>
+              </div>
+            )}
           </div>
         </>
       )}
@@ -183,7 +205,7 @@ export const MobileBetPlaceModal = ({ minMax }) => {
   };
 
   const handleButtonClick = (id) => {
-    setInputValue(id.toString());
+    setInputValue(Number(id) + Number(inputValue));
     const newObj = {
       ...selector.data,
       stake: id,
@@ -222,9 +244,9 @@ export const MobileBetPlaceModal = ({ minMax }) => {
   let dispatch = useDispatch();
   useEffect(() => {
     if (data?.status) {
-      toast.success(data?.message);
+      showSuccessToast(data?.message);
     } else {
-      toast.error(data?.message);
+      showErrorToast(data?.message);
     }
   }, [data]);
   return (
@@ -266,7 +288,7 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                       onClick={() =>
                         dispatch(
                           setBetSlipData({
-                            ...selector.data,
+                            ...selector?.data,
                             odds: selector?.data?.odds - 1.0,
                           })
                         )
@@ -291,7 +313,7 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                       onClick={() =>
                         dispatch(
                           setBetSlipData({
-                            ...selector.data,
+                            ...selector?.data,
                             odds: selector?.data?.odds + 1.0,
                           })
                         )
@@ -312,6 +334,7 @@ export const MobileBetPlaceModal = ({ minMax }) => {
                     defaultValue="0"
                     variant="filled"
                     size="small"
+                    onChange={(e) => handleButtonClick(e.target.value)}
                     value={inputValue}
                   />
                 </Box>
@@ -319,16 +342,17 @@ export const MobileBetPlaceModal = ({ minMax }) => {
             </Box>
           </Box>
           <Box className="stakeButton">
-            {Object.keys(betNumberArray?.data).map((val, idx) => (
-              <Button
-                disableRipple
-                key={idx}
-                onClick={() => handleButtonClick(betNumberArray?.data[val])}
-                className="betStakebutton"
-              >
-                {betNumberArray?.data[val]}
-              </Button>
-            ))}
+            {betNumberArray?.data &&
+              Object?.keys(betNumberArray?.data)?.map((val, idx) => (
+                <Button
+                  disableRipple
+                  key={idx}
+                  onClick={() => handleButtonClick(betNumberArray?.data[val])}
+                  className="betStakebutton"
+                >
+                  {betNumberArray?.data[val]}
+                </Button>
+              ))}
           </Box>
           <Box className="minmaxclear">
             {minmaxclear.map((val, idx) => (

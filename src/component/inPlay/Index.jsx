@@ -4,24 +4,29 @@ import InPlayHeading from "./InPlay";
 import InplayCollapse from "./InplayCollapse";
 ///styles
 import "./styles.scss";
+import Loader from "../Loader/Loader";
 const Inplay = () => {
-  const { data } = useInPlayQuery();
+  const { data, isLoading } = useInPlayQuery();
 
   return (
     <React.Fragment>
       <InPlayHeading headName={"IN PLAY"} />
-      {data?.data?.map((res) => {
-        if (res?.matchList?.length == 0) return <></>;
-        return (
-          <React.Fragment key={res?.name + res?.sportid}>
-            <InplayCollapse
-              name={res?.name}
-              data={res?.matchList}
-              sportid={res.sportid}
-            />
-          </React.Fragment>
-        );
-      })}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.data?.map((res) => {
+          if (res?.matchList?.length == 0) return <></>;
+          return (
+            <React.Fragment key={res?.name + res?.sportid}>
+              <InplayCollapse
+                name={res?.name}
+                data={res?.matchList}
+                sportid={res.sportid}
+              />
+            </React.Fragment>
+          );
+        })
+      )}
     </React.Fragment>
   );
 };

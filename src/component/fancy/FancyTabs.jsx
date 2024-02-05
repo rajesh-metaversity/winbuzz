@@ -21,13 +21,15 @@ const FancyTabs = ({
   const [fancyData, setFancyData] = useState("All");
   const [activeValue, setActiveValue] = useState(0);
   const tabsVal = data ? Object.keys(data) : [];
-  
+
   return (
     <>
       <GridContainer container props={"fancy"}>
         <Grid item xs={5} md={4}>
           <PolygonStrip>
-            <P props={"fancyodds"}>Fancy</P>
+            <P props={"fancyodds"} sx={{ paddingLeft: "10px" ,}}>
+              Fancy
+            </P>
           </PolygonStrip>
         </Grid>
         <Grid item xs={7} md={8}></Grid>

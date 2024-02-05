@@ -16,7 +16,8 @@ import { setIslogin } from "../../App/LoginSlice";
 import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { changePass, passwordChange } from "../../routes/PagesUrl";
-const LoginForm = ({ setOpen, handleClose, }) => {
+import { showErrorToast, showSuccessToast } from "../toast/Toast";
+const LoginForm = ({ setOpen, handleClose }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const [demoChecker, setDemoChecker] = useState(false);
@@ -57,7 +58,7 @@ const LoginForm = ({ setOpen, handleClose, }) => {
         // setloginCheck(false);
       } else {
         if (check?.status == false) {
-          toast.error(check?.message);
+          showErrorToast(check?.message);
           dispatch(setIslogin(false));
         } else if (check?.token) {
           localStorage.setItem("token", check.token);
@@ -65,7 +66,7 @@ const LoginForm = ({ setOpen, handleClose, }) => {
           dispatch(setIslogin(true));
           setOpen(false);
           //   nav(rules_Regulation);
-          toast.success("Login Successful");
+          showSuccessToast("Login Successful");
         }
 
         localStorage.setItem("token", check.token);
@@ -73,7 +74,6 @@ const LoginForm = ({ setOpen, handleClose, }) => {
         if (demoChecker) {
           localStorage.setItem("userTypeInfo", check.userTypeInfo);
         }
-      
       }
     }
   }, [check]);
@@ -134,7 +134,7 @@ const LoginForm = ({ setOpen, handleClose, }) => {
     trigge({ appUrl: window.location.hostname });
   };
 
-  if (isLoading) {
+  if (isLoading || demoLoading) {
     return <Loader />;
   } else {
     return (
@@ -143,9 +143,8 @@ const LoginForm = ({ setOpen, handleClose, }) => {
           <div
             className="cross_icon"
             onClick={() => {
-           
               setOpen(false);
-              handleClose()
+              handleClose();
             }}
           >
             <CloseIcon />
@@ -200,9 +199,9 @@ const LoginForm = ({ setOpen, handleClose, }) => {
               >
                 LOGIN WITH DEMO ID
               </button>
-              <button className="login_with_demo">
+              {/* <button className="login_with_demo">
                 <a href="#">Forgot Password?</a>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

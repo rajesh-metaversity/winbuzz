@@ -23,6 +23,14 @@ import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
 import Logout from "../LogoutConfirmation/Logout";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
+import { showSuccessToast } from "../toast/Toast";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import LockIcon from "@mui/icons-material/Lock";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 const UserDetailDropDown = ({ name, balanceData }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const dispatch = useDispatch();
@@ -36,17 +44,13 @@ const UserDetailDropDown = ({ name, balanceData }) => {
   };
   const nav = useNavigate();
   const [openModal, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-    setAnchorEl(false);
-  };
 
   const [trigger, { data, isLoading, isError }] = useLogoutMutation();
 
   useEffect(() => {
     if (data?.status) {
       dispatch(setIslogin(false));
-      toast.success(data.message);
+      showSuccessToast(data.message);
       localStorage.clear();
       nav("/");
     }
@@ -80,7 +84,8 @@ const UserDetailDropDown = ({ name, balanceData }) => {
           onClick={handleClick}
           sx={{ color: "white", padding: "0", minWidth: "auto" }}
         >
-          {name} <ArrowDropDownIcon />
+          {name}
+          {!isBreakPoint && <ArrowDropDownIcon />}
         </Button>
         <StyledMenu
           sx={{
@@ -126,7 +131,6 @@ const UserDetailDropDown = ({ name, balanceData }) => {
             <li className="refer_earn">Refer and Earn </li>
             <li className="bonus">Awaiting Bonus 1290</li> */}
 
-
             {/* {!isBreakPoint && (
               <Link to={mybets} className="link">
                 <li
@@ -141,38 +145,38 @@ const UserDetailDropDown = ({ name, balanceData }) => {
                 </li>
               </Link>
             )} */}
-             <Link to={mybets} className="link">
-                <li
-                  className="list-bottom-border"
-                  style={{
-                    borderTop: "1px solid #b88831",
-                    textDecoration: "none",
-                  }}
-                  onClick={() => handleClose()}
-                >
-                  My Bets
-                </li>
-              </Link>
+            <Link to={mybets} className="link">
+              <li
+                className="list-bottom-border"
+                style={{
+                  borderTop: "1px solid #b88831",
+                  textDecoration: "none",
+                }}
+                onClick={() => handleClose()}
+              >
+                <AccessTimeIcon />
+                My Bets
+              </li>
+            </Link>
             <Link to={bets_profit_loss} className="link">
               <li className="list-bottom-border" onClick={() => handleClose()}>
-                {" "}
+                <HelpOutlineIcon />
                 Betting Profit and Loss
               </li>
             </Link>
             <Link className="link" to={account_statement}>
               <li className="list-bottom-border" onClick={() => handleClose()}>
+                <AccountBalanceIcon />
                 Account Statement
               </li>
             </Link>
             <Link className="link" to={setting}>
-                {" "}
-                <li
-                  className="list-bottom-border"
-                  onClick={() => handleClose()}
-                >
-                  Settings
-                </li>{" "}
-              </Link>
+              {" "}
+              <li className="list-bottom-border" onClick={() => handleClose()}>
+                <SettingsIcon />
+                Settings
+              </li>
+            </Link>
             {/* {isBreakPoint && (
               <Link className="link" to={setting}>
                 {" "}
@@ -196,36 +200,38 @@ const UserDetailDropDown = ({ name, balanceData }) => {
               </Link>
             )} */}
             <Link className="link" to={unsettled}>
-                <li
-                  className="list-bottom-border"
-                  onClick={() => handleClose()}
-                >
-                  Unsettled Bets
-                </li>
-              </Link>
+              <li className="list-bottom-border" onClick={() => handleClose()}>
+                <LibraryBooksIcon />
+                Unsettled Bets
+              </li>
+            </Link>
             {/* {!isBreakPoint && (
               <Link className="link">
                 <li className="list-bottom-border">Market Analysis</li>
               </Link>
             )} */}
-             <Link className="link">
-                <li className="list-bottom-border">Market Analysis</li>
-              </Link>
-
+            <Link className="link">
+              <li className="list-bottom-border">
+                <DashboardIcon /> Market Analysis
+              </li>
+            </Link>
 
             <Link
               to={passwordChange}
               className="link"
               onClick={() => handleClose()}
             >
-              <li className="list-bottom-border">Change Password</li>
+              <li className="list-bottom-border">
+                <LockIcon />
+                Change Password
+              </li>
             </Link>
             {/* <li className="list-bottom-border" onClick={() => handleOpen()}>
               Bonus Rules
             </li> */}
             <li className="logout-li" onClick={() => setLogutModal(true)}>
-              Logout
               <ExitToAppIcon />
+              Logout
             </li>
           </ul>
           {/* <MenuItem onClick={handleClose}></MenuItem>

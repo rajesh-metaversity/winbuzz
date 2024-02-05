@@ -12,12 +12,13 @@ import CasinoRuleModalContent from "../../component/casinoRuleModalContent/Casin
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useQtechMutation } from "../../Services/Qtech/Qtech";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 var settings = {
+  className: "center",
   dots: false,
   infinite: true,
-  slidesToShow: 4,
+  slidesToShow: 2.4,
   slidesToScroll: 1,
   autoplay: true,
   speed: 500,
@@ -26,6 +27,9 @@ var settings = {
   pauseOnHover: true,
   vertical: true,
   verticalSwiping: true,
+  centerPadding: "60px",
+  // rows: 2,
+  // slidesPerRow: 2
 };
 
 export const SiderBanner = ({ setOpen, open, setModalValue }) => {
@@ -38,7 +42,7 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
     trigger({
       type: 2,
     });
-    fetch("https://admin-api-banners-new.s3.ap-south-1.amazonaws.com/wolf.json")
+    fetch("https://admin-api-banners-2.s3.ap-south-1.amazonaws.com/wolf.json")
       .then((res) => res.json())
       .then((res) => {
         setCasinoData(res?.data);
@@ -86,6 +90,10 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
       setGameLists(items);
     }
   }, [gamelist?.data]);
+const nav = useNavigate()
+  const handleSuperNowaClick = ()=>{
+    nav(gameName)
+  }
   if (!isBreakPoint) {
     return (
       <>

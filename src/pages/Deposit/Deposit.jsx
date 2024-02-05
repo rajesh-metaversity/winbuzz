@@ -22,6 +22,7 @@ import QR from "./QR";
 import { toast } from "react-toastify";
 import Loader from "../../component/Loader/Loader";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { showErrorToast, showSuccessToast } from "../../component/toast/Toast";
 const Deposit = () => {
   const [files, setFiles] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -79,12 +80,12 @@ const Deposit = () => {
   useEffect(() => {
     try {
       if (submitBalance) {
-        toast.success(submitBalance?.message);
+        showSuccessToast(submitBalance?.message);
       } else {
-        toast.error(submitBalance?.message);
+        showErrorToast(submitBalance?.message);
       }
     } catch (error) {
-      toast.error(error?.submitBalance?.message);
+      showErrorToast(error?.submitBalance?.message);
     }
   }, [submitBalance]);
 
@@ -115,7 +116,6 @@ const Deposit = () => {
         url: "",
       });
       setFiles("");
-
     }
   };
 
@@ -359,22 +359,35 @@ const Deposit = () => {
                 <Loader />
               ) : (
                 <TableBody className="table_body">
-                  {balance?.data?.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell align="left">{item?.amount}</TableCell>
-                      <TableCell align="left">
-                        <img src={item?.image} height="50px" />
-                      </TableCell>
-                      <TableCell align="left">{item?.time}</TableCell>
-                      <TableCell align="left" className="table_td">
-                        {item?.status}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {balance?.data &&
+                    balance?.data?.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell align="left">{item?.amount}</TableCell>
+                        <TableCell align="left">
+                          <img src={item?.image} height="50px" />
+                        </TableCell>
+                        <TableCell align="left">{item?.time}</TableCell>
+                        <TableCell align="left" className="table_td">
+                          {item?.status}
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               )}
             </Table>
           </TableContainer>
+          {!balanceLoading && !balance?.data && (
+            <p
+              style={{
+                width: "100%",
+                textAlign: "center",
+                background: "transparent",
+                color: "black",
+              }}
+            >
+              No data
+            </p>
+          )}
         </div>
       </div>
     </div>

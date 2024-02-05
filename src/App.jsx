@@ -7,12 +7,12 @@ import { useQtechAuthQuery } from "./Services/Qtech/Qtech";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useValidateJWTMutation } from "./Services/ValidateJWT/Validate";
+import { useIsSelfMutation } from "./Services/isSelf/IsSelf";
 
 function App() {
   const [trigger, { data, isLoading, isError }] = useValidateJWTMutation();
-	const dispatch = useDispatch();
-	
 
+  const dispatch = useDispatch();
 
   const isLogin = useSelector(isLoginSelector);
 
@@ -28,23 +28,21 @@ function App() {
     if (isLogin) {
       const validateJWT = setInterval(() => {
         dispatch(trigger({}));
-	}, 5000);
+      }, 5000);
       return () => clearInterval(validateJWT);
     }
   }, [isLogin]);
-	
-	useEffect(() => {
 
-		if (data?.status == false) {
-			localStorage.clear()
-			dispatch(setIslogin(false));
-		}
-
-	}, [data])
+  useEffect(() => {
+    if (data?.status == false) {
+      localStorage.clear();
+      dispatch(setIslogin(false));
+    }
+  }, [data]);
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer position="top-center" />
       {isLogin && <IfLoginComp />}
       <Routes />
     </>
@@ -53,7 +51,7 @@ function App() {
 
 const IfLoginComp = () => {
   const { data: qtechAuth } = useQtechAuthQuery(undefined, {
-    pollingInterval: 3000,
+    pollingInterval: 3600000,
   });
   useEffect(() => {
     localStorage.setItem("casino-token", qtechAuth?.data?.access_token);

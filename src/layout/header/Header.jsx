@@ -20,6 +20,9 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useIsSelfMutation } from "../../Services/isSelf/IsSelf";
+import { useEffect } from "react";
+import HeaderMessage from "../../component/HeaderMessage/HeaderMessage";
 export const WebHeaderComponent = ({
   balanceData,
   setSiderOpen,
@@ -38,7 +41,11 @@ export const WebHeaderComponent = ({
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
   const userType = localStorage.getItem("userTypeInfo");
-
+  const appUrl = window.location.hostname;
+  const [trigg, { data: isSlefDat }] = useIsSelfMutation();
+  useEffect(() => {
+    trigg({ appUrl: appUrl });
+  }, []);
   if (!isBreakPoint) {
     return (
       <>
@@ -51,7 +58,7 @@ export const WebHeaderComponent = ({
         <div className="header-container">
           <div className="header-left-col">
             <Link to={home}>
-              <img src={logo} alt="" />
+              <img src={isSlefDat?.data?.logo} alt="" />
             </Link>
           </div>
           <div className="header-right-col">
@@ -89,9 +96,11 @@ export const WebHeaderComponent = ({
                   >
                     login
                   </li>
-                  <Link to="/sign-up">
-                    <li className="header-register">Register</li>
-                  </Link>
+                  {isSlefDat?.data?.selfAllowed && (
+                    <Link to="/sign-up">
+                      <li className="header-register">Register</li>
+                    </Link>
+                  )}
                 </>
               ) : (
                 <>
@@ -159,6 +168,7 @@ export const WebHeaderComponent = ({
             </ul>
           </div>
         </div>
+
         <SubHeader setModalValue={setModalValue} handleOpen={handleOpen} />
       </>
     );
@@ -179,7 +189,7 @@ export const WebHeaderComponent = ({
             )}
 
             <Link to={home}>
-              <img src={logo} alt="" />
+              <img src={isSlefDat?.data?.logo} alt="" />
             </Link>
           </div>
           {/* <div className="mobile-header-middle-col">
@@ -229,13 +239,16 @@ export const WebHeaderComponent = ({
                 >
                   <ButtonComponent name="Login" bg="#b88831" clr="white" />
                 </span>
-                <Link to="/sign-up">
-                  <ButtonComponent name="Register" bg="white" clr="#b88831" />
-                </Link>
+                {isSlefDat?.data?.selfAllowed && (
+                  <Link to="/sign-up">
+                    <ButtonComponent name="Register" bg="white" clr="#b88831" />
+                  </Link>
+                )}
               </>
             )}
           </div>
         </div>
+        {isBreakPoint && <HeaderMessage />}
         <SubHeader setModalValue={setModalValue} handleOpen={handleOpen} />
       </>
     );

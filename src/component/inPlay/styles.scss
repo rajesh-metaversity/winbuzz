@@ -99,9 +99,9 @@
   }
 }
 .odds-row-container {
-  width: 100%;
+  width: calc(100% - 10px);
   display: flex;
-  height: 40px;
+  height: auto;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #e5e5e5;
@@ -162,6 +162,11 @@
       @media screen and (max-width: 780px) {
         display: flex;
       }
+      img {
+        @media screen and (max-width: 780px) {
+          padding-left: 5px;
+        }
+      }
     }
 
     .left_combo {
@@ -169,7 +174,7 @@
       justify-content: space-between;
       align-items: center;
       height: 100%;
-      width: 92%;
+      width: 100%;
 
       @media screen and (max-width: 780px) {
         background: #dedddd;
@@ -181,15 +186,16 @@
 
       .odds-row-left-col {
         // width: fit-content;
-        width: 65%;
+        width: auto;
         padding-block: 5px;
         height: 100%;
-        padding-left: 10px;
+        padding-left: 2px;
         // white-space: nowrap;
         @media screen and (max-width: 780px) {
           display: flex;
           flex-direction: column-reverse;
           gap: 10px;
+          padding-left: 5px;
           // width: calc(100% - 200px);
           width: 100%;
           margin-bottom: 0px;
@@ -208,26 +214,25 @@
           padding-left: 0 !important;
 
           @media screen and (max-width: 780px) {
-            color: #000;
+            color: green;
             font-weight: bold;
             margin-left: 3%;
-            
           }
         }
-
 
         p {
           font-size: 0.8rem;
           line-height: 1.1;
           color: #333;
           margin: 0%;
+          font-weight: 600;
           @media screen and (max-width: 780px) {
             white-space: nowrap;
             color: #000;
             text-transform: uppercase;
             font-weight: bold;
+            font-size: 12px;
           }
-
         }
       }
       .odds-row-middle-col {
@@ -247,7 +252,6 @@
           bottom: 5px;
           align-items: center;
           text-align: end;
-
         }
         .live-inplay {
           font-weight: 500;
@@ -289,9 +293,14 @@
           display: inline-block;
           margin-left: 4px;
           margin-right: 0;
-          color: #fff;
+          color: black;
           text-align: center;
-          background: #8b8b8b;
+          background-image: linear-gradient(
+            94deg,
+            #b6842d,
+            #ebda8d 55%,
+            #b7862f
+          );
           border-radius: 50px;
         }
       }
@@ -341,6 +350,8 @@
         justify-content: end;
         flex: 1;
         gap: 2px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
       }
       li {
         list-style: none;

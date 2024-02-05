@@ -6,6 +6,7 @@ import {
 } from "../../Services/Settings/Settings";
 import Loader from "../../component/Loader/Loader";
 import { toast } from "react-toastify";
+import { showSuccessToast } from "../../component/toast/Toast";
 
 const Setting = () => {
   const stackArr = [
@@ -60,7 +61,7 @@ const Setting = () => {
 
   useEffect(() => {
     if (stakeBalance?.message) {
-      toast.success(stakeBalance?.message);
+      showSuccessToast(stakeBalance?.message);
     }
   }, [stakeBalance]);
   return (
