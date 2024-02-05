@@ -9,6 +9,8 @@ import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import { AllCasinoProviderName } from "../allCasino/superNowaProvider";
 import { useNavigate } from "react-router-dom";
 import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import { isLoginSelector } from "../../App/LoginSlice";
+import { useSelector } from "react-redux";
 
 const TopBanner = () => {
   // const isBreakPoint = useMediaQuery("(max-width: 780px)");
@@ -23,6 +25,7 @@ const TopBanner = () => {
   //   arrows: false,
   //   pauseOnHover: true,
   // };
+  const isLogin = useSelector(isLoginSelector);
   const [trigger, { data }] = useBannerListDataMutation();
   useEffect(() => {
     trigger({
@@ -45,7 +48,9 @@ const TopBanner = () => {
   };
   const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
   useEffect(() => {
-    trigg();
+    if (isLogin) {
+      trigg();
+    }
   }, []);
 
   return (

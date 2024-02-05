@@ -23,6 +23,8 @@ import CasinoRuleModalContent from "../../component/casinoRuleModalContent/Casin
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import { AllCasinoProviderName } from "../../component/allCasino/superNowaProvider";
 import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import { isLoginSelector } from "../../App/LoginSlice";
+import { useSelector } from "react-redux";
 
 const Casino = () => {
   const [gameCode, setGameCode] = useState("");
@@ -31,12 +33,15 @@ const Casino = () => {
   const [providerFilter, setProviderFilter] = useState("ALL");
   const { id } = useParams();
   const QtechAutch = useQtechAuthQuery();
+  const isLogin = useSelector(isLoginSelector);
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
   const [providerTrigger, { data: providerdata }] = useProviderMutation();
   const [triger, { data: allotedCasino }] = useAllotedCasinoMutation();
 
   useEffect(() => {
-    triger();
+    if (isLogin) {
+      triger();
+    }
   }, []);
   useEffect(() => {
     providerTrigger({ gameType: id });
@@ -135,7 +140,9 @@ const Casino = () => {
   };
   const [trigg, { data: allotedCasin }] = useAllotedCasinoMutation();
   useEffect(() => {
-    trigg();
+    if (isLogin) {
+      trigg();
+    }
   }, []);
   // console.log(category, "category");
   const allowCasino = useMemo(
