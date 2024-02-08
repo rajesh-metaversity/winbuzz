@@ -39,8 +39,8 @@ import Withdraw from "../pages/withdraw/Withdraw";
 import CasinoIframe from "../pages/casinoIframe/CasinoIframe";
 import Deposit from "../pages/Deposit/Deposit";
 import CasinoContainer from "../pages/casino/CasinoContainer";
-import AuraCasino from "../pages/allCasino/AuraCasino.jsx";
-import QtechCasino from "../pages/allCasino/QtechCasino.jsx";
+import AuraCasino from "../pages/allcasino/AuraCasino.jsx";
+import QtechCasino from "../pages/allcasino/QtechCasino.jsx";
 
 import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
 import InPlayy from "../pages/InPlayy/InPlay";

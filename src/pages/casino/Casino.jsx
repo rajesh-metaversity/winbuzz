@@ -21,7 +21,7 @@ import FantasyGameCard from "../../component/casinoCard/FantasyCard";
 import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
-import { AllCasinoProviderName } from "../../component/allCasino/superNowaProvider";
+import { AllCasinoProviderName } from "../../component/allcasino/superNowaProvider";
 import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
