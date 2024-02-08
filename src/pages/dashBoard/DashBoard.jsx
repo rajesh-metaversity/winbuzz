@@ -1,6 +1,6 @@
 // import React from "react";
 import SportData from "../../component/SportData/SportData";
-import AllProviderName from "../../component/allcasino";
+import AllProviderName from "../../component/allCasino";
 import Inplay from "../../component/inPlay/Index";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 
