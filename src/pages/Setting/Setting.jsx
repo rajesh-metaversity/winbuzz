@@ -68,7 +68,7 @@ const Setting = () => {
     <div className="settings_cont">
       <div className="settings-heading">Stack Settings</div>
       <div className="values_cont">
-        {isLoading ? (
+        {getLoading ? (
           <Loader />
         ) : (
           <div className="values">

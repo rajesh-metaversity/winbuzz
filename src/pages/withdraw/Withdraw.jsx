@@ -112,7 +112,7 @@ const Withdraw = () => {
     setWithdrawType("");
   };
 
-  console.log(userWithdrawDetails, "userWithdrawDetails");
+
 
   const [
     trigger,
@@ -186,13 +186,13 @@ const Withdraw = () => {
             ? undefined
             : "Bank name should contain atleast one alphabet."
           : err.noBank,
-      ifsc:
-        withdrawDetails.ifsc || withdrawType.toLowerCase() !== "bank"
-          ? withdrawDetails.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
-            withdrawType.toLowerCase() !== "bank"
-            ? undefined
-            : err.invalidIfsc
-          : err.noIfsc,
+      // ifsc:
+      //   withdrawDetails.ifsc || withdrawType.toLowerCase() !== "bank"
+      //     ? withdrawDetails.ifsc?.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) ||
+      //       withdrawType.toLowerCase() !== "bank"
+      //       ? undefined
+      //       : err.invalidIfsc
+      //     : err.noIfsc,
     };
 
     var check = Object.fromEntries(

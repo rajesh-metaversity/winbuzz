@@ -1,6 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-
+import "./styles.css";
 function Loader() {
   return (
     <Box
@@ -16,7 +16,22 @@ function Loader() {
         backgroundColor: "transparent !important",
       }}
     >
-      <CircularProgress />
+      {/* <i className="fa fa-spinner" aria-hidden="true"></i> */}
+      <div className="lds-default">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      {/* <CircularProgress /> */}
     </Box>
   );
 }

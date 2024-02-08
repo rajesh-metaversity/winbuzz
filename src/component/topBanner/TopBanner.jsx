@@ -39,11 +39,11 @@ const TopBanner = () => {
   ];
 
   const nav = useNavigate();
-  const navHndler = (game) => {
+  const navHndler = (game, gameCodeName) => {
     if (game == "Super nowa" || game == "Aura") {
       nav("/SuperNowa_casion");
     } else {
-      nav(`/qtech/${game}`);
+      nav(`/casino/LiveCasino/${gameCodeName}`);
     }
   };
   const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
@@ -52,7 +52,6 @@ const TopBanner = () => {
       trigg();
     }
   }, []);
-
   return (
     // <div className="img_cont">
     // <div className="top-banner-container">
@@ -140,7 +139,7 @@ const TopBanner = () => {
               <div
                 className="top-banner-img-col"
                 key={key + item}
-                onClick={() => navHndler(item?.name)}
+                onClick={() => navHndler(item?.name, item?.gameCodeName)}
               >
                 <div
                   className="img"

@@ -22,7 +22,7 @@ const CasinoRuleModalContent = ({
     p: isBreakPoint ? 0 : 2,
     pb: isBreakPoint ? 2 : 2,
   };
-
+  // console.log(points, id, "data");
   // const [trigger, { data, isLoading, isError }] = useCasinoRulesMutation();
   // useEffect(() => {
   //   trigger();
@@ -53,7 +53,7 @@ const CasinoRuleModalContent = ({
               </p>
               <p>
                 यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या
-                हार ₹{" "}
+                हार ₹
                 {100 * Number(isSupernowa ? data?.data?.supernowa : points[id])}{" "}
                 होगी।
               </p>

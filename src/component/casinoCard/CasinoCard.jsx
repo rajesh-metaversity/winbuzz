@@ -1,5 +1,4 @@
 import "./style.scss";
-import { useNavigate } from "react-router-dom";
 
 const CasinoCard = ({
   gameLists,
@@ -7,11 +6,9 @@ const CasinoCard = ({
   setCasinoRuleModal,
   setCasinoName,
 }) => {
-
   return (
     <>
       {gameLists?.map((res) => {
-
         if (res?.category?.includes(providerFilter) || providerFilter === "ALL")
           return (
             <>

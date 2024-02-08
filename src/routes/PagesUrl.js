@@ -17,7 +17,7 @@ export const setting = "setting";
 export const unsettled = "unsettled-bets";
 export const changePass = "/change-pass";
 export const qtechCaino = "/qtech/:id";
-export const supernowaCasino = '/SuperNowa_casion'
-export const auraCasinoGame = '/casino-list'
-export const superNowaGame = '/super-nowa/:gameCode/:gameId'
-
+export const supernowaCasino = "/SuperNowa_casion";
+export const auraCasinoGame = "/casino-list";
+export const superNowaGame = "/super-nowa/:gameCode/:gameId";
+export const liveCasinoM = "/casino/:gameName/:id";

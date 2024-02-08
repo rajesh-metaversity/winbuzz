@@ -62,9 +62,11 @@ const QtechCasino = () => {
         <Typography className="main_casino_modals" id="modal-modal-description">
           <>
             <iframe
+              style={{ height: "100vh" }}
               src={data?.data?.url}
-              className="desktop_if"
+              // className="desktop_if"
               width="100%"
+              // height="100%"
               title="desktop"
             />
           </>

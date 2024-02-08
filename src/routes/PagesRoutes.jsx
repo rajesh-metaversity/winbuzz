@@ -26,6 +26,7 @@ import {
   supernowaCasino,
   auraCasinoGame,
   superNowaGame,
+  liveCasinoM,
 } from "./PagesUrl";
 import Sublayout from "../common/SubLayout";
 import Casino from "../pages/casino/Casino";
@@ -49,6 +50,7 @@ import PassChange from "../pages/PassChange/PassChange";
 import SupernowaCasino from "../pages/supernowa/SupernowaCasino.jsx";
 import AuraCasinoGamePage from "../pages/aura/AuraCasinoGamePage.jsx";
 import SuperNowaIframe from "../pages/supernowa/SuperNowaIframe.jsx";
+import MobileCasino from "../pages/casino/MobileCasino.jsx";
 
 const userType = localStorage.getItem("userTypeInfo");
 
@@ -82,6 +84,7 @@ export const router = () => {
           path: supernowaCasino,
           element: <SupernowaCasino />,
         },
+        { path: liveCasinoM, element: <MobileCasino /> },
       ],
     },
 

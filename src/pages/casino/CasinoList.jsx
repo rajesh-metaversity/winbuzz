@@ -16,7 +16,6 @@ const CasinoList = ({
     }
     setActive(0);
   }, [id]);
-  console.log(list, "list");
   return (
     <>
       <div className="int_casoini_list_all">
