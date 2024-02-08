@@ -11,7 +11,7 @@ import {
 } from "./MatchedStyled";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import Suspend from "../suspend/suspend";
+import Suspend from "../suspend/Suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

@@ -11,7 +11,7 @@ import {
   P,
   PolygonStrip,
 } from "../matchedDetail/MatchedStyled";
-import Suspend from "../suspend/suspend";
+import Suspend from "../suspend/Suspend";
 import StarIcon from "@mui/icons-material/Star";
 import { setBetSlipData } from "../../App/LoginSlice";
 import { useDispatch } from "react-redux";
