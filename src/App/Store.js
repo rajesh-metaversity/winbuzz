@@ -14,7 +14,7 @@ import { Message } from "../Services/Message/Message";
 import { MyBets } from "../Services/MyBets/MyBets";
 import { Qtech } from "../Services/Qtech/Qtech";
 import { stake } from "../Services/stake/Deposit";
-import { Withdraw } from "../Services/withdraw/Withdraw";
+import { Withdraw } from "../Services/Withdraw/Withdraw";
 import { PnlApi } from "../Services/Pnl/Pnl";
 import { Casino } from "../Services/auraCasino/AuraCasino";
 import { Favourite } from "../Services/Favourite/Favourite";

@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Typography } from "@mui/material";
-import { useWithdrawClientListQuery } from "../../Services/withdraw/Withdraw";
+import { useWithdrawClientListQuery } from "../../Services/Withdraw/Withdraw";
 import Loader from "../../component/Loader/Loader";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

@@ -19,7 +19,7 @@ import {
   useWithdrawBalanceMutation,
   useWithdrawQuery,
   useWithdrawStakeQuery,
-} from "../../Services/withdraw/Withdraw";
+} from "../../Services/Withdraw/Withdraw";
 import Upi from "./Upi";
 import Bank from "./Bank";
 import Previouswithdraw from "./Previouswithdraw";
@@ -111,8 +111,6 @@ const Withdraw = () => {
   const withdrawTypeHandler = () => {
     setWithdrawType("");
   };
-
-
 
   const [
     trigger,
