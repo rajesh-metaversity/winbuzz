@@ -30,8 +30,8 @@ const LoginForm = ({ setOpen, handleClose }) => {
   const [loginData, setloginData] = useState({
     userId: "",
     password: "",
-    // appUrl: window.location.hostname
-    appUrl: "localhost",
+    appUrl: window.location.hostname,
+    // appUrl: "localhost",
   });
 
   const [error, setError] = useState({
