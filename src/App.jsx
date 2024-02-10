@@ -39,7 +39,7 @@ function App() {
       dispatch(setIslogin(false));
     }
   }, [data]);
-console.log("version1")
+console.log("version2")
   return (
     <>
       <ToastContainer position="top-center" />

@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import { useEffect } from "react";
 import { useBannerListDataMutation } from "../../Services/BannerList/BannerList";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
-import { AllCasinoProviderName } from "../allcasino/superNowaProvider";
+import { AllCasinoProviderName } from "../allCasino/superNowaProvider";
 import { useNavigate } from "react-router-dom";
 import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 import { isLoginSelector } from "../../App/LoginSlice";
