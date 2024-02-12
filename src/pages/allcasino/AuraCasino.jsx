@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import HomeIcon from "@mui/icons-material/Home";
 import logo from "../../assets/img/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
+import { isSelfData } from "../../layout/header/Header";
 const AuraCasino = () => {
   const nav = useNavigate();
   const casinoStyle = {
@@ -35,7 +36,7 @@ const AuraCasino = () => {
             >
               <HomeIcon />
             </span>
-            <img src={logo} alt="" onClick={() => nav("/")} />
+            <img src={isSelfData?.data?.logo} alt="" onClick={() => nav("/")} />
             {/* <span>{matchId}</span> */}
           </div>
           <div

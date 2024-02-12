@@ -39,10 +39,10 @@ function App() {
       dispatch(setIslogin(false));
     }
   }, [data]);
-console.log("version2")
+  console.log("version2");
   return (
     <>
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" autoClose={1500} />
       {isLogin && <IfLoginComp />}
       <Routes />
     </>

@@ -45,12 +45,13 @@ import QtechCasino from "../pages/allcasino/QtechCasino.jsx";
 import MultiMarket from "../pages/MultiMarket/MultiMarket.jsx";
 import InPlayy from "../pages/InPlayy/InPlay";
 import Setting from "../pages/Setting/Setting";
-import UnsettledBets from "../pages/UnsettledBets/UnsettledBets";
+import UnsettledBets from "../pages/UnsettledBets/UnsettledBetsSports.jsx";
 import PassChange from "../pages/PassChange/PassChange";
 import SupernowaCasino from "../pages/supernowa/SupernowaCasino.jsx";
 import AuraCasinoGamePage from "../pages/aura/AuraCasinoGamePage.jsx";
 import SuperNowaIframe from "../pages/supernowa/SuperNowaIframe.jsx";
 import MobileCasino from "../pages/casino/MobileCasino.jsx";
+import BasicTabs from "../pages/UnsettledBets/indexUnSettelBet.jsx";
 
 const userType = localStorage.getItem("userTypeInfo");
 
@@ -101,7 +102,7 @@ export const router = () => {
 
         {
           path: unsettled,
-          element: <UnsettledBets />,
+          element: <BasicTabs />,
         },
 
         {

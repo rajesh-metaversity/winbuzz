@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import logo from "../../assets/img/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
+import { isSelfData } from "../../layout/header/Header";
 const SuperNowaIframe = () => {
   const [authenticationTrigger, { data: authenticationdata }] =
     useSupernowaAuthenticationMutation();
@@ -51,7 +52,7 @@ const SuperNowaIframe = () => {
           >
             <HomeIcon />
           </span>
-          <img src={logo} alt="" onClick={() => nav("/")} />
+          <img src={isSelfData?.data?.logo} alt="" onClick={() => nav("/")} />
           {/* <span>{matchId}</span> */}
         </div>
         <div

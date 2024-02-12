@@ -23,6 +23,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useIsSelfMutation } from "../../Services/isSelf/IsSelf";
 import { useEffect } from "react";
 import HeaderMessage from "../../component/HeaderMessage/HeaderMessage";
+export let isSelfData
 export const WebHeaderComponent = ({
   balanceData,
   setSiderOpen,
@@ -46,6 +47,7 @@ export const WebHeaderComponent = ({
   useEffect(() => {
     trigg({ appUrl: appUrl });
   }, []);
+  isSelfData =isSlefDat
   if (!isBreakPoint) {
     return (
       <>

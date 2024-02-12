@@ -8,6 +8,7 @@ export const showErrorToast = (str) => {
       background: "red",
       color: "white",
     },
+    // delay: 1000,
     theme: "dark",
   });
 };
@@ -20,6 +21,7 @@ export const showSuccessToast = (str) => {
       background: "green",
       color: "white",
     },
+    // delay: 1000,
     theme: "dark",
   });
 };

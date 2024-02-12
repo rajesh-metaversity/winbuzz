@@ -6,6 +6,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import logo from "../../assets/img/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
 import { isBrowser } from "react-device-detect";
+import { isSelfData } from "../../layout/header/Header";
 const QtechCasino = () => {
   const casinoStyle = {
     width: "100%",
@@ -75,7 +76,7 @@ const QtechCasino = () => {
             >
               <HomeIcon />
             </span>
-            <img src={logo} alt="" onClick={() => nav("/")} />
+            <img src={isSelfData?.data?.logo} alt="" onClick={() => nav("/")} />
             {/* <span>{matchId}</span> */}
           </div>
           <div

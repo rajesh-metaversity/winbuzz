@@ -10,9 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { betSlipSelector, setBetSlipData } from "../../App/LoginSlice";
 import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
-import { toast } from "react-toastify";
+
 import { showErrorToast, showSuccessToast } from "../toast/Toast";
-import { userBalanceTrigger } from "../../common/SubLayout";
 
 export const WebBetPlaceModule = ({ minMax }) => {
   const { data: betNumberArray } = useStakeQuery();
@@ -57,7 +56,10 @@ export const WebBetPlaceModule = ({ minMax }) => {
   useEffect(() => {
     if (data?.status) {
       showSuccessToast(data?.message);
-      userBalanceTrigger();
+      handleBetModalOpen();
+      // userBalanceTrigger();
+      // setBetData();
+      // setBetSlipData();
     } else {
       showErrorToast(data?.message);
     }
@@ -247,6 +249,8 @@ export const MobileBetPlaceModal = ({ minMax }) => {
   useEffect(() => {
     if (data?.status) {
       showSuccessToast(data?.message);
+      dispatch(setBetSlipData({}));
+      // userBalanceTrigger();
     } else {
       showErrorToast(data?.message);
     }
@@ -255,7 +259,9 @@ export const MobileBetPlaceModal = ({ minMax }) => {
     <>
       {isBreakPoint && selector?.data?.name && (
         <Box
-          className={`mobilemodal ${selector?.data?.isBack ? "back" : "lay"}`}
+          className={`mobilemodal ${
+            selector?.data?.isBack ? "back" : "lay"
+          } mobile-bet-container`}
         >
           <Box className="matchinfo">
             <Box className="teamname">
@@ -397,6 +403,11 @@ export const MobileBetPlaceModal = ({ minMax }) => {
               Place Bet
             </button>
           </Box>
+          {isLoading && (
+            <div className="right_cont_loader_overlay">
+              <span className="loader"></span>
+            </div>
+          )}
         </Box>
       )}
     </>

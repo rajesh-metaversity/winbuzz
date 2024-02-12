@@ -3,17 +3,18 @@ import { WebHeaderComponent } from "../layout/header/Header";
 import { Outlet } from "react-router-dom";
 import SiderBar from "../layout/sider/Sider";
 import MobileFooter from "../layout/mobileFooter/MobileFooter";
-import { useBalanceApiMutation } from "../Services/Balance/BalanceApi";
+import { useBalanceApiQuery } from "../Services/Balance/BalanceApi";
 import { isLoginSelector } from "../App/LoginSlice";
 import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
 import { useSelector } from "react-redux";
 import LoginForm from "../component/loginForm/LoginForm";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
 // import { userBalnceData } from "./MainLayout";
-export let userBalanceTrigger;
+
 const Sublayout = ({ setGame, gameName }) => {
   const [siderOpen, setSiderOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const loginCheck = useSelector(isLoginSelector);
   useEffect(() => {
     if (siderOpen) {
       document.body.style.overflow = "hidden";
@@ -22,15 +23,16 @@ const Sublayout = ({ setGame, gameName }) => {
     }
   }, [siderOpen]);
 
-  const [trigger, { data }] = useBalanceApiMutation();
-  const loginCheck = useSelector(isLoginSelector);
-  userBalanceTrigger = trigger;
-  // userBalnceData = data;
-  useEffect(() => {
-    if (loginCheck) {
-      trigger();
+  const { data } = useBalanceApiQuery(
+    {},
+    {
+      pollingInterval: 1000,
+      skip: !loginCheck,
     }
-  }, [loginCheck]);
+  );
+
+  // userBalanceTrigger = trigger;
+  // userBalnceData = data;
 
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,

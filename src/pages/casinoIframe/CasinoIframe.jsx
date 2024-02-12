@@ -6,6 +6,7 @@ import { useCasinoIframeMutation } from "../../Services/Qtech/Qtech";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { isBrowser } from "react-device-detect";
+import { isSelfData } from "../../layout/header/Header";
 
 const CasinoIframe = () => {
   const { id, matchId } = useParams();
@@ -40,7 +41,7 @@ const CasinoIframe = () => {
           <span onClick={() => handleNav()}>
             <HomeIcon />
           </span>
-          <img src={logo} alt="" onClick={() => handleNav()} />
+          <img src={isSelfData?.data?.logo} alt="" onClick={() => handleNav()} />
           <span>{matchId}</span>
         </div>
         <div className="casino-iframe-header-right-col"></div>

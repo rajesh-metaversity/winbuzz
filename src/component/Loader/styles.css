@@ -12,6 +12,7 @@
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
+
 .lds-default div:nth-child(1) {
   animation-delay: 0s;
   top: 37px;
@@ -81,5 +82,22 @@
   }
   50% {
     transform: scale(1.5);
+  }
+}
+
+@media screen and (max-width: 780px) {
+  /* .lds-default {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+  } */
+  .lds-default div {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #c0943f;
+    border-radius: 50%;
+    animation: lds-default 1.2s linear infinite;
   }
 }

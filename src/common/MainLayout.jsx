@@ -6,7 +6,7 @@ import SiderBar from "../layout/sider/Sider";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
-import { useBalanceApiMutation } from "../Services/Balance/BalanceApi";
+import { useBalanceApiQuery } from "../Services/Balance/BalanceApi";
 import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
 import MobileFooter from "../layout/mobileFooter/MobileFooter";
 import { isLoginSelector } from "../App/LoginSlice";
@@ -23,6 +23,7 @@ const MainLayout = () => {
   const [modalValue, setModalValue] = useState(0);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   const [open, setOpen] = useState(false);
+  const loginCheck = useSelector(isLoginSelector);
   useEffect(() => {
     if (siderOpen) {
       document.body.style.overflow = "hidden";
@@ -31,14 +32,20 @@ const MainLayout = () => {
     }
   }, [siderOpen]);
 
-  const [trigger, { data, isLoading, isError }] = useBalanceApiMutation();
-  const loginCheck = useSelector(isLoginSelector);
-
-  useEffect(() => {
-    if (loginCheck) {
-      trigger();
+  const { data, isLoading } = useBalanceApiQuery(
+    {},
+    {
+      pollingInterval: 1000,
+      skip: !loginCheck,
     }
-  }, [loginCheck]);
+  );
+  // const [trigger, { data, isLoading, isError }] = useBalanceApiMutation();
+
+  // useEffect(() => {
+  //   if (loginCheck) {
+  //     trigger();
+  //   }
+  // }, [loginCheck]);
 
   const handleOpen = () => {
     setOpen(!open);
