@@ -11,7 +11,7 @@ import {
 } from "../../Services/Favourite/Favourite";
 import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
 import FancyTabs from "../../component/fancy/FancyTabs";
-import { useFancyPnlQuery, useOddsPnlMutation } from "../../Services/Pnl/Pnl";
+import { useFancyPnlQuery, useOddsPnlQuery } from "../../Services/Pnl/Pnl";
 const MultiMarketDetails = ({
   matchName,
   data,
@@ -23,7 +23,7 @@ const MultiMarketDetails = ({
   const [userFav, { data: fav }] = useUserFavMutation();
   const [trigger, { data: createFav }] = useCreateFavMutation();
   const [deletedData, { data: deleteFav }] = useDeleteFavMutation();
-  const [trigge, { data: oddsPnl }] = useOddsPnlMutation({ matchId: id });
+  const { data: oddsPnl } = useOddsPnlQuery({ matchId: id });
   const { data: FancyPnl } = useFancyPnlQuery({ matchId: id });
   const [odds, setOdds] = useState({});
   const [prevOdds, setPrevOdds] = useState({});
@@ -51,9 +51,9 @@ const MultiMarketDetails = ({
       matchId: id,
     });
   }, [createFav?.data, deleteFav?.data]);
-  useEffect(() => {
-    trigge();
-  }, []);
+  // useEffect(() => {
+  //   trigge();
+  // }, []);
 
   useEffect(() => {
     if (data) {

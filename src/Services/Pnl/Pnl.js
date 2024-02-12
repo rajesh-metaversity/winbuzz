@@ -5,7 +5,7 @@ export const PnlApi = createApi({
   reducerPath: "PnlApi",
   baseQuery: dynamicBaseQuery,
   endpoints: (builder) => ({
-    oddsPnl: builder.mutation({
+    oddsPnl: builder.query({
       query: (body) => ({
         url: "/enduser/user-odds-pnl",
         method: "POST",
@@ -13,7 +13,7 @@ export const PnlApi = createApi({
         body,
       }),
     }),
-    winnerPnl: builder.mutation({
+    winnerPnl: builder.query({
       query: (body) => ({
         url: "/enduser/user-winner-pnl",
         method: "POST",
@@ -30,5 +30,5 @@ export const PnlApi = createApi({
   }),
 });
 
-export const { useOddsPnlMutation, useWinnerPnlMutation, useFancyPnlQuery } =
+export const { useOddsPnlQuery, useWinnerPnlQuery, useFancyPnlQuery } =
   PnlApi;

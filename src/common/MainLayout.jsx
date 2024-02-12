@@ -17,6 +17,7 @@ import LoginForm from "../component/loginForm/LoginForm";
 import ModalComponent from "../component/modal/Modal";
 // import MyBets from "../component/MyBets/MyBets";
 export let setLoginFormHandlerRef;
+
 const MainLayout = () => {
   const [siderOpen, setSiderOpen] = useState(false);
   const [modalValue, setModalValue] = useState(0);

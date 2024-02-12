@@ -145,7 +145,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
                 </li>
               </Link>
             )} */}
-            <Link to={mybets} className="link">
+            {/* <Link to={mybets} className="link">
               <li
                 className="list-bottom-border"
                 style={{
@@ -157,7 +157,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
                 <AccessTimeIcon />
                 My Bets
               </li>
-            </Link>
+            </Link> */}
             <Link to={bets_profit_loss} className="link">
               <li className="list-bottom-border" onClick={() => handleClose()}>
                 <HelpOutlineIcon />

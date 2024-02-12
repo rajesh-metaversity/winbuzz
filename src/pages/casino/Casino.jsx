@@ -188,7 +188,7 @@ const Casino = () => {
         <Title name={id} />
         <div className="casino-center-col">
           {/* <p className="int_casino">Int Casino</p> */}
-          <p className="int_casino">{id}</p>
+          <p className="int_casino">{id }</p>
           {id == "Indian-Casino" ? (
             <div className="main_wrap_live-casion">
               {allowCasino &&

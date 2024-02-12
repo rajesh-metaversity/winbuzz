@@ -25,6 +25,7 @@ import { supernowaApi } from "../Services/supernowa/SupernowaCasino";
 import { allotedCasino } from "../Services/allotedCasino/AllotedCasino";
 import { register } from "../Services/selfRegister/SelfRegister";
 import { IsSelf } from "../Services/isSelf/IsSelf";
+import { userFancyBook } from "../Services/userFancyBook/UserFancyBook";
 
 export const store = configureStore({
   reducer: {
@@ -54,6 +55,7 @@ export const store = configureStore({
     [allotedCasino.reducerPath]: allotedCasino.reducer,
     [register.reducerPath]: register.reducer,
     [IsSelf.reducerPath]: IsSelf.reducer,
+    [userFancyBook.reducerPath]: userFancyBook.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -82,7 +84,8 @@ export const store = configureStore({
       .concat(supernowaApi.middleware)
       .concat(allotedCasino.middleware)
       .concat(register.middleware)
-      .concat(IsSelf.middleware),
+      .concat(IsSelf.middleware)
+      .concat(userFancyBook.middleware),
 });
 
 setupListeners(store.dispatch);

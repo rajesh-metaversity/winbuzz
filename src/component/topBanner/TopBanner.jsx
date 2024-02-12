@@ -40,8 +40,10 @@ const TopBanner = () => {
 
   const nav = useNavigate();
   const navHndler = (game, gameCodeName) => {
-    if (game == "Super nowa" || game == "Aura") {
+    if (game == "Super nowa") {
       nav("/SuperNowa_casion");
+    } else if (game == "Aura") {
+      nav("casino-list");
     } else {
       nav(`/casino/LiveCasino/${gameCodeName}`);
     }

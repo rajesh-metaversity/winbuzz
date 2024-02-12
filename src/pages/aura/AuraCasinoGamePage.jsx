@@ -91,7 +91,13 @@ const AuraCasinoGamePage = () => {
               md={2.9}
               item
               sx={{ cursor: "pointer", overflow: "hidden" }}
-              onClick={() => handleClickOpen(games?.gameId, games?.gameName)}
+              onClick={() => {
+                if (points["aura"] != 1) {
+                  handleClickOpen(games?.gameId, games?.gameName);
+                } else {
+                  nav(`/aura/${games?.gameName}/${games?.gameId}`);
+                }
+              }}
             >
               <img
                 src={games?.imageUrl}
@@ -102,20 +108,22 @@ const AuraCasinoGamePage = () => {
           ))}
         </Grid>
       }
-
-      <ModalComponent
-        Elememt={
-          <CasinoRuleModalContent
-            handleClose={handleClose}
-            gameName={gameName}
-            gameId={casinoId}
-            data={data}
-            points={points}
-          />
-        }
-        open={casinoRuleModal}
-        setOpen={setCasinoRuleModal}
-      />
+      {points["aura"] != 1 && (
+        <ModalComponent
+          Elememt={
+            <CasinoRuleModalContent
+              handleClose={handleClose}
+              gameName={gameName}
+              gameId={casinoId}
+              data={data}
+              id="aura"
+              points={points}
+            />
+          }
+          open={casinoRuleModal}
+          setOpen={setCasinoRuleModal}
+        />
+      )}
     </>
   );
 };

@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useQtechMutation } from "../../Services/Qtech/Qtech";
 import { useNavigate, useParams } from "react-router-dom";
+import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 
 var settings = {
   className: "center",
@@ -51,14 +52,15 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
   const [gameId, setGameId] = useState();
   const [gameName, setGameName] = useState();
   const loginCheck = useSelector(isLoginSelector);
+
+  const isLogin = useSelector(isLoginSelector);
   const handelAuraCasino = (gameId, gameName) => {
     setGameId(gameId);
     setGameName(gameName);
   };
 
-  const [gameCode, setGameCode] = useState("");
-  const [category, setCategory] = useState([]);
-  const [gameLists, setGameLists] = useState([]);
+  const [, setCategory] = useState([]);
+  const [, setGameLists] = useState([]);
 
   const casinoToken = localStorage.getItem("casino-token");
   const [trigge, { data: gamelist }] = useQtechMutation();
@@ -90,24 +92,44 @@ export const SiderBanner = ({ setOpen, open, setModalValue }) => {
       setGameLists(items);
     }
   }, [gamelist?.data]);
-const nav = useNavigate()
-  const handleSuperNowaClick = ()=>{
-    nav(gameName)
-  }
+  const nav = useNavigate();
+  const [trigg, { data: casinoDataRes, isLoading: casinoLoading }] =
+    useCasinoRulesMutation();
+  const handleSuperNowaClick = () => {
+    nav(gameName);
+  };
+  const points = {
+    LiveCasino: casinoDataRes?.data?.qtech,
+    FantasyGame: casinoDataRes?.data?.fantasyGames,
+    Slot: casinoDataRes?.data?.qtech,
+    Lottery: casinoDataRes?.data?.qtech,
+    aura: casinoDataRes?.data?.aura,
+  };
+  useEffect(() => {
+    if (isLogin) {
+      trigg();
+    }
+  }, []);
+  // console.log(gameName, gameId);
   if (!isBreakPoint) {
     return (
       <>
-        <ModalComponent
-          Elememt={
-            <CasinoRuleModalContent
-              gameId={gameId}
-              gameName={gameName}
-              handleClose={() => setCasinoRuleModal(false)}
-            />
-          }
-          open={casinoRuleModal}
-          setOpen={setCasinoRuleModal}
-        />
+        {points["aura"] != 1 && (
+          <ModalComponent
+            Elememt={
+              <CasinoRuleModalContent
+                gameId={gameId}
+                gameName={gameName}
+                points={points}
+                data={casinoDataRes}
+                id="aura"
+                handleClose={() => setCasinoRuleModal(false)}
+              />
+            }
+            open={casinoRuleModal}
+            setOpen={setCasinoRuleModal}
+          />
+        )}
         <div className="side_banner_cont">
           <div className="play_games">Play Games</div>
           <Slider className="right_banner" {...settings}>
@@ -162,7 +184,11 @@ const nav = useNavigate()
                     onClick={() => {
                       if (loginCheck) {
                         setCasinoRuleModal(true);
-                        handelAuraCasino(data?.gameId, data.gameName);
+                        if (points["aura"] != 1) {
+                          handelAuraCasino(data?.gameId, data?.gameName);
+                        } else {
+                          nav(`/aura/${data?.gameName}/${data?.gameId}`);
+                        }
                       } else {
                         setModalValue(0);
                         setOpen(true);

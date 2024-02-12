@@ -27,7 +27,6 @@ const CasinoRuleModalContent = ({
   // useEffect(() => {
   //   trigger();
   // }, []);
-
   return (
     <>
       <Box sx={style}>
@@ -54,7 +53,7 @@ const CasinoRuleModalContent = ({
               <p>
                 यदि आप ₹100 लगाते हैं तो उपरोक्त गणना के अनुसार आपकी शर्त जीत या
                 हार ₹
-                {100 * Number(isSupernowa ? data?.data?.supernowa : points[id])}{" "}
+                {100 * Number(isSupernowa ? data?.data?.supernowa : points[id])}
                 होगी।
               </p>
             </div>
@@ -71,7 +70,7 @@ const CasinoRuleModalContent = ({
             >
               Ok I Agree
             </button>
-          ) : id ? (
+          ) : id && id != "aura" ? (
             <Link to={`/qtech/${gameName}`}>
               <button>Ok I Agree</button>
             </Link>

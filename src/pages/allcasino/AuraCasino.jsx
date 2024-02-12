@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
-
+import HomeIcon from "@mui/icons-material/Home";
+import logo from "../../assets/img/logo.png";
+import PersonIcon from "@mui/icons-material/Person";
 const AuraCasino = () => {
   const nav = useNavigate();
   const casinoStyle = {
@@ -12,29 +14,38 @@ const AuraCasino = () => {
   };
   const token = localStorage.getItem("token");
   const { id, gameId } = useParams();
-  const handlerClose = () => {
-    nav("/casino-list");
-  };
+  // const handlerClose = () => {
+  //   nav("/casino-list");
+  // };
+  const userId = localStorage.getItem("userId");
   return (
     <div>
       <Box sx={casinoStyle}>
-        <Box
-          sx={{
-            background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
-            color: "#fff",
-            pl: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
+        <div
+          className="casino-iframe-header"
+          style={{ paddingInline: "10px", width: "calc(100% - 20px)" }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {id}
-          </Typography>
-          <Typography>
-            <CloseIcon onClick={handlerClose} />
-          </Typography>
-        </Box>
+          <div
+            className="casino-iframe-header-left-col"
+            style={{ alignItems: "center" }}
+          >
+            <span
+              onClick={() => nav("/")}
+              style={{ display: "flex", alignItems: "end" }}
+            >
+              <HomeIcon />
+            </span>
+            <img src={logo} alt="" onClick={() => nav("/")} />
+            {/* <span>{matchId}</span> */}
+          </div>
+          <div
+            className="casino-iframe-header-right-col"
+            style={{ color: "white", display: "flex", alignItems: "center" }}
+          >
+            <PersonIcon />
+            {userId}
+          </div>
+        </div>
 
         <Typography className="main_casino_modals" id="modal-modal-description">
           <>

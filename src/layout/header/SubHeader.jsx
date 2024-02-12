@@ -16,7 +16,7 @@ import lottery from "../../assets/img/lottery.png";
 import slots from "../../assets/img/slots.png";
 import fantasygame from "../../assets/img/fantasy-game.png";
 
-const SubHeader = ({ setModalValue, handleOpen }) => {
+const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
   const { data } = useActiveSportQuery();
   const nav = useNavigate();
 
@@ -222,27 +222,27 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                 })}
           </ul>
         </div>
-        {userType != 2
-          ? splitPathName[1] != "game_detail"
-            ? isLogin && (
-                <div className="mobile-subheader-deposit">
-                  <Link to={deposit}>
-                    <div className="mobile-subheader-deposit-left-col">
-                      <AccountBalanceIcon />
-                      Deposit
-                    </div>
-                  </Link>
-                  <Link to={withdraw}>
-                    <div className="mobile-subheader-deposit-right-col">
-                      <AddCardIcon />
-                      Withdraw
-                    </div>
-                  </Link>
-                </div>
-              )
-            : ""
-          : ""}
-        {}
+        {selfAllowed?.selfAllowed ? (
+          // ? splitPathName[1] != "game_detail"
+          // ? isLogin && (
+          <div className="mobile-subheader-deposit">
+            <Link to={deposit}>
+              <div className="mobile-subheader-deposit-left-col">
+                <AccountBalanceIcon />
+                Deposit
+              </div>
+            </Link>
+            <Link to={withdraw}>
+              <div className="mobile-subheader-deposit-right-col">
+                <AddCardIcon />
+                Withdraw
+              </div>
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
+        {/* {} */}
       </>
     );
   }

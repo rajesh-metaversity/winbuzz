@@ -2,7 +2,9 @@ import { Box, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCasinoIframeMutation } from "../../Services/Qtech/Qtech";
 import { useEffect } from "react";
-
+import HomeIcon from "@mui/icons-material/Home";
+import logo from "../../assets/img/logo.png";
+import PersonIcon from "@mui/icons-material/Person";
 import { isBrowser } from "react-device-detect";
 const QtechCasino = () => {
   const casinoStyle = {
@@ -35,10 +37,11 @@ const QtechCasino = () => {
   }, []);
 
   const nav = useNavigate();
+  const userId = localStorage.getItem("userId");
   return (
     <div>
       <Box sx={casinoStyle}>
-        <Box
+        {/* <Box
           sx={{
             background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
             color: "#fff",
@@ -57,8 +60,32 @@ const QtechCasino = () => {
           <Typography>
             <button onClick={() => nav("/")}>X</button>
           </Typography>
-        </Box>
-
+        </Box> */}
+        <div
+          className="casino-iframe-header"
+          style={{ paddingInline: "10px", width: "calc(100% - 20px)" }}
+        >
+          <div
+            className="casino-iframe-header-left-col"
+            style={{ alignItems: "center" }}
+          >
+            <span
+              onClick={() => nav("/")}
+              style={{ display: "flex", alignItems: "end" }}
+            >
+              <HomeIcon />
+            </span>
+            <img src={logo} alt="" onClick={() => nav("/")} />
+            {/* <span>{matchId}</span> */}
+          </div>
+          <div
+            className="casino-iframe-header-right-col"
+            style={{ color: "white", display: "flex", alignItems: "center" }}
+          >
+            <PersonIcon />
+            {userId}
+          </div>
+        </div>
         <Typography className="main_casino_modals" id="modal-modal-description">
           <>
             <iframe

@@ -15,6 +15,8 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
+import ModalComponent from "../modal/Modal";
+import RunAmount from "../runAmount/RunAmount";
 
 const FancyBetComp = ({
   fancyItem,
@@ -83,204 +85,235 @@ const FancyBetComp = ({
       setFancyArray(arr);
     }
   }, [fancyItem]);
+  const [open, setOpen] = useState(false);
+  const [runAmountPayload, setRunAmountPayload] = useState({
+    fancyId: "",
+    matchId: id,
+  });
 
+  const modalHandlerOpen = () => {
+    setOpen(true);
+  };
   return (
-    <MainDiv>
-      <GridContainer container props={"fancy"} xxx={"lol"}>
-        <Grid item xs={6} md={6}>
-          <PolygonStrip>
-            <P props={"fancyodds"}>{fancyData}</P>
-          </PolygonStrip>
-        </Grid>
-        <Grid item md={2}></Grid>
-        <Grid item xs={3} md={1}>
-          <P props={"lay"}>no</P>
-        </Grid>
-        <Grid item xs={3} md={1}>
-          <P props={"back"}>yes</P>
-        </Grid>
+    <>
+      <ModalComponent
+        Elememt={<RunAmount data={runAmountPayload} />}
+        open={open}
+        setOpen={setOpen}
+      />
+      <MainDiv>
+        <GridContainer container props={"fancy"} xxx={"lol"}>
+          <Grid item xs={6} md={6}>
+            <PolygonStrip>
+              <P props={"fancyodds"}>{fancyData}</P>
+            </PolygonStrip>
+          </Grid>
+          <Grid item md={2}></Grid>
+          <Grid item xs={3} md={1}>
+            <P props={"lay"}>no</P>
+          </Grid>
+          <Grid item xs={3} md={1}>
+            <P props={"back"}>yes</P>
+          </Grid>
 
-        <Grid item md={2}></Grid>
-      </GridContainer>
-      <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
-        {fancyArray?.length > 0 &&
-          fancyArray?.map((item, id) => {
-            const createMarketID = favData?.find(
-              (pnl) => pnl?.marketId === item?.sid
-            )?.marketId;
-            return (
-              <Grid
-                key={id}
-                container
-                sx={{
-                  borderRadius: 0,
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  padding: "4px 0px",
-                  borderBottom: "2px solid #f4f4f4",
-                  ":last-child": {
-                    borderBottom: "0px ",
-                  },
-                }}
-              >
-                <Grid item md={6} xs={6.5}>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    {createMarketID ? (
-                      <StarIcon
-                        onClick={() => handleFavDel(item?.sid)}
-                        fontSize="medium"
-                        sx={{ color: "#ffcf03" }}
-                      />
-                    ) : (
-                      <StarBorderIcon
-                        onClick={() => handleFavSec(item?.sid)}
-                        fontSize="medium"
-                        sx={{ color: "#ccc" }}
-                      />
-                    )}
+          <Grid item md={2}></Grid>
+        </GridContainer>
+        <GridContainer container props={"betgrid"} xxx={"lol"} gap={0}>
+          {fancyArray?.length > 0 &&
+            fancyArray?.map((item, id) => {
+              const createMarketID = favData?.find(
+                (pnl) => pnl?.marketId === item?.sid
+              )?.marketId;
 
-                    <P props={"fancyodds"} sx={{ textAlign: "left" }}>
-                      {item?.nation}
-                    </P>
-                  </Box>
-                </Grid>
-
-                <Grid item md={6} xs={5.5} sx={{ padding: "0px 0px" }}>
-                  <Grid container>
-                    <>
-                      <Grid item xs={6} md={5.9}>
-                        <Grid
-                          container
-                          gap={{ md: "1%", xs: "2%" }}
-                          sx={{ justifyContent: "flex-end" }}
-                        >
-                          <LayGrid
-                            item
-                            md={4}
-                            xs={12}
-                            className={
-                              (Number(item?.l1) < Number(prevOdds[id]?.l1)
-                                ? "odds-down-color "
-                                : " hiuhiuhiu ") + "lay"
-                            }
-                            onClick={() => {
-                              handleBackBet(
-                                item?.mid,
-                                item?.nation,
-                                item?.sid,
-                                item?.l1,
-                                item?.ls1,
-                                false,
-                                true,
-                                fancyData,
-                                item?.minBet,
-                                item?.maxBet
-                              );
-                            }}
-                            sx={{
-                              borderRadius: {
-                                md: "5px",
-                                xs: 0,
-                              },
-                              minHeight: {
-                                md: "36px",
-                                xs: "46px",
-                              },
-                            }}
-                          >
-                            <BetTypoPara>{item?.l1}</BetTypoPara>
-                            <BetTypoSpan>{item?.ls1}</BetTypoSpan>
-                          </LayGrid>
-                        </Grid>
-                      </Grid>
-                      <Grid item xs={6} md={5.9}>
-                        <Grid
-                          container
-                          gap={{ md: "1%", xs: "2%" }}
-                          sx={{
-                            justifyContent: "space-evenly",
-                            flexWrap: "nowrap",
-                          }}
-                        >
-                          <BackGrid
-                            item
-                            md={4}
-                            xs={12}
-                            sx={{
-                              mx: 0.5,
-                              borderRadius: {
-                                md: "5px",
-                                xs: 0,
-                              },
-                              minHeight: {
-                                md: "36px",
-                                xs: "46px",
-                              },
-                            }}
-                            className={
-                              (Number(item?.b1) < Number(prevOdds[id]?.b1)
-                                ? "odds-up-color "
-                                : " hiuhiuhiu ") + "back"
-                            }
-                            onClick={() => {
-                              handleBackBet(
-                                item?.mid,
-                                item?.nation,
-                                item?.sid,
-                                item?.b1,
-                                item?.bs1,
-                                true,
-                                true,
-                                fancyData,
-                                item?.minBet,
-                                item?.maxBet
-                              );
-                            }}
-                          >
-                            <BetTypoPara>{item?.b1}</BetTypoPara>
-                            <BetTypoSpan>{item?.bs1}</BetTypoSpan>
-                          </BackGrid>
-                          <Grid
-                            display={{ xs: "none", md: "block" }}
-                            item
-                            md={8}
-                            sx={{
-                              alignItems: "center",
-                              flexDirection: "column",
-                            }}
-                          >
-                            <BetTypoPara props={"fancyp"}>
-                              Min Bet: {item?.minBet}
-                            </BetTypoPara>
-                            <BetTypoSpan>
-                              Max Market: {item?.maxBet}
-                            </BetTypoSpan>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </>
-                  </Grid>
-                </Grid>
-                {item?.sid == selectionIds && (
-                  <MobileBetPlaceModal minMax={minMax} />
-                )}
-                <p
-                  style={{
-                    margin: "0",
-                    padding: "0px 0 0 12px",
-                    fontSize: "12px",
+              return (
+                <Grid
+                  key={id}
+                  container
+                  sx={{
+                    borderRadius: 0,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "4px 0px",
+                    borderBottom: "2px solid #f4f4f4",
+                    ":last-child": {
+                      borderBottom: "0px ",
+                    },
                   }}
                 >
-                  {fancyPnl?.find((pnl) => pnl?.marketId === item?.sid)?.pnl ||
-                    0}
-                </p>
-              </Grid>
+                  <Grid item md={6} xs={6.5}>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      {createMarketID ? (
+                        <StarIcon
+                          onClick={() => handleFavDel(item?.sid)}
+                          fontSize="medium"
+                          sx={{ color: "#ffcf03" }}
+                        />
+                      ) : (
+                        <StarBorderIcon
+                          onClick={() => handleFavSec(item?.sid)}
+                          fontSize="medium"
+                          sx={{ color: "#ccc" }}
+                        />
+                      )}
 
-              // </div>
-            );
-          })}
-      </GridContainer>
-    </MainDiv>
+                      <P props={"fancyodds"} sx={{ textAlign: "left" }}>
+                        {item?.nation}
+                      </P>
+                    </Box>
+                  </Grid>
+
+                  <Grid item md={6} xs={5.5} sx={{ padding: "0px 0px" }}>
+                    <Grid container>
+                      <>
+                        <Grid item xs={6} md={5.9}>
+                          <Grid
+                            container
+                            gap={{ md: "1%", xs: "2%" }}
+                            sx={{ justifyContent: "flex-end" }}
+                          >
+                            <LayGrid
+                              item
+                              md={4}
+                              xs={12}
+                              className={
+                                (Number(item?.l1) < Number(prevOdds[id]?.l1)
+                                  ? "odds-down-color "
+                                  : " hiuhiuhiu ") + "lay"
+                              }
+                              onClick={() => {
+                                handleBackBet(
+                                  item?.mid,
+                                  item?.nation,
+                                  item?.sid,
+                                  item?.l1,
+                                  item?.ls1,
+                                  false,
+                                  true,
+                                  fancyData,
+                                  item?.minBet,
+                                  item?.maxBet
+                                );
+                              }}
+                              sx={{
+                                borderRadius: {
+                                  md: "5px",
+                                  xs: 0,
+                                },
+                                minHeight: {
+                                  md: "36px",
+                                  xs: "46px",
+                                },
+                              }}
+                            >
+                              <BetTypoPara>{item?.l1}</BetTypoPara>
+                              <BetTypoSpan>{item?.ls1}</BetTypoSpan>
+                            </LayGrid>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={6} md={5.9}>
+                          <Grid
+                            container
+                            gap={{ md: "1%", xs: "2%" }}
+                            sx={{
+                              justifyContent: "space-evenly",
+                              flexWrap: "nowrap",
+                            }}
+                          >
+                            <BackGrid
+                              item
+                              md={4}
+                              xs={12}
+                              sx={{
+                                mx: 0.5,
+                                borderRadius: {
+                                  md: "5px",
+                                  xs: 0,
+                                },
+                                minHeight: {
+                                  md: "36px",
+                                  xs: "46px",
+                                },
+                              }}
+                              className={
+                                (Number(item?.b1) < Number(prevOdds[id]?.b1)
+                                  ? "odds-up-color "
+                                  : " hiuhiuhiu ") + "back"
+                              }
+                              onClick={() => {
+                                handleBackBet(
+                                  item?.mid,
+                                  item?.nation,
+                                  item?.sid,
+                                  item?.b1,
+                                  item?.bs1,
+                                  true,
+                                  true,
+                                  fancyData,
+                                  item?.minBet,
+                                  item?.maxBet
+                                );
+                              }}
+                            >
+                              <BetTypoPara>{item?.b1}</BetTypoPara>
+                              <BetTypoSpan>{item?.bs1}</BetTypoSpan>
+                            </BackGrid>
+                            <Grid
+                              display={{ xs: "none", md: "block" }}
+                              item
+                              md={8}
+                              sx={{
+                                alignItems: "center",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <BetTypoPara props={"fancyp"}>
+                                Min Bet: {item?.minBet}
+                              </BetTypoPara>
+                              <BetTypoSpan>
+                                Max Market: {item?.maxBet}
+                              </BetTypoSpan>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </>
+                    </Grid>
+                  </Grid>
+                  {item?.sid == selectionIds && (
+                    <MobileBetPlaceModal minMax={minMax} />
+                  )}
+                  <p
+                    style={{
+                      margin: "0",
+                      padding: "0px 0 0 12px",
+                      fontSize: "12px",
+                      color:
+                        fancyPnl?.find((pnl) => pnl?.marketId == item?.sid)
+                          ?.pnl < 0
+                          ? "#e33c3d"
+                          : "#369547",
+                    }}
+                    onClick={() => {
+                      setRunAmountPayload((prev) => {
+                        return {
+                          ...prev,
+                          fancyId: item?.sid,
+                        };
+                      });
+                      modalHandlerOpen();
+                    }}
+                  >
+                    {/* {fancyPnl?.find((pnl) => pnl?.marketId === item?.sid)?.pnl} */}
+                    {fancyPnl?.find((pnl) => pnl?.marketId === item?.sid)
+                      ?.pnl || 0}
+                  </p>
+                </Grid>
+
+                // </div>
+              );
+            })}
+        </GridContainer>
+      </MainDiv>
+    </>
   );
 };
 

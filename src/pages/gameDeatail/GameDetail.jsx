@@ -11,8 +11,8 @@ import FancyTabs from "../../component/fancy/FancyTabs";
 import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
 import {
   useFancyPnlQuery,
-  useOddsPnlMutation,
-  useWinnerPnlMutation,
+  useOddsPnlQuery,
+  useWinnerPnlQuery,
 } from "../../Services/Pnl/Pnl";
 import {
   useCreateFavMutation,
@@ -98,23 +98,44 @@ const GameDetail = () => {
     },
     1: { marketId: marketId, pnlCheckWinner: pnlCheckWinner },
   };
-  const [trigge, { data: oddsPnl }] = useOddsPnlMutation();
-  const [trigg, { data: winnerOddaPnl }] = useWinnerPnlMutation();
+  const { data: oddsPnl } = useOddsPnlQuery(
+    { matchId: id },
+    {
+      pollingInterval: 3000,
+      skip: pnlCheckWinner != 0,
+    }
+  );
+  // console.log(pnlCheckWinner, "pnlCheckWinner");
+  const { data: winnerOddaPnl } = useWinnerPnlQuery(
+    { matchId: marketId },
+    {
+      pollingInterval: 3000,
+      skip: pnlCheckWinner == 0,
+    }
+  );
 
-  const { data: FancyPnl } = useFancyPnlQuery({ matchId: id });
+  const { data: FancyPnl } = useFancyPnlQuery(
+    { matchId: id },
+    {
+      pollingInterval: 3000,
+    }
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setBetSlipData(null));
   }, []);
 
-  useEffect(() => {
-    if (pnlCheckWinner == 0) {
-      trigge({ matchId: id });
-    } else {
-      trigg({ marketId: marketId });
-    }
-  }, [pnlCheckWinner]);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     if (pnlCheckWinner == 0) {
+  //       trigge({ matchId: id });
+  //     } else {
+  //       trigg({ marketId: marketId });
+  //     }
+  //   }, 3000);
+  //   return () => clearInterval(timer);
+  // }, [pnlCheckWinner]);
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">

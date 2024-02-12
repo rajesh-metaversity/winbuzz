@@ -104,7 +104,7 @@ export const WebHeaderComponent = ({
                 </>
               ) : (
                 <>
-                  {userType != 2 ? (
+                  {isSlefDat?.data?.selfAllowed ? (
                     <>
                       <Link to={deposit}>
                         <li>
@@ -169,7 +169,11 @@ export const WebHeaderComponent = ({
           </div>
         </div>
 
-        <SubHeader setModalValue={setModalValue} handleOpen={handleOpen} />
+        <SubHeader
+          setModalValue={setModalValue}
+          handleOpen={handleOpen}
+          selfAllowed={isSlefDat?.data}
+        />
       </>
     );
   } else {
@@ -249,7 +253,11 @@ export const WebHeaderComponent = ({
           </div>
         </div>
         {isBreakPoint && <HeaderMessage />}
-        <SubHeader setModalValue={setModalValue} handleOpen={handleOpen} />
+        <SubHeader
+          setModalValue={setModalValue}
+          handleOpen={handleOpen}
+          selfAllowed={isSlefDat?.data}
+        />
       </>
     );
   }

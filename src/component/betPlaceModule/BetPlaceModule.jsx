@@ -12,6 +12,7 @@ import { useStakeQuery } from "../../Services/stake/Deposit";
 import { usePlaceBetsMutation } from "../../Services/MyBets/MyBets";
 import { toast } from "react-toastify";
 import { showErrorToast, showSuccessToast } from "../toast/Toast";
+import { userBalanceTrigger } from "../../common/SubLayout";
 
 export const WebBetPlaceModule = ({ minMax }) => {
   const { data: betNumberArray } = useStakeQuery();
@@ -56,6 +57,7 @@ export const WebBetPlaceModule = ({ minMax }) => {
   useEffect(() => {
     if (data?.status) {
       showSuccessToast(data?.message);
+      userBalanceTrigger();
     } else {
       showErrorToast(data?.message);
     }

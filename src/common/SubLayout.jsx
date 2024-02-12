@@ -9,6 +9,8 @@ import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
 import { useSelector } from "react-redux";
 import LoginForm from "../component/loginForm/LoginForm";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
+// import { userBalnceData } from "./MainLayout";
+export let userBalanceTrigger;
 const Sublayout = ({ setGame, gameName }) => {
   const [siderOpen, setSiderOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -22,6 +24,8 @@ const Sublayout = ({ setGame, gameName }) => {
 
   const [trigger, { data }] = useBalanceApiMutation();
   const loginCheck = useSelector(isLoginSelector);
+  userBalanceTrigger = trigger;
+  // userBalnceData = data;
   useEffect(() => {
     if (loginCheck) {
       trigger();
