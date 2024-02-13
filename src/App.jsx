@@ -39,7 +39,6 @@ function App() {
       dispatch(setIslogin(false));
     }
   }, [data]);
-  console.log("version2");
   return (
     <>
       <ToastContainer position="top-center" autoClose={1500} />

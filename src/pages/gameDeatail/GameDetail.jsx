@@ -125,6 +125,7 @@ const GameDetail = () => {
   useEffect(() => {
     dispatch(setBetSlipData(null));
   }, []);
+ 
 
   // useEffect(() => {
   //   const timer = setInterval(() => {
