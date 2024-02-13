@@ -22,7 +22,7 @@ import fantasygame from "../../assets/img/fantasy-game.png";
 import { multi_market } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
-import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import {  useAllotedCasinoQuery } from "../../Services/allotedCasino/AllotedCasino";
 import { setLoginFormHandlerRef } from "../../common/MainLayout";
 export const sportImages = {
   Cricket: cricketImage,
@@ -40,22 +40,24 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
   const [activeSlide, setActiveSlide] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-  const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
+  const isLogin = useSelector(isLoginSelector);
+  const  { data: allotedCasino } = useAllotedCasinoQuery({},{
+    skip:!isLogin
+  });
 
   const nav = useNavigate();
 
   const handleGameDetailsPage = (id, sportId) => {
     nav(`/game_detail/${id}/${sportId}`);
   };
-  const isLogin = useSelector(isLoginSelector);
 
   const [idSport, setIdSport] = useState(0);
 
-  useEffect(() => {
-    if (isLogin) {
-      trigger();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     trigger();
+  //   }
+  // }, []);
 
   const casinoList = [
     {

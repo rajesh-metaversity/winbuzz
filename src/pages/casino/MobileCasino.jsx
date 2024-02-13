@@ -22,7 +22,7 @@ import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import { AllCasinoProviderName } from "../../component/allCasino/superNowaProvider";
-import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import { useAllotedCasinoQuery } from "../../Services/allotedCasino/AllotedCasino";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 import Loader from "../../component/Loader/Loader";
@@ -37,13 +37,13 @@ const MobileCasino = () => {
   const isLogin = useSelector(isLoginSelector);
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
   const [providerTrigger, { data: providerdata }] = useProviderMutation();
-  const [triger, { data: allotedCasino }] = useAllotedCasinoMutation();
-
-  useEffect(() => {
-    if (isLogin) {
-      triger();
+  const { data: allotedCasino } = useAllotedCasinoQuery(
+    {},
+    {
+      skip: !isLogin,
     }
-  }, []);
+  );
+
   useEffect(() => {
     providerTrigger({ gameType: id });
   }, [id]);
@@ -139,12 +139,12 @@ const MobileCasino = () => {
       },
     });
   };
-  const [trigg, { data: allotedCasin }] = useAllotedCasinoMutation();
-  useEffect(() => {
-    if (isLogin) {
-      trigg();
-    }
-  }, []);
+  // const [trigg, { data: allotedCasin }] = useAllotedCasinoMutation();
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     trigg();
+  //   }
+  // }, []);
   // console.log(category, "category");
   const allowCasino = useMemo(
     () =>

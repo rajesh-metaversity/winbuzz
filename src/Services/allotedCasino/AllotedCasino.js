@@ -5,7 +5,7 @@ export const allotedCasino = createApi({
   reducerPath: "allotedCasino",
   baseQuery: dynamicBaseQuery,
   endpoints: (builder) => ({
-    allotedCasino: builder.mutation({
+    allotedCasino: builder.query({
       query: (body) => ({
         url: "user/alloted-casino-list",
         method: "POST",
@@ -15,4 +15,4 @@ export const allotedCasino = createApi({
   }),
 });
 
-export const { useAllotedCasinoMutation } = allotedCasino;
+export const { useAllotedCasinoQuery} = allotedCasino;

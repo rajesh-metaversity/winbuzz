@@ -185,7 +185,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
                 event.preventDefault();
                 onSumbit();
               }}
-              disabled={isLoading ? true : false}
+              disabled={demoLoading || isLoading ? true : false}
             >
               LOGIN
               {isLoading && <Loader />}
@@ -199,7 +199,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
               disabled={demoLoading ? true : false}
             >
               LOGIN WITH DEMO ID
-              {demoLoading && <Loader />}
+              {isLoading || (demoLoading && <Loader />)}
             </button>
             {/* <button className="login_with_demo">
                 <a href="#">Forgot Password?</a>

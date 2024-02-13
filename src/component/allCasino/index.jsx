@@ -9,7 +9,7 @@ import { AllCasinoProviderName } from "./superNowaProvider";
 import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
 import { useEffect } from "react";
 import CasinoRuleModal2 from "../casinoRuleModalContent/CasinoRuleModal2";
-import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import {  useAllotedCasinoQuery } from "../../Services/allotedCasino/AllotedCasino";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
 // import Modal from "react-bootstrap/Modal";
@@ -78,14 +78,18 @@ const AllProviderName = () => {
   const handleClose = () => {
     setCasinoRuleModal(false);
   };
-  const [link, setLink] = useState("");
-  const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
   const isLogin = useSelector(isLoginSelector);
-  useEffect(() => {
-    if (isLogin) {
-      trigg();
-    }
-  }, []);
+  const [link, setLink] = useState("");
+  // const{ data: allotedCasino } = useAllotedCasinoQuery({
+    
+  // },{
+  //   skip:!isLogin
+  // });
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     trigg();
+  //   }
+  // }, []);
   const modalElement = {
     0: <LoginForm setOpen={setOpen} handleClose={handleClose} />,
     1: (

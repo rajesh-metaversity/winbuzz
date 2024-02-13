@@ -7,7 +7,7 @@ import play from "../../assets/img/in-play.png";
 import { InPlay, deposit, home, withdraw } from "../../routes/PagesUrl";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
-import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import { useAllotedCasinoQuery } from "../../Services/allotedCasino/AllotedCasino";
 import { sportImages } from "../sider/Sider";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
@@ -30,14 +30,19 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
 
   const userType = localStorage.getItem("userTypeInfo");
   // const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
-  const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
+  const { data: allotedCasino } = useAllotedCasinoQuery(
+    {},
+    {
+      skip: !isLogin,
+    }
+  );
   let splitPathName = pathName.split("/");
 
-  useEffect(() => {
-    if (isLogin) {
-      trigger();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     trigger();
+  //   }
+  // }, []);
 
   const casinoList = useMemo(
     () => [

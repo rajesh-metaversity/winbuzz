@@ -8,7 +8,7 @@ import { useBannerListDataMutation } from "../../Services/BannerList/BannerList"
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import { AllCasinoProviderName } from "../allCasino/superNowaProvider";
 import { useNavigate } from "react-router-dom";
-import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
+import { useAllotedCasinoQuery } from "../../Services/allotedCasino/AllotedCasino";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
 
@@ -48,12 +48,17 @@ const TopBanner = () => {
       nav(`/casino/LiveCasino/${gameCodeName}`);
     }
   };
-  const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
-  useEffect(() => {
-    if (isLogin) {
-      trigg();
+  const { data: allotedCasino } = useAllotedCasinoQuery(
+    {},
+    {
+      skip: !isLogin,
     }
-  }, []);
+  );
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     trigg();
+  //   }
+  // }, []);
   return (
     // <div className="img_cont">
     // <div className="top-banner-container">
