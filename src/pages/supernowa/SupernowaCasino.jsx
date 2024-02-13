@@ -63,7 +63,17 @@ const SupernowaCasino = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Loader />
+        </div>
       ) : (
         <Grid
           container
