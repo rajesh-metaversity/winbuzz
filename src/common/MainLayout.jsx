@@ -62,7 +62,19 @@ const MainLayout = () => {
   };
   setLoginFormHandlerRef = setLoginFormHandler;
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
   } else {
     return (
       <div>

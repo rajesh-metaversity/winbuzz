@@ -7,6 +7,7 @@
   position: relative;
   box-sizing: border-box;
   animation: rotation 2s linear infinite;
+  margin: auto;
 }
 
 @keyframes rotation {
@@ -19,6 +20,6 @@
 }
 @media screen and (max-width: 780px) {
   .loader {
-    border: 5px solid #b88831;
+    border: 5px dotted #b88831;
   }
 }

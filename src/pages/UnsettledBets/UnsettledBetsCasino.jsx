@@ -137,7 +137,7 @@ const UnsettledBetsCasino = () => {
           <Loader />
         ) : (
           <div className="mybets_table">
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{ borderRadius: "0px" }}>
               <Table>
                 <TableHead>
                   <TableRow>
