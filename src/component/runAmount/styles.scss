@@ -12,6 +12,10 @@
     background: transparent
       linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
   }
+  @media screen and (max-width: 780px) {
+    width: 100%;
+    background-color: white;
+  }
   .heading-pnl {
   }
 }
