@@ -7,7 +7,7 @@ import football from "../../assets/img/football2.png";
 
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import { useParams } from "react-router-dom";
-const InPlayOddRow = ({ live, index }) => {
+const InPlayOddRow = ({ live, index, sportid }) => {
   const oddsBg = {
     back: "#a5d9fe",
     lay: "#f8d0ce",
@@ -20,11 +20,12 @@ const InPlayOddRow = ({ live, index }) => {
     1: football,
     14: ball,
   };
+  // console.log(live,"live")
   return (
     <div className={`odds-row-container  ${index == 1 && "live"}`}>
       <div className="betmobileparent">
         <div className="cricket_ball">
-          <img src={id ? iconObj[id] : ball} alt="ball" />
+          <img src={id ? iconObj[id] : iconObj[sportid]} alt="ball" />
         </div>
         <div className="left_combo">
           <div className="odds-row-left-col">

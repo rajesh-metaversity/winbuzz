@@ -33,7 +33,7 @@ const InplayCollapse = ({ data, name, sportid }) => {
                   }}
                   key={res?.openDate + res?.matchName + index}
                 >
-                  <InPlayOddRow live={res} index={index} />
+                  <InPlayOddRow live={res} index={index} sportid={sportid} />
                 </div>
               );
             })
