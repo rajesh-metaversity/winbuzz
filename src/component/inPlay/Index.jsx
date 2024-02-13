@@ -12,7 +12,17 @@ const Inplay = () => {
     <React.Fragment>
       <InPlayHeading headName={"IN PLAY"} />
       {isLoading ? (
-        <Loader />
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Loader />
+        </div>
       ) : (
         data?.data?.map((res) => {
           if (res?.matchList?.length == 0) return <></>;

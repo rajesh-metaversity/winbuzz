@@ -126,12 +126,12 @@ export const router = () => {
         },
 
         {
-          path: userType != 2 ? deposit : "",
+          path: deposit,
           element: <Deposit />,
         },
 
         {
-          path: userType != 2 ? withdraw : "",
+          path: withdraw,
           element: <Withdraw />,
         },
 

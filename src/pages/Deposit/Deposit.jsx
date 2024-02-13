@@ -355,38 +355,62 @@ const Deposit = () => {
                 </TableRow>
               </TableHead>
 
-              {balanceLoading ? (
-                <Loader />
-              ) : (
-                <TableBody className="table_body">
-                  {balance?.data &&
-                    balance?.data?.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell align="left">{item?.amount}</TableCell>
-                        <TableCell align="left">
-                          <img src={item?.image} height="50px" />
-                        </TableCell>
-                        <TableCell align="left">{item?.time}</TableCell>
-                        <TableCell align="left" className="table_td">
-                          {item?.status}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              )}
+              {/* {balanceLoading ? (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Loader />
+                </div>
+              ) : ( */}
+              <TableBody className="table_body">
+                {balance?.data &&
+                  balance?.data?.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell align="left">{item?.amount}</TableCell>
+                      <TableCell align="left">
+                        <img src={item?.image} height="50px" />
+                      </TableCell>
+                      <TableCell align="left">{item?.time}</TableCell>
+                      <TableCell align="left" className="table_td">
+                        {item?.status}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+              {/* )} */}
             </Table>
           </TableContainer>
-          {!balanceLoading && !balance?.data && (
-            <p
+          {!balanceLoading ? (
+            !balance?.data && (
+              <p
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  background: "transparent",
+                  color: "black",
+                }}
+              >
+                No data
+              </p>
+            )
+          ) : (
+            <div
               style={{
                 width: "100%",
-                textAlign: "center",
-                background: "transparent",
-                color: "black",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              No data
-            </p>
+              <Loader />
+            </div>
           )}
         </div>
       </div>

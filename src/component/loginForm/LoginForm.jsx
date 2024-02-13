@@ -17,6 +17,7 @@ import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { changePass, passwordChange } from "../../routes/PagesUrl";
 import { showErrorToast, showSuccessToast } from "../toast/Toast";
+import { isSelfData } from "../../layout/header/Header";
 const LoginForm = ({ setOpen, handleClose }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -134,79 +135,80 @@ const LoginForm = ({ setOpen, handleClose }) => {
     trigge({ appUrl: window.location.hostname });
   };
 
-  if (isLoading || demoLoading) {
-    return <Loader />;
-  } else {
-    return (
-      <form>
-        <div className="login_modal">
-          <div
-            className="cross_icon"
-            onClick={() => {
-              setOpen(false);
-              handleClose();
-            }}
-          >
-            <CloseIcon />
+  return (
+    <form>
+      <div className="login_modal">
+        <div
+          className="cross_icon"
+          onClick={() => {
+            setOpen(false);
+            handleClose();
+          }}
+        >
+          <CloseIcon />
+        </div>
+        <div className="login_section">
+          <div className="winbuaa_logo">
+            <img src={isSelfData?.data?.logo} alt="" />
           </div>
-          <div className="login_section">
-            <div className="winbuaa_logo">
-              <img src={logo} alt="" />
-            </div>
-            <form className="login-form">
-              <input
-                type="text"
-                placeholder="Username"
-                onChange={handleChange}
-                name="userId"
-                value={loginData.userId}
-                style={{
-                  border: error.userId
-                    ? "1px solid red"
-                    : "1px solid transparent",
-                }}
-              />
-              <input
-                placeholder="Password"
-                onChange={handleChange}
-                name="password"
-                type="password"
-                value={loginData.password}
-                style={{
-                  border: error.password
-                    ? "1px solid red"
-                    : "1px solid transparent",
-                }}
-              />
-            </form>
-            <div className="login_buttons">
-              <button
-                // disabled
-                className="login"
-                onClick={(event) => {
-                  event.preventDefault();
-                  onSumbit();
-                }}
-              >
-                LOGIN
-              </button>
-              <button
-                className="login_with_demo"
-                onClick={(e) => {
-                  setDemoChecker(true);
-                  demoIdLogin(e);
-                }}
-              >
-                LOGIN WITH DEMO ID
-              </button>
-              {/* <button className="login_with_demo">
+          <form className="login-form">
+            <input
+              type="text"
+              placeholder="Username"
+              onChange={handleChange}
+              name="userId"
+              value={loginData.userId}
+              style={{
+                border: error.userId
+                  ? "1px solid red"
+                  : "1px solid transparent",
+              }}
+            />
+            <input
+              placeholder="Password"
+              onChange={handleChange}
+              name="password"
+              type="password"
+              value={loginData.password}
+              style={{
+                border: error.password
+                  ? "1px solid red"
+                  : "1px solid transparent",
+              }}
+            />
+          </form>
+          <div className="login_buttons">
+            <button
+              // disabled
+              className="login"
+              onClick={(event) => {
+                event.preventDefault();
+                onSumbit();
+              }}
+              disabled={isLoading ? true : false}
+            >
+              LOGIN
+              {isLoading && <Loader />}
+            </button>
+            <button
+              className="login_with_demo"
+              onClick={(e) => {
+                setDemoChecker(true);
+                demoIdLogin(e);
+              }}
+              disabled={demoLoading ? true : false}
+            >
+              LOGIN WITH DEMO ID
+              {demoLoading && <Loader />}
+            </button>
+            {/* <button className="login_with_demo">
                 <a href="#">Forgot Password?</a>
               </button> */}
-            </div>
           </div>
         </div>
-      </form>
-    );
-  }
+      </div>
+    </form>
+  );
 };
+
 export default LoginForm;

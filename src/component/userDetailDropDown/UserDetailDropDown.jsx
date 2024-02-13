@@ -89,6 +89,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
         </Button>
         <StyledMenu
           sx={{
+            //
             "&.MuiList-root ": {
               "&::after": {
                 content: '""',
@@ -161,7 +162,7 @@ const UserDetailDropDown = ({ name, balanceData }) => {
             <Link to={bets_profit_loss} className="link">
               <li className="list-bottom-border" onClick={() => handleClose()}>
                 <HelpOutlineIcon />
-                Betting Profit and Loss
+                Betting Profit & Loss
               </li>
             </Link>
             <Link className="link" to={account_statement}>
