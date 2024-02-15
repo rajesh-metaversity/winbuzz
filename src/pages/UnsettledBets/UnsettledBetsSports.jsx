@@ -88,10 +88,10 @@ const UnsettledBetsSports = () => {
               <RadioStyled>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="Matched"
+                  defaultValue={bets?.isDeleted}
                   name="radio-buttons-group"
                   onChange={matchedHandler}
-                  //   defaultChecked="Matched"
+                  // defaultChecked="Matched"
                   //   value="Matched"
                 >
                   <FormControlLabel
@@ -134,7 +134,16 @@ const UnsettledBetsSports = () => {
         </div>
 
         {isLoading ? (
-          <Loader />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
         ) : (
           <div className="mybets_table">
             <TableContainer component={Paper}>
@@ -173,7 +182,7 @@ const UnsettledBetsSports = () => {
                       </TableCell>
                       <TableCell>{row.time}</TableCell>
                       <TableCell>
-                        {" "}
+                        {/* {" "} */}
                         <Tooltip title={row.deviceInfo}>
                           <IconButton>
                             <RemoveRedEyeIcon />
@@ -184,6 +193,9 @@ const UnsettledBetsSports = () => {
                   ))}
                 </TableBody>
               </Table>
+              {!data?.data?.dataList?.length && (
+                <p className="pnl-no-data">No Data To Display</p>
+              )}
             </TableContainer>
           </div>
         )}

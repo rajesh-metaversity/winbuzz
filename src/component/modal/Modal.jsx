@@ -1,5 +1,4 @@
-import { Dialog } from "@mui/material";
-import Modal from "@mui/material/Modal";
+
 import { StyledDialouge } from "./styled";
 
 const ModalComponent = ({ Elememt, open, setOpen, loginWidth}) => {

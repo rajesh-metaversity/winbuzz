@@ -9,6 +9,8 @@ import HeaderMessage from "../component/HeaderMessage/HeaderMessage";
 import { useSelector } from "react-redux";
 import LoginForm from "../component/loginForm/LoginForm";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
+import ExposureIndex from "../component/exposureComponent/ExposureIndex";
+import ModalComponent from "../component/modal/Modal";
 // import { userBalnceData } from "./MainLayout";
 
 const Sublayout = ({ setGame, gameName }) => {
@@ -33,10 +35,10 @@ const Sublayout = ({ setGame, gameName }) => {
 
   // userBalanceTrigger = trigger;
   // userBalnceData = data;
-
+  const [modalValue, setModalValue] = useState(0);
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
-    // 1: <RulesModal setOpen={setOpen} />,
+    1: <ExposureIndex />,
   };
 
   const handleOpen = () => {
@@ -45,6 +47,12 @@ const Sublayout = ({ setGame, gameName }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
   return (
     <div>
+      <ModalComponent
+        Elememt={modalElement[modalValue]}
+        open={open}
+        setOpen={setOpen}
+        loginWidth={modalValue == 0 ? "480px" : ""}
+      />
       <div className="main-layout-container">
         <div className="header-layout">
           {!isBreakPoint && <HeaderMessage />}
@@ -54,6 +62,8 @@ const Sublayout = ({ setGame, gameName }) => {
             balanceData={data?.data}
             handleOpen={handleOpen}
             modalElement={modalElement}
+            modalValue={modalValue}
+            setModalValue={setModalValue}
           />
         </div>
         <div className="content-container">

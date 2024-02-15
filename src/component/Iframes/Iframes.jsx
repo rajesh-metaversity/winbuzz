@@ -5,15 +5,27 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { home } from "../../routes/PagesUrl";
 import { useMediaQuery } from "@mui/material";
+import ModalComponent from "../modal/Modal";
+import MyBetsModule from "../myBetsModule/MyBetsModule";
 
 const Iframes = ({ odds, id }) => {
   const [toggle, setToggle] = useState(false);
   const params = useParams();
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+  const [open, setOpen] = useState(false);
 
+  const modalHandlerOpen = () => {
+    setOpen(true);
+  };
   return (
     <>
+      <ModalComponent
+        Elememt={<MyBetsModule cross={true} setOpen={setOpen}/>}
+        open={open}
+        setOpen={setOpen}
+        
+      />
       <div className="scorecard_heading">
         <p>
           <Link to={home}>
@@ -57,7 +69,9 @@ const Iframes = ({ odds, id }) => {
           <div className="match-tim" style={{ fontSize: "12px" }}>
             {odds?.Odds?.length ? odds?.Odds[0].eventTime : ""}
           </div>
-          <div className="betsh">Bets</div>
+          <div className="betsh" onClick={modalHandlerOpen}>
+            Bets
+          </div>
         </div>
       )}
 

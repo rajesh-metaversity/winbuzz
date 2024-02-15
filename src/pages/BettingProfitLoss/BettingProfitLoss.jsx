@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import dayjs from "dayjs";
-import { LocalizationProvider, } from "@mui/x-date-pickers/LocalizationProvider";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BettingStyled, SelectStyles } from "./styled";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
@@ -65,12 +65,10 @@ const BettingProfitLoss = () => {
     const value = e;
     if (name == "toDate") {
       setBettingPnl((prev) => {
-      
         return {
           ...prev,
           toDate: value,
-        }
-       
+        };
       });
     } else if (name == "fromDate") {
       setBettingPnl((prev) => {
@@ -104,127 +102,169 @@ const BettingProfitLoss = () => {
     setBettingPnl((prev) => {
       return {
         ...prev,
-        noOfRecords: +e.target.value
-      }
-    })
-  }
-  
+        noOfRecords: +e.target.value,
+      };
+    });
+  };
+
   const nameSearchHandler = (e) => {
     setBettingPnl((prev) => {
       return {
         ...prev,
-        userId: e.target.value
-      }
-    })
-  }
+        userId: e.target.value,
+      };
+    });
+  };
   return (
     <>
-		<div className="betting_profit-loss_cont">
-			<div className="right">
-				<p>betting profit loss</p>
-				<div className="dates_cont">
-					<div className="input_field">
-						<label htmlFor="form" style={{ fontSize: '12px' }}>
-							Select Sport
-						</label>
-						<SelectStyles onChange={e => getMatchDetail(e.target.value)} value={bettingPnl.sportId}>
-							{activSport?.data?.map(curElm => (
-								<MenuItem key={curElm.sportId} value={curElm?.sportId}>
-									{curElm?.sportName}
-								</MenuItem>
-							))}
-						</SelectStyles>
-					</div>
+      <div className="betting_profit-loss_cont">
+        <div className="right">
+          <p>betting profit loss</p>
+          <div className="dates_cont">
+            <div className="input_field">
+              <label htmlFor="form" style={{ fontSize: "12px" }}>
+                Select Sport
+              </label>
+              <SelectStyles
+                onChange={(e) => getMatchDetail(e.target.value)}
+                value={bettingPnl.sportId}
+              >
+                {activSport?.data?.map((curElm) => (
+                  <MenuItem key={curElm.sportId} value={curElm?.sportId}>
+                    {curElm?.sportName}
+                  </MenuItem>
+                ))}
+              </SelectStyles>
+            </div>
 
-					<div className="input_field">
-						<label htmlFor="form" style={{ fontSize: '12px' }}>
-							Select Match
-						</label>
-						<SelectStyles onChange={e => matchHandler(e.target.value)} value={bettingPnl?.matchId} disabled={matchData?.data ? false : true}>
-							{matchData?.data?.map(el => (
-								<MenuItem value={el?.matchId} key={el?.matchId}>
-									{el?.matchName}
-								</MenuItem>
-							))}
-						</SelectStyles>
-					</div>
+            <div className="input_field">
+              <label htmlFor="form" style={{ fontSize: "12px" }}>
+                Select Match
+              </label>
+              <SelectStyles
+                onChange={(e) => matchHandler(e.target.value)}
+                value={bettingPnl?.matchId}
+                disabled={matchData?.data ? false : true}
+              >
+                {matchData?.data?.map((el) => (
+                  <MenuItem value={el?.matchId} key={el?.matchId}>
+                    {el?.matchName}
+                  </MenuItem>
+                ))}
+              </SelectStyles>
+            </div>
 
-					<div className="right_date">
-						<label htmlFor="form">Form</label>
-						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} minDate={dayjs().subtract(2, "month")} disableFuture={true}/>
-						</LocalizationProvider>
-					</div>
-					<div className="right_date">
-						<label htmlFor="form">To Date</label>
-						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)}  disableFuture={true}/>
-						</LocalizationProvider>
-					</div>
+            <div className="right_date">
+              <label htmlFor="form">Form</label>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <BettingStyled
+                  defaultValue={bettingPnl?.fromDate}
+                  format="DD-MM-YYYY"
+                  onChange={(e) => handleChange("fromDate", e)}
+                  minDate={dayjs().subtract(2, "month")}
+                  disableFuture={true}
+                />
+              </LocalizationProvider>
+            </div>
+            <div className="right_date">
+              <label htmlFor="form">To Date</label>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <BettingStyled
+                  defaultValue={bettingPnl?.toDate}
+                  format="DD-MM-YYYY"
+                  onChange={(e) => handleChange("toDate", e)}
+                  disableFuture={true}
+                />
+              </LocalizationProvider>
+            </div>
 
-					<button
-						className="search_button"
-						onClick={e => {
-							e.preventDefault();
-							submitHandler();
-						}}>
-						Search
-					</button>
-				</div>
-      </div>
-      <div className='record-search'>
-        <NoOfRecords
-          handlerselectchange={rowsHandler} />
-					<span>
-						<input placeholder='Search' onChange={ nameSearchHandler} value={bettingPnl?.userId} />
-						{/* <button onClick={() => loadHandler()}>Load</button> */}
-						</span>
-
-					</div>
-      {isLoading ? <Loader /> :
-        <div className="mybets_table">
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Match Name</TableCell>
-                  <TableCell>pnl</TableCell>
-                  <TableCell>uplineAmount</TableCell>
-                  <TableCell>Date</TableCell>
-                  {/* <TableCell>Action</TableCell> */}
-                </TableRow>
-              </TableHead>
-              {data?.data?.market?.length ? (
-                <TableBody className="bet_table-body">
-                  {data?.data?.market.map(row => (
-                    <TableRow key={row?.id + row?.name}>
-                      <TableCell>{row?.matchName}</TableCell>
-                      <TableCell>{row?.pnl}</TableCell>
-                      <TableCell>{row?.uplineAmount}</TableCell>
-                      <TableCell>{row?.createdon}</TableCell>
-                      {/* <TableCell>{row?.action}</TableCell> */}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              ) : (
-                <TableBody className="bet_table-body">
-                  <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell>
-                      <Empty />
-                    </TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                </TableBody>
-              )}
-            </Table>
-          </TableContainer>
+            <button
+              className="search_button"
+              onClick={(e) => {
+                e.preventDefault();
+                submitHandler();
+              }}
+            >
+              Search
+            </button>
+          </div>
         </div>
-      }
-    </div>
-      <Pagination setPaginationData={setBettingPnl} paginationData={bettingPnl} />
-      </>
-	);
-}
+        <div className="record-search">
+          <NoOfRecords handlerselectchange={rowsHandler} />
+          <span>
+            <input
+              placeholder="Search"
+              onChange={nameSearchHandler}
+              value={bettingPnl?.userId}
+            />
+            {/* <button onClick={() => loadHandler()}>Load</button> */}
+          </span>
+        </div>
+        {isLoading ? (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
+        ) : (
+          <div className="mybets_table">
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Match Name</TableCell>
+                    <TableCell>pnl</TableCell>
+                    <TableCell>uplineAmount</TableCell>
+                    <TableCell>Date</TableCell>
+                    {/* <TableCell>Action</TableCell> */}
+                  </TableRow>
+                </TableHead>
+                {
+                  data?.data?.market?.length && (
+                    <TableBody className="bet_table-body">
+                      {data?.data?.market.map((row) => (
+                        <TableRow key={row?.id + row?.name}>
+                          <TableCell>{row?.matchName}</TableCell>
+                          <TableCell>{row?.pnl}</TableCell>
+                          <TableCell>{row?.uplineAmount}</TableCell>
+                          <TableCell>{row?.createdon}</TableCell>
+                          {/* <TableCell>{row?.action}</TableCell> */}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  )
+                  // : (
+                  //   <TableBody className="bet_table-body">
+                  //     <TableRow>
+                  //       <TableCell></TableCell>
+                  //       <TableCell>
+                  //         <Empty />
+                  //       </TableCell>
+                  //       <TableCell></TableCell>
+                  //       <TableCell></TableCell>
+                  //     </TableRow>
+                  //   </TableBody>
+                  // )
+                }
+              </Table>
+            </TableContainer>
+            {!data?.data?.market?.length && (
+              <p className="pnl-no-data">No Data To Display</p>
+            )}
+          </div>
+        )}
+      </div>
+      <Pagination
+        setPaginationData={setBettingPnl}
+        paginationData={bettingPnl}
+      />
+    </>
+  );
+};
 
 export default BettingProfitLoss;

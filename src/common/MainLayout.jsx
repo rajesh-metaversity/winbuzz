@@ -15,6 +15,7 @@ import TopBanner from "../component/topBanner/TopBanner";
 import Loader from "../component/Loader/Loader";
 import LoginForm from "../component/loginForm/LoginForm";
 import ModalComponent from "../component/modal/Modal";
+import ExposureIndex from "../component/exposureComponent/ExposureIndex";
 // import MyBets from "../component/MyBets/MyBets";
 export let setLoginFormHandlerRef;
 
@@ -53,7 +54,7 @@ const MainLayout = () => {
   };
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
-    // 1: <RulesModal setOpen={setOpen} />,
+    1: <ExposureIndex />,
   };
 
   const setLoginFormHandler = () => {

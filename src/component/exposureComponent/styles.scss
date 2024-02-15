@@ -1,0 +1,52 @@
+.exposure-container {
+  width: 90vw;
+  //   background-color: red;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+  .exposure-heading {
+    width: calc(100% - 20px);
+    padding-block: 10px;
+    padding-inline: 10px;
+    background: transparent
+      linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    color: white;
+    position: sticky;
+    top: 0%;
+    z-index: 9999;
+  }
+  .tabs-content {
+    width: calc(100% - 20px);
+    padding-inline: 10px;
+    @media screen and (max-width: 800px) {
+      background-color: black;
+    }
+  }
+}
+// .exposure-tabs {
+//   .Mui-selected {
+//     color: white !important;
+//   }
+// }
+
+.mybets2 {
+  @media screen and (max-width: 780px) {
+    height: 47vh;
+  }
+}
+.right2 {
+  display: flex !important;
+
+  @media screen and (max-width: 780px) {
+    color: white;
+    display: flex !important;
+    column-gap: 7px !important;
+    width: calc(100% - 10px) !important;
+  }
+}
+.matched2 {
+  .MuiFormControl-root {
+    padding: 0%;
+    padding-block: 10px;
+  }
+}

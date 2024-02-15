@@ -150,7 +150,16 @@ const MyBets = () => {
         </div>
 
         {isLoading ? (
-          <Loader />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
         ) : (
           <div className="mybets_table">
             <TableContainer component={Paper}>

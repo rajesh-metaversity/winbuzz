@@ -3,7 +3,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./styles.scss";
 import { useBetListByMatchQuery } from "../../Services/BettingProfitLoss/BettingProfitLoss";
 import { useParams } from "react-router-dom";
-const MyBetsModule = ({ matId, matchid }) => {
+import ClearIcon from "@mui/icons-material/Clear";
+const MyBetsModule = ({ matId, matchid, cross, setOpen }) => {
   const { id } = useParams();
 
   const { data: betlistbymatch } = useBetListByMatchQuery(
@@ -18,9 +19,20 @@ const MyBetsModule = ({ matId, matchid }) => {
       <div className="my_bets-cont betslip">
         <div className="heading">
           <span className="my_bets">My bets</span>
+          <div
+            className="icon"
+            onClick={() => setOpen(false)}
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            {cross && <ClearIcon />}
+          </div>
         </div>
         <div className="my-bets-module-container">
-          <Grid container className="gridcontainer">
+          <Grid
+            container
+            className="gridcontainer"
+            sx={{ background: "white" }}
+          >
             <Grid item xs={8}>
               <Typography component="p" className="text">
                 matched bet

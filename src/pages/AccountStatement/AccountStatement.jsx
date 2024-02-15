@@ -146,9 +146,9 @@ const AccountStatement = () => {
                 </TableHead>
                 {data?.data?.dataList?.length ? (
                   <TableBody className="bet_table-body">
-                    {data?.data?.dataList.map((res) => {
+                    {data?.data?.dataList.map((res, index) => {
                       return (
-                        <StyledTableRow key={res.name}>
+                        <StyledTableRow key={res.name + index}>
                           <StyledTableCell>{res?.sno}</StyledTableCell>
                           <StyledTableCell align="left">
                             {res?.date}

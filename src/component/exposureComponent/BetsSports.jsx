@@ -9,31 +9,24 @@ import {
   TableHead,
   TableRow,
   Paper,
-  FormControl,
   RadioGroup,
   FormControlLabel,
   Radio,
   Tooltip,
   IconButton,
-  Box,
-  Tabs,
-  Tab,
-  Typography,
 } from "@mui/material";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import FileOpenIcon from "@mui/icons-material/FileOpen";
-import Loader from "../../component/Loader/Loader";
+
+import Loader from "../Loader/Loader";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useUnsettledBetsMutation } from "../../Services/UnsettledBets/UnsettledBets";
-import NoOfRecords from "../../component/noOfRecords/NoOfRecords";
-import Pagination from "../../component/Pagination/Pagination";
-import BasicTabs from "./indexUnSettelBet";
+import NoOfRecords from "../noOfRecords/NoOfRecords";
+import Pagination from "../Pagination/Pagination";
 
-const UnsettledBetsCasino = () => {
+const BetsSports = () => {
   const [bets, setBets] = useState({
     noOfRecords: 1,
     index: 0,
-    sportType: 2,
+    sportType: 1,
     isDeleted: false,
     betType: 1,
     totalPages: 1,
@@ -49,7 +42,7 @@ const UnsettledBetsCasino = () => {
     setBets((prev) => {
       return {
         ...prev,
-        isDeleted: el,
+        betType: el,
       };
     });
   };
@@ -80,45 +73,47 @@ const UnsettledBetsCasino = () => {
       {/* <BasicTabs /> */}
 
       <div className="bets_cont">
-        <div className="combo">
+        <div
+          className="combo"
+          style={{ width: "calc(100% - 20px)", paddingInline: "10px" }}
+        >
           <div className="left">
-            <p>Unsettled Bets</p>
+            {/* <p>Unsettled Bets</p> */}
 
-            <div className="matched">
+            <div className="matched matched2">
               <RadioStyled>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue={bets?.isDeleted}
+                  defaultValue={bets?.betType}
                   name="radio-buttons-group"
                   onChange={matchedHandler}
-                  //   defaultChecked="Matched"
+                  // defaultChecked="Matched"
                   //   value="Matched"
                 >
+                  <FormControlLabel value={1} control={<Radio />} label="All" />
                   <FormControlLabel
-                    value={false}
+                    value={2}
                     control={<Radio />}
-                    label="Matched"
+                    label="Back"
                   />
-                  <FormControlLabel
-                    value={true}
-                    control={<Radio />}
-                    label="Deleted"
-                  />
+                  <FormControlLabel value={3} control={<Radio />} label="Lay" />
                 </RadioGroup>
               </RadioStyled>
             </div>
           </div>
-          <div className="right">
-            <span>
-              <label>Types</label>
-              <select onChange={handleChange} value={bets?.betType}>
-                <option value={1}>All</option>
-                <option value={2}>Back</option>
-                <option value={3}>Lay</option>
-              </select>
+          <div className="right right2">
+            Total Bets:
+            <span
+              style={{ color: data?.data?.totalBets >= 0 ? "green" : "red" }}
+            >
+              {data?.data?.totalBets}
             </span>
-
-            <button onClick={() => searchHandler()}>Search</button>
+            Total Amount:
+            <span
+              style={{ color: data?.data?.totalStake >= 0 ? "green" : "red" }}
+            >
+              {data?.data?.totalStake}
+            </span>
           </div>
           {/* <div className="pdf-excel">
 					<span className="pdf">
@@ -129,7 +124,10 @@ const UnsettledBetsCasino = () => {
 					</span>
 				</div> */}
         </div>
-        <div style={{ padding: "0 10px" }} className="records_class">
+        <div
+          className="records_class"
+          style={{ width: "calc(100% - 20px)", paddingInline: "10px" }}
+        >
           <NoOfRecords handlerselectchange={rowsHandler} />
         </div>
 
@@ -145,14 +143,17 @@ const UnsettledBetsCasino = () => {
             <Loader />
           </div>
         ) : (
-          <div className="mybets_table">
-            <TableContainer component={Paper} sx={{ borderRadius: "0px" }}>
+          <div className="mybets_table mybets2">
+            <TableContainer component={Paper}>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Event</TableCell>
+                    <TableCell>Event Type</TableCell>
+                    <TableCell>Event Name</TableCell>
+                    <TableCell>User Name</TableCell>
+                    <TableCell>M Name</TableCell>
                     <TableCell>Nation</TableCell>
-                    <TableCell>User Rate</TableCell>
+                    <TableCell>U Rate</TableCell>
                     <TableCell>Amount</TableCell>
                     <TableCell>Place Date</TableCell>
                     <TableCell>Detail</TableCell>
@@ -162,14 +163,22 @@ const UnsettledBetsCasino = () => {
                   {data?.data?.dataList.map((row) => (
                     <TableRow key={row.id}>
                       {/* <TableCell>{row.id}</TableCell> */}
+                      <TableCell>{row.eventType}</TableCell>
                       <TableCell>{row.eventName}</TableCell>
+                      <TableCell>{row.username}</TableCell>
+                      <TableCell>{row.marketname}</TableCell>
                       <TableCell>{row.nation}</TableCell>
-                      <TableCell>{row.rate}</TableCell>
-                      <TableCell>{row.amount}</TableCell>
+                      <TableCell
+                        style={{ color: row.rate >= 0 ? "green" : "red" }}
+                      >
+                        {row.rate}
+                      </TableCell>
+                      <TableCell
+                        style={{ color: row.amount >= 0 ? "green" : "red" }}
+                      >
+                        {row.amount}
+                      </TableCell>
                       <TableCell>{row.time}</TableCell>
-
-                      {/* <TableCell>{row.nation}</TableCell> */}
-
                       <TableCell>
                         {/* {" "} */}
                         <Tooltip title={row.deviceInfo}>
@@ -194,4 +203,4 @@ const UnsettledBetsCasino = () => {
   );
 };
 
-export default UnsettledBetsCasino;
+export default BetsSports;

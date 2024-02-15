@@ -199,6 +199,11 @@
   }
 
   .mybets_table {
+    .MuiTableContainer-root {
+      @media screen and (max-width: 780px) {
+        background-color: #2e2e2e;
+      }
+    }
     @media screen and (max-width: 780px) {
       padding: 10px;
       padding-top: 5px;
@@ -241,6 +246,7 @@
         @media screen and (max-width: 780px) {
           padding: 5px;
           color: white;
+          background: #202020;
         }
       }
     }

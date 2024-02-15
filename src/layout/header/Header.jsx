@@ -13,7 +13,6 @@ import { MyTextField } from "./styled";
 import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDropDown";
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
-import RulesModal from "../../component/RulesModal/RulesModal";
 import { deposit, home, withdraw } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
@@ -23,7 +22,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useIsSelfMutation } from "../../Services/isSelf/IsSelf";
 import { useEffect } from "react";
 import HeaderMessage from "../../component/HeaderMessage/HeaderMessage";
-export let isSelfData
+export let isSelfData;
 export const WebHeaderComponent = ({
   balanceData,
   setSiderOpen,
@@ -47,16 +46,11 @@ export const WebHeaderComponent = ({
   useEffect(() => {
     trigg({ appUrl: appUrl });
   }, []);
-  isSelfData =isSlefDat
+  isSelfData = isSlefDat;
+  // console.log(modalElement[modalValue],"kadnfjknds");
   if (!isBreakPoint) {
     return (
       <>
-        <ModalComponent
-          Elememt={modalElement[modalValue]}
-          open={open}
-          setOpen={setOpen}
-          loginWidth={modalValue == 0 ? "480px" : ""}
-        />
         <div className="header-container">
           <div className="header-left-col">
             <Link to={home}>
@@ -151,11 +145,17 @@ export const WebHeaderComponent = ({
                       }}
                     />
                   </li> */}
-                  <li className="header-balance">
+                  <li
+                    className="header-balance"
+                    onClick={() => {
+                      setModalValue(1);
+                      handleOpen();
+                    }}
+                  >
                     {/* <span className="user_id">{userId }</span> */}
                     Bal: {balanceData?.balance}
                     <span>
-                      Exp:{""}
+                      Exp:
                       {balanceData?.libality}
                     </span>
                   </li>
@@ -221,7 +221,13 @@ export const WebHeaderComponent = ({
                   >
                     {userId}
                   </span>
-                  <li className="header-balance">
+                  <li
+                    className="header-balance"
+                    onClick={() => {
+                      setModalValue(1);
+                      handleOpen();
+                    }}
+                  >
                     Bal:{balanceData?.balance}
                     <span>Exp:{balanceData?.libality}</span>
                   </li>
