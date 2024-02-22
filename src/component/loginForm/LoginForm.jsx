@@ -32,7 +32,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
     userId: "",
     password: "",
     appUrl: window.location.hostname,
-    // appUrl: "localhost",
+    // appUrl: "sportindia247.com",
   });
 
   const [error, setError] = useState({
@@ -132,7 +132,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
 
   const demoIdLogin = (e) => {
     e.preventDefault();
-    trigge({ appUrl: window.location.hostname });
+    trigge({ appUrl: "window.location.hostname" });
   };
 
   return (

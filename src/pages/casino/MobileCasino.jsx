@@ -191,7 +191,16 @@ const MobileCasino = () => {
           {/* <p className="int_casino">Int Casino</p> */}
           <p className="int_casino">{gameName}</p>
           {isLoading ? (
-            <Loader />
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Loader />
+            </div>
           ) : (
             <>
               {id == "Indian-Casino" ? (
