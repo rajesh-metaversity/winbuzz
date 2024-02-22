@@ -132,7 +132,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
 
   const demoIdLogin = (e) => {
     e.preventDefault();
-    trigge({ appUrl: "window.location.hostname" });
+    trigge({ appUrl: window.location.hostname });
   };
 
   return (
