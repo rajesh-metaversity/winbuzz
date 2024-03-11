@@ -80,7 +80,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
   }, [check]);
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = e.target.value.replace(" ", "");
     if (!value) {
       setError((prev) => {
         return {
@@ -155,7 +155,9 @@ const LoginForm = ({ setOpen, handleClose }) => {
             <input
               type="text"
               placeholder="Username"
-              onChange={handleChange}
+              onChange={(event) => {
+                handleChange(event);
+              }}
               name="userId"
               value={loginData.userId}
               style={{

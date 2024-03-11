@@ -107,7 +107,7 @@ const GameDetail = () => {
   );
   // console.log(pnlCheckWinner, "pnlCheckWinner");
   const { data: winnerOddaPnl } = useWinnerPnlQuery(
-    { matchId: marketId },
+    { marketId: marketId },
     {
       pollingInterval: 3000,
       skip: pnlCheckWinner == 0,
@@ -125,7 +125,6 @@ const GameDetail = () => {
   useEffect(() => {
     dispatch(setBetSlipData(null));
   }, []);
- 
 
   // useEffect(() => {
   //   const timer = setInterval(() => {

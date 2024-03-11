@@ -1,6 +1,4 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
-// import { message } from "antd";
-import { toast } from "react-toastify";
 import { showErrorToast } from "../../component/toast/Toast";
 export const dynamicBaseQuery = async (args, WebApi, extraOptions) => {
   const rawBaseQuery = fetchBaseQuery({

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { WebHeaderComponent } from "../layout/header/Header";
 import { Outlet } from "react-router-dom";
 import SiderBar from "../layout/sider/Sider";
@@ -11,6 +11,9 @@ import LoginForm from "../component/loginForm/LoginForm";
 import { useMediaQuery } from "../useMediaQuery/UseMediaQuery";
 import ExposureIndex from "../component/exposureComponent/ExposureIndex";
 import ModalComponent from "../component/modal/Modal";
+import whatsApp from "../assets/img/image.png";
+import { useIsSelfMutation } from "../Services/isSelf/IsSelf";
+import { useFooterdataMutation } from "../Services/footerData/FooterData";
 // import { userBalnceData } from "./MainLayout";
 
 const Sublayout = ({ setGame, gameName }) => {
@@ -35,6 +38,12 @@ const Sublayout = ({ setGame, gameName }) => {
 
   // userBalanceTrigger = trigger;
   // userBalnceData = data;
+  const appUrl = window.location.hostname;
+  const [trigg, { data: isSlefDat }] = useIsSelfMutation();
+
+  useEffect(() => {
+    trigg({ appUrl: appUrl });
+  }, []);
   const [modalValue, setModalValue] = useState(0);
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
@@ -45,8 +54,39 @@ const Sublayout = ({ setGame, gameName }) => {
     setOpen(!open);
   };
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
+  const appRef = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (appRef?.current) {
+        appRef.current.style.top = `calc( ${window.scrollY}px + 50vh)`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const [trigger, { data: footerData }] = useFooterdataMutation();
+  useEffect(() => {
+    trigger({ appUrl: appUrl });
+  }, []);
   return (
     <div>
+      {!loginCheck && isSlefDat?.data?.selfAllowed && (
+        <a
+          ref={appRef}
+          href={footerData?.data?.s_whatsapp?.link}
+          className="whatsapp-fixed"
+        >
+          <div className="whatsapp-text">
+            <span>Get an ID Instantly on Whatsapp</span>
+            <span>Click Here Now</span>
+          </div>
+          <img alt="whatsapp" src={whatsApp}></img>
+        </a>
+      )}
       <ModalComponent
         Elememt={modalElement[modalValue]}
         open={open}

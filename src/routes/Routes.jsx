@@ -3,6 +3,7 @@ import { router } from "./PagesRoutes";
 const Routes = () => {
 	return (
 		<div>
+			
 			<RouterProvider router={router()} />
 		</div>
 	);

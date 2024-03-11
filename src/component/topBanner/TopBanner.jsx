@@ -135,12 +135,13 @@ const TopBanner = () => {
           if (
             (item?.gameCode == "AURA" &&
               allotedCasino?.data?.find((item) => item?.name == "Aura")
-                .active) ||
+                ?.active) ||
             (item?.gameCode == "SP-NOWA" &&
               allotedCasino?.data?.find((item) => item?.name == "Super Nova")
-                .active) ||
+                ?.active) ||
             (!["AURA", "SP-NOWA"].includes(item?.gameCode) &&
-              allotedCasino?.data?.find((item) => item?.name == "QTech").active)
+              allotedCasino?.data?.find((item) => item?.name == "QTech")
+                ?.active)
           ) {
             return (
               <div

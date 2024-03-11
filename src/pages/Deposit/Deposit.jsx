@@ -13,13 +13,11 @@ import {
   useDepositStakeQuery,
   useDepositbalanceQuery,
   useDepositbalanceSubmitMutation,
-  useStakeQuery,
 } from "../../Services/stake/Deposit";
 import { useEffect, useState } from "react";
 import Bank from "./Bank";
 import UPI from "./UPI";
 import QR from "./QR";
-import { toast } from "react-toastify";
 import Loader from "../../component/Loader/Loader";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { showErrorToast, showSuccessToast } from "../../component/toast/Toast";
@@ -66,7 +64,7 @@ const Deposit = () => {
   };
 
   const bankDetailObj = {
-    0: <Bank selectedImage={selectedImage || data?.data[0]} />,
+    0: <Bank selectedImage={selectedImage || (data?.data && data?.data[0])} />,
     1: <UPI selectedImage={selectedImage} />,
     2: <QR selectedImage={selectedImage} />,
   };
@@ -107,7 +105,7 @@ const Deposit = () => {
     }
     if (isSuccess) {
       const submitData = new FormData();
-      submitData.append("amount", payloadData.amount);
+      submitData.append("amount", payloadData?.amount);
       submitData.append("image", files);
       trigger(submitData);
 
@@ -193,7 +191,7 @@ const Deposit = () => {
   // };
   const minusHandleChange = () => {
     setPayloadData((prev) => {
-      const newAmount = Math.max(Number(prev.amount) - 10, 100);
+      const newAmount = Math.max(Number(prev?.amount) - 10, 100);
       return {
         ...prev,
         amount: newAmount,
@@ -206,7 +204,7 @@ const Deposit = () => {
     setPayloadData((prev) => {
       return {
         ...prev,
-        amount: Number(payloadData.amount) + Number(event.value),
+        amount: Number(payloadData?.amount) + Number(event?.value),
       };
     });
     // setPayloadData.amount(payloadData.amount + event.value);
@@ -226,14 +224,14 @@ const Deposit = () => {
               -
             </button>
             <input
-              value={payloadData.amount}
+              value={payloadData?.amount}
               onChange={handleAmountChange}
               placeholder="Enter Amount"
               // onChange={e => {
               // 	setAmount(e.target.value);
 
               // }}
-              style={{ borderColor: error1.amount ? "red" : "#b6842d" }}
+              style={{ borderColor: error1?.amount ? "red" : "#b6842d" }}
             />
             <button
               onClick={() => plusHandleChange()}
@@ -247,46 +245,48 @@ const Deposit = () => {
           )}
         </div>
         <div className="right">
-          {depositData?.data?.map((item, index) => {
-            return (
-              <button key={index} onClick={() => keyAmount(item)}>
-                {item?.key}
-              </button>
-            );
-          })}
+          {depositData?.data &&
+            depositData?.data?.map((item, index) => {
+              return (
+                <button key={index} onClick={() => keyAmount(item)}>
+                  {item?.key}
+                </button>
+              );
+            })}
         </div>
       </div>
       <div className="middle_cont">
         <span className="pay">
-          <p>Pay {payloadData.amount}</p>
+          <p>Pay {payloadData?.amount}</p>
           <p>Pay manually</p>
-          {Number(payloadData.amount) > 0 && (
+          {Number(payloadData?.amount) > 0 && (
             <>
               <p className="image_cont">
-                {data?.data?.map((el, index) => {
-                  return (
-                    <>
-                      <div key={index} className="image_sub-cont">
-                        <img
-                          src={el?.image}
-                          alt="image"
-                          onClick={() => {
-                            setDepositKey();
-                            handleClickImage(el, key[el?.depositType]);
-                            // handleClickImage(el);
-                          }}
-                        />
-                      </div>
-                    </>
-                  );
-                })}
+                {data?.data &&
+                  data?.data?.map((el, index) => {
+                    return (
+                      <>
+                        <div key={index} className="image_sub-cont">
+                          <img
+                            src={el?.image}
+                            alt="image"
+                            onClick={() => {
+                              setDepositKey();
+                              handleClickImage(el, key[el?.depositType]);
+                              // handleClickImage(el);
+                            }}
+                          />
+                        </div>
+                      </>
+                    );
+                  })}
               </p>
               <div className="payment_cont">{bankDetailObj[depositKey]}</div>
             </>
           )}
         </span>
 
-        {payloadData.amount > 0 && (
+        {payloadData?.amount > 0 && (
           <div
             className="lebel"
             style={{
@@ -295,8 +295,8 @@ const Deposit = () => {
                 : "2px solid rgb(253, 207, 19)",
             }}
           >
-            {payloadData.url && <img src={payloadData.url} alt="" />}
-            {!payloadData.url && (
+            {payloadData?.url && <img src={payloadData?.url} alt="" />}
+            {!payloadData?.url && (
               <>
                 <p
                   style={{ display: "flex", alignItems: "center", gap: "10px" }}

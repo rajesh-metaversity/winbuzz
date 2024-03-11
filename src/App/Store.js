@@ -26,6 +26,7 @@ import { allotedCasino } from "../Services/allotedCasino/AllotedCasino";
 import { register } from "../Services/selfRegister/SelfRegister";
 import { IsSelf } from "../Services/isSelf/IsSelf";
 import { userFancyBook } from "../Services/userFancyBook/UserFancyBook";
+import { footerData } from "../Services/footerData/FooterData";
 
 export const store = configureStore({
   reducer: {
@@ -56,6 +57,7 @@ export const store = configureStore({
     [register.reducerPath]: register.reducer,
     [IsSelf.reducerPath]: IsSelf.reducer,
     [userFancyBook.reducerPath]: userFancyBook.reducer,
+    [footerData.reducerPath]: footerData.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -85,6 +87,7 @@ export const store = configureStore({
       .concat(allotedCasino.middleware)
       .concat(register.middleware)
       .concat(IsSelf.middleware)
+      .concat(footerData.middleware)
       .concat(userFancyBook.middleware),
 });
 

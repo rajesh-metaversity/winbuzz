@@ -27,7 +27,7 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
   const pathName = window.location.pathname;
   const isLogin = useSelector(isLoginSelector);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
-
+  const token = localStorage.getItem("token");
   const userType = localStorage.getItem("userTypeInfo");
   // const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
   const { data: allotedCasino } = useAllotedCasinoQuery(
@@ -49,22 +49,22 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
       {
         name: "Lottery",
         img: lottery,
-        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3)?.active,
       },
       {
         name: "Live Casino",
         img: casinos,
-        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3)?.active,
       },
       {
         name: "Slot",
         img: slots,
-        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3)?.active,
       },
       {
         name: "Fantasy Game",
         img: fantasygame,
-        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3)?.active,
       },
     ],
     [allotedCasino]
@@ -227,7 +227,7 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
                 })}
           </ul>
         </div>
-        {selfAllowed?.selfAllowed ? (
+        {selfAllowed?.selfAllowed && token ? (
           // ? splitPathName[1] != "game_detail"
           // ? isLogin && (
           <div className="mobile-subheader-deposit">

@@ -56,6 +56,7 @@ const AuraCasino = () => {
               width="100%"
               title="mobile"
               allowFullScreen={true}
+              key={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${gameId}`}
             />
 
             <iframe
@@ -63,6 +64,7 @@ const AuraCasino = () => {
               className="desktop_if"
               width="100%"
               title="desktop"
+              key={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${gameId}`}
             />
           </>
         </Typography>

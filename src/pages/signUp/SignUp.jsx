@@ -52,7 +52,7 @@ const SignUp = () => {
   const [demoChecker, setDemoChecker] = useState(false);
   const formHandleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = e.target.value.replace(" ", "");
     setformData((prev) => {
       if (!value) {
         setError((prev) => {
@@ -185,13 +185,14 @@ const SignUp = () => {
       <div className="signup_section">
         <div className="signup_content">
           <div className="signup_logo">
-            <img src={logo} alt="" />
+            <img src={isSlefDat?.data?.logo} alt="" />
           </div>
-          <form className="sign_up_form_input">
+          <form className="sign_up_form_input" autoComplete="new-password">
             <input
               type="text"
               placeholder="Username"
               name="username"
+              autoComplete="new-password"
               style={{
                 borderBottom: error?.username
                   ? "1px solid red"
@@ -213,6 +214,7 @@ const SignUp = () => {
               }}
             />
             <input
+             autoComplete="new-password"
               type="password"
               placeholder="New Password"
               name="password"
@@ -226,6 +228,7 @@ const SignUp = () => {
             />
             <input
               type="password"
+              autoComplete="new-password"
               placeholder="Confirm Password"
               name="confirmPassword"
               onChange={(e) => formHandleChange(e)}
