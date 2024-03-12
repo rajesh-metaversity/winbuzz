@@ -74,7 +74,7 @@ const Sublayout = ({ setGame, gameName }) => {
   }, []);
   return (
     <div>
-      {!loginCheck && isSlefDat?.data?.selfAllowed && (
+      {isSlefDat?.data?.selfAllowed && (
         <a
           ref={appRef}
           href={footerData?.data?.s_whatsapp?.link}
