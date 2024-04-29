@@ -3,8 +3,7 @@ import { WebBetPlaceModule } from "../../component/betPlaceModule/BetPlaceModule
 import { useUserFavMutation } from "../../Services/Favourite/Favourite";
 import { useFavListMutation } from "../../Services/FavList/FavList";
 import MultiMarketDetails from "./MultiMarketDetails";
-import MyBetsModule from '../../component/myBetsModule/MyBetsModule';
-import Empty from '../../component/empty/Empty';
+
 
 const MultiMarket = () => {
 	const [trigger, { data }] = useFavListMutation();

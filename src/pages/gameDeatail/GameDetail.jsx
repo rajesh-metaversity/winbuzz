@@ -9,7 +9,11 @@ import { useParams } from "react-router-dom";
 import BookMaker from "../../component/BookMaker/BookMaker";
 import FancyTabs from "../../component/fancy/FancyTabs";
 import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
-import { useFancyPnlQuery, useOddsPnlQuery } from "../../Services/Pnl/Pnl";
+import {
+  useFancyPnlQuery,
+  useOddsPnlMutation,
+  useWinnerPnlMutation,
+} from "../../Services/Pnl/Pnl";
 import {
   useCreateFavMutation,
   useDeleteFavMutation,
@@ -85,13 +89,32 @@ const GameDetail = () => {
   }, [id]);
 
   const { data } = useMyIpQuery();
-  const { data: oddsPnl } = useOddsPnlQuery({ matchId: id });
+  const [pnlCheckWinner, setPnlCheckWinner] = useState(0);
+  const [marketId, setMarketId] = useState("");
+
+  const dataObj = {
+    0: {
+      pnlCheckWinner: pnlCheckWinner,
+    },
+    1: { marketId: marketId, pnlCheckWinner: pnlCheckWinner },
+  };
+  const [trigge, { data: oddsPnl }] = useOddsPnlMutation();
+  const [trigg, { data: winnerOddaPnl }] = useWinnerPnlMutation();
+
   const { data: FancyPnl } = useFancyPnlQuery({ matchId: id });
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setBetSlipData(null));
   }, []);
 
+  useEffect(() => {
+    if (pnlCheckWinner == 0) {
+      trigge({ matchId: id });
+    } else {
+      trigg({ marketId: marketId });
+    }
+  }, [pnlCheckWinner]);
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
@@ -104,9 +127,13 @@ const GameDetail = () => {
           data={odds}
           showId={1}
           PnlOdds={oddsPnl?.data}
+          winnerOddaPnl={winnerOddaPnl}
           favData={fav?.data}
+          pnlCheckWinner={pnlCheckWinner}
+          setPnlCheckWinner={setPnlCheckWinner}
           handleFavDel={handleFavDel}
           handleFavSec={handleFavSec}
+          setMarketId={setMarketId}
         />
         <BookMaker
           minMax={minMax}

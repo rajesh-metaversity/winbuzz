@@ -109,6 +109,13 @@ const Deposit = () => {
       submitData.append("amount", payloadData.amount);
       submitData.append("image", files);
       trigger(submitData);
+
+      setPayloadData({
+        amount: "",
+        url: "",
+      });
+      setFiles("");
+
     }
   };
 
@@ -257,7 +264,6 @@ const Deposit = () => {
             <>
               <p className="image_cont">
                 {data?.data?.map((el, index) => {
-                  console.log(el, "el");
                   return (
                     <>
                       <div key={index} className="image_sub-cont">

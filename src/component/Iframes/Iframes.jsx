@@ -9,7 +9,6 @@ const Iframes = ({ odds, id }) => {
   const [toggle, setToggle] = useState(false);
   const params = useParams();
 
-  console.log(params, 'lllllllll');
   return (
 		<>
 			<div className="scorecard_heading">

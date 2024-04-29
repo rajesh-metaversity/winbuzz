@@ -175,7 +175,7 @@ export const WebHeaderComponent = ({
             {siderOpen ? (
               <CloseIcon onClick={() => setSiderOpen(!siderOpen)} />
             ) : (
-              <MenuIcon onClick={() => setSiderOpen(!siderOpen)} />
+              <MenuIcon onClick={() => setSiderOpen(true)} />
             )}
 
             <Link to={home}>
@@ -196,7 +196,13 @@ export const WebHeaderComponent = ({
                     flexDirection: "column",
                   }}
                 >
-                  <span style={{ color: "white", fontSize: "13px" }}>
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: "13px",
+                      fontWeight: "bolder",
+                    }}
+                  >
                     {userId}
                   </span>
                   <li className="header-balance">

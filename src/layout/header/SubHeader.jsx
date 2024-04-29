@@ -1,20 +1,20 @@
-import {
-  Link,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SubHeader.scss";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useMediaQuery } from "../../useMediaQuery/UseMediaQuery";
 import play from "../../assets/img/in-play.png";
-import { InPlay, casino, deposit, home, withdraw } from "../../routes/PagesUrl";
+import { InPlay, deposit, home, withdraw } from "../../routes/PagesUrl";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AddCardIcon from "@mui/icons-material/AddCard";
-
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 import { sportImages } from "../sider/Sider";
 import { useSelector } from "react-redux";
 import { isLoginSelector } from "../../App/LoginSlice";
+import casinos from "../../assets/int.svg";
+import lottery from "../../assets/img/lottery.png";
+import slots from "../../assets/img/slots.png";
+import fantasygame from "../../assets/img/fantasy-game.png";
 
 const SubHeader = ({ setModalValue, handleOpen }) => {
   const { data } = useActiveSportQuery();
@@ -29,12 +29,56 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
   const userType = localStorage.getItem("userTypeInfo");
-  const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
+  // const casinoList = ["Lottery", "Live Casino", "Slot", "Fantasy Game"];
+  const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
+  useEffect(() => {
+    if (isLogin) {
+      trigger();
+    }
+  }, []);
+
+  const casinoList = useMemo(
+    () => [
+      {
+        name: "Lottery",
+        img: lottery,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+      {
+        name: "Live Casino",
+        img: casinos,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+      {
+        name: "Slot",
+        img: slots,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+      {
+        name: "Fantasy Game",
+        img: fantasygame,
+        active: allotedCasino?.data?.find((item) => item.casinoId == 3).active,
+      },
+    ],
+    [allotedCasino]
+  );
+
+  console.log(filteredCasino, 'filteredCaisno');
   if (!isBreakPoint) {
     return (
       <div className="sub_header_cont">
         <ul className="sub_header_ul">
-          {data?.data.map((items, index) => {
+          <li
+            onClick={() => {
+              nav(InPlay);
+            }}
+            className={pathName == "/in-play" ? "active-tabs" : ""}
+          >
+            <div>
+              <Link to={home}>In play</Link>
+            </div>
+          </li>
+          {data?.data?.map((items, index) => {
             return (
               <React.Fragment key={items?.sportId + items.sportName + index}>
                 <li>
@@ -49,21 +93,36 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
               </React.Fragment>
             );
           })}
+          <li
+            onClick={() => {
+              if (isLogin) {
+                nav("casino/Indian-Casino");
+              } else {
+                setModalValue(0), handleOpen();
+              }
+            }}
+          >
+            Int Casino
+          </li>
           {isLogin
-            ? casinoList.map((item, index) => {
-                let removeSpace = item.split(" ").join("");
-                return (
-                  <li key={item + index}>
-                    <Link
-                      to={`casino/${removeSpace}`}
-                      style={{ color: "#fffa00" }}
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                );
+            ? casinoList?.map((item, index) => {
+                let removeSpace = item.name.split(" ").join("");
+                if (item?.active) {
+                  return (
+                    <li key={item + index}>
+                      <Link
+                        to={`casino/${removeSpace}`}
+                        style={{ color: "#fffa00" }}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                } else {
+                  return;
+                }
               })
-            : casinoList.map((item, index) => {
+            : casinoList?.map((item, index) => {
                 return (
                   <li
                     key={item + index}
@@ -72,13 +131,51 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                       setModalValue(0), handleOpen();
                     }}
                   >
-                    {item}
+                    {item?.name}
                   </li>
                 );
-              })}
-        </ul>
-      </div>
-    );
+              })} */}
+				{filteredCasino?.length &&
+					casinoList.map((item, index) => {
+						let removeSpace = item.name.split(' ').join('');
+						return (
+							<>
+								{isLogin ? (
+									<li key={item + index}>
+										<Link to={`casino/${removeSpace}`} style={{ color: '#fffa00' }}>
+											{item?.name}
+										</Link>
+									</li>
+								) : (
+									<li
+										key={item + index}
+										style={{ color: '#fffa00' }}
+										onClick={() => {
+											setModalValue(0), handleOpen();
+										}}>
+										{item?.name}
+									</li>
+								)}
+							</>
+						);
+					})}
+
+				{/* {!isLogin &&
+					casinoList?.map((item, index) => {
+						return (
+							<li
+								key={item + index}
+								style={{ color: '#fffa00' }}
+								onClick={() => {
+									setModalValue(0), handleOpen();
+								}}>
+								{item?.name}
+							</li>
+						);
+					})} */}
+			</ul>
+		</div>
+	);
   } else {
     return (
       <>
@@ -109,57 +206,78 @@ const SubHeader = ({ setModalValue, handleOpen }) => {
                   >
                     {/* <img src={play} alt="" /> */}
                     <img src={sportImages[items.sportName]} />
+                    {/* sports Name */}
                     <span>{items.sportName}</span>
                   </li>
                 </React.Fragment>
               );
             })}
-            {isLogin ? (
-              casinoList.map((item, index) => {
-                let removeSpace = item.split(" ").join("");
-                return (
-                  <li
-                    onClick={() => nav("/casino/" + removeSpace)}
-                    key={item + index}
-                    className={pathName == "/casino" ? "active-tabs" : ""}
-                  >
-                    <img src={play} alt="" />
-                    <span>
-                      <Link to={`/casino/${removeSpace}`}>{item}</Link>
-                    </span>
-                  </li>
-                );
-              })
-            ) : (
-              <li
-                className={pathName == "/casino" ? "active-tabs" : ""}
-                onClick={() => {
+            <li
+              onClick={() => {
+                if (isLogin) {
+                  nav("casino/Indian-Casino");
+                } else {
                   setModalValue(0), handleOpen();
-                }}
-              >
-                <img src={play} alt="" />
-                <span>Int Casino</span>
-              </li>
-            )}
+                }
+              }}
+              className={pathName == "/in-play" ? "active-tabs" : ""}
+            >
+              <img src={play} alt="" />
+
+              <span>Int Casino</span>
+            </li>
+            {isLogin
+              ? casinoList.map((item, index) => {
+                  let removeSpace = item.name.split(" ").join("");
+                  return (
+                    <li
+                      onClick={() => nav("/casino/" + removeSpace)}
+                      key={item + index}
+                      className={pathName == "/casino" ? "active-tabs" : ""}
+                    >
+                      <img src={item?.img} alt="" />
+                      {/* CASINO NAMES */}
+                      <span>
+                        <Link to={`/casino/${removeSpace}`}>{item?.name}</Link>
+                      </span>
+                    </li>
+                  );
+                })
+              : casinoList.map((item, index) => {
+                  return (
+                    <li
+                      className={pathName == "/casino" ? "active-tabs" : ""}
+                      onClick={() => {
+                        setModalValue(0), handleOpen();
+                      }}
+                      key={item + index}
+                    >
+                      <img src={item?.img} alt="" />
+                      <span>{item?.name}</span>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
-        {isLogin ||
-          (userType == 2 && (
-            <div className="mobile-subheader-deposit">
-              <Link to={deposit}>
-                <div className="mobile-subheader-deposit-left-col">
-                  <AccountBalanceIcon />
-                  Deposit
-                </div>
-              </Link>
-              <Link to={withdraw}>
-                <div className="mobile-subheader-deposit-right-col">
-                  <AddCardIcon />
-                  Withdraw
-                </div>
-              </Link>
-            </div>
-          ))}
+        {userType != 2
+          ? isLogin && (
+              <div className="mobile-subheader-deposit">
+                <Link to={deposit}>
+                  <div className="mobile-subheader-deposit-left-col">
+                    <AccountBalanceIcon />
+                    Deposit
+                  </div>
+                </Link>
+                <Link to={withdraw}>
+                  <div className="mobile-subheader-deposit-right-col">
+                    <AddCardIcon />
+                    Withdraw
+                  </div>
+                </Link>
+              </div>
+            )
+          : ""}
+        {}
       </>
     );
   }

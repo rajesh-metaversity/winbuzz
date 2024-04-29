@@ -49,14 +49,14 @@ const FilterAccountStatement = ({ setAccountStatementBody, accountStatementBody,
 					<div className="input_field">
 						<label htmlFor="form">From</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DatStyles defaultValue={accountStatementBody?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} />
+							<DatStyles defaultValue={accountStatementBody?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} minDate={dayjs().subtract(2, "month")} disableFuture={true}/>
 						</LocalizationProvider>
 						{/* <DatePicker defaultValue={dayjs('2022-04-17')} /> */}
 					</div>
 					<div className="input_field">
 						<label htmlFor="form">To Date</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DatStyles defaultValue={accountStatementBody?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
+							<DatStyles defaultValue={accountStatementBody?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} disableFuture={true}/>
 						</LocalizationProvider>
 						{/* <DatePicker defaultValue={dayjs('2022-04-17')} /> */}
 					</div>

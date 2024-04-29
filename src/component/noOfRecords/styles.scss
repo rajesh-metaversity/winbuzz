@@ -16,7 +16,9 @@
 .total-entries {
   @media screen and (max-width: 780px) {
     span {
+      // color: #666;
       color: white;
+      font-size: 13px;
     }
   }
 }

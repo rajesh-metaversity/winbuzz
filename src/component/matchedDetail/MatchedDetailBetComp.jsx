@@ -13,7 +13,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Suspend from "../suspend/suspend";
 import { MobileBetPlaceModal } from "../betPlaceModule/BetPlaceModule";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setBetSlipData } from "../../App/LoginSlice";
@@ -31,6 +31,10 @@ const MatchedDetailBetComp = ({
   handleFavSec,
   matchName,
   matId,
+  setPnlCheckWinner,
+  setMarketId,
+  pnlCheckWinner,
+  winnerOddaPnl,
 }) => {
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
@@ -73,6 +77,26 @@ const MatchedDetailBetComp = ({
       })
     );
   };
+  useEffect(() => {
+    //  if()
+    data?.Odds?.map((item) => {
+      if (item?.Name.includes("Winner")) {
+        setPnlCheckWinner(1);
+        setMarketId(item?.marketId);
+      } else {
+        setPnlCheckWinner(0);
+      }
+    });
+  }, [data]);
+  const [oddsObject, setOddsObject] = useState({});
+  useEffect(() => {
+    let resultObject = {};
+    winnerOddaPnl?.data?.forEach((item) => {
+      resultObject[item.selctionId] = item.liability;
+    });
+    setOddsObject(resultObject);
+  }, [winnerOddaPnl]);
+  console.log(winnerOddaPnl, "winner");
   return (
     <>
       {data?.Odds?.map((item, index) => {
@@ -149,27 +173,43 @@ const MatchedDetailBetComp = ({
                   >
                     <Grid item md={5} xs={5.5}>
                       <P props={"left"}>{dataRunn?.name}</P>
-                      {PnlOdds?.map((item, id) => {
-                        if (item?.marketId?.includes("BM")) return <></>;
-                        const oddsPnl = {
-                          [item?.selection1]: item?.pnl1,
-                          [item?.selection2]: item?.pnl2,
-                          [item?.selection3]: item?.pnl3,
-                        };
-                        return (
-                          <div className="sub_title" key={id}>
-                            <span
-                              className={
-                                oddsPnl[dataRunn.selectionId] < 0
-                                  ? "text_danger"
-                                  : "text_success"
-                              }
-                            >
-                              {oddsPnl[dataRunn.selectionId] || "0.0"}
-                            </span>
-                          </div>
-                        );
-                      })}
+
+                      {pnlCheckWinner == 0 ? (
+                        PnlOdds?.map((item, id) => {
+                          if (item?.marketId?.includes("BM")) return <></>;
+                          const oddsPnl = {
+                            [item?.selection1]: item?.pnl1,
+                            [item?.selection2]: item?.pnl2,
+                            [item?.selection3]: item?.pnl3,
+                          };
+
+                          return (
+                            <div className="sub_title" key={id}>
+                              <span
+                                className={
+                                  oddsPnl[dataRunn.selectionId] < 0
+                                    ? "text_danger"
+                                    : "text_success"
+                                }
+                              >
+                                {oddsPnl[dataRunn.selectionId] || "0.0"}
+                              </span>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div className="sub_title" key={id}>
+                          <span
+                            className={
+                              oddsObject[dataRunn.selectionId] < 0
+                                ? "text_danger"
+                                : "text_success"
+                            }
+                          >
+                            {oddsObject[dataRunn.selectionId] || "0.0"}
+                          </span>
+                        </div>
+                      )}
                     </Grid>
                     <Grid item md={6} xs={5.5} sx={{ padding: "0px 4px" }}>
                       <Grid container>

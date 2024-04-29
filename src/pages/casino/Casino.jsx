@@ -10,15 +10,18 @@ import {
   fantsyGameList,
   slotProviderList,
 } from "./QtechProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   useQtechAuthQuery,
   useQtechMutation,
 } from "../../Services/Qtech/Qtech";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FantasyGameCard from "../../component/casinoCard/FantasyCard";
 import ModalComponent from "../../component/modal/Modal";
 import CasinoRuleModalContent from "../../component/casinoRuleModalContent/CasinoRuleModalContent";
+import { useCasinoRulesMutation } from "../../Services/auraCasino/AuraCasino";
+import { AllCasinoProviderName } from "../../component/allCasino/superNowaProvider";
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 
 const Casino = () => {
   const [gameCode, setGameCode] = useState("");
@@ -27,6 +30,16 @@ const Casino = () => {
   const [providerFilter, setProviderFilter] = useState("ALL");
   const QtechAutch = useQtechAuthQuery();
   const [trigger, { data: gamelist, isLoading }] = useQtechMutation();
+
+  const [triger, { data: allotedCasino }] = useAllotedCasinoMutation();
+
+  useEffect(() => {
+    triger()
+
+  }, [])
+
+  console.log(allotedCasino?.data, "allotedCasino")
+
   const { id } = useParams();
   useEffect(() => {
     const casinoToken = localStorage.getItem("casino-token");
@@ -36,6 +49,7 @@ const Casino = () => {
       gameCategory: id.toUpperCase(),
       provider: gameCode,
       token: casinoToken,
+      // currency: "IN5",
     });
     // }
   }, [gameCode, QtechAutch.isSuccess, id]);
@@ -43,7 +57,6 @@ const Casino = () => {
   useEffect(() => {
     if (gamelist) {
       const { items } = gamelist.data;
-      // console.log("inner",items)
       let categories = items.map((el) => {
         const itemAr = el?.category.split("/");
         const lastelm = itemAr[itemAr.length - 1];
@@ -56,7 +69,6 @@ const Casino = () => {
       // newAr.push("OTHER");
       setCategory(newAr);
       // }
-
       setGameLists(items);
       //
     }
@@ -85,61 +97,157 @@ const Casino = () => {
   useEffect(() => {
     setProviderFilter("ALL");
   }, [id]);
+  const [trigge, { data, isLoading: isLoad, isError }] =
+    useCasinoRulesMutation();
+  useEffect(() => {
+    trigge();
+  }, []);
+  const points = {
+    LiveCasino: data?.data?.qtech,
+    FantasyGame: data?.data?.fantasyGames,
+    Slot: data?.data?.qtech,
+    Lottery: data?.data?.qtech,
+    aura: data?.data?.aura,
+  };
 
+  const indianCasino = {
+    "Indian-Casino": "Indian Casino",
+  };
+
+  const nav = useNavigate();
+
+  const indianCasinoCat = {
+    Aura: { name: "Aura", gameCode: "AURA", PageUrl: "/casino-list" },
+    "Super nowa": {
+      name: "Super nowa",
+      gameCode: "SP-NOWA",
+      PageUrl: "/SuperNowa_casion",
+    },
+  };
+
+  const handleGamePageroute = (val) => {
+    nav(val?.PageUrl, {
+      state: {
+        item1: { gameCode: val?.gameCode },
+        item2: window.location.pathname,
+      },
+    });
+  };
+  const [trigg, { data: allotedCasino }] = useAllotedCasinoMutation();
+  useEffect(() => {
+    trigg();
+  }, []);
+  const allowCasino = useMemo(
+    () =>
+      AllCasinoProviderName[indianCasino[id]]?.map((item) => {
+        if (item?.name == "Aura") {
+          return {
+            ...item,
+            active: allotedCasino?.data?.find((item) => item.casinoId == 1)
+              .active,
+          };
+        } else {
+          return {
+            ...item,
+            active: allotedCasino?.data?.find((item) => item.casinoId == 2)
+              .active,
+          };
+        }
+      }),
+    [allotedCasino, indianCasino]
+  );
   return (
     <div>
-      <ModalComponent
-        Elememt={
-          <CasinoRuleModalContent
-            gameId={gameId}
-            id={id}
-            gameName={casinoName}
-            handleClose={() => setCasinoRuleModal(false)}
-          />
-        }
-        open={casinoRuleModal}
-        setOpen={setCasinoRuleModal}
-      />
-      <div className="casino-page-container">
-        <Title name={"INT CASINO"} />
-        <div className="casino-center-col">
-          <p className="int_casino">Int Casino</p>
-
-          <CasinoList
-            list={casinoObj[id]}
-            setGameCode={setGameCode}
-            type={1}
-            id={id}
-            setFantasyGame={setFantasyGameActive}
-            setProviderFilter={setProviderFilter}
-          />
-          {id != "FantasyGame" && (
-            <CasinoList
-              list={category}
-              type={2}
+      {casinoRuleModal && points[id] == 1 ? (
+        nav(`/qtech/${casinoName}`)
+      ) : (
+        <ModalComponent
+          Elememt={
+            <CasinoRuleModalContent
+              gameId={gameId}
               id={id}
-              setGameCode={setGameCode}
-              setFantasyGame={setFantasyGameActive}
-              setProviderFilter={setProviderFilter}
+              points={points}
+              gameName={casinoName}
+              data={data}
+              handleClose={() => setCasinoRuleModal(false)}
             />
+          }
+          open={casinoRuleModal}
+          setOpen={setCasinoRuleModal}
+        />
+      )}
+      <div className="casino-page-container">
+        <Title name={id} />
+        <div className="casino-center-col">
+          {/* <p className="int_casino">Int Casino</p> */}
+          <p className="int_casino">{id}</p>
+          {id == "Indian-Casino" ? (
+            <div className="main_wrap_live-casion">
+              {allowCasino &&
+                allowCasino?.map((item) => {
+                  if (item?.active) {
+                    return (
+                      <div
+                        className="MainBtn_warp"
+                        style={{ border: "0.5px solid" }}
+                        key={item?.name + item?.logo}
+                        onClick={() =>
+                          handleGamePageroute(indianCasinoCat[item?.name])
+                        }
+                      >
+                        <img
+                          className="complany-logo-warp"
+                          src={item?.logo}
+                          alt=""
+                        />
+                        <span className="complany-name-wrap">{item.name}</span>
+                      </div>
+                    );
+                  } else {
+                    return;
+                  }
+                })}
+            </div>
+          ) : (
+            //
+            <>
+              <CasinoList
+                list={casinoObj[id]}
+                setGameCode={setGameCode}
+                type={1}
+                id={id}
+                setFantasyGame={setFantasyGameActive}
+                setProviderFilter={setProviderFilter}
+              />
+              {id != "FantasyGame" && (
+                <CasinoList
+                  list={category}
+                  type={2}
+                  id={id}
+                  setGameCode={setGameCode}
+                  setFantasyGame={setFantasyGameActive}
+                  setProviderFilter={setProviderFilter}
+                />
+              )}
+              <div className="casino_card_container">
+                {id == "FantasyGame" ? (
+                  <FantasyGameCard
+                    gameLists={fantasyGame}
+                    setCasinoName={setCasinoName}
+                    setCasinoRuleModal={setCasinoRuleModal}
+                  />
+                ) : (
+                  <CasinoCard
+                    list={category}
+                    gameLists={gameLists}
+                    setCasinoName={setCasinoName}
+                    setCasinoRuleModal={setCasinoRuleModal}
+                    providerFilter={providerFilter}
+                  />
+                )}
+              </div>
+            </>
           )}
-          <div className="casino_card_container">
-            {id == "FantasyGame" ? (
-              <FantasyGameCard
-                gameLists={fantasyGame}
-                setCasinoName={setCasinoName}
-                setCasinoRuleModal={setCasinoRuleModal}
-              />
-            ) : (
-              <CasinoCard
-                list={category}
-                gameLists={gameLists}
-                setCasinoName={setCasinoName}
-                setCasinoRuleModal={setCasinoRuleModal}
-                providerFilter={providerFilter}
-              />
-            )}
-          </div>
         </div>
       </div>
     </div>

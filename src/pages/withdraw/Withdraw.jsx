@@ -12,14 +12,9 @@ import {
   useTheme,
 } from "@mui/material";
 import "./styles.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  useBankAccountQuery,
-  useWithdrawBalanceMutation,
-  useWithdrawQuery,
-  useWithdrawStakeQuery,
-} from "../../Services/withdraw/Withdraw";
+import { useBankAccountMutation, useWithdrawBalanceMutation, useWithdrawQuery, useWithdrawStakeQuery } from '../../Services/withdraw/Withdraw';
 import Upi from "./Upi";
 import Bank from "./Bank";
 import Previouswithdraw from "./Previouswithdraw";
@@ -27,6 +22,8 @@ import WithdrawButton from "./WithdrawButton";
 import Paytm from "./Paytm";
 import { toast } from "react-toastify";
 import Loader from "../../component/Loader/Loader";
+import ModalComponent from '../../component/modal/Modal';
+import WithdrawModal from "./WithdrawModal";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,13 +58,13 @@ const Withdraw = () => {
     withdrawType: "",
     withdrawMode: "NORMAL",
   });
+	
+	const [saveBankModal, setSaveBankModal] = useState(false);
 
   const [userWithdrawDetails, setUserWithdrawDetails] = useState([]);
-
-  const theme = useTheme();
   const [value, setValue] = useState(0);
   const [border, setBorder] = useState(0);
-  const [withdrawType, setWithdrawType] = useState("bank");
+  const [withdrawType, setWithdrawType] = useState("BANK");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -85,12 +82,12 @@ const Withdraw = () => {
     error: stakeError,
     isLoading: stakeLoading,
   } = useWithdrawStakeQuery();
-
-  const {
+	
+  const [triger, {
     data: accountDetails,
     error: bankError,
     isLoading: bankDetailsLoading,
-  } = useBankAccountQuery();
+  }] = useBankAccountMutation();
 
   const imageHandler = (id, id2) => {
     const withdrawDetail = accountDetails?.data?.filter(
@@ -105,12 +102,14 @@ const Withdraw = () => {
       };
     });
   };
+	
+	const withdrawTypeHandler = () => {
+		setWithdrawType("")
+	}
+	
+	console.log(userWithdrawDetails, "userWithdrawDetails")
 
-  const [
-    trigger,
-    { data: withdrawBalance, status, error, isError, isLoading },
-  ] = useWithdrawBalanceMutation();
-
+  const [trigger, { data: withdrawBalance, status, error, isError, isLoading }] = useWithdrawBalanceMutation();
 
   useEffect(() => {
 		try {
@@ -182,7 +181,8 @@ const Withdraw = () => {
 			trigger(withdrawDetails);
 		}
   };
-
+	
+	
   const valueChangeHandler = (name, value) => {
 		setCheckError(false);
 		setWithdrawDetails(prev => {
@@ -193,28 +193,57 @@ const Withdraw = () => {
 		});
   };
 
+//   useEffect(() => {
+// 		if (withdrawBalance?.status) {
+// 			setWithdrawDetails(prev => {
+// 				return {
+// 					...prev,
+// 					accountHolderName: '',
+// 					bankName: '',
+// 					accountType: '',
+// 					amount: '',
+// 					ifsc: '',
+// 					accountNumber: '',
+// 					withdrawType: '',
+// 					withdrawMode: ''
+// 				};
+// 			});
+// 		}
+//   }, [withdrawBalance]);
+	
+useEffect(() => {
+	if (withdrawBalance?.data?.bankExist) {
+		setWithdrawDetails(prev => {
+			return {
+				...prev,
+				accountHolderName: '',
+				bankName: '',
+				accountType: '',
+				amount: '',
+				ifsc: '',
+				accountNumber: '',
+				withdrawType: '',
+				withdrawMode: ''
+			};
+		});
+	}
+}, [withdrawBalance?.data?.bankExist]);
+
   useEffect(() => {
-		if (withdrawBalance?.status) {
-			setWithdrawDetails(prev => {
-				return {
-					...prev,
-					accountHolderName: '',
-					bankName: '',
-					accountType: '',
-					amount: '',
-					ifsc: '',
-					accountNumber: '',
-					withdrawType: '',
-					withdrawMode: ''
-				};
-			});
+		if (withdrawBalance?.data?.bankExist == false) {
+			setSaveBankModal(true);
+		} else {
+			setSaveBankModal(false);
 		}
-  }, [withdrawBalance]);
-
-  // console.log(isLoading, "isLOADING")
-  // debugger
-
-  return (
+  }, [withdrawBalance?.data?.bankExist]);
+	
+	useEffect(() => {
+	triger()
+	}, [])
+	
+	return (
+	<>
+			<ModalComponent Elememt={<WithdrawModal triger={triger} withdrawTypeHandler={withdrawTypeHandler} withdrawDetails={withdrawDetails} setWithdrawDetails={setWithdrawDetails} setSaveBankModal={setSaveBankModal} />} open={saveBankModal} setOpen={setSaveBankModal} />
 		<Container maxWidth="lg" className="container">
 			<Box className="withdrawparent">
 				<Box className="heading">
@@ -349,7 +378,8 @@ const Withdraw = () => {
 				</Box>
 
 				<TabPanel value={value} index={0}>
-					<Bank
+						<Bank
+							withdrawType={withdrawType}
 						valueChangeHandler={valueChangeHandler}
 						bankDetails={userWithdrawDetails}
 						bankDetailsLoading={bankDetailsLoading}
@@ -359,7 +389,8 @@ const Withdraw = () => {
 					/>
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<Upi
+						<Upi
+							withdrawType={withdrawType}
 						valueChangeHandler={valueChangeHandler}
 						upiDetails={userWithdrawDetails}
 						setWithdrawDetails={setWithdrawDetails}
@@ -368,7 +399,8 @@ const Withdraw = () => {
 					/>
 				</TabPanel>
 				<TabPanel value={value} index={2}>
-					<Paytm
+						<Paytm
+							withdrawType={withdrawType}
 						valueChangeHandler={valueChangeHandler}
 						paytmDetails={userWithdrawDetails}
 						setWithdrawDetails={setWithdrawDetails}
@@ -382,10 +414,10 @@ const Withdraw = () => {
 					name={isLoading ? <Loader /> : 'withdraw coins'}
 					// disable={isLoading}
 				/>
-
 				<Previouswithdraw />
 			</Box>
-		</Container>
+			</Container>
+			</>
   );
 };
 

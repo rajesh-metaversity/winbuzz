@@ -39,13 +39,13 @@ const MainLayout = ({ setGame, gameName }) => {
     }
   }, [loginCheck]);
 
+  const handleOpen = () => {
+    setOpen(!open);
+    // setSiderOpen(!siderOpen)
+  };
   const modalElement = {
     0: <LoginForm setOpen={setOpen} />,
     // 1: <RulesModal setOpen={setOpen} />,
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
   };
 
   if (isLoading) {
@@ -81,7 +81,7 @@ const MainLayout = ({ setGame, gameName }) => {
               }
               onClick={() => setSiderOpen(!siderOpen)}
             >
-              <SiderBar handleOpen={handleOpen} />
+              <SiderBar handleOpen={handleOpen} setSiderOpen={setSiderOpen} />
             </div>
             <div className="content">
               <TopBanner />

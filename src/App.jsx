@@ -10,7 +10,9 @@ import { useValidateJWTMutation } from "./Services/ValidateJWT/Validate";
 
 function App() {
   const [trigger, { data, isLoading, isError }] = useValidateJWTMutation();
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	
+
 
   const isLogin = useSelector(isLoginSelector);
 
@@ -26,10 +28,19 @@ function App() {
     if (isLogin) {
       const validateJWT = setInterval(() => {
         dispatch(trigger({}));
-      }, 5000);
+	}, 5000);
       return () => clearInterval(validateJWT);
     }
-  }, []);
+  }, [isLogin]);
+	
+	useEffect(() => {
+
+		if (data?.status == false) {
+			localStorage.clear()
+			dispatch(setIslogin(false));
+		}
+
+	}, [data])
 
   return (
     <>

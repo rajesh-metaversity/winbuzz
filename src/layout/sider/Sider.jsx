@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import arrow from "../../assets/img/rightArrow.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -13,8 +13,8 @@ import tennisImage from "../../assets/tennis.svg";
 import footballImage from "../../assets/football.svg";
 import horseRidingImage from "../../assets/horse.svg";
 import kabaddiImage from "../../assets/kabaddi.svg";
-import casino from "../../assets/int.svg";
 import leaf from "../../assets/img/99999.svg";
+import casino from "../../assets/int.svg";
 import lottery from "../../assets/img/lottery.png";
 import slots from "../../assets/img/slots.png";
 import fantasygame from "../../assets/img/fantasy-game.png";
@@ -22,6 +22,7 @@ import fantasygame from "../../assets/img/fantasy-game.png";
 import { multi_market } from "../../routes/PagesUrl";
 import { isLoginSelector } from "../../App/LoginSlice";
 import { useSelector } from "react-redux";
+import { useAllotedCasinoMutation } from "../../Services/allotedCasino/AllotedCasino";
 export const sportImages = {
   Cricket: cricketImage,
   Tennis: tennisImage,
@@ -30,13 +31,15 @@ export const sportImages = {
   Kabaddi: kabaddiImage,
 };
 
-const SiderBar = ({ handleOpen }) => {
+const SiderBar = ({ handleOpen, setSiderOpen }) => {
   const { data, isLoading, isError } = useActiveSportQuery();
   const [trigge, { data: activeMatch, isLoading: jkm, isError: bhjn }] =
     useActiveMatchMutation();
   const [matchName, setMatchName] = useState("second");
   const [activeSlide, setActiveSlide] = useState(false);
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
+
+  const [trigger, { data: allotedCasino }] = useAllotedCasinoMutation();
 
   const nav = useNavigate();
 
@@ -46,6 +49,13 @@ const SiderBar = ({ handleOpen }) => {
   const isLogin = useSelector(isLoginSelector);
 
   const [idSport, setIdSport] = useState(0);
+
+  useEffect(() => {
+    if (isLogin) {
+      trigger()
+    }
+  }, [])
+
   const casinoList = [
     {
       name: "Lottery",
@@ -55,6 +65,12 @@ const SiderBar = ({ handleOpen }) => {
     { name: "Slot", img: slots },
     { name: "Fantasy Game", img: fantasygame },
   ];
+
+  const filteredCasino = allotedCasino?.data?.filter(item => item?.name === "QTech" && item?.active)
+
+  console.log(filteredCasino, "FILTERED")
+
+
   return (
     <div
       className={isBreakPoint ? "sider-active" : "sider-container"}
@@ -99,15 +115,19 @@ const SiderBar = ({ handleOpen }) => {
             </React.Fragment>
           );
         })}
-        {isLogin
+
+        {/*  */}
+
+
+        {/* {isLogin
           ? casinoList.map((item, index) => {
               let removeSpace = item.name.split(" ").join("");
 
               return (
                 <Link to={`casino/${removeSpace}`} key={item + index}>
-                  <li>
+                  <li onClick={() => setSiderOpen(false)}>
                     <p>
-                      <img src={item.img} alt="casino" />
+                      <img src={item?.img} alt="casino" />
                       {item?.name}
                     </p>
                     <span>
@@ -121,7 +141,7 @@ const SiderBar = ({ handleOpen }) => {
               return (
                 <li key={item + index}>
                   <p onClick={() => handleOpen()}>
-                    <img src={item.img} alt="casino" />
+                    <img src={item?.img} alt="casino" />
                     {item.name}
                   </p>
                   <span>
@@ -129,7 +149,39 @@ const SiderBar = ({ handleOpen }) => {
                   </span>
                 </li>
               );
-            })}
+            })} */}
+        
+        {filteredCasino?.length && casinoList.map((item, index) => {
+              let removeSpace = item.name.split(" ").join("");
+
+              return (
+                <Link to={`casino/${removeSpace}`} key={item + index}>
+                  <li onClick={() => setSiderOpen(false)}>
+                    <p>
+                      <img src={item?.img} alt="casino" />
+                      {item?.name}
+                    </p>
+                    <span>
+                      <img src={arrow} alt="" />
+                    </span>
+                  </li>
+                </Link>
+              );
+        })}
+        
+        {/* {!isLogin && casinoList?.map((item, index) => {
+              return (
+                <li key={item + index}>
+                  <p onClick={() => handleOpen()}>
+                    <img src={item?.img} alt="casino" />
+                    {item?.name}
+                  </p>
+                  <span>
+                    <img src={arrow} alt="" />
+                  </span>
+                </li>
+              );
+            }) } */}
       </ul>
 
       <div
@@ -141,16 +193,20 @@ const SiderBar = ({ handleOpen }) => {
           </p>
           <p className="matchName">{matchName}</p>
           {activeMatch?.data.map((item) => {
-            console.log(item, "ooioin");
             if (item.matchName) {
               return (
                 <>
-                  <li onClick={() => setActiveSlide(true)}>
+                  <li onClick={() => {
+                    setSiderOpen(false)
+                    setActiveSlide(!activeSlide)
+                  }}>
                     <p
-                      onClick={() =>
+                      onClick={() => {
                         handleGameDetailsPage(item?.matchId, idSport)
                       }
+                      }
                     >
+                      {/* Matches */}
                       {item.matchName}
                     </p>
                     <span>

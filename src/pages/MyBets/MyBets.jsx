@@ -71,9 +71,9 @@ const MyBets = () => {
 		})
 	}
 
-	const loadHandler = () => {
-		trigger(bets)
-	}
+	// const loadHandler = () => {
+	// 	trigger(bets)
+	// }
 
 
 	return (

@@ -32,7 +32,7 @@ export const Withdraw = createApi({
                 body: args
             })
         }),
-        BankAccount: builder.query({
+        BankAccount: builder.mutation({
             query: args => ({
                 url: "/get/client-bank",
                 method: 'POST',
@@ -46,8 +46,15 @@ export const Withdraw = createApi({
                 body: args
             })
         }),
+        SaveBankAccount: builder.mutation({
+            query: args => ({
+                url: "/save/client-bank",
+                method: 'POST',
+                body: args
+            })
+        }),
     })
 })
 
 
-export const { useWithdrawQuery, useWithdrawStakeQuery, useWithdrawClientListQuery, useBankAccountQuery, useWithdrawBalanceMutation } = Withdraw;
+export const {useSaveBankAccountMutation, useWithdrawQuery, useWithdrawStakeQuery, useWithdrawClientListQuery, useBankAccountMutation, useWithdrawBalanceMutation } = Withdraw;

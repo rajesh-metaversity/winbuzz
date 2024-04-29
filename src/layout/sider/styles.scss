@@ -126,7 +126,7 @@
 
     p {
       margin: 0%;
-      display: flex;
+      // display: flex;
       gap: 5px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -142,7 +142,7 @@
       width: 20px;
     }
     &:last-child {
-      border-bottom: 1px solid transparent;
+      // border-bottom: 1px solid transparent;
     }
     &:hover {
       transform: scale(1.07);

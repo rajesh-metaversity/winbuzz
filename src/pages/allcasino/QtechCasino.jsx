@@ -33,7 +33,6 @@ const QtechCasino = () => {
   useEffect(() => {
     trigger(qtechData);
   }, []);
-  console.log(data?.data?.url);
 
   const nav = useNavigate();
   return (

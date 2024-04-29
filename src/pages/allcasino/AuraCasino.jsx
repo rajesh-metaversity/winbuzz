@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
 const AuraCasino = () => {
+  const nav = useNavigate();
   const casinoStyle = {
     width: "100%",
     background: "transparent",
@@ -10,6 +12,9 @@ const AuraCasino = () => {
   };
   const token = localStorage.getItem("token");
   const { id, gameId } = useParams();
+  const handlerClose = () => {
+    nav("/casino-list");
+  };
   return (
     <div>
       <Box sx={casinoStyle}>
@@ -17,15 +22,17 @@ const AuraCasino = () => {
           sx={{
             background: "linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f)",
             color: "#fff",
-            mt: 2,
             pl: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {id}
           </Typography>
           <Typography>
-            <button>X</button>
+            <CloseIcon onClick={handlerClose} />
           </Typography>
         </Box>
 

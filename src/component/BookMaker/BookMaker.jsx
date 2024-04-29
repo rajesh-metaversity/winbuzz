@@ -31,7 +31,6 @@ const BookMaker = ({
   handleFavDel,
   handleFavSec,
 }) => {
-  // console.log(PnlOdds, 'alskdjfhkajsaaaa');
   var curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const pTime = moment(curr).format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -157,7 +156,7 @@ const BookMaker = ({
                               : "text_success"
                           }`}
                         >
-                          {oddsPnl[dataBook.sid] || "0.0"}
+                          {oddsPnl[dataBook?.sid] || "0.0"}
                         </span>
                       </div>
                     );
@@ -200,7 +199,7 @@ const BookMaker = ({
                               md={3.9}
                               xs={12}
                               className={
-                                (dataBook && dataBook?.b1 > prevOdds[id]?.b1
+                                (dataBook?.length && dataBook?.b1 > prevOdds[id]?.b1
                                   ? "odds-up-color "
                                   : "") + "back"
                               }
@@ -234,7 +233,7 @@ const BookMaker = ({
                           >
                             <LayGrid
                               className={
-                                (dataBook?.l1 > prevOdds[id].l1
+                                (dataBook?.length && dataBook?.l1 > prevOdds[id].l1
                                   ? "odds-down-color"
                                   : "") + "lay"
                               }

@@ -12,7 +12,7 @@ const CasinoList = ({
   const [active, setActive] = useState(0);
   useEffect(() => {
     if (type != 2) {
-      setGameCode("");
+      // setGameCode("");
     }
     setActive(0);
   }, [id]);

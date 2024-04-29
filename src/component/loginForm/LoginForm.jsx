@@ -16,7 +16,7 @@ import { setIslogin } from "../../App/LoginSlice";
 import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { changePass, passwordChange } from "../../routes/PagesUrl";
-const LoginForm = ({ setOpen, handleClose }) => {
+const LoginForm = ({ setOpen, handleClose, }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const [demoChecker, setDemoChecker] = useState(false);
@@ -46,7 +46,6 @@ const LoginForm = ({ setOpen, handleClose }) => {
         localStorage.setItem("userId", check.userId);
         nav(changePass);
         if (check.userTypeInfo == 2) {
-          // console.log("checking")
           localStorage.setItem("session", JSON.stringify(check));
           setOpen(false);
           dispatch(setIslogin(true));
@@ -74,16 +73,7 @@ const LoginForm = ({ setOpen, handleClose }) => {
         if (demoChecker) {
           localStorage.setItem("userTypeInfo", check.userTypeInfo);
         }
-        // if (check.passwordtype == 'old') {
-        // 	nav(passwordChange);
-
-        // if (isBreakPoint) {
-        //   console.log("mobile-chan");
-        // } else {
-        //   console.log("web-change");
-        // }
-        //   nav(changePassword_Web_Screen);
-        // }
+      
       }
     }
   }, [check]);
@@ -153,8 +143,9 @@ const LoginForm = ({ setOpen, handleClose }) => {
           <div
             className="cross_icon"
             onClick={() => {
-              handleClose();
+           
               setOpen(false);
+              handleClose()
             }}
           >
             <CloseIcon />

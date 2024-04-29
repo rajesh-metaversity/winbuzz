@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { LocalizationProvider, } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BettingStyled, SelectStyles } from "./styled";
 import { useActiveSportQuery } from "../../Services/ActiveSportList/ActiveSportList";
@@ -65,10 +65,12 @@ const BettingProfitLoss = () => {
     const value = e;
     if (name == "toDate") {
       setBettingPnl((prev) => {
+      
         return {
           ...prev,
           toDate: value,
-        };
+        }
+       
       });
     } else if (name == "fromDate") {
       setBettingPnl((prev) => {
@@ -115,11 +117,6 @@ const BettingProfitLoss = () => {
       }
     })
   }
-  
-  const loadHandler = () => {
-    trigger(bettingPnl)
-  }
-  
   return (
     <>
 		<div className="betting_profit-loss_cont">
@@ -155,13 +152,13 @@ const BettingProfitLoss = () => {
 					<div className="right_date">
 						<label htmlFor="form">Form</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} />
+							<BettingStyled defaultValue={bettingPnl?.fromDate} format="DD-MM-YYYY" onChange={e => handleChange('fromDate', e)} minDate={dayjs().subtract(2, "month")} disableFuture={true}/>
 						</LocalizationProvider>
 					</div>
 					<div className="right_date">
 						<label htmlFor="form">To Date</label>
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<BettingStyled defaultValue={bettingPnl?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)} />
+							<BettingStyled defaultValue={bettingPnl?.toDate} format="DD-MM-YYYY" onChange={e => handleChange('toDate', e)}  disableFuture={true}/>
 						</LocalizationProvider>
 					</div>
 
