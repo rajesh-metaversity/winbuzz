@@ -197,11 +197,11 @@ const BookMaker = ({
                               item
                               md={3.9}
                               xs={12}
-                              // className={
-                              //   (dataBook && dataBook?.b1 > prevOdds[id]?.b1
-                              //     ? "odds-up-color "
-                              //     : "") + "back"
-                              // }
+                              className={
+                                (dataBook && dataBook?.b1 > prevOdds[id]?.b1
+                                  ? "odds-up-color "
+                                  : "") + "back"
+                              }
                               onClick={() =>{
                                 setmatchId(dataBook.matchId)
                                 handleBackBet(
