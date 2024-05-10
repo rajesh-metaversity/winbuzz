@@ -1,24 +1,74 @@
 .main-layout-container {
   width: 100%;
   height: 100vh;
-  background-color: aqua;
+  margin-bottom: 75px;
+  @media screen and (max-width: 780px) {
+    height: 100%;
+  }
   .header-layout {
-    height: 94px;
+    height: auto;
+    // position: sticky;
+    top: 0%;
+    z-index: 100;
   }
   .content-container {
     width: 100%;
     display: flex;
-    align-items: center;
     height: calc(100% - 64px);
-    .sider-container {
-      width: 15%;
-      background-color: firebrick;
+    .sider-layout-container {
+      width: 12%;
       height: 100%;
+      background-color: white;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      @media screen and (max-width: 780px) {
+        position: fixed;
+        z-index: 103;
+        width: 0%;
+        transition: width 0.4s;
+        top: 64px;
+        background-color: transparent;
+        border-right: none;
+      }
     }
-    .content-container {
-      width: 85%;
+    .sider-layout-active {
+      width: 100%;
+      position: fixed;
+      z-index: 999999;
+      height: calc(100vh - 64px);
+      background-color: transparent;
+      border-left: 1px solid #ddd;
+      border-right: none;
+      transition: width 0.4s;
+      top: 64px;
+    }
+    .content {
+      width: calc(65% - 20px);
       height: 100%;
-      background-color: darkcyan;
+      padding: 10px;
+      background-color: white;
+      @media screen and (max-width: 780px) {
+        width: calc(100% - 10px);
+        padding: 5px;
+      }
+    }
+    .sub-content {
+      width: calc(90% - 20px);
+      padding: 10px;
+      @media screen and (max-width: 780px) {
+        width: calc(100% - 5px);
+        padding: 2px;
+      }
+
+      @media screen and (max-width: 780px) {
+        // background-color: #202020;
+        overflow: hidden;
+        width: 100% !important;
+      }
+    }
+    .banner-sider {
+      width: 23%;
+      margin-top: 10px;
     }
   }
 }

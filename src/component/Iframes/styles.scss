@@ -1,0 +1,80 @@
+.scorecard_heading {
+  width: calc(100% - 28px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #dedddd;
+  padding: 6px 14px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  p {
+    margin: 0 !important;
+    padding: 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    a {
+      display: flex;
+      align-items: center;
+    }
+    svg {
+      font-size: 10px;
+      font-weight: bold;
+      background-color: #000;
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+  }
+
+  .score_btn {
+    background-color: #4caf50;
+    border: unset;
+    padding: 2px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    svg {
+      color: #fff;
+      font-size: 14px;
+    }
+  }
+}
+
+.score_board {
+  width: 100%;
+  // background-image: url("../../assets/img/scoreboardbanner.jpeg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 200px;
+  transition: height 0.4s ease-in-out;
+  overflow: hidden;
+
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.score_board2 {
+  width: 100%;
+  transition: height 0.4s ease-in-out;
+  height: 0px;
+  margin-top: 10px;
+  overflow: hidden;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+}

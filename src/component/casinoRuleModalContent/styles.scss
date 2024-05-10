@@ -1,0 +1,93 @@
+.main_casino_modals {
+  position: relative;
+  .casino_images_modals {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+      backdrop-filter: blur(1px);
+    }
+  }
+  .casino_message {
+    .please_note {
+      text-align: center;
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .points {
+      text-align: center;
+      font-size: 26px;
+      margin: 18px 0px;
+    }
+  }
+  .casino_dis {
+    p {
+      text-align: center;
+      margin: 12px;
+      span {
+        color: #000;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.agree_btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  a {
+    width: 48%;
+  }
+  .agree {
+    width: 48%;
+  }
+  button {
+    width: 48%;
+    border: unset;
+    background-color: #198754;
+    padding: 8px 16px;
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+    &:nth-child(2) {
+      border: unset;
+      background-color: red !important;
+      padding: 8px 16px;
+      width: 48%;
+      color: #fff;
+    }
+  }
+}
+
+.mobile_if {
+  display: none;
+}
+.desktop_if {
+  height: 95vh;
+}
+
+@media screen and (max-width: 800px) {
+  .mobile_if {
+    min-height: 850px;
+    height: 100vh;
+    max-height: 100vh;
+    display: block;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  .desktop_if {
+    display: none;
+  }
+}

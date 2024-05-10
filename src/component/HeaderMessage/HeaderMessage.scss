@@ -1,0 +1,14 @@
+.marq_mes{
+    background-color: #000;
+    color: #fff;
+    padding: 4px;
+
+    @media screen and (max-width: 780px) {
+        display: none;
+        
+    }
+    .msg{
+        font-size: 14px;
+        font-weight: 600;
+    }
+}

@@ -1,0 +1,131 @@
+.sub_header_cont {
+  padding: 5px;
+  background: black;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .sub_header_ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin: 0;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    li {
+      padding: 5px 20px;
+      line-height: 20px;
+      text-transform: uppercase;
+      font-size: 13px;
+      cursor: pointer;
+      // margin-right: 12px;
+      white-space: nowrap;
+      list-style: none;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 40%;
+        left: 0px;
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+      }
+
+      &:nth-child(1) {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 40%;
+          left: 0px;
+          display: inline-block;
+          width: 0px;
+          height: 0px;
+          border-radius: 50%;
+          background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+        }
+      }
+    }
+  }
+}
+
+.mobile-sub-header-container {
+  width: 100%;
+  // height: 40px;
+  background-color: #dedddd;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ul {
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding-block: 5px;
+      padding-inline: 10px;
+      white-space: nowrap;
+      height: 100%;
+      border-right: 1px solid #ccc;
+      cursor: pointer;
+      span {
+        font-size: 12px;
+        a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+      img {
+        width: 20px;
+      }
+    }
+    .active-tabs {
+      background: linear-gradient(94deg, #b6842d, #ebda8d 55%, #b7862f);
+    }
+  }
+}
+.mobile-subheader-deposit {
+  display: flex;
+  align-items: center;
+  a {
+    width: 50%;
+    text-decoration: none;
+    .mobile-subheader-deposit-left-col {
+      width: 100%;
+      background-color: darkgreen;
+      display: flex;
+      padding-block: 6px;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      svg {
+        color: white;
+      }
+    }
+    .mobile-subheader-deposit-right-col {
+      width: 100%;
+      background-color: darkred;
+      display: flex;
+      padding-block: 6px;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      svg {
+        color: white;
+      }
+    }
+  }
+}
