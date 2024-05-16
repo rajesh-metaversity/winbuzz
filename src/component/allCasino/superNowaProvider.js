@@ -1,19 +1,19 @@
 import Qtech from "../../assets/img/qtech.png";
 export let AllCasinoProviderName = {
-  "Indian Casino": [
-    {
-      name: "Super nowa",
-      logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
-      gameCode: "SP-NOWA",
-      PageUrl: "/SuperNowa_casion",
-    },
-    {
-      name: "Aura",
-      logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-      gameCode: "AURA",
-      PageUrl: "/casino-list",
-    },
-  ],
+  // "Indian Casino": [
+    // {
+    //   name: "Super nowa",
+    //   logo: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+    //   gameCode: "SP-NOWA",
+    //   PageUrl: "/SuperNowa_casion",
+    // },
+    // {
+    //   name: "Aura",
+    //   logo: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
+    //   gameCode: "AURA",
+    //   PageUrl: "/casino-list",
+    // },
+  // ],
   "Internation Casino": [
     {
       name: "EVOLUTION",

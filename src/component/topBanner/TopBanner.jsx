@@ -34,7 +34,7 @@ const TopBanner = () => {
   }, []);
 
   const newArraya = [
-    ...AllCasinoProviderName["Indian Casino"],
+    // ...AllCasinoProviderName["Indian Casino"],
     ...AllCasinoProviderName["Internation Casino"],
   ];
 

@@ -156,13 +156,12 @@ const SiderBar = ({ handleOpen, setSiderOpen }) => {
         {filteredCasino?.length &&
           casinoList.map((item, index) => {
             let removeSpace = item.name.split(" ").join("");
-
             return (
               <Link to={`casino/${removeSpace}`} key={item + index}>
                 <li onClick={() => setSiderOpen(false)}>
                   <p className="match-list">
                     <img src={item?.img} alt="casino" />
-                    {item?.name}df
+                    {item?.name}
                   </p>
                   <span>
                     <img src={arrow} alt="" />
