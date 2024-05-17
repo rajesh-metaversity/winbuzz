@@ -12,13 +12,13 @@ const DashBoard = () => {
       {/* {!isBreakPoint && <TopBanner />} */}
 
       <Inplay />
-      {isBreakPoint && (
-        <>
+      {/* {isBreakPoint && (
+        <> */}
           {/* <SiderBanner /> */}
           <AllProviderName />
           <SportData />
-        </>
-      )}
+        {/* </> */}
+      {/* )} */}
     </div>
   );
 };

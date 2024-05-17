@@ -99,7 +99,7 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
               </React.Fragment>
             );
           })}
-          <li
+          {/* <li
             onClick={() => {
               if (isLogin) {
                 nav("casino/Indian-Casino");
@@ -109,7 +109,7 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
             }}
           >
             Int Casino
-          </li>
+          </li> */}
           {isLogin
             ? casinoList?.map((item, index) => {
                 let removeSpace = item.name.split(" ").join("");
@@ -180,7 +180,7 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
                 </React.Fragment>
               );
             })}
-            <li
+            {/* <li
               onClick={() => {
                 if (isLogin) {
                   nav("casino/Indian-Casino");
@@ -193,7 +193,7 @@ const SubHeader = ({ setModalValue, handleOpen, selfAllowed }) => {
               <img src={play} alt="" />
 
               <span>Int Casino</span>
-            </li>
+            </li> */}
             {isLogin
               ? casinoList.map((item, index) => {
                   let removeSpace = item.name.split(" ").join("");
