@@ -14,7 +14,10 @@ export const activeMatch = createApi({
     myIp: builder.query({
       query: () => "/betfair_api/my-ip",
     }),
+    odssApi: builder.mutation({
+      query: (id) => "/betfair_api/fancy/" + id,
+    }),
   }),
 });
-export const { useActiveMatchMutation, useInPlayQuery, useMyIpQuery } =
+export const { useActiveMatchMutation, useInPlayQuery, useMyIpQuery, useOdssApiMutation } =
   activeMatch;

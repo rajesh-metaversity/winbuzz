@@ -4,11 +4,11 @@ import { WebBetPlaceModule } from "../../component/betPlaceModule/BetPlaceModule
 import MyBetsModule from "../../component/myBetsModule/MyBetsModule";
 import MatchedDetailBetComp from "../../component/matchedDetail/MatchedDetailBetComp";
 import "./styles.scss";
-import { socket } from "./Socket";
+// import { socket } from "./Socket";
 import { useParams } from "react-router-dom";
 import BookMaker from "../../component/BookMaker/BookMaker";
 import FancyTabs from "../../component/fancy/FancyTabs";
-import { useMyIpQuery } from "../../Services/ActiveSportList/ActiveMatch";
+import { useMyIpQuery, useOdssApiMutation } from "../../Services/ActiveSportList/ActiveMatch";
 import {
   useFancyPnlQuery,
   useOddsPnlQuery,
@@ -35,6 +35,7 @@ const GameDetail = () => {
 
   const [trigger, { data: createFav }] = useCreateFavMutation();
   const [deletedData, { data: deleteFav }] = useDeleteFavMutation();
+  const [oddsTrigger, {data: oddsData}] = useOdssApiMutation()
 
   const handleFavSec = (marketId) => {
     trigger({
@@ -56,37 +57,73 @@ const GameDetail = () => {
     });
   }, [createFav?.data, deleteFav?.data, id]);
 
-  useEffect(() => {
-    socket.on("OddsUpdated", (e) =>
-      setOdds((odds) => {
-        e["All"] = e
-          ? Object.keys(e).reduce(
+  useEffect(()=>{
+    oddsTrigger(id)
+    const timer = setInterval(() => {
+      oddsTrigger(id)
+    }, 1000);
+    return () => clearInterval(timer);
+    
+  }, [id])
+
+
+  useEffect(()=>{
+      if (oddsData) {
+        const newData = { ...oddsData };
+        newData["All"] = newData
+          ? Object.keys(newData).reduce(
               (ac, key) =>
                 ["Odds", "All", "Bookmaker"].includes(key)
                   ? ac
-                  : [...ac, ...e[key]],
+                  : [...ac, ...newData[key]],
               []
             )
           : [];
-
-        if (JSON.stringify(odds) !== JSON.stringify(e)) {
+  
+        if (JSON.stringify(odds) !== JSON.stringify(newData)) {
           if (Object.keys(odds)?.length) {
             const newOdds = { ...odds };
             setPrevOdds(newOdds);
           } else {
-            setPrevOdds(e);
+            setPrevOdds(newData);
           }
         }
-        return e;
-      })
-    );
-  }, [id]);
+        setOdds(newData);
+      }
+  }, [oddsData])
 
-  useEffect(() => {
-    socket.emit("JoinRoom", {
-      eventId: id,
-    });
-  }, [id]);
+
+  // useEffect(() => {
+  //   socket.on("OddsUpdated", (e) =>
+  //     setOdds((odds) => {
+  //       e["All"] = e
+  //         ? Object.keys(e).reduce(
+  //             (ac, key) =>
+  //               ["Odds", "All", "Bookmaker"].includes(key)
+  //                 ? ac
+  //                 : [...ac, ...e[key]],
+  //             []
+  //           )
+  //         : [];
+
+  //       if (JSON.stringify(odds) !== JSON.stringify(e)) {
+  //         if (Object.keys(odds)?.length) {
+  //           const newOdds = { ...odds };
+  //           setPrevOdds(newOdds);
+  //         } else {
+  //           setPrevOdds(e);
+  //         }
+  //       }
+  //       return e;
+  //     })
+  //   );
+  // }, [id]);
+
+  // useEffect(() => {
+  //   socket.emit("JoinRoom", {
+  //     eventId: id,
+  //   });
+  // }, [id]);
 
   const { data } = useMyIpQuery();
   const [pnlCheckWinner, setPnlCheckWinner] = useState(0);
@@ -127,15 +164,17 @@ const GameDetail = () => {
   }, []);
 
   // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     if (pnlCheckWinner == 0) {
-  //       trigge({ matchId: id });
-  //     } else {
-  //       trigg({ marketId: marketId });
-  //     }
-  //   }, 3000);
-  //   return () => clearInterval(timer);
+    // const timer = setInterval(() => {
+    //   if (pnlCheckWinner == 0) {
+    //     trigge({ matchId: id });
+    //   } else {
+    //     trigg({ marketId: marketId });
+    //   }
+    // }, 3000);
+    // return () => clearInterval(timer);
   // }, [pnlCheckWinner]);
+
+
   return (
     <div className="game_detail-cont">
       <div className="game-detail-left-col">
@@ -156,7 +195,8 @@ const GameDetail = () => {
           handleFavSec={handleFavSec}
           setMarketId={setMarketId}
         />
-        <BookMaker
+        {
+          prevOdds?.Bookmaker?.length > 0 &&  <BookMaker
           minMax={minMax}
           prevOdds={prevOdds?.Bookmaker}
           setMinMax={setMinMax}
@@ -168,6 +208,8 @@ const GameDetail = () => {
           handleFavDel={handleFavDel}
           handleFavSec={handleFavSec}
         />
+        }
+       
         <FancyTabs
           minMax={minMax}
           prevOdds={prevOdds}
