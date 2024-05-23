@@ -15,8 +15,10 @@ const FantasyGameCard = ({ gameLists, setCasinoRuleModal, setCasinoName }) => {
           >
             <div
               className="casino_card"
-              style={{ backgroundImage: `url(${res?.image})` }}
-            ></div>
+              // style={{ backgroundImage: `url(${res?.image})` }}
+            >
+               <img width="100%" height="100%" src={res?.image} alt="" />
+            </div>
             <div
               className="casion-card-footer"
               // onClick={() => {

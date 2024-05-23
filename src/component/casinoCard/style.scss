@@ -1,45 +1,47 @@
-.casino-card-t{
+.casino-card-t {
+  width: 100%;
+  display: flex;
+  height: 110px;
+  flex-direction: column;
+
+
+  @media screen and (max-width: 780px) {
     width: 100%;
-    display: flex;
-    height: 130px;
-    flex-direction: column;
+  }
+
+  .casino_card {
+    width: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 80%;
 
     @media screen and (max-width: 780px) {
-        width: 100%;
+      width: 100%;
+      height: 100%;
+      img{
+        border: 3px solid #045662;
+        border-radius: 7px;
+      }
     }
+  }
+  .casion-card-footer {
+    height: 20%;
+    background: #a70011;
+    width: calc(100% - 20px);
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
 
-    .casino_card {
-        width: 100%;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        height: 80%;
-
-        @media screen and (max-width: 780px) {
-            width: 100%;
-            height: 100%;
-
-        }
+    @media screen and (max-width: 780px) {
+      clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+      width: 70%;
+      text-transform: uppercase;
+      height: 0%;
+      padding: 4px 10px;
+      height: 15%;
+      display: none;
     }
-    .casion-card-footer {
-        height: 20%;
-        background: #a70011;
-        width: calc(100% - 20px);
-        padding: 4px 10px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #fff;
-        cursor: pointer;
-
-        @media screen and (max-width: 780px) {
-            clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
-            width: 70%;
-            text-transform: uppercase;
-            height: 0%;
-            padding: 4px 10px;
-            height: 15%;
-            display: none;
-            
-        }
-    }
-
+  }
 }

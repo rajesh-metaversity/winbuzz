@@ -21,8 +21,11 @@ const CasinoCard = ({
               >
                 <div
                   className="casino_card"
-                  style={{ backgroundImage: `url(${res?.images[1].url})` }}
-                ></div>
+                  // style={{ backgroundImage: `url(${res?.images[1].url})` }}
+                >
+                  <img width="100%" height="100%" src={res?.images[1].url} alt="" />
+                </div>
+                
                 <div className="casion-card-footer">Play Now</div>
               </div>
             </>
