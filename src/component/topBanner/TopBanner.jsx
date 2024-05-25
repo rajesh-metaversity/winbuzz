@@ -121,7 +121,7 @@ const TopBanner = () => {
     setOpen(false);
     nav("/");
   };
-  // const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
