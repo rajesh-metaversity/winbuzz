@@ -40,6 +40,13 @@ export const Qtech = createApi({
         body,
       }),
     }),
+    gameLobby: builder.mutation({
+      query: (body) => ({
+        url: "/gamelobby",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -48,4 +55,5 @@ export const {
   useProviderMutation,
   useQtechAuthQuery,
   useCasinoIframeMutation,
+  useGameLobbyMutation,
 } = Qtech;

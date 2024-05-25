@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useCasinoIframeMutation } from "../../Services/Qtech/Qtech";
 import { useEffect } from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import logo from "../../assets/img/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
 import { isBrowser } from "react-device-detect";
 import { isSelfData } from "../../layout/header/Header";

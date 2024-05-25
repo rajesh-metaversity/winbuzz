@@ -39,7 +39,7 @@ const CasinoIframe = () => {
       <div className="casino-iframe-header">
         <div className="casino-iframe-header-left-col">
           <span onClick={() => handleNav()}>
-            <HomeIcon />
+            <HomeIcon /> 
           </span>
           <img src={isSelfData?.data?.logo} alt="" onClick={() => handleNav()} />
           <span>{matchId}</span>
