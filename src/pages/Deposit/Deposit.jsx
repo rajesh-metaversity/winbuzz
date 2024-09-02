@@ -60,19 +60,29 @@ const Deposit = () => {
   const [depositKey, setDepositKey] = useState(0);
   const handleClickImage = (imageData, key) => {
     setSelectedImage(imageData);
-    setDepositKey(key);
+    if (key === "GPAY") {
+      setDepositKey("G PAY");
+    } else if (key === "PHONEPE") {
+      setDepositKey("PHONE PE");
+    } else {
+      setDepositKey(key);
+    }
   };
 
   const bankDetailObj = {
-    0: <Bank selectedImage={selectedImage || (data?.data && data?.data[0])} />,
+    0: <Bank selectedImage={selectedImage || (data?.data && data?.data[0])} phone={false}/>,
     1: <UPI selectedImage={selectedImage} />,
     2: <QR selectedImage={selectedImage} />,
+    3: <Bank selectedImage={selectedImage } phone={true}/>,
+    4: <Bank selectedImage={selectedImage } phone={true}/>,
   };
 
   const key = {
     BANK: 0,
     UPI: 1,
     QR: 2,
+    GPAY: 3,
+    PHONEPE: 4,
   };
 
   useEffect(() => {
@@ -219,8 +229,7 @@ const Deposit = () => {
           <span className="left_span">
             <button
               onClick={() => minusHandleChange()}
-              style={{ cursor: "pointer" }}
-            >
+              style={{ cursor: "pointer" }}>
               -
             </button>
             <input
@@ -235,8 +244,7 @@ const Deposit = () => {
             />
             <button
               onClick={() => plusHandleChange()}
-              style={{ cursor: "pointer" }}
-            >
+              style={{ cursor: "pointer" }}>
               +
             </button>
           </span>
@@ -293,14 +301,16 @@ const Deposit = () => {
               border: error1.url
                 ? "2px solid red"
                 : "2px solid rgb(253, 207, 19)",
-            }}
-          >
+            }}>
             {payloadData?.url && <img src={payloadData?.url} alt="" />}
             {!payloadData?.url && (
               <>
                 <p
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
-                >
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}>
                   <AddCircleIcon /> Click here to upload payment screenshot
                 </p>
               </>
@@ -308,8 +318,7 @@ const Deposit = () => {
             <ReactFileReader
               fileTypes={[".png", ".jpg"]}
               base64={true}
-              handleFiles={handleFiles}
-            >
+              handleFiles={handleFiles}>
               {/* <FiCamera style={{ width: 30, height: 30 }} as={Button} />
                */}
 
@@ -320,8 +329,7 @@ const Deposit = () => {
 
         <button
           className="submit_button"
-          onClick={() => depositSubmitHandler()}
-        >
+          onClick={() => depositSubmitHandler()}>
           {loading ? <Loader /> : "Submit"}
         </button>
       </div>
@@ -339,15 +347,13 @@ const Deposit = () => {
             <Table aria-label="customized table">
               <TableHead
                 sx={{ borderRadius: 0 }}
-                className="deposit_table-head"
-              >
+                className="deposit_table-head">
                 <TableRow
                   sx={{
                     "& .MuiTableCell-root": {
                       padding: "8px",
                     },
-                  }}
-                >
+                  }}>
                   <TableCell align="left">Amount</TableCell>
                   <TableCell align="left">Image&nbsp;</TableCell>
                   <TableCell align="left">Date&nbsp;</TableCell>
@@ -394,8 +400,7 @@ const Deposit = () => {
                   textAlign: "center",
                   background: "transparent",
                   color: "black",
-                }}
-              >
+                }}>
                 No data
               </p>
             )
@@ -407,8 +412,7 @@ const Deposit = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <Loader />
             </div>
           )}
