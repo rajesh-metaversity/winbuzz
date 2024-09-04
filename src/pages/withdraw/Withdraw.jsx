@@ -40,8 +40,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
+      {...other}>
       {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
     </div>
   );
@@ -162,7 +161,9 @@ const Withdraw = () => {
             )
             ? undefined
             : err.invalidUpi
-          : withdrawType.toLowerCase() === "paytm"
+          : withdrawType.toLowerCase() === "paytm" ||
+            withdrawType.toLowerCase() === "g pay" ||
+            withdrawType.toLowerCase() === "phone pe"
           ? withdrawDetails.accountNumber?.match(/^[0-9]{10}$/)
             ? undefined
             : "Mobile no should be 10 digits."
@@ -324,8 +325,7 @@ const Withdraw = () => {
                         amount: +withdrawDetails?.amount + +stake?.value,
                       };
                     })
-                  }
-                >
+                  }>
                   {stake?.key}
                 </button>
               ))}
@@ -354,8 +354,7 @@ const Withdraw = () => {
             }}
             size="small"
             displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-          >
+            inputProps={{ "aria-label": "Without label" }}>
             {/* <MenuItem value="" disabled>
             <span>Choose Withdraw Type</span>
           </MenuItem> */}
@@ -386,8 +385,7 @@ const Withdraw = () => {
               }}
               textColor="inherit"
               variant="fullWidth"
-              aria-label="full width tabs example"
-            >
+              aria-label="full width tabs example">
               {paymentImage?.data?.map((imgdata, index) => (
                 <Tab
                   TouchRippleProps={{
@@ -404,13 +402,11 @@ const Withdraw = () => {
                     <div
                       onClick={() =>
                         imageHandler(imgdata?.withdrawType, imgdata.id)
-                      }
-                    >
+                      }>
                       <img src={imgdata.image} className="tabImg" />
                       <Typography
                         component="p"
-                        sx={{ fontSize: 14, marginTop: 1 }}
-                      >
+                        sx={{ fontSize: 14, marginTop: 1 }}>
                         {imgdata?.withdrawType}
                       </Typography>
                     </div>
@@ -420,7 +416,8 @@ const Withdraw = () => {
             </Tabs>
           </Box>
 
-          <TabPanel value={value} index={0}>
+          {/* <TabPanel value={value} index={0}> */}
+          {withdrawType === "BANK" && (
             <Bank
               withdrawType={withdrawType}
               valueChangeHandler={valueChangeHandler}
@@ -430,8 +427,10 @@ const Withdraw = () => {
               withdrawDetail={withdrawDetails}
               checkError={checkError}
             />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
+          )}
+          {/* </TabPanel> */}
+          {/* <TabPanel value={value} index={1}> */}
+          {withdrawType === "UPI" && (
             <Upi
               withdrawType={withdrawType}
               valueChangeHandler={valueChangeHandler}
@@ -440,8 +439,13 @@ const Withdraw = () => {
               withdrawDetail={withdrawDetails}
               checkError={checkError}
             />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
+          )}
+
+          {/* </TabPanel> */}
+          {/* <TabPanel value={value} index={2}> */}
+          {(withdrawType === "PAYTM" ||
+            withdrawType === "G PAY" ||
+            withdrawType === "PHONE PE") && (
             <Paytm
               withdrawType={withdrawType}
               valueChangeHandler={valueChangeHandler}
@@ -450,7 +454,9 @@ const Withdraw = () => {
               withdrawDetail={withdrawDetails}
               checkError={checkError}
             />
-          </TabPanel>
+          )}
+
+          {/* </TabPanel> */}
 
           <WithdrawButton
             withdrawHandler={withdrawHandler}

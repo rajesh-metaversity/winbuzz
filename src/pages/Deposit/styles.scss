@@ -155,9 +155,11 @@
           width: 100px;
           border-radius: 10px;
           aspect-ratio: 1 / 1;
-          width: 150px;
+          width: 80px;
+          border: 1px solid #b6842d;
+          padding: 12px;
           @media screen and (max-width: 780px) {
-            width: 120px;
+            width: 50px;
           }
 
           // width: fit-content;
@@ -165,6 +167,8 @@
           img {
             width: 100%;
             border-radius: 10px;
+            height: 100%;
+            
           }
         }
       }

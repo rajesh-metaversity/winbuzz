@@ -60,13 +60,13 @@ const Deposit = () => {
   const [depositKey, setDepositKey] = useState(0);
   const handleClickImage = (imageData, key) => {
     setSelectedImage(imageData);
-    if (key === "GPAY") {
-      setDepositKey("G PAY");
-    } else if (key === "PHONEPE") {
-      setDepositKey("PHONE PE");
-    } else {
+    // if (key === "GPAY") {
+    //   setDepositKey("G PAY");
+    // } else if (key === "PHONEPE") {
+    //   setDepositKey("PHONE PE");
+    // } else {
       setDepositKey(key);
-    }
+    // }
   };
 
   const bankDetailObj = {
@@ -78,11 +78,11 @@ const Deposit = () => {
   };
 
   const key = {
-    BANK: 0,
-    UPI: 1,
-    QR: 2,
-    GPAY: 3,
-    PHONEPE: 4,
+    "BANK": 0,
+    "UPI": 1,
+    "QR": 2,
+    "G PAY": 3,
+    "PHONE PE": 4,
   };
 
   useEffect(() => {

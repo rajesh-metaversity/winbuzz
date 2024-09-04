@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 export const Qtech = createApi({
   reducerPath: "qtechApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.247idhub.com/api/qtech",
+    baseUrl: "https://api.247idhub.com/FOLDEXCH/api/qtech",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) headers.set("Authorization", `Bearer ${token}`);
