@@ -1,15 +1,12 @@
-import InputAdornment from "@mui/material/InputAdornment";
-import logo from "../../assets/img/logo.png";
+/* eslint-disable react/prop-types */
 import ButtonComponent from "../../component/button/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 
 import AddCardIcon from "@mui/icons-material/AddCard";
-import LoginForm from "../../component/loginForm/LoginForm";
 import ModalComponent from "../../component/modal/Modal";
 import PersonIcon from "@mui/icons-material/Person";
 import "./styles.scss";
-import { MyTextField } from "./styled";
 import UserDetailDropDown from "../../component/userDetailDropDown/UserDetailDropDown";
 import SubHeader from "./SubHeader";
 import { Link } from "react-router-dom";
@@ -40,7 +37,6 @@ export const WebHeaderComponent = ({
 
   const isBreakPoint = useMediaQuery("(max-width: 780px)");
 
-  const userType = localStorage.getItem("userTypeInfo");
   const appUrl = window.location.hostname;
   const [trigg, { data: isSlefDat }] = useIsSelfMutation();
   useEffect(() => {

@@ -1,5 +1,4 @@
 import HomeIcon from "@mui/icons-material/Home";
-import logo from "../../assets/img/logo.png";
 ///styles
 import "./styles.scss";
 import { useCasinoIframeMutation } from "../../Services/Qtech/Qtech";

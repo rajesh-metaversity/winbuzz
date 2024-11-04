@@ -1,4 +1,5 @@
-import { Box, Grid, useMediaQuery } from "@mui/material";
+/* eslint-disable react/prop-types */
+import { Grid } from "@mui/material";
 import {
   BackGrid,
   BetTypoPara,
@@ -29,7 +30,6 @@ const MatchedDetailBetComp = ({
   favData,
   handleFavDel,
   handleFavSec,
-  matchName,
   matId,
   setPnlCheckWinner,
   setMarketId,

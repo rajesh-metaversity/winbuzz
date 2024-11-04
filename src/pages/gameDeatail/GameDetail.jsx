@@ -129,12 +129,6 @@ const GameDetail = () => {
   const [pnlCheckWinner, setPnlCheckWinner] = useState(0);
   const [marketId, setMarketId] = useState("");
 
-  const dataObj = {
-    0: {
-      pnlCheckWinner: pnlCheckWinner,
-    },
-    1: { marketId: marketId, pnlCheckWinner: pnlCheckWinner },
-  };
   const { data: oddsPnl } = useOddsPnlQuery(
     { matchId: id },
     {

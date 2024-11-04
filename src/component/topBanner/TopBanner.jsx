@@ -19,17 +19,6 @@ import { Modal, Typography } from "@mui/material";
 import { isSelfData } from "../../layout/header/Header";
 import { isBrowser } from "react-device-detect";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 const TopBanner = () => {
   // const isBreakPoint = useMediaQuery("(max-width: 780px)");
@@ -47,7 +36,7 @@ const TopBanner = () => {
   const isLogin = useSelector(isLoginSelector);
   const [open, setOpen] = useState(false);
   const [gameName, setGameName] = useState("");
-  const [trigger, { data }] = useBannerListDataMutation();
+  const [trigger] = useBannerListDataMutation();
   useEffect(() => {
     trigger({
       type: 1,
@@ -89,7 +78,7 @@ const TopBanner = () => {
     device: isBrowser ? "desktop" : "mobile",
     // returnUrl: "https://sportindia247.com",
     returnUrl: `https://${window.location.hostname}`,
-    walletSessionId: localStorage.getItem("casino-token"),
+    walletSessionId: localStorage.getItem("token"),
     token: localStorage.getItem("casino-token"),
     gameName: "SPB-aviator",
   };
