@@ -14,6 +14,91 @@ export let AllCasinoProviderName = {
     //   PageUrl: "/casino-list",
     // },
   // ],
+  "Top Casino": [
+    {
+      name: "EVOLUTION",
+      logo: "/img/vite.config.png",
+      gameCode: "EVO-dhp",
+      gameCodeName: "EVO",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "VIVO GAMING",
+      logo: "/img/vivo-gaming.jpg",
+      gameCode: "VGL-bulgariaroulette",
+      gameCodeName: "VGL",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "EZUGI",
+      logo: "/img/ezugi-casino.webp",
+      gameCode: "EZU-32cards",
+      gameCodeName: "EZU",
+      PageUrl: "/m/All-Games-page",
+    },
+    // {
+    //   name: "BGAMING",
+    //   logo: "https://global-uploads.webflow.com/63b2c230b49fa188ad86ffec/63f4c9689497e0d7c32f4a31_BGaming_logo.svg",
+    //   gameCode: "Qtech",
+    //   gameCode: "BGM",
+    // },
+    {
+      name: "SKY WIND",
+      logo: "/img/sky.png",
+      gameCode: "SWL-atomroulette",
+      gameCodeName: "SWL",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "SA GAMING",
+      logo: "/img/sa.webp",
+      gameCode: "SAG-lobby",
+      gameCodeName: "SAG",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "PRAGMATIC PLAY",
+      logo: "/img/pragmatic.jpg",
+      gameCode: "PPL-livecasinolobby",
+      gameCodeName: "PPL",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "BETTER LIVE",
+      logo: "/img/beter.jpg",
+      gameCode: "BTL-lobby",
+      gameCodeName: "BTL",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "BET GAMES",
+      logo: "/img/bts.jpeg",
+      gameCode: "BTV-lobby",
+      gameCodeName: "BTV",
+      PageUrl: "/m/All-Games-page",
+    },
+    // {
+    //   name: " EBET",
+    //   logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
+    //   gameCode: "EBT-sicbo",
+    //   gameCode: "EBT",
+    // },
+    {
+      name: "AVIATOR",
+      logo: "/img/avi.webp",
+      gameCode: "SPB-aviator",
+      gameCodeName: "SPB",
+      PageUrl: "/m/All-Games-page",
+    },
+    {
+      name: "Q Tech",
+      logo: '/img/qtech.jpg',
+      gameCode: "Qtech",
+      gameCodeName: "SPB",
+      PageUrl: "/m/All-Games-page",
+    },
+  ],
+
   "Internation Casino": [
     {
       name: "EVOLUTION",
@@ -98,6 +183,7 @@ export let AllCasinoProviderName = {
       PageUrl: "/m/All-Games-page",
     },
   ],
+  
   "Fantasy Games": [
     {
       name: "Aviator",

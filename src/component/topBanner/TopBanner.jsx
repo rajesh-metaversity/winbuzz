@@ -45,7 +45,7 @@ const TopBanner = () => {
 
   const newArraya = [
     // ...AllCasinoProviderName["Indian Casino"],
-    ...AllCasinoProviderName["Internation Casino"],
+    ...AllCasinoProviderName["Top Casino"],
   ];
 
   const nav = useNavigate();
@@ -134,12 +134,11 @@ const TopBanner = () => {
                 onClick={() => navHndler(item?.name, item?.gameCodeName)}>
                 <div
                   className="img"
-                  style={{ border: "0.5px solid" }}
+                  // style={{ border: "0.5px solid" }}
                   key={item.PageUrl + key}>
-                  <img className="complany-logo-warp" src={item?.logo} alt="" />
-                  <span className="complany-name-wrap">{item?.name}</span>
+                  <img className="complany-logo-warp1" src={item?.logo} alt="" />
+                 
                   <a
-                    // _ngcontent-ugj-c101=""
                     href="javascript:void(0);"
                     className="home-animated">
                     <span></span>

@@ -116,6 +116,7 @@ const AllProviderName = () => {
   return (
     <div className="Main_header_for_game_provide_Incasino">
       {Object.keys(AllCasinoProviderName).map((key, item) => {
+        if(key === "Top Casino") return null;
         return (
           <div
             className="Inner_header_for_game_provide_Incasin"

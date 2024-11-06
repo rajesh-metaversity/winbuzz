@@ -17,8 +17,12 @@
   gap: 7px;
 }
 .complany-logo-warp {
-  max-width: 90%;
+  max-width: 100%;
   height: 33px;
+}
+.complany-logo-warp1{
+  max-width: 100%;
+
 }
 .MainBtn_warp {
   width: 29%;
